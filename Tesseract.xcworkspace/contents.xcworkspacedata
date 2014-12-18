@@ -4,4 +4,7 @@
    <FileRef
       location = "group:Tesseract.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:External/Box/Box.xcodeproj">
+   </FileRef>
 </Workspace>
