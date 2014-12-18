@@ -4,6 +4,7 @@ enum Type {
 	case Boolean
 	case Function
 	case Generic(Int, Box<Type>)
+	case Parameter(Int)
 }
 
 
