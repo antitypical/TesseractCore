@@ -12,6 +12,7 @@
 		D4ED82881A3F9ADB00D0479E /* Tesseract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* Tesseract.framework */; };
 		D4ED828F1A3F9ADB00D0479E /* TesseractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
+		D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED829A1A3F9C4900D0479E /* Type.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		D4ED828D1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesseractTests.swift; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		D4ED829A1A3F9C4900D0479E /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			children = (
 				D4ED827C1A3F9ADB00D0479E /* Tesseract.h */,
 				D4ED82981A3F9C3800D0479E /* Symbol.swift */,
+				D4ED829A1A3F9C4900D0479E /* Type.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
 			);
 			path = Tesseract;
@@ -217,6 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
+				D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
