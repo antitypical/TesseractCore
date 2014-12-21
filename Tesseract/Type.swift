@@ -5,6 +5,9 @@ enum Type {
 	case Function
 	case Generic(Int, Box<Type>)
 	case Parameter(Int)
+
+	case Sum([Type])
+	case Product([Type])
 }
 
 
