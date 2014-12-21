@@ -2,6 +2,8 @@
 
 enum Type {
 	case Boolean
+	case Integer
+	case String
 
 	case Function(Box<Type>, Box<Type>)
 
