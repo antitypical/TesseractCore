@@ -13,3 +13,13 @@ public enum Value {
 	case Integer(Swift.Int)
 	case String(Swift.String)
 }
+
+
+public func eval(term: Term) -> Value? {
+	switch term {
+	case let .Constant(value):
+		return value
+	default:
+		return nil
+	}
+}
