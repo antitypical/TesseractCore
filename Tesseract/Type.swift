@@ -1,14 +1,21 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Type: Equatable {
+	// MARK: Base
+
 	case Boolean
 	case Integer
 	case String
-
 	case Function(Box<Type>, Box<Type>)
+
+
+	// MARK: Polymorphism
 
 	case Generic(Int, Box<Type>)
 	case Parameter(Int)
+
+
+	// MARK: Algebraic types
 
 	case Sum([Type])
 	case Product([Type])
@@ -40,16 +47,18 @@ public func == (left: Type, right: Type) -> Bool {
 }
 
 
-public func typeof(term: Term) -> Type {
+public func typeof(term: Term) -> Either<String, Type> {
 	switch term {
 	case let .Parameter(_, type):
-		return type
+		return .right(type)
 	case let .Return(_, type):
-		return type
+		return .right(type)
+
 	case let .Constant(value):
-		return typeof(value)
+		return .right(typeof(value))
+
 	default:
-		return .Boolean
+		return .left("Don’t know how to typecheck \(term)")
 	}
 }
 
@@ -68,3 +77,4 @@ public func typeof(value: Value) -> Type {
 // MARK: - Imports
 
 import Box
+import Either
