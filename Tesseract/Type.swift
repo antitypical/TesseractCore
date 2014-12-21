@@ -1,14 +1,21 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Type: Equatable {
+	// MARK: Base
+
 	case Boolean
 	case Integer
 	case String
-
 	case Function(Box<Type>, Box<Type>)
+
+
+	// MARK: Polymorphism
 
 	case Generic(Int, Box<Type>)
 	case Parameter(Int)
+
+
+	// MARK: Algebraic types
 
 	case Sum([Type])
 	case Product([Type])
