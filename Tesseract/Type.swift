@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-enum Type {
+public enum Type {
 	case Boolean
 	case Integer
 	case String
@@ -15,7 +15,7 @@ enum Type {
 }
 
 
-func typeof(term: Term) -> Type {
+public func typeof(term: Term) -> Type {
 	switch term {
 	case let .Parameter(_, type):
 		return type
@@ -28,7 +28,7 @@ func typeof(term: Term) -> Type {
 	}
 }
 
-func typeof(value: Value) -> Type {
+public func typeof(value: Value) -> Type {
 	switch value {
 	case .Boolean:
 		return .Boolean
