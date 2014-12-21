@@ -15,6 +15,18 @@ enum Type {
 }
 
 
+func typeof(value: Value) -> Type {
+	switch value {
+	case .Boolean:
+		return .Boolean
+	case .Integer:
+		return .Integer
+	case .String:
+		return .String
+	}
+}
+
+
 // MARK: - Imports
 
 import Box
