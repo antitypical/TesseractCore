@@ -15,6 +15,19 @@ enum Type {
 }
 
 
+func typeof(term: Term) -> Type {
+	switch term {
+	case let .Parameter(_, type):
+		return type
+	case let .Return(_, type):
+		return type
+	case let .Constant(value):
+		return typeof(value)
+	default:
+		return .Boolean
+	}
+}
+
 func typeof(value: Value) -> Type {
 	switch value {
 	case .Boolean:
