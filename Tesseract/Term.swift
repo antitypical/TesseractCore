@@ -5,6 +5,10 @@ public enum Term {
 	case Return(String, Type)
 
 	case Constant(Value)
+
+	case Variable(Int)
+	case Abstraction(Type, Box<Term>)
+	case Application(Box<Term>, Box<Term>)
 }
 
 
@@ -19,7 +23,13 @@ public func eval(term: Term) -> Value? {
 	switch term {
 	case let .Constant(value):
 		return value
+
 	default:
 		return nil
 	}
 }
+
+
+// MARK: - Imports
+
+import Box
