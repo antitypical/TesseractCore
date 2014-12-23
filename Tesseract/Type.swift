@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public enum Type: Equatable {
+public enum Type: Equatable, Printable {
 	// MARK: Base
 
 	case Boolean
@@ -19,6 +19,35 @@ public enum Type: Equatable {
 
 	case Sum([Type])
 	case Product([Type])
+
+
+	// MARK: Printable
+
+	public var description: Swift.String {
+		switch self {
+		case Boolean:
+			return "Boolean"
+		case Integer:
+			return "Integer"
+		case String:
+			return "String"
+		case let Function(x, y):
+			return "\(x) -> \(y)"
+
+		case let Polymorphic(n, t):
+			return "<\(n)> \(t)"
+		case let Parameter(n):
+			return toString(n)
+
+		case let Sum(xs):
+			return "(" + " | ".join(xs.map(toString)) + ")"
+		case let Product(xs):
+			return "(" + " ✕ ".join(xs.map(toString)) + ")"
+
+		default:
+			return ""
+		}
+	}
 }
 
 
