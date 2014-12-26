@@ -1,6 +1,13 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Type: Equatable, Printable {
+	// MARK: Constructors
+
+	public static func function(argumentType: Type, _ returnType: Type) -> Type {
+		return Function(Box(argumentType), Box(returnType))
+	}
+
+
 	// MARK: Base
 
 	case Boolean
