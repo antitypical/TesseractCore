@@ -7,6 +7,10 @@ public enum Type: Equatable, Printable {
 		return Function(Box(argumentType), Box(returnType))
 	}
 
+	public static func polymorphic(body: Type) -> Type {
+		return Polymorphic(Box(body))
+	}
+
 
 	// MARK: Base
 
