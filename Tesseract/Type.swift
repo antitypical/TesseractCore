@@ -11,7 +11,7 @@ public enum Type: Equatable, Printable {
 
 	// MARK: Polymorphism
 
-	case Polymorphic(Int, Box<Type>)
+	case Polymorphic(Box<Type>)
 	case Parameter(Int)
 
 
@@ -34,8 +34,8 @@ public enum Type: Equatable, Printable {
 		case let Function(x, y):
 			return "\(x) -> \(y)"
 
-		case let Polymorphic(n, t):
-			return "<\(n)> \(t)"
+		case let Polymorphic(t):
+			return "=> \(t)"
 		case let Parameter(n):
 			return toString(n)
 
@@ -59,8 +59,8 @@ public func == (left: Type, right: Type) -> Bool {
 	case let (.Function(x1, y1), .Function(x2, y2)):
 		return x1 == x2 && y1 == y2
 
-	case let (.Polymorphic(n1, x1), .Polymorphic(n2, x2)):
-		return n1 == n2 && x1 == x2
+	case let (.Polymorphic(x1), .Polymorphic(x2)):
+		return x1 == x2
 	// fixme: this is insufficient, we need to know the context
 	case let (.Parameter(x), .Parameter(y)):
 		return x == y
