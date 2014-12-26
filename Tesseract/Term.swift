@@ -1,6 +1,13 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Term {
+	// MARK: Constructors
+
+	public static func abstraction(type: Type, _ body: Term) -> Term {
+		return Abstraction(type, Box(body))
+	}
+
+
 	// MARK: ???
 
 	case Parameter(String, Type)
