@@ -37,10 +37,21 @@ public enum Term: Printable {
 }
 
 
-public enum Value {
+public enum Value: Printable {
 	case Boolean(Swift.Bool)
 	case Integer(Swift.Int)
 	case String(Swift.String)
+
+	public var description: Swift.String {
+		switch self {
+		case let .Boolean(v):
+			return v ? "true" : "false"
+		case let .Integer(x):
+			return toString(x)
+		case let .String(s):
+			return "\"\(s)\""
+		}
+	}
 }
 
 
