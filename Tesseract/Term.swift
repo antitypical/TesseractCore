@@ -21,7 +21,7 @@ public enum Term {
 
 	// MARK: λ
 
-	case Variable(Int)
+	case Variable(Int) // de Bruijn index
 	case Abstraction(Type, Box<Term>)
 	case Application(Box<Term>, Box<Term>)
 }
