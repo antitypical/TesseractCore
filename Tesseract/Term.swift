@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public enum Term {
+public enum Term: Printable {
 	// MARK: Constructors
 
 	public static func abstraction(type: Type, _ body: Term) -> Term {
@@ -18,6 +18,22 @@ public enum Term {
 	case Variable(Int) // de Bruijn index
 	case Abstraction(Type, Box<Term>)
 	case Application(Box<Term>, Box<Term>)
+
+
+	// MARK: Printable
+
+	public var description: String {
+		switch self {
+		case let .Constant(v):
+			return toString(v)
+		case let .Variable(i):
+			return toString(i)
+		case let .Abstraction(t, body):
+			return "λ \(t) . \(body)"
+		case let .Application(t1, t2):
+			return "(\(t1) \(t2))"
+		}
+	}
 }
 
 
