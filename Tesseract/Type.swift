@@ -89,11 +89,6 @@ public func == (left: Type, right: Type) -> Bool {
 
 public func typeof(term: Term) -> Either<String, Type> {
 	switch term {
-	case let .Parameter(_, type):
-		return .right(type)
-	case let .Return(_, type):
-		return .right(type)
-
 	case let .Constant(value):
 		return .right(typeof(value))
 

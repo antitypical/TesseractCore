@@ -8,12 +8,6 @@ public enum Term {
 	}
 
 
-	// MARK: ???
-
-	case Parameter(String, Type)
-	case Return(String, Type)
-
-
 	// MARK: Base
 
 	case Constant(Value)
