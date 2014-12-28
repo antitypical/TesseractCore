@@ -14,6 +14,7 @@ public enum Type: Equatable, Printable {
 
 	// MARK: Base
 
+	case Unit
 	case Boolean
 	case Integer
 	case String
@@ -36,6 +37,8 @@ public enum Type: Equatable, Printable {
 
 	public var description: Swift.String {
 		switch self {
+		case Unit:
+			return "Unit"
 		case Boolean:
 			return "Boolean"
 		case Integer:
@@ -54,9 +57,6 @@ public enum Type: Equatable, Printable {
 			return "(" + " | ".join(xs.map(toString)) + ")"
 		case let Product(xs):
 			return "(" + " ✕ ".join(xs.map(toString)) + ")"
-
-		default:
-			return ""
 		}
 	}
 }
@@ -64,7 +64,7 @@ public enum Type: Equatable, Printable {
 
 public func == (left: Type, right: Type) -> Bool {
 	switch (left, right) {
-	case (.Boolean, .Boolean), (.Integer, .Integer), (.String, .String):
+	case (.Unit, .Unit), (.Boolean, .Boolean), (.Integer, .Integer), (.String, .String):
 		return true
 
 	case let (.Function(x1, y1), .Function(x2, y2)):
@@ -107,6 +107,8 @@ public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Ty
 
 public func typeof(value: Value) -> Type {
 	switch value {
+	case .Unit:
+		return .Unit
 	case .Boolean:
 		return .Boolean
 	case .Integer:

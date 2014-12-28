@@ -78,12 +78,15 @@ public enum DestructuredTerm {
 
 
 public enum Value: Printable, Equatable {
+	case Unit
 	case Boolean(Swift.Bool)
 	case Integer(Swift.Int)
 	case String(Swift.String)
 
 	public var description: Swift.String {
 		switch self {
+		case Unit:
+			return "Unit"
 		case let Boolean(v):
 			return v ? "true" : "false"
 		case let Integer(x):
@@ -96,6 +99,8 @@ public enum Value: Printable, Equatable {
 
 public func == (left: Value, right: Value) -> Bool {
 	switch (left, right) {
+	case (.Unit, .Unit):
+		return true
 	case let (.Boolean(x), .Boolean(y)) where x == y:
 		return true
 	case let (.Integer(x), .Integer(y)) where x == y:
