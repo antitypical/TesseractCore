@@ -55,6 +55,26 @@ public enum Value: Printable {
 }
 
 
+func map(term: Term, c: Int, f: (Int, Int) -> Term) -> Term {
+	let walk: (Term, Int) -> Term = fix { walk in
+		{ term, c in
+			switch term {
+			case .Constant:
+				return term
+
+			case let .Variable(n):
+				return f(c, n)
+			case let .Abstraction(type, body):
+				return .Abstraction(type, body.map { walk($0, c + 1) })
+			case let .Application(a, b):
+				return .Application(a.map { walk($0, c) }, b.map { walk($0, c) })
+			}
+		}
+	}
+	return walk(term, c)
+}
+
+
 public func eval(term: Term) -> Value? {
 	switch term {
 	case let .Constant(value):
@@ -69,3 +89,4 @@ public func eval(term: Term) -> Value? {
 // MARK: - Imports
 
 import Box
+import Prelude
