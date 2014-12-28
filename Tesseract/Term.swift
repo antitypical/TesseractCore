@@ -44,7 +44,7 @@ public enum Term: Printable, Equatable {
 
 	var isValue: Bool {
 		switch self {
-		case Constant, .Abstraction:
+		case Constant, Abstraction:
 			return true
 		default:
 			return false
