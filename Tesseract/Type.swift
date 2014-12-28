@@ -1,6 +1,17 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public enum Type: Equatable {
+public enum Type: Equatable, Printable {
+	// MARK: Constructors
+
+	public static func function(argumentType: Type, _ returnType: Type) -> Type {
+		return Function(Box(argumentType), Box(returnType))
+	}
+
+	public static func polymorphic(body: Type) -> Type {
+		return Polymorphic(Box(body))
+	}
+
+
 	// MARK: Base
 
 	case Boolean
@@ -11,7 +22,7 @@ public enum Type: Equatable {
 
 	// MARK: Polymorphism
 
-	case Generic(Int, Box<Type>)
+	case Polymorphic(Box<Type>)
 	case Parameter(Int)
 
 
@@ -19,6 +30,35 @@ public enum Type: Equatable {
 
 	case Sum([Type])
 	case Product([Type])
+
+
+	// MARK: Printable
+
+	public var description: Swift.String {
+		switch self {
+		case Boolean:
+			return "Boolean"
+		case Integer:
+			return "Integer"
+		case String:
+			return "String"
+		case let Function(x, y):
+			return "\(x) -> \(y)"
+
+		case let Polymorphic(t):
+			return "=> \(t)"
+		case let Parameter(n):
+			return toString(n)
+
+		case let Sum(xs):
+			return "(" + " | ".join(xs.map(toString)) + ")"
+		case let Product(xs):
+			return "(" + " ✕ ".join(xs.map(toString)) + ")"
+
+		default:
+			return ""
+		}
+	}
 }
 
 
@@ -30,8 +70,8 @@ public func == (left: Type, right: Type) -> Bool {
 	case let (.Function(x1, y1), .Function(x2, y2)):
 		return x1 == x2 && y1 == y2
 
-	case let (.Generic(n1, x1), .Generic(n2, x2)):
-		return n1 == n2 && x1 == x2
+	case let (.Polymorphic(x1), .Polymorphic(x2)):
+		return x1 == x2
 	// fixme: this is insufficient, we need to know the context
 	case let (.Parameter(x), .Parameter(y)):
 		return x == y
@@ -47,15 +87,18 @@ public func == (left: Type, right: Type) -> Bool {
 }
 
 
-public func typeof(term: Term) -> Either<String, Type> {
+public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Type> {
 	switch term {
-	case let .Parameter(_, type):
-		return .right(type)
-	case let .Return(_, type):
-		return .right(type)
-
 	case let .Constant(value):
 		return .right(typeof(value))
+
+	case let .Variable(index):
+		return .right(context[index].1)
+
+	case let .Abstraction(type, body):
+		return typeof(body.value, context: context + [(context.count, type)]).either(Either.left, {
+			.right(.function(type, $0))
+		})
 
 	default:
 		return .left("Don’t know how to typecheck \(term)")
