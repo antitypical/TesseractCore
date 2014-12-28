@@ -96,9 +96,9 @@ public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Ty
 		return .right(context[index].1)
 
 	case let .Abstraction(type, body):
-		return typeof(body.value, context: context + [(context.count, type)]).either(Either.left, {
-			.right(.function(type, $0))
-		})
+		return typeof(body.value, context: context + [(context.count, type)]).map {
+			.function(type, $0)
+		}
 
 	default:
 		return .left("Don’t know how to typecheck \(term)")
