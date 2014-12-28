@@ -14,6 +14,7 @@ public enum Type: Equatable, Printable {
 
 	// MARK: Base
 
+	case Unit
 	case Boolean
 	case Integer
 	case String
