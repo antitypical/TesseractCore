@@ -149,9 +149,9 @@ func evalStep(term: Term) -> Either<Term, Term> {
 	case let .Application(.Abstraction(_, body), operand) where operand.isValue:
 		return .right(substitute(operand, body.value))
 	case let .Application(a, b) where a.isValue:
-		return evalStep(b).either(Either.left, { .right(.Application(Box(a), Box($0))) })
+		return evalStep(b).map { .Application(Box(a), Box($0)) }
 	case let .Application(a, b):
-		return evalStep(a).either(Either.left, { .right(.Application(Box($0), Box(b))) })
+		return evalStep(a).map { .Application(Box($0), Box(b)) }
 
 	default:
 		return .left(term)
