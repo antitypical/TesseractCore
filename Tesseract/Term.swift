@@ -78,6 +78,7 @@ public enum DestructuredTerm {
 
 
 public enum Value: Printable, Equatable {
+	case Unit
 	case Boolean(Swift.Bool)
 	case Integer(Swift.Int)
 	case String(Swift.String)
