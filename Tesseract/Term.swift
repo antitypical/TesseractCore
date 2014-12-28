@@ -56,13 +56,13 @@ public enum Term: Printable, Equatable {
 
 	public var description: String {
 		switch self {
-		case let .Constant(v):
+		case let Constant(v):
 			return toString(v)
-		case let .Variable(i):
+		case let Variable(i):
 			return toString(i)
-		case let .Abstraction(t, body):
+		case let Abstraction(t, body):
 			return "λ \(t) . \(body)"
-		case let .Application(t1, t2):
+		case let Application(t1, t2):
 			return "(\(t1) \(t2))"
 		}
 	}
