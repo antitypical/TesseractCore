@@ -85,6 +85,8 @@ public enum Value: Printable, Equatable {
 
 	public var description: Swift.String {
 		switch self {
+		case Unit:
+			return "Unit"
 		case let Boolean(v):
 			return v ? "true" : "false"
 		case let Integer(x):
