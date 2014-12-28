@@ -84,11 +84,11 @@ public enum Value: Printable, Equatable {
 
 	public var description: Swift.String {
 		switch self {
-		case let .Boolean(v):
+		case let Boolean(v):
 			return v ? "true" : "false"
-		case let .Integer(x):
+		case let Integer(x):
 			return toString(x)
-		case let .String(s):
+		case let String(s):
 			return "\"\(s)\""
 		}
 	}
