@@ -36,6 +36,18 @@ public enum Term: Printable {
 	}
 
 
+	// MARK: Values
+
+	var isValue: Bool {
+		switch self {
+		case Constant, .Abstraction:
+			return true
+		default:
+			return false
+		}
+	}
+
+
 	// MARK: Printable
 
 	public var description: String {
@@ -115,19 +127,27 @@ func map(term: Term, c: Int, f: (Int, Int) -> Term) -> Term {
 	return walk(term, c)
 }
 
-
-public func eval(term: Term) -> Value? {
-	switch term {
-	case let .Constant(value):
-		return value
+func evalStep(term: Term) -> Either<Term, Term> {
+	switch term.destructure() {
+	case let .Application(.Abstraction(_, body), operand) where operand.isValue:
+		return .right(substitute(operand, body.value))
+	case let .Application(a, b) where a.isValue:
+		return evalStep(b).either(Either.left, { .right(.Application(Box(a), Box($0))) })
+	case let .Application(a, b):
+		return evalStep(a).either(Either.left, { .right(.Application(Box($0), Box(b))) })
 
 	default:
-		return nil
+		return .left(term)
 	}
+}
+
+public func eval(term: Term) -> Term {
+	return evalStep(term).either(id, { eval($0) })
 }
 
 
 // MARK: - Imports
 
 import Box
+import Either
 import Prelude
