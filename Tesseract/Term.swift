@@ -99,6 +99,8 @@ public enum Value: Printable, Equatable {
 
 public func == (left: Value, right: Value) -> Bool {
 	switch (left, right) {
+	case (.Unit, .Unit):
+		return true
 	case let (.Boolean(x), .Boolean(y)) where x == y:
 		return true
 	case let (.Integer(x), .Integer(y)) where x == y:
