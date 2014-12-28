@@ -7,6 +7,10 @@ public enum Term: Printable, Equatable {
 		return Abstraction(type, Box(body))
 	}
 
+	public static func application(abstraction: Term, _ operand: Term) -> Term {
+		return Application(Box(abstraction), Box(operand))
+	}
+
 
 	// MARK: Base
 
