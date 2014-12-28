@@ -107,6 +107,8 @@ public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Ty
 
 public func typeof(value: Value) -> Type {
 	switch value {
+	case .Unit:
+		return .Unit
 	case .Boolean:
 		return .Boolean
 	case .Integer:
