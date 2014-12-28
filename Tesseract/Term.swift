@@ -62,6 +62,16 @@ func shift(term: Term, by: Int, above: Int = 0) -> Term {
 }
 
 
+func substitute(term: Term, inTerm: Term) -> Term {
+	return shift(substitute(shift(term, 1), 0, inTerm), -1)
+}
+
+func substitute(term: Term, forIndex: Int, inTerm: Term) -> Term {
+	return map(inTerm, forIndex) { index, n in
+		n == index ? shift(term, index) : .Variable(n)
+	}
+}
+
 func map(term: Term, c: Int, f: (Int, Int) -> Term) -> Term {
 	let walk: (Term, Int) -> Term = fix { walk in
 		{ term, c in
