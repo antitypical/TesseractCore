@@ -55,6 +55,13 @@ public enum Value: Printable {
 }
 
 
+func shift(term: Term, by: Int, above: Int = 0) -> Term {
+	return map(term, above) { above, n in
+		.Variable(n + n >= above ? by : 0)
+	}
+}
+
+
 func map(term: Term, c: Int, f: (Int, Int) -> Term) -> Term {
 	let walk: (Term, Int) -> Term = fix { walk in
 		{ term, c in
