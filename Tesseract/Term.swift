@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public enum Term: Printable {
+public enum Term: Printable, Equatable {
 	// MARK: Constructors
 
 	public static func abstraction(type: Type, _ body: Term) -> Term {
@@ -156,6 +156,25 @@ func evalStep(term: Term) -> Either<Term, Term> {
 
 public func eval(term: Term) -> Term {
 	return evalStep(term).either(id, { eval($0) })
+}
+
+
+public func == (left: Term, right: Term) -> Bool {
+	switch (left.destructure(), right.destructure()) {
+	case let (.Constant(x), .Constant(y)) where x == y:
+		return true
+
+	// fixme: this is insufficient, we need to know the context
+	case let (.Variable(x), .Variable(y)) where x == y:
+		return true
+	case let (.Abstraction(leftType, leftBody), .Abstraction(rightType, rightBody)) where leftType == rightType && leftBody == rightBody:
+		return true
+	case let (.Application(left1, left2), .Application(right1, right2)) where left1 == right1 && left2 == right2:
+		return true
+
+	default:
+		return false
+	}
 }
 
 
