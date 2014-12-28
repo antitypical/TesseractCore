@@ -37,6 +37,8 @@ public enum Type: Equatable, Printable {
 
 	public var description: Swift.String {
 		switch self {
+		case Unit:
+			return "Unit"
 		case Boolean:
 			return "Boolean"
 		case Integer:
