@@ -20,6 +20,22 @@ public enum Term: Printable {
 	case Application(Box<Term>, Box<Term>)
 
 
+	// MARK: Destructuring
+
+	public func destructure() -> DestructuredTerm {
+		switch self {
+		case let Constant(v):
+			return .Constant(v)
+		case let Variable(i):
+			return .Variable(i)
+		case let Abstraction(type, body):
+			return .Abstraction(type, body.value)
+		case let Application(t1, t2):
+			return .Application(t1.value, t2.value)
+		}
+	}
+
+
 	// MARK: Printable
 
 	public var description: String {
@@ -34,6 +50,14 @@ public enum Term: Printable {
 			return "(\(t1) \(t2))"
 		}
 	}
+}
+
+public enum DestructuredTerm {
+	case Constant(Value)
+
+	case Variable(Int)
+	case Abstraction(Type, Term)
+	case Application(Term, Term)
 }
 
 
