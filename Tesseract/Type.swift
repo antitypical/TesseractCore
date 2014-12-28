@@ -57,9 +57,6 @@ public enum Type: Equatable, Printable {
 			return "(" + " | ".join(xs.map(toString)) + ")"
 		case let Product(xs):
 			return "(" + " ✕ ".join(xs.map(toString)) + ")"
-
-		default:
-			return ""
 		}
 	}
 }
