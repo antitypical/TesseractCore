@@ -64,7 +64,7 @@ public enum Type: Equatable, Printable {
 
 public func == (left: Type, right: Type) -> Bool {
 	switch (left, right) {
-	case (.Boolean, .Boolean), (.Integer, .Integer), (.String, .String):
+	case (.Unit, .Unit), (.Boolean, .Boolean), (.Integer, .Integer), (.String, .String):
 		return true
 
 	case let (.Function(x1, y1), .Function(x2, y2)):
