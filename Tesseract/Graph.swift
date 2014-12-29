@@ -35,6 +35,11 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 
 
 public struct Edge {
+	public init(input: Identifier, output: Identifier) {
+		self.input = input
+		self.output = output
+	}
+
 	public let input: Identifier
 	public let output: Identifier
 }
