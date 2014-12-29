@@ -16,8 +16,8 @@ public enum Identifier: Hashable {
 			return toString(x)
 		case let Return(x):
 			return toString(x)
-		case Node:
-			return ""
+		case let Node(x):
+			return x
 		}
 	}
 
