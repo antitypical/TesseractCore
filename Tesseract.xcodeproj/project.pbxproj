@@ -25,6 +25,7 @@
 		D4ED828F1A3F9ADB00D0479E /* TesseractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
 		D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED829A1A3F9C4900D0479E /* Type.swift */; };
+		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesseractTests.swift; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		D4ED829A1A3F9C4900D0479E /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				D42CAC371A4299160091F6AA /* Binding.swift */,
 				D42CAC3B1A429CF80091F6AA /* Term.swift */,
 				D4B5DE351A505F66004B4C0C /* Graph.swift */,
+				D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
 			);
 			path = Tesseract;
@@ -258,6 +261,7 @@
 				D42CAC3C1A429CF80091F6AA /* Term.swift in Sources */,
 				D42CAC381A4299160091F6AA /* Binding.swift in Sources */,
 				D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */,
+				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
