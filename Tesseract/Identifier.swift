@@ -1,6 +1,13 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Identifier: Hashable {
+	// MARK: Constructors
+
+	public init() {
+		self = Node(UUID())
+	}
+
+
 	// MARK: Cases
 
 	case Parameter(Int)
