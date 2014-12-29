@@ -21,4 +21,6 @@ public struct Node {
 public struct Graph {
 	let title: String
 	let nodes: [Identifier: Node]
+	let parameters: [Identifier]
+	let returns: [Identifier]
 }
