@@ -26,8 +26,6 @@ public struct Graph {
 	}
 
 	public let title: String
-	let parameters: [Identifier]
-	let returns: [Identifier]
 
 	public let nodes: [Identifier]
 	public let edges: [Edge]
