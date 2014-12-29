@@ -12,15 +12,17 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 	return left.value == right.value
 }
 
-public struct Node {
-	let title: String
-	let inputs: [(String, Identifier?)] = []
-	let outputs: [(String, Identifier?)] = []
+
+public struct Edge {
+	let input: Identifier
+	let output: Identifier
 }
 
 public struct Graph {
 	let title: String
-	let nodes: [Identifier: Node]
 	let parameters: [Identifier]
 	let returns: [Identifier]
+
+	let nodes: [Identifier]
+	let edges: [Edge]
 }
