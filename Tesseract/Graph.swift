@@ -1,11 +1,16 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Identifier: Hashable {
-	private let value: String
+	// MARK: Hashable
 
 	public var hashValue: Int {
 		return value.hashValue
 	}
+
+
+	// MARK: Private
+
+	private let value: String
 }
 
 public func == (left: Identifier, right: Identifier) -> Bool {
