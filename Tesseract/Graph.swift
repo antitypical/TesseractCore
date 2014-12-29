@@ -35,8 +35,8 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 
 
 public struct Edge {
-	let input: Identifier
-	let output: Identifier
+	public let input: Identifier
+	public let output: Identifier
 }
 
 public struct Graph {
