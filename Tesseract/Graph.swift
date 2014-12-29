@@ -19,6 +19,12 @@ public struct Edge {
 }
 
 public struct Graph {
+	public init(title: String, nodes: [Identifier] = [], edges: [Edge] = []) {
+		self.title = title
+		self.nodes = nodes
+		self.edges = edges
+	}
+
 	let title: String
 	let parameters: [Identifier]
 	let returns: [Identifier]
