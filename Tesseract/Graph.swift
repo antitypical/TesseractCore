@@ -25,7 +25,7 @@ public struct Graph {
 		self.edges = edges
 	}
 
-	let title: String
+	public let title: String
 	let parameters: [Identifier]
 	let returns: [Identifier]
 
