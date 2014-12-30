@@ -44,7 +44,14 @@ public struct Graph {
 	}
 
 
-	public var nodes: Set<Identifier>
+	public var nodes: Set<Identifier> {
+		didSet {
+			edges = edges.filter {
+				self.contains($0.input) && self.contains($0.output)
+			}
+		}
+	}
+
 	public var edges: Set<Edge>
 }
 
