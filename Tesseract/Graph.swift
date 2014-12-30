@@ -1,24 +1,24 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge: Hashable {
-	public init(input: SourceIdentifier, output: DestinationIdentifier) {
-		self.input = input
-		self.output = output
+	public init(source: SourceIdentifier, destination: DestinationIdentifier) {
+		self.source = source
+		self.destination = destination
 	}
 
-	public let input: SourceIdentifier
-	public let output: DestinationIdentifier
+	public let source: SourceIdentifier
+	public let destination: DestinationIdentifier
 
 
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return input.hashValue ^ output.hashValue
+		return source.hashValue ^ destination.hashValue
 	}
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
-	return left.input == right.input && left.output == right.output
+	return left.source == right.source && left.destination == right.destination
 }
 
 
@@ -47,7 +47,7 @@ public struct Graph {
 	public var nodes: Set<Identifier> {
 		didSet {
 			edges = edges.filter {
-				self.contains($0.input) && self.contains($0.output)
+				self.contains($0.source) && self.contains($0.destination)
 			}
 		}
 	}
