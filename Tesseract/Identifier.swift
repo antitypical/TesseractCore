@@ -3,19 +3,18 @@
 public enum Identifier: Hashable, Printable {
 	// MARK: Constructors
 
-	public static func Parameter(index: Int) -> Identifier {
-		return Index(Box(Key(Box(Root), "parameter")), index)
+	public static func Parameter(source: SourceIdentifier) -> Identifier {
+		return Source(Box(source))
 	}
 
-	public static func Return(index: Int) -> Identifier {
-		return Index(Box(Key(Box(Root), "return")), index)
+	public static func Return(sink: SinkIdentifier) -> Identifier {
+		return Sink(Box(sink))
 	}
 
 
 	// MARK: Cases
 
 	case Key(Box<Identifier>, String)
-	case Index(Box<Identifier>, Int)
 	case Source(Box<SourceIdentifier>)
 	case Sink(Box<SinkIdentifier>)
 	case Root
@@ -26,8 +25,6 @@ public enum Identifier: Hashable, Printable {
 	public var description: String {
 		switch self {
 		case let Key(base, x):
-			return base.value.append(x)
-		case let Index(base, x):
 			return base.value.append(x)
 		case let Source(source):
 			return source.value.base.append(source.value.index)
