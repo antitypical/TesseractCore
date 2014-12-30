@@ -3,12 +3,12 @@
 public enum Identifier: Hashable, Printable {
 	// MARK: Constructors
 
-	public static func Parameter(source: SourceIdentifier) -> Identifier {
-		return Source(Box(source))
+	public static func Parameter(index: Int) -> Identifier {
+		return Source(Box(SourceIdentifier(base: nil, index: index)))
 	}
 
-	public static func Return(sink: SinkIdentifier) -> Identifier {
-		return Sink(Box(sink))
+	public static func Return(index: Int) -> Identifier {
+		return Sink(Box(SinkIdentifier(base: nil, index: index)))
 	}
 
 
@@ -55,57 +55,61 @@ public enum Identifier: Hashable, Printable {
 	}
 }
 
-public struct SourceIdentifier: IntegerLiteralConvertible, Printable {
-	public init(base: Identifier, index: Int) {
-		self.base = base
-		self.index = index
-	}
-
-
-	// MARK: IntegerLiteralConvertible
-
-	public init(integerLiteral value: IntegerLiteralType) {
-		self.init(base: .Root, index: value)
+public struct BaseIdentifier: Printable {
+	public init() {
+		self.uuid = UUID()
 	}
 
 
 	// MARK: Printable
 
 	public var description: String {
-		return base.append(index)
+		return uuid.description
+	}
+
+
+	// MARK: Private
+
+	private let uuid: UUID
+}
+
+public struct SourceIdentifier: Printable {
+	public init(base: BaseIdentifier?, index: Int) {
+		self.base = base
+		self.index = index
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		return "\(base?.description ?? String())/sources/\(index)"
 	}
 
 	
 	// MARK: Properties
 
-	public let base: Identifier
+	public let base: BaseIdentifier?
 	public let index: Int
 }
 
-public struct SinkIdentifier: IntegerLiteralConvertible, Printable {
-	public init(base: Identifier, index: Int) {
+public struct SinkIdentifier: Printable {
+	public init(base: BaseIdentifier?, index: Int) {
 		self.base = base
 		self.index = index
-	}
-
-
-	// MARK: IntegerLiteralConvertible
-
-	public init(integerLiteral value: IntegerLiteralType) {
-		self.init(base: .Root, index: value)
 	}
 
 
 	// MARK: Printable
 
 	public var description: String {
-		return base.append(index)
+		return "\(base?.description ?? String())/sources/\(index)"
 	}
 
 
 	// MARK: Properties
 	
-	public let base: Identifier
+	public let base: BaseIdentifier?
 	public let index: Int
 }
 
