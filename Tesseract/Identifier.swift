@@ -108,7 +108,7 @@ public struct SourceIdentifier: Hashable, Printable {
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return (base?.hashValue ?? 0) ^ index.hashValue
+		return (base?.hashValue ?? 0) ^ "sources".hashValue ^ index.hashValue
 	}
 
 
@@ -140,7 +140,7 @@ public struct DestinationIdentifier: Hashable, Printable {
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return (base?.hashValue ?? 0) ^ index.hashValue
+		return (base?.hashValue ?? 0) ^ "destinations".hashValue ^ index.hashValue
 	}
 
 
