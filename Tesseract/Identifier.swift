@@ -52,22 +52,42 @@ public enum Identifier: Hashable, Printable {
 	}
 }
 
-public struct SourceIdentifier {
+public struct SourceIdentifier: IntegerLiteralConvertible {
 	public init(base: Identifier, index: Int) {
 		self.base = base
 		self.index = index
 	}
+
+
+	// MARK: IntegerLiteralConvertible
+
+	public init(integerLiteral value: IntegerLiteralType) {
+		self.init(base: .Root, index: value)
+	}
+
+
+	// MARK: Properties
 
 	public let base: Identifier
 	public let index: Int
 }
 
-public struct SinkIdentifier {
+public struct SinkIdentifier: IntegerLiteralConvertible {
 	public init(base: Identifier, index: Int) {
 		self.base = base
 		self.index = index
 	}
 
+
+	// MARK: IntegerLiteralConvertible
+
+	public init(integerLiteral value: IntegerLiteralType) {
+		self.init(base: .Root, index: value)
+	}
+
+
+	// MARK: Properties
+	
 	public let base: Identifier
 	public let index: Int
 }
