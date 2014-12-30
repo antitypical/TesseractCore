@@ -8,6 +8,8 @@ public struct UUID: Comparable, Hashable, Printable {
 	}
 
 
+	// MARK: Printable
+
 	public var description: String {
 		var characters: [CChar] = Array(count: 37, repeatedValue: 0)
 		uuid_unparse(value, &characters)
