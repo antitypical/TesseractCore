@@ -28,8 +28,8 @@ public struct Graph {
 		self.edges = edges
 	}
 
-	public let nodes: Set<Identifier>
-	public let edges: Set<Edge>
+	public var nodes: Set<Identifier>
+	public var edges: Set<Edge>
 }
 
 
