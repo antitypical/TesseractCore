@@ -4,18 +4,18 @@ public enum Identifier: Hashable, Printable {
 	// MARK: Constructors
 
 	public static func Parameter(index: Int) -> Identifier {
-		return Source(Box(SourceIdentifier(base: nil, index: index)))
+		return Source(SourceIdentifier(base: nil, index: index))
 	}
 
 	public static func Return(index: Int) -> Identifier {
-		return Destination(Box(DestinationIdentifier(base: nil, index: index)))
+		return Destination(DestinationIdentifier(base: nil, index: index))
 	}
 
 
 	// MARK: Cases
 
-	case Source(Box<SourceIdentifier>)
-	case Destination(Box<DestinationIdentifier>)
+	case Source(SourceIdentifier)
+	case Destination(DestinationIdentifier)
 	case Base(BaseIdentifier)
 	case Root
 
@@ -156,8 +156,3 @@ public struct DestinationIdentifier: Hashable, Printable {
 public func == (left: DestinationIdentifier, right: DestinationIdentifier) -> Bool {
 	return left.base == right.base && left.index == right.index
 }
-
-
-// MARK: - Imports
-
-import Box
