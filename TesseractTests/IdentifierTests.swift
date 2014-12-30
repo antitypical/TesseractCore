@@ -6,6 +6,6 @@ import XCTest
 final class IdentifierTests: XCTestCase {
 	func testNodeStringValueIsUUIDString() {
 		let identifier = Identifier()
-		XCTAssertEqual(countElements(identifier.stringValue), 36)
+		XCTAssertEqual(countElements(identifier.description), 36)
 	}
 }
