@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public enum Identifier: Hashable {
+public enum Identifier: Hashable, Printable {
 	// MARK: Constructors
 
 	public init() {
@@ -15,9 +15,9 @@ public enum Identifier: Hashable {
 	case Base(String)
 
 
-	// MARK: API
+	// MARK: Printable
 
-	public var stringValue: String {
+	public var description: String {
 		switch self {
 		case let Parameter(x):
 			return toString(x)
@@ -32,12 +32,12 @@ public enum Identifier: Hashable {
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return self.stringValue.hashValue
+		return self.description.hashValue
 	}
 }
 
 public func == (left: Identifier, right: Identifier) -> Bool {
-	return left.stringValue == right.stringValue
+	return left.description == right.description
 }
 
 
