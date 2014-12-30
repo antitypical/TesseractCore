@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct UUID: Equatable {
+public struct UUID: Comparable {
 	public init() {
 		var value: [UInt8] = Array(count: 16, repeatedValue: 0)
 		uuid_generate(&value)
@@ -24,6 +24,15 @@ public struct UUID: Equatable {
 	private let value: [UInt8]
 }
 
+
+// MARK: - Comparable
+
+public func < (left: UUID, right: UUID) -> Bool {
+	return uuid_compare(left.value, right.value) < 0
+}
+
+
+// MARK: - Equatable
 
 public func == (left: UUID, right: UUID) -> Bool {
 	return uuid_compare(left.value, right.value) == 0
