@@ -94,10 +94,17 @@ public func == (left: BaseIdentifier, right: BaseIdentifier) -> Bool {
 }
 
 
-public struct SourceIdentifier: Printable {
+public struct SourceIdentifier: Hashable, Printable {
 	public init(base: BaseIdentifier?, index: Int) {
 		self.base = base
 		self.index = index
+	}
+
+
+	// MARK: Hashable
+
+	public var hashValue: Int {
+		return (base?.hashValue ?? 0) ^ index.hashValue
 	}
 
 
@@ -113,6 +120,11 @@ public struct SourceIdentifier: Printable {
 	public let base: BaseIdentifier?
 	public let index: Int
 }
+
+public func == (left: SourceIdentifier, right: SourceIdentifier) -> Bool {
+	return left.base == right.base && left.index == right.index
+}
+
 
 public struct DestinationIdentifier: Printable {
 	public init(base: BaseIdentifier?, index: Int) {
