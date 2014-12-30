@@ -11,6 +11,10 @@ public enum Identifier: Hashable, Printable {
 		return Destination(DestinationIdentifier(base: nil, index: index))
 	}
 
+	public static func Node() -> Identifier {
+		return Base(BaseIdentifier())
+	}
+
 
 	// MARK: Cases
 
