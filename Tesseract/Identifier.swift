@@ -16,6 +16,8 @@ public enum Identifier: Hashable, Printable {
 
 	case Key(Box<Identifier>, String)
 	case Index(Box<Identifier>, Int)
+	case Source(Box<SourceIdentifier>)
+	case Sink(Box<SinkIdentifier>)
 	case Root
 
 
@@ -27,6 +29,10 @@ public enum Identifier: Hashable, Printable {
 			return base.value.append(x)
 		case let Index(base, x):
 			return base.value.append(x)
+		case let Source(source):
+			return source.value.base.append(source.value.index)
+		case let Sink(sink):
+			return sink.value.base.append(sink.value.index)
 		case Root:
 			return "/"
 		}
