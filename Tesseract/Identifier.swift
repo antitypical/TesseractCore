@@ -27,9 +27,9 @@ public enum Identifier: Hashable, Printable {
 		case let Key(base, x):
 			return base.value.append(x)
 		case let Source(source):
-			return source.value.base.append(source.value.index)
+			return toString(source)
 		case let Sink(sink):
-			return sink.value.base.append(sink.value.index)
+			return toString(sink)
 		case Root:
 			return "/"
 		}
@@ -55,7 +55,7 @@ public enum Identifier: Hashable, Printable {
 	}
 }
 
-public struct SourceIdentifier: IntegerLiteralConvertible {
+public struct SourceIdentifier: IntegerLiteralConvertible, Printable {
 	public init(base: Identifier, index: Int) {
 		self.base = base
 		self.index = index
@@ -69,13 +69,20 @@ public struct SourceIdentifier: IntegerLiteralConvertible {
 	}
 
 
+	// MARK: Printable
+
+	public var description: String {
+		return base.append(index)
+	}
+
+	
 	// MARK: Properties
 
 	public let base: Identifier
 	public let index: Int
 }
 
-public struct SinkIdentifier: IntegerLiteralConvertible {
+public struct SinkIdentifier: IntegerLiteralConvertible, Printable {
 	public init(base: Identifier, index: Int) {
 		self.base = base
 		self.index = index
@@ -86,6 +93,13 @@ public struct SinkIdentifier: IntegerLiteralConvertible {
 
 	public init(integerLiteral value: IntegerLiteralType) {
 		self.init(base: .Root, index: value)
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		return base.append(index)
 	}
 
 
