@@ -12,6 +12,7 @@ final class GraphTests: XCTestCase {
 		let a = SourceIdentifier(base: nil, index: 0)
 		let b = DestinationIdentifier(base: nil, index: 0)
 		var graph = Graph(nodes: [ .Source(a), .Destination(b) ], edges: [ Edge(source: a, destination: b) ])
+		XCTAssertEqual(graph.edges.count, 1)
 		graph.nodes.remove(.Source(a))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
