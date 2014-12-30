@@ -62,6 +62,8 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 }
 
 
+// MARK: - Component identifiers
+
 public struct BaseIdentifier: Printable {
 	public init() {
 		self.uuid = UUID()
