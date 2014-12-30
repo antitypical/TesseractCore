@@ -3,10 +3,6 @@
 public enum Identifier: Hashable, Printable {
 	// MARK: Constructors
 
-	public init() {
-		self = Base(UUID().stringValue)
-	}
-
 	public static func Parameter(index: Int) -> Identifier {
 		return Index(Box(Key(Box(Root), "parameter")), index)
 	}
@@ -20,7 +16,6 @@ public enum Identifier: Hashable, Printable {
 
 	case Key(Box<Identifier>, String)
 	case Index(Box<Identifier>, Int)
-	case Base(String)
 	case Root
 
 
@@ -32,8 +27,6 @@ public enum Identifier: Hashable, Printable {
 			return base.value.append(x)
 		case let Index(base, x):
 			return base.value.append(x)
-		case let Base(x):
-			return x
 		case Root:
 			return "/"
 		}
