@@ -52,6 +52,27 @@ public enum Identifier: Hashable, Printable {
 	}
 }
 
+public struct SourceIdentifier {
+	public init(base: Identifier, index: Int) {
+		self.base = base
+		self.index = index
+	}
+
+	public let base: Identifier
+	public let index: Int
+}
+
+public struct SinkIdentifier {
+	public init(base: Identifier, index: Int) {
+		self.base = base
+		self.index = index
+	}
+
+	public let base: Identifier
+	public let index: Int
+}
+
+
 public func == (left: Identifier, right: Identifier) -> Bool {
 	return left.description == right.description
 }
