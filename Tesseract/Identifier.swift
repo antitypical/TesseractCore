@@ -4,7 +4,7 @@ public enum Identifier: Hashable {
 	// MARK: Constructors
 
 	public init() {
-		self = Node(UUID())
+		self = Base(UUID())
 	}
 
 
@@ -12,7 +12,7 @@ public enum Identifier: Hashable {
 
 	case Parameter(Int)
 	case Return(Int)
-	case Node(UUID)
+	case Base(UUID)
 
 
 	// MARK: API
@@ -23,7 +23,7 @@ public enum Identifier: Hashable {
 			return toString(x)
 		case let Return(x):
 			return toString(x)
-		case let Node(x):
+		case let Base(x):
 			return x.stringValue
 		}
 	}
