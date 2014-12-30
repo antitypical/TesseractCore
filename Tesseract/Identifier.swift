@@ -43,6 +43,25 @@ public enum Identifier: Hashable, Printable {
 	}
 }
 
+
+// MARK: - Equatable
+
+public func == (left: Identifier, right: Identifier) -> Bool {
+	switch (left, right) {
+	case let (.Source(x), .Source(y)):
+		return x.value.base?.uuid == y.value.base?.uuid && x.value.index == y.value.index
+	case let (.Sink(x), .Sink(y)):
+		return x.value.base?.uuid == y.value.base?.uuid && x.value.index == y.value.index
+	case let (.Base(x), .Base(y)):
+		return x.uuid == y.uuid
+	case let (.Root, .Root):
+		return true
+	default:
+		return false
+	}
+}
+
+
 public struct BaseIdentifier: Printable {
 	public init() {
 		self.uuid = UUID()
@@ -99,11 +118,6 @@ public struct SinkIdentifier: Printable {
 	
 	public let base: BaseIdentifier?
 	public let index: Int
-}
-
-
-public func == (left: Identifier, right: Identifier) -> Bool {
-	return left.description == right.description
 }
 
 
