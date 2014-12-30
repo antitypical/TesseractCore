@@ -1,6 +1,8 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
+/// A universally unique identifier.
 public struct UUID: Comparable, Hashable, Printable {
+	/// Generates a new UUID.
 	public init() {
 		var value: [UInt8] = Array(count: 16, repeatedValue: 0)
 		uuid_generate(&value)
@@ -26,10 +28,14 @@ public struct UUID: Comparable, Hashable, Printable {
 
 	// MARK: Private
 
+	/// Construct with a uuid_t.
 	private init(value: [UInt8]) {
 		self.value = value
 	}
 
+	/// The underlying uuid_t.
+	///
+	/// This isn’t typed as such because Swift incorrectly ingests the uuid_t type as a 16-tuple of Int8.
 	private let value: [UInt8]
 }
 
