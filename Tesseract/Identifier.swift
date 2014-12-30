@@ -49,11 +49,11 @@ public enum Identifier: Hashable, Printable {
 public func == (left: Identifier, right: Identifier) -> Bool {
 	switch (left, right) {
 	case let (.Source(x), .Source(y)):
-		return x.value.base?.uuid == y.value.base?.uuid && x.value.index == y.value.index
+		return x == y
 	case let (.Destination(x), .Destination(y)):
-		return x.value.base?.uuid == y.value.base?.uuid && x.value.index == y.value.index
+		return x == y
 	case let (.Base(x), .Base(y)):
-		return x.uuid == y.uuid
+		return x == y
 	case let (.Root, .Root):
 		return true
 	default:
