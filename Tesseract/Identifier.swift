@@ -14,7 +14,6 @@ public enum Identifier: Hashable, Printable {
 
 	// MARK: Cases
 
-	case Key(Box<Identifier>, String)
 	case Source(Box<SourceIdentifier>)
 	case Sink(Box<SinkIdentifier>)
 	case Root
@@ -24,8 +23,6 @@ public enum Identifier: Hashable, Printable {
 
 	public var description: String {
 		switch self {
-		case let Key(base, x):
-			return base.value.append(x)
 		case let Source(source):
 			return toString(source)
 		case let Sink(sink):
@@ -40,18 +37,6 @@ public enum Identifier: Hashable, Printable {
 
 	public var hashValue: Int {
 		return self.description.hashValue
-	}
-
-
-	// MARK: Private
-
-	private func append<T>(child: T) -> String {
-		switch self {
-		case Root:
-			return toString(child)
-		default:
-			return "\(self)/\(child)"
-		}
 	}
 }
 
