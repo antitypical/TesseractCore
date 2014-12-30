@@ -12,6 +12,8 @@ public enum Identifier: Hashable, Printable {
 
 	case Parameter(Int)
 	case Return(Int)
+	case Key(Box<Identifier>, String)
+	case Index(Box<Identifier>, Int)
 	case Base(String)
 
 
@@ -23,6 +25,10 @@ public enum Identifier: Hashable, Printable {
 			return toString(x)
 		case let Return(x):
 			return toString(x)
+		case let Key(base, x):
+			return base.value.append(x)
+		case let Index(base, x):
+			return base.value.append(x)
 		case let Base(x):
 			return x
 		}
@@ -33,6 +39,13 @@ public enum Identifier: Hashable, Printable {
 
 	public var hashValue: Int {
 		return self.description.hashValue
+	}
+
+
+	// MARK: Private
+
+	private func append<T>(child: T) -> String {
+		return "\(self)/\(child)"
 	}
 }
 
@@ -68,4 +81,5 @@ public struct UUID {
 
 // MARK: - Imports
 
+import Box
 import Darwin.uuid
