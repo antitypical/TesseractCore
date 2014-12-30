@@ -16,6 +16,7 @@ public enum Identifier: Hashable, Printable {
 
 	case Source(Box<SourceIdentifier>)
 	case Sink(Box<SinkIdentifier>)
+	case Base(BaseIdentifier)
 	case Root
 
 
@@ -24,9 +25,11 @@ public enum Identifier: Hashable, Printable {
 	public var description: String {
 		switch self {
 		case let Source(source):
-			return toString(source)
+			return source.description
 		case let Sink(sink):
-			return toString(sink)
+			return sink.description
+		case let Base(base):
+			return base.description
 		case Root:
 			return "/"
 		}
