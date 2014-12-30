@@ -64,9 +64,16 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 
 // MARK: - Component identifiers
 
-public struct BaseIdentifier: Printable {
+public struct BaseIdentifier: Hashable, Printable {
 	public init() {
 		self.uuid = UUID()
+	}
+
+
+	// MARK: Hashable
+
+	public var hashValue: Int {
+		return uuid.hashValue
 	}
 
 
@@ -81,6 +88,11 @@ public struct BaseIdentifier: Printable {
 
 	private let uuid: UUID
 }
+
+public func == (left: BaseIdentifier, right: BaseIdentifier) -> Bool {
+	return left.uuid == right.uuid
+}
+
 
 public struct SourceIdentifier: Printable {
 	public init(base: BaseIdentifier?, index: Int) {
