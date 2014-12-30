@@ -7,11 +7,17 @@ public enum Identifier: Hashable, Printable {
 		self = Base(UUID().stringValue)
 	}
 
+	public static func Parameter(index: Int) -> Identifier {
+		return Index(Box(Key(Box(Root), "parameter")), index)
+	}
+
+	public static func Return(index: Int) -> Identifier {
+		return Index(Box(Key(Box(Root), "return")), index)
+	}
+
 
 	// MARK: Cases
 
-	case Parameter(Int)
-	case Return(Int)
 	case Key(Box<Identifier>, String)
 	case Index(Box<Identifier>, Int)
 	case Base(String)
@@ -22,10 +28,6 @@ public enum Identifier: Hashable, Printable {
 
 	public var description: String {
 		switch self {
-		case let Parameter(x):
-			return toString(x)
-		case let Return(x):
-			return toString(x)
 		case let Key(base, x):
 			return base.value.append(x)
 		case let Index(base, x):
