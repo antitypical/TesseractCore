@@ -8,14 +8,14 @@ public enum Identifier: Hashable, Printable {
 	}
 
 	public static func Return(index: Int) -> Identifier {
-		return Sink(Box(SinkIdentifier(base: nil, index: index)))
+		return Destination(Box(DestinationIdentifier(base: nil, index: index)))
 	}
 
 
 	// MARK: Cases
 
 	case Source(Box<SourceIdentifier>)
-	case Sink(Box<SinkIdentifier>)
+	case Destination(Box<DestinationIdentifier>)
 	case Base(BaseIdentifier)
 	case Root
 
@@ -26,7 +26,7 @@ public enum Identifier: Hashable, Printable {
 		switch self {
 		case let Source(source):
 			return source.description
-		case let Sink(sink):
+		case let Destination(sink):
 			return sink.description
 		case let Base(base):
 			return base.description
@@ -50,7 +50,7 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 	switch (left, right) {
 	case let (.Source(x), .Source(y)):
 		return x.value.base?.uuid == y.value.base?.uuid && x.value.index == y.value.index
-	case let (.Sink(x), .Sink(y)):
+	case let (.Destination(x), .Destination(y)):
 		return x.value.base?.uuid == y.value.base?.uuid && x.value.index == y.value.index
 	case let (.Base(x), .Base(y)):
 		return x.uuid == y.uuid
@@ -102,7 +102,7 @@ public struct SourceIdentifier: Printable {
 	public let index: Int
 }
 
-public struct SinkIdentifier: Printable {
+public struct DestinationIdentifier: Printable {
 	public init(base: BaseIdentifier?, index: Int) {
 		self.base = base
 		self.index = index

@@ -1,13 +1,13 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge {
-	public init(input: SourceIdentifier, output: SinkIdentifier) {
+	public init(input: SourceIdentifier, output: DestinationIdentifier) {
 		self.input = input
 		self.output = output
 	}
 
 	public let input: SourceIdentifier
-	public let output: SinkIdentifier
+	public let output: DestinationIdentifier
 }
 
 public struct Graph {
