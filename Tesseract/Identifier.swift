@@ -15,6 +15,7 @@ public enum Identifier: Hashable, Printable {
 	case Key(Box<Identifier>, String)
 	case Index(Box<Identifier>, Int)
 	case Base(String)
+	case Root
 
 
 	// MARK: Printable
@@ -31,6 +32,8 @@ public enum Identifier: Hashable, Printable {
 			return base.value.append(x)
 		case let Base(x):
 			return x
+		case Root:
+			return "/"
 		}
 	}
 
@@ -45,7 +48,12 @@ public enum Identifier: Hashable, Printable {
 	// MARK: Private
 
 	private func append<T>(child: T) -> String {
-		return "\(self)/\(child)"
+		switch self {
+		case Root:
+			return toString(child)
+		default:
+			return "\(self)/\(child)"
+		}
 	}
 }
 
