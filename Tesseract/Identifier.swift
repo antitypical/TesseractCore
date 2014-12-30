@@ -147,7 +147,7 @@ public struct DestinationIdentifier: Hashable, Printable {
 	// MARK: Printable
 
 	public var description: String {
-		return "\(base?.description ?? String())/sources/\(index)"
+		return "\(base?.description ?? String())/destinations/\(index)"
 	}
 
 
