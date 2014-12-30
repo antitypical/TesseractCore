@@ -23,13 +23,10 @@ public func == (left: Edge, right: Edge) -> Bool {
 
 
 public struct Graph {
-	public init(title: String, nodes: Set<Identifier> = [], edges: Set<Edge> = []) {
-		self.title = title
+	public init(nodes: Set<Identifier> = [], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
 	}
-
-	public let title: String
 
 	public let nodes: Set<Identifier>
 	public let edges: Set<Edge>
