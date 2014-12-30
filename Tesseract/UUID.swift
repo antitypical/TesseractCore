@@ -4,6 +4,7 @@
 public struct UUID: Comparable, Hashable, Printable {
 	/// Generates a new UUID.
 	public init() {
+		// 16 bytes
 		var value: [UInt8] = Array(count: 16, repeatedValue: 0)
 		uuid_generate(&value)
 		self.init(value: value)
@@ -13,6 +14,7 @@ public struct UUID: Comparable, Hashable, Printable {
 	// MARK: Printable
 
 	public var description: String {
+		// 36 characters + null byte
 		var characters: [CChar] = Array(count: 37, repeatedValue: 0)
 		uuid_unparse(value, &characters)
 		return String.fromCString(characters)!
