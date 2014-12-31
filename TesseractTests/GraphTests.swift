@@ -16,4 +16,11 @@ final class GraphTests: XCTestCase {
 		graph.nodes.remove(.Source(a))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
+
+	func testSanitizesEdgesOnEdgesMutation() {
+		var graph = Graph()
+		XCTAssertEqual(graph.edges.count, 0)
+		graph.edges.append(Edge(source: SourceIdentifier(base: nil, index: 0), destination: DestinationIdentifier(base: nil, index: 0)))
+		XCTAssertEqual(graph.edges.count, 0)
+	}
 }
