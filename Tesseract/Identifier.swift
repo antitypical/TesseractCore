@@ -115,7 +115,7 @@ public protocol IndexedIdentifierType {
 }
 
 
-public struct SourceIdentifier: Hashable, Printable {
+public struct SourceIdentifier: Hashable, Printable, IndexedIdentifierType {
 	public init(base: BaseIdentifier?, index: Int) {
 		self.base = base
 		self.index = index
@@ -140,6 +140,10 @@ public struct SourceIdentifier: Hashable, Printable {
 
 	public let base: BaseIdentifier?
 	public let index: Int
+
+	public var identifier: Identifier {
+		return .Source(self)
+	}
 }
 
 public func == (left: SourceIdentifier, right: SourceIdentifier) -> Bool {
@@ -147,7 +151,7 @@ public func == (left: SourceIdentifier, right: SourceIdentifier) -> Bool {
 }
 
 
-public struct DestinationIdentifier: Hashable, Printable {
+public struct DestinationIdentifier: Hashable, Printable, IndexedIdentifierType {
 	public init(base: BaseIdentifier?, index: Int) {
 		self.base = base
 		self.index = index
@@ -172,6 +176,10 @@ public struct DestinationIdentifier: Hashable, Printable {
 	
 	public let base: BaseIdentifier?
 	public let index: Int
+
+	public var identifier: Identifier {
+		return .Destination(self)
+	}
 }
 
 public func == (left: DestinationIdentifier, right: DestinationIdentifier) -> Bool {
