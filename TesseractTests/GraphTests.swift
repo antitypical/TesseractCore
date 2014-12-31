@@ -8,7 +8,7 @@ final class GraphTests: XCTestCase {
 		let graph = Graph(nodes: [ .Parameter(0), .Return(0) ], edges: [ Edge(source: SourceIdentifier(base: nil, index: 0), destination: DestinationIdentifier(base: nil, index: 0)) ])
 	}
 
-	func testFiltersEdgesOnNodesMutation() {
+	func testSanitizesEdgesOnNodesMutation() {
 		let a = SourceIdentifier(base: nil, index: 0)
 		let b = DestinationIdentifier(base: nil, index: 0)
 		var graph = Graph(nodes: [ .Source(a), .Destination(b) ], edges: [ Edge(source: a, destination: b) ])
