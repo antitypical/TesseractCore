@@ -31,19 +31,6 @@ public struct Graph {
 
 	// MARK: Primitive methods
 
-	public func contains(identifier: BaseIdentifier) -> Bool {
-		return nodes.contains(.Base(identifier))
-	}
-
-	public func contains(identifier: SourceIdentifier) -> Bool {
-		return identifier.base.map { self.contains($0) } ?? nodes.contains(.Source(identifier))
-	}
-
-	public func contains(identifier: DestinationIdentifier) -> Bool {
-		return identifier.base.map { self.contains($0) } ?? nodes.contains(.Destination(identifier))
-	}
-
-
 	public var nodes: Set<Identifier> {
 		willSet {
 			let removed = nodes - newValue
