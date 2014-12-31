@@ -20,7 +20,6 @@
 		D4B7EE741A47226B006D44E9 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE6F1A466104006D44E9 /* Either.framework */; };
 		D4B7EE751A47226B006D44E9 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE711A46614C006D44E9 /* Prelude.framework */; };
 		D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C893BC1A51DCC10078743E /* GraphTests.swift */; };
-		D4CD9E121A530DBB00B1FF53 /* UUID.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CD9E111A530DBB00B1FF53 /* UUID.swift */; };
 		D4CD9E141A5323D200B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
 		D4CD9E151A5323E400B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
 		D4ED827D1A3F9ADB00D0479E /* Tesseract.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* Tesseract.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -52,7 +51,6 @@
 		D4B7EE6F1A466104006D44E9 /* Either.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Either.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4B7EE711A46614C006D44E9 /* Prelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Prelude.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4C893BC1A51DCC10078743E /* GraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
-		D4CD9E111A530DBB00B1FF53 /* UUID.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UUID.swift; sourceTree = "<group>"; };
 		D4CD9E131A5323D200B1FF53 /* Set.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Set.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED82771A3F9ADB00D0479E /* Tesseract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tesseract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED827B1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 				D42CAC3B1A429CF80091F6AA /* Term.swift */,
 				D4B5DE351A505F66004B4C0C /* Graph.swift */,
 				D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */,
-				D4CD9E111A530DBB00B1FF53 /* UUID.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
 			);
 			path = Tesseract;
@@ -272,7 +269,6 @@
 				D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */,
 				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
-				D4CD9E121A530DBB00B1FF53 /* UUID.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
