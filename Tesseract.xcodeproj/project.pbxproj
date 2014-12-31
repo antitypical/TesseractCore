@@ -12,17 +12,22 @@
 		D42CAC3C1A429CF80091F6AA /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42CAC3B1A429CF80091F6AA /* Term.swift */; };
 		D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B564091A4CEF2E00795949 /* Assertions.swift */; };
 		D4B5DE341A4F9527004B4C0C /* TermTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE331A4F9526004B4C0C /* TermTests.swift */; };
+		D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE351A505F66004B4C0C /* Graph.swift */; };
 		D4B7EE6C1A465926006D44E9 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B7EE6B1A465926006D44E9 /* TypeTests.swift */; };
 		D4B7EE701A466104006D44E9 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE6F1A466104006D44E9 /* Either.framework */; };
 		D4B7EE721A46614C006D44E9 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE711A46614C006D44E9 /* Prelude.framework */; };
 		D4B7EE731A47226B006D44E9 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
 		D4B7EE741A47226B006D44E9 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE6F1A466104006D44E9 /* Either.framework */; };
 		D4B7EE751A47226B006D44E9 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE711A46614C006D44E9 /* Prelude.framework */; };
+		D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C893BC1A51DCC10078743E /* GraphTests.swift */; };
+		D4CD9E141A5323D200B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
+		D4CD9E151A5323E400B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
 		D4ED827D1A3F9ADB00D0479E /* Tesseract.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* Tesseract.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4ED82881A3F9ADB00D0479E /* Tesseract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* Tesseract.framework */; };
 		D4ED828F1A3F9ADB00D0479E /* TesseractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
 		D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED829A1A3F9C4900D0479E /* Type.swift */; };
+		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,9 +46,12 @@
 		D42CAC3B1A429CF80091F6AA /* Term.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		D4B564091A4CEF2E00795949 /* Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		D4B5DE331A4F9526004B4C0C /* TermTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermTests.swift; sourceTree = "<group>"; };
+		D4B5DE351A505F66004B4C0C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		D4B7EE6B1A465926006D44E9 /* TypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTests.swift; sourceTree = "<group>"; };
 		D4B7EE6F1A466104006D44E9 /* Either.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Either.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4B7EE711A46614C006D44E9 /* Prelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Prelude.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4C893BC1A51DCC10078743E /* GraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
+		D4CD9E131A5323D200B1FF53 /* Set.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Set.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED82771A3F9ADB00D0479E /* Tesseract.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Tesseract.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED827B1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4ED827C1A3F9ADB00D0479E /* Tesseract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tesseract.h; sourceTree = "<group>"; };
@@ -52,6 +60,7 @@
 		D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesseractTests.swift; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		D4ED829A1A3F9C4900D0479E /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4CD9E141A5323D200B1FF53 /* Set.framework in Frameworks */,
 				D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */,
 				D4B7EE701A466104006D44E9 /* Either.framework in Frameworks */,
 				D4B7EE721A46614C006D44E9 /* Prelude.framework in Frameworks */,
@@ -72,6 +82,7 @@
 				D4B7EE731A47226B006D44E9 /* Box.framework in Frameworks */,
 				D4B7EE741A47226B006D44E9 /* Either.framework in Frameworks */,
 				D4B7EE751A47226B006D44E9 /* Prelude.framework in Frameworks */,
+				D4CD9E151A5323E400B1FF53 /* Set.framework in Frameworks */,
 				D4ED82881A3F9ADB00D0479E /* Tesseract.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +98,7 @@
 				D42CAC391A429BFD0091F6AA /* Box.framework */,
 				D4B7EE6F1A466104006D44E9 /* Either.framework */,
 				D4B7EE711A46614C006D44E9 /* Prelude.framework */,
+				D4CD9E131A5323D200B1FF53 /* Set.framework */,
 				D4ED82781A3F9ADB00D0479E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +120,8 @@
 				D4ED829A1A3F9C4900D0479E /* Type.swift */,
 				D42CAC371A4299160091F6AA /* Binding.swift */,
 				D42CAC3B1A429CF80091F6AA /* Term.swift */,
+				D4B5DE351A505F66004B4C0C /* Graph.swift */,
+				D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
 			);
 			path = Tesseract;
@@ -125,6 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */,
+				D4C893BC1A51DCC10078743E /* GraphTests.swift */,
 				D4B5DE331A4F9526004B4C0C /* TermTests.swift */,
 				D4B7EE6B1A465926006D44E9 /* TypeTests.swift */,
 				D4ED828C1A3F9ADB00D0479E /* Supporting Files */,
@@ -252,6 +267,8 @@
 				D42CAC3C1A429CF80091F6AA /* Term.swift in Sources */,
 				D42CAC381A4299160091F6AA /* Binding.swift in Sources */,
 				D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */,
+				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
+				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +278,7 @@
 			files = (
 				D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */,
 				D4B5DE341A4F9527004B4C0C /* TermTests.swift in Sources */,
+				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
 				D4ED828F1A3F9ADB00D0479E /* TesseractTests.swift in Sources */,
 				D4B7EE6C1A465926006D44E9 /* TypeTests.swift in Sources */,
 			);
