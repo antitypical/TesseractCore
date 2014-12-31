@@ -185,3 +185,8 @@ public struct DestinationIdentifier: Hashable, Printable, IndexedIdentifierType 
 public func == (left: DestinationIdentifier, right: DestinationIdentifier) -> Bool {
 	return left.base == right.base && left.index == right.index
 }
+
+
+public func containingIdentifier<I: IndexedIdentifierType>(identifier: I) -> Identifier {
+	return identifier.base.map { .Base($0) } ?? identifier.identifier
+}
