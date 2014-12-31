@@ -75,7 +75,7 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 
 public struct BaseIdentifier: Hashable, Printable {
 	public init() {
-		self.uuid = UUID()
+		self.uuid = BaseIdentifier.cursor++
 	}
 
 
@@ -95,7 +95,9 @@ public struct BaseIdentifier: Hashable, Printable {
 
 	// MARK: Private
 
-	private let uuid: UUID
+	private let uuid: Int
+
+	private static var cursor = 0
 }
 
 public func == (left: BaseIdentifier, right: BaseIdentifier) -> Bool {
