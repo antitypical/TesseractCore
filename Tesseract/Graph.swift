@@ -45,9 +45,10 @@ public struct Graph {
 
 
 	public var nodes: Set<Identifier> {
-		didSet {
+		willSet {
+			let removed = nodes - newValue
 			edges = edges.filter {
-				self.contains($0.source) && self.contains($0.destination)
+				!removed.contains(containingIdentifier($0.source)) && !removed.contains(containingIdentifier($0.destination))
 			}
 		}
 	}
