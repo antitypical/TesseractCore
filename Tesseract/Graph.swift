@@ -41,7 +41,15 @@ public struct Graph {
 		}
 	}
 
-	public var edges: Set<Edge>
+	public var edges: Set<Edge> {
+		didSet {
+			let added = edges - oldValue
+			if added.count == 0 { return }
+			edges -= added.filter {
+				!self.nodes.contains(containingIdentifier($0.source)) && !self.nodes.contains(containingIdentifier($0.destination))
+			}
+		}
+	}
 }
 
 
