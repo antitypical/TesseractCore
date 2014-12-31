@@ -34,6 +34,7 @@ public struct Graph {
 	public var nodes: Set<Identifier> {
 		willSet {
 			let removed = nodes - newValue
+			if removed.count == 0 { return }
 			edges = edges.filter {
 				!removed.contains(containingIdentifier($0.source)) && !removed.contains(containingIdentifier($0.destination))
 			}
