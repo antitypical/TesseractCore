@@ -43,7 +43,12 @@ public enum Identifier: Hashable, Printable {
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return self.description.hashValue
+		switch self {
+		case .Source, .Destination, .Root:
+			return self.description.hashValue
+		case let .Base(identifier):
+			return identifier.hashValue
+		}
 	}
 }
 
