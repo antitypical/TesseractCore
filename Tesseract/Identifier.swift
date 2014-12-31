@@ -105,6 +105,16 @@ public func == (left: BaseIdentifier, right: BaseIdentifier) -> Bool {
 }
 
 
+public protocol IndexedIdentifierType {
+	init(base: BaseIdentifier?, index: Int)
+
+	var base: BaseIdentifier? { get }
+	var index: Int { get }
+
+	var identifier: Identifier { get }
+}
+
+
 public struct SourceIdentifier: Hashable, Printable {
 	public init(base: BaseIdentifier?, index: Int) {
 		self.base = base
