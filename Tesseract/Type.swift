@@ -33,6 +33,34 @@ public enum Type: Equatable, Printable {
 	case Product([Type])
 
 
+	// MARK: Destructuring
+
+	public func destructure() -> DestructuredType {
+		switch self {
+		case .Unit:
+			return .Unit
+		case .Boolean:
+			return .Boolean
+		case .Integer:
+			return .Integer
+		case .String:
+			return .String
+		case let .Function(x, y):
+			return .Function(x.value, y.value)
+
+		case let .Polymorphic(x):
+			return .Polymorphic(x.value)
+		case let .Parameter(x):
+			return .Parameter(x)
+
+		case let .Sum(xs):
+			return .Sum(xs)
+		case let .Product(xs):
+			return .Product(xs)
+		}
+	}
+
+
 	// MARK: Printable
 
 	public var description: Swift.String {
@@ -59,6 +87,20 @@ public enum Type: Equatable, Printable {
 			return "(" + " ✕ ".join(xs.map(toString)) + ")"
 		}
 	}
+}
+
+public enum DestructuredType {
+	case Unit
+	case Boolean
+	case Integer
+	case String
+	case Function(Type, Type)
+
+	case Polymorphic(Type)
+	case Parameter(Int)
+
+	case Sum([Type])
+	case Product([Type])
 }
 
 
