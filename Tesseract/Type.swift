@@ -130,7 +130,7 @@ public func == (left: Type, right: Type) -> Bool {
 
 
 public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Type> {
-	switch term {
+	switch term.destructure() {
 	case let .Constant(value):
 		return .right(typeof(value))
 
@@ -138,17 +138,17 @@ public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Ty
 		return .right(context[index].1)
 
 	case let .Abstraction(type, body):
-		return typeof(body.value, context: context + [(context.count, type)]).map {
+		return typeof(body, context: context + [(context.count, type)]).map {
 			.function(type, $0)
 		}
 
 	case let .Application(a, b):
-		return typeof(a.value, context: context).either(Either.left, { appliedType in
-			switch appliedType {
+		return typeof(a, context: context).either(Either.left, { appliedType in
+			switch appliedType.destructure() {
 			case let .Function(parameterType, returnType):
-				return typeof(b.value, context: context).either(Either.left, {
-					$0 == parameterType.value ?
-						.right(returnType.value)
+				return typeof(b, context: context).either(Either.left, {
+					$0 == parameterType ?
+						.right(returnType)
 					:	.left("\(term) is of type \($0), not expected type \(parameterType)")
 				})
 			default:
