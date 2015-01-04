@@ -100,6 +100,20 @@ public func typeof(term: Term, context: [(Int, Type)] = []) -> Either<String, Ty
 			.function(type, $0)
 		}
 
+	case let .Application(a, b):
+		return typeof(a.value, context: context).either(Either.left, { appliedType in
+			switch appliedType {
+			case let .Function(parameterType, returnType):
+				return typeof(b.value, context: context).either(Either.left, {
+					$0 == parameterType.value ?
+						.right(returnType.value)
+					:	.left("\(term) is of type \($0), not expected type \(parameterType)")
+				})
+			default:
+				return .left("\(term) is of type \(appliedType), not expected (function) type.")
+			}
+		})
+
 	default:
 		return .left("Don’t know how to typecheck \(term)")
 	}
