@@ -15,6 +15,13 @@ public struct Edge: Hashable {
 	public var hashValue: Int {
 		return source.hashValue ^ destination.hashValue
 	}
+
+
+	// MARK: Private
+
+	private func intersects(nodes: Set<Identifier>) -> Bool {
+		return nodes.contains(containingIdentifier(source)) || nodes.contains(containingIdentifier(destination))
+	}
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
@@ -35,9 +42,7 @@ public struct Graph {
 		willSet {
 			let removed = nodes - newValue
 			if removed.count == 0 { return }
-			edges = edges.filter {
-				!removed.contains(containingIdentifier($0.source)) && !removed.contains(containingIdentifier($0.destination))
-			}
+			edges = edges.filter { !$0.intersects(removed) }
 		}
 	}
 
@@ -45,9 +50,7 @@ public struct Graph {
 		didSet {
 			let added = edges - oldValue
 			if added.count == 0 { return }
-			edges -= added.filter {
-				!self.nodes.contains(containingIdentifier($0.source)) && !self.nodes.contains(containingIdentifier($0.destination))
-			}
+			edges -= added.filter { !$0.intersects(self.nodes) }
 		}
 	}
 }
