@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge: Hashable {
-	public init(source: SourceIdentifier, destination: DestinationIdentifier) {
+	public init(_ source: SourceIdentifier, _ destination: DestinationIdentifier) {
 		self.source = source
 		self.destination = destination
 	}
