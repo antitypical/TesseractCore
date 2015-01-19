@@ -50,6 +50,13 @@ public struct Graph<T> {
 			}
 		}
 	}
+
+	
+	// MARK: Higher-order methods.
+
+	public func filter(includeNodeWithIdentifier: (Identifier, T) -> Bool) -> Graph {
+		return Graph(nodes: nodes.filter(includeNodeWithIdentifier), edges: edges)
+	}
 }
 
 extension Dictionary {
