@@ -25,6 +25,6 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testAttachingDataToNodes() {
-		let graph: Graph<Int> = Graph(nodes: [.Parameter(0): 0, .Return(0): 1])
+		let graph: Graph<Int> = Graph(nodes: [ .Parameter(0): 0, .Return(0): 1 ])
 	}
 }
