@@ -75,33 +75,33 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 
 public struct BaseIdentifier: Hashable, Printable {
 	public init() {
-		self.uuid = BaseIdentifier.cursor++
+		self.value = BaseIdentifier.cursor++
 	}
 
 
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return uuid.hashValue
+		return value.hashValue
 	}
 
 
 	// MARK: Printable
 
 	public var description: String {
-		return uuid.description
+		return value.description
 	}
 
 
 	// MARK: Private
 
-	private let uuid: Int
+	private let value: Int
 
 	private static var cursor = 0
 }
 
 public func == (left: BaseIdentifier, right: BaseIdentifier) -> Bool {
-	return left.uuid == right.uuid
+	return left.value == right.value
 }
 
 
