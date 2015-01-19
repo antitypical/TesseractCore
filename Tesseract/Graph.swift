@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge: Hashable {
-	public init(source: SourceIdentifier, destination: DestinationIdentifier) {
+	public init(_ source: SourceIdentifier, _ destination: DestinationIdentifier) {
 		self.source = source
 		self.destination = destination
 	}
@@ -22,8 +22,8 @@ public func == (left: Edge, right: Edge) -> Bool {
 }
 
 
-public struct Graph {
-	public init(nodes: Set<Identifier> = [], edges: Set<Edge> = []) {
+public struct Graph<T> {
+	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
 	}
@@ -31,9 +31,9 @@ public struct Graph {
 
 	// MARK: Primitive methods
 
-	public var nodes: Set<Identifier> {
+	public var nodes: [Identifier: T] {
 		willSet {
-			let removed = nodes - newValue
+			let removed = Set(nodes.keys) - Set(newValue.keys)
 			if removed.count == 0 { return }
 			edges = edges.filter {
 				!removed.contains(containingIdentifier($0.source)) && !removed.contains(containingIdentifier($0.destination))
@@ -46,7 +46,7 @@ public struct Graph {
 			let added = edges - oldValue
 			if added.count == 0 { return }
 			edges -= added.filter {
-				!self.nodes.contains(containingIdentifier($0.source)) && !self.nodes.contains(containingIdentifier($0.destination))
+				!contains(self.nodes.keys, containingIdentifier($0.source)) && !contains(self.nodes.keys, containingIdentifier($0.destination))
 			}
 		}
 	}

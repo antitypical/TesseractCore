@@ -5,22 +5,26 @@ import XCTest
 
 final class GraphTests: XCTestCase {
 	func testIdentityGraph() {
-		let graph = Graph(nodes: [ .Parameter(0), .Return(0) ], edges: [ Edge(source: SourceIdentifier(base: nil, index: 0), destination: DestinationIdentifier(base: nil, index: 0)) ])
+		let graph = Graph(nodes: [ .Parameter(0): (), .Return(0): () ], edges: [ Edge(.Parameter(0), .Return(0)) ])
 	}
 
 	func testSanitizesEdgesOnNodesMutation() {
-		let a = SourceIdentifier(base: nil, index: 0)
-		let b = DestinationIdentifier(base: nil, index: 0)
-		var graph = Graph(nodes: [ .Source(a), .Destination(b) ], edges: [ Edge(source: a, destination: b) ])
+		let a = SourceIdentifier.Parameter(0)
+		let b = DestinationIdentifier.Return(0)
+		var graph = Graph(nodes: [ .Source(a): (), .Destination(b): () ], edges: [ Edge(a, b) ])
 		XCTAssertEqual(graph.edges.count, 1)
-		graph.nodes.remove(.Source(a))
+		graph.nodes.removeValueForKey(.Source(a))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
 	func testSanitizesEdgesOnEdgesMutation() {
-		var graph = Graph()
+		var graph = Graph<()>()
 		XCTAssertEqual(graph.edges.count, 0)
-		graph.edges.append(Edge(source: SourceIdentifier(base: nil, index: 0), destination: DestinationIdentifier(base: nil, index: 0)))
+		graph.edges.append(Edge(.Parameter(0), .Return(0)))
 		XCTAssertEqual(graph.edges.count, 0)
+	}
+
+	func testAttachingDataToNodes() {
+		let graph: Graph<Int> = Graph(nodes: [ .Parameter(0): 0, .Return(0): 1 ])
 	}
 }
