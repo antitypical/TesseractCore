@@ -61,6 +61,10 @@ extension Dictionary {
 			updateValue(value, forKey: key)
 		}
 	}
+
+	func filter(includeKeyAndValue: Element -> Bool) -> Dictionary {
+		return Dictionary(Swift.filter(self, includeKeyAndValue))
+	}
 }
 
 
