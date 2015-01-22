@@ -9,11 +9,9 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testSanitizesEdgesOnNodesMutation() {
-		let a = SourceIdentifier.Parameter(0)
-		let b = DestinationIdentifier.Return(0)
-		var graph = Graph(nodes: [ .Source(a): (), .Destination(b): () ], edges: [ Edge(a, b) ])
+		var graph = Graph(nodes: [ .Parameter(0): (), .Return(0): () ], edges: [ Edge(.Parameter(0), .Return(0)) ])
 		XCTAssertEqual(graph.edges.count, 1)
-		graph.nodes.removeValueForKey(.Source(a))
+		graph.nodes.removeValueForKey(.Parameter(0))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
