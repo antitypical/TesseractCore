@@ -60,6 +60,7 @@ public struct Graph<T> {
 	}
 }
 
+
 extension Dictionary {
 	init<S: SequenceType where S.Generator.Element == Element>(_ elements: S) {
 		self.init()
