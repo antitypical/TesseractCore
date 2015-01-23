@@ -55,8 +55,8 @@ public struct Graph<T> {
 	
 	// MARK: Higher-order methods.
 
-	public func filter(includeNodeWithIdentifier: (Identifier, T) -> Bool) -> Graph {
-		return Graph(nodes: nodes.filter(includeNodeWithIdentifier), edges: edges)
+	public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
+		return Graph(nodes: nodes.filter(includeNode), edges: edges)
 	}
 }
 
