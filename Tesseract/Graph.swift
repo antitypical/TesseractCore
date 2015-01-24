@@ -51,6 +51,29 @@ public struct Graph<T> {
 			}
 		}
 	}
+
+	
+	// MARK: Higher-order methods.
+
+	public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
+		return Graph(nodes: nodes.filter(includeNode), edges: edges)
+	}
+}
+
+
+extension Dictionary {
+	init<S: SequenceType where S.Generator.Element == Element>(_ elements: S) {
+		self.init()
+		var generator = elements.generate()
+		let next: () -> Element? = { generator.next() }
+		for (key, value) in GeneratorOf(next) {
+			updateValue(value, forKey: key)
+		}
+	}
+
+	func filter(includeKeyAndValue: Element -> Bool) -> Dictionary {
+		return Dictionary(Swift.filter(self, includeKeyAndValue))
+	}
 }
 
 
