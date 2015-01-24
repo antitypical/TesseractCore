@@ -166,6 +166,14 @@ public struct NodeIdentifier: Hashable, Printable {
 		return .Node(self)
 	}
 
+	public func parameter(index: Int) -> DestinationIdentifier {
+		return .Node(self, index)
+	}
+
+	public func result(index: Int) -> SourceIdentifier {
+		return .Node(self, index)
+	}
+
 
 	// MARK: Hashable
 
