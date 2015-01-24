@@ -55,6 +55,10 @@ public struct Graph<T> {
 		return Graph(nodes: nodes.filter(includeNode), edges: edges)
 	}
 
+	public func filter(includeEdge: Edge -> Bool) -> Graph {
+		return Graph(nodes: nodes, edges: edges.filter(includeEdge))
+	}
+
 
 	// MARK: Private
 
