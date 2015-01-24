@@ -14,7 +14,7 @@ extension Dictionary {
 		return Dictionary(lazy(self).filter(includeKeyAndValue))
 	}
 
-	func map<MappedKey: Hashable, MappedValue>(f: Element -> (MappedKey, MappedValue)) -> Dictionary<MappedKey, MappedValue> {
-		return Dictionary<MappedKey, MappedValue>(Swift.map(self, f))
+	func map<K: Hashable, V>(transform: Element -> (K, V)) -> Dictionary<K, V> {
+		return Dictionary<K, V>(lazy(self).map(transform))
 	}
 }
