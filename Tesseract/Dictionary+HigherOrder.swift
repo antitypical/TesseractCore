@@ -11,7 +11,7 @@ extension Dictionary {
 	}
 
 	func filter(includeKeyAndValue: Element -> Bool) -> Dictionary {
-		return Dictionary(Swift.filter(self, includeKeyAndValue))
+		return Dictionary(lazy(self).filter(includeKeyAndValue))
 	}
 
 	func map<MappedKey: Hashable, MappedValue>(f: Element -> (MappedKey, MappedValue)) -> Dictionary<MappedKey, MappedValue> {
