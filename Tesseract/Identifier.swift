@@ -3,8 +3,8 @@
 public enum Identifier: Hashable, Printable {
 	// MARK: Cases
 
-	case Parameter(Int)
-	case Return(Int)
+	case Input(Int)
+	case Output(Int)
 	case Node(NodeIdentifier)
 
 
@@ -12,9 +12,9 @@ public enum Identifier: Hashable, Printable {
 
 	public var description: String {
 		switch self {
-		case let Parameter(index):
+		case let Input(index):
 			return index.description
-		case let Return(index):
+		case let Output(index):
 			return index.description
 		case let Node(identifier):
 			return identifier.description
@@ -26,9 +26,9 @@ public enum Identifier: Hashable, Printable {
 
 	public var hashValue: Int {
 		switch self {
-		case let Parameter(index):
+		case let Input(index):
 			return index.hashValue
-		case let Return(index):
+		case let Output(index):
 			return index.hashValue
 		case let Node(identifier):
 			return identifier.hashValue
@@ -41,9 +41,9 @@ public enum Identifier: Hashable, Printable {
 
 public func == (left: Identifier, right: Identifier) -> Bool {
 	switch (left, right) {
-	case let (.Parameter(leftIndex), .Parameter(rightIndex)):
+	case let (.Input(leftIndex), .Input(rightIndex)):
 		return leftIndex == rightIndex
-	case let (.Return(leftIndex), .Return(rightIndex)):
+	case let (.Output(leftIndex), .Output(rightIndex)):
 		return leftIndex == rightIndex
 	case let (.Node(leftIdentifier), .Node(rightIdentifier)):
 		return leftIdentifier == rightIdentifier
@@ -56,7 +56,7 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 // MARK: - Component identifiers
 
 public enum SourceIdentifier: Hashable, Printable {
-	case Parameter(Int)
+	case Input(Int)
 	case Node(NodeIdentifier, Int)
 
 
@@ -64,7 +64,7 @@ public enum SourceIdentifier: Hashable, Printable {
 
 	public var destructured: (NodeIdentifier?, Int) {
 		switch self {
-		case let Parameter(index):
+		case let Input(index):
 			return (nil, index)
 		case let Node(identifier, index):
 			return (identifier, index)
@@ -73,8 +73,8 @@ public enum SourceIdentifier: Hashable, Printable {
 
 	public var identifier: Identifier {
 		switch self {
-		case let Parameter(index):
-			return .Parameter(index)
+		case let Input(index):
+			return .Input(index)
 		case let Node(identifier, index):
 			return .Node(identifier)
 		}
@@ -107,7 +107,7 @@ public func == (left: SourceIdentifier, right: SourceIdentifier) -> Bool {
 
 
 public enum DestinationIdentifier: Hashable, Printable {
-	case Return(Int)
+	case Output(Int)
 	case Node(NodeIdentifier, Int)
 
 
@@ -115,7 +115,7 @@ public enum DestinationIdentifier: Hashable, Printable {
 
 	public var destructured: (NodeIdentifier?, Int) {
 		switch self {
-		case let Return(index):
+		case let Output(index):
 			return (nil, index)
 		case let Node(identifier, index):
 			return (identifier, index)
@@ -124,8 +124,8 @@ public enum DestinationIdentifier: Hashable, Printable {
 
 	public var identifier: Identifier {
 		switch self {
-		case let Return(index):
-			return .Return(index)
+		case let Output(index):
+			return .Output(index)
 		case let Node(identifier, index):
 			return .Node(identifier)
 		}
@@ -166,11 +166,11 @@ public struct NodeIdentifier: Hashable, Printable {
 		return .Node(self)
 	}
 
-	public func parameter(index: Int) -> DestinationIdentifier {
+	public func input(index: Int) -> DestinationIdentifier {
 		return .Node(self, index)
 	}
 
-	public func result(index: Int) -> SourceIdentifier {
+	public func output(index: Int) -> SourceIdentifier {
 		return .Node(self, index)
 	}
 
