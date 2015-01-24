@@ -18,6 +18,12 @@ extension Dictionary {
 		return Dictionary<K, V>(lazy(self).map(transform))
 	}
 
+	func flatMap<K: Hashable, V, S: SequenceType where S.Generator.Element == Dictionary<K, V>.Element>(transform: Element -> S) -> Dictionary<K, V> {
+		return reduce(Dictionary<K, V>(minimumCapacity: count)) {
+			$0 + transform($1)
+		}
+	}
+
 	func reduce<Into>(initial: Into, combine: (Into, Element) -> Into) -> Into {
 		return Swift.reduce(self, initial, combine)
 	}
