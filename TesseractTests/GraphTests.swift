@@ -25,4 +25,29 @@ final class GraphTests: XCTestCase {
 	func testAttachingDataToNodes() {
 		let graph: Graph<Int> = Graph(nodes: [ .Parameter(0): 0, .Return(0): 1 ])
 	}
+
+	func testAbsoluteValueGraph() {
+		let x = SourceIdentifier.Parameter(0)
+		let result = DestinationIdentifier.Return(0)
+		let zero = NodeIdentifier()
+		let lessThan = NodeIdentifier()
+		let iff = NodeIdentifier()
+		let unaryMinus = NodeIdentifier()
+		let abs = Graph<String>(nodes: [
+			x.identifier: "x",
+			result.identifier: "result",
+			zero.identifier: "0",
+			unaryMinus.identifier: "-",
+			iff.identifier: "if",
+			lessThan.identifier: "<"
+		], edges: [
+			Edge(x, lessThan.parameter(0)),
+			Edge(zero.result(0), lessThan.parameter(1)),
+			Edge(lessThan.result(0), iff.parameter(0)),
+			Edge(x, unaryMinus.parameter(0)),
+			Edge(unaryMinus.result(0), iff.parameter(1)),
+			Edge(x, iff.parameter(2)),
+			Edge(iff.result(0), result)
+		])
+	}
 }
