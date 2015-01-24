@@ -49,7 +49,7 @@ public struct Graph<T> {
 	}
 
 	
-	// MARK: Higher-order methods.
+	// MARK: Higher-order methods
 
 	public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
 		return Graph(nodes: nodes.filter(includeNode), edges: edges)
