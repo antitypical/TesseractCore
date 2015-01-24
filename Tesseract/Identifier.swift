@@ -162,6 +162,10 @@ public struct NodeIdentifier: Hashable, Printable {
 		self.value = NodeIdentifier.cursor++
 	}
 
+	public var identifier: Identifier {
+		return .Node(self)
+	}
+
 
 	// MARK: Hashable
 
