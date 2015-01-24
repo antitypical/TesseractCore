@@ -59,6 +59,10 @@ public struct Graph<T> {
 		return Graph(nodes: nodes, edges: edges.filter(includeEdge))
 	}
 
+	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
+		return Graph(nodes: nodes.filter(includeNode), edges: edges.filter(includeEdge))
+	}
+
 
 	// MARK: Private
 
@@ -75,3 +79,4 @@ public struct Graph<T> {
 // MARK: - Imports
 
 import Set
+import Prelude
