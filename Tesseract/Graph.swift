@@ -36,7 +36,7 @@ public struct Graph<T> {
 			let removed = Set(nodes.keys) - Set(newValue.keys)
 			if removed.count == 0 { return }
 			edges = edges.filter {
-				!removed.contains(containingIdentifier($0.source)) && !removed.contains(containingIdentifier($0.destination))
+				!removed.contains($0.source.identifier) && !removed.contains($0.destination.identifier)
 			}
 		}
 	}
@@ -45,8 +45,9 @@ public struct Graph<T> {
 		didSet {
 			let added = edges - oldValue
 			if added.count == 0 { return }
+			let keys = nodes.keys
 			edges -= added.filter {
-				!contains(self.nodes.keys, containingIdentifier($0.source)) && !contains(self.nodes.keys, containingIdentifier($0.destination))
+				!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
 			}
 		}
 	}
