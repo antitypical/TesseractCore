@@ -49,5 +49,7 @@ final class GraphTests: XCTestCase {
 			Edge(x, iff.input(2)),
 			Edge(iff.output(0), result)
 		])
+		XCTAssertEqual(abs.nodes.count, 6)
+		XCTAssertEqual(abs.edges.count, 7)
 	}
 }
