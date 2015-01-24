@@ -17,4 +17,8 @@ extension Dictionary {
 	func map<K: Hashable, V>(transform: Element -> (K, V)) -> Dictionary<K, V> {
 		return Dictionary<K, V>(lazy(self).map(transform))
 	}
+
+	func reduce<Into>(initial: Into, combine: (Into, Element) -> Into) -> Into {
+		return Swift.reduce(self, initial, combine)
+	}
 }
