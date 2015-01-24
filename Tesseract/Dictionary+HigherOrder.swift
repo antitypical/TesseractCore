@@ -22,3 +22,13 @@ extension Dictionary {
 		return Swift.reduce(self, initial, combine)
 	}
 }
+
+
+func + <Key: Hashable, Value, S: SequenceType where S.Generator.Element == Dictionary<Key, Value>.Element> (var left: Dictionary<Key, Value>, right: S) -> Dictionary<Key, Value> {
+	var generator = right.generate()
+	let next: () -> (Key, Value)? = { generator.next() }
+	for (key, value) in GeneratorOf(next) {
+		left.updateValue(value, forKey: key)
+	}
+	return left
+}
