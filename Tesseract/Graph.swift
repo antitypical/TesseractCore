@@ -26,6 +26,7 @@ public struct Graph<T> {
 	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
+		sanitize(edges)
 	}
 
 
@@ -43,12 +44,7 @@ public struct Graph<T> {
 
 	public var edges: Set<Edge> {
 		didSet {
-			let added = edges - oldValue
-			if added.count == 0 { return }
-			let keys = nodes.keys
-			edges -= added.filter {
-				!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
-			}
+			sanitize(edges - oldValue)
 		}
 	}
 
@@ -57,6 +53,17 @@ public struct Graph<T> {
 
 	public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
 		return Graph(nodes: nodes.filter(includeNode), edges: edges)
+	}
+
+
+	// MARK: Private
+
+	private mutating func sanitize(added: Set<Edge>) {
+		if added.count == 0 { return }
+		let keys = nodes.keys
+		edges -= added.filter {
+			!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
+		}
 	}
 }
 
