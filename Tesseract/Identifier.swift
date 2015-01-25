@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Identifier: Hashable, Printable {
+public struct Identifier: Comparable, Hashable, Printable {
 	public init() {
 		self.value = Identifier.cursor++
 	}
@@ -29,6 +29,10 @@ public struct Identifier: Hashable, Printable {
 
 public func == (left: Identifier, right: Identifier) -> Bool {
 	return left.value == right.value
+}
+
+public func < (left: Identifier, right: Identifier) -> Bool {
+	return left.value < right.value
 }
 
 
