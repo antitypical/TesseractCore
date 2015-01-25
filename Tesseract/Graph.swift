@@ -3,19 +3,19 @@
 public struct Edge: Hashable {
 	public typealias Endpoint = (identifier: Identifier, index: Int)
 
-	public init(_ source: SourceIdentifier, _ destination: DestinationIdentifier) {
+	public init(_ source: Endpoint, _ destination: Endpoint) {
 		self.source = source
 		self.destination = destination
 	}
 
-	public let source: SourceIdentifier
-	public let destination: DestinationIdentifier
+	public let source: Endpoint
+	public let destination: Endpoint
 
 
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return source.hashValue ^ destination.hashValue
+		return (source.identifier.hashValue + source.index) ^ (destination.identifier.hashValue + destination.index)
 	}
 }
 
