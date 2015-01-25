@@ -2,18 +2,20 @@
 
 public struct Edge: Hashable {
 	public typealias Endpoint = (identifier: Identifier, index: Int)
+	public typealias Source = Endpoint
+	public typealias Destination = Endpoint
 
-	public init(_ source: Endpoint, _ destination: Endpoint) {
+	public init(_ source: Source, _ destination: Destination) {
 		self.source = source
 		self.destination = destination
 	}
 
-	public init (_ source: Identifier, _ destination: Endpoint) {
+	public init (_ source: Identifier, _ destination: Destination) {
 		self.init(source.output(0), destination)
 	}
 
-	public let source: Endpoint
-	public let destination: Endpoint
+	public let source: Source
+	public let destination: Destination
 
 
 	// MARK: Hashable
