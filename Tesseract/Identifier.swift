@@ -55,7 +55,7 @@ public func == (left: Identifier, right: Identifier) -> Bool {
 
 // MARK: - Component identifiers
 
-public enum SourceIdentifier: Hashable, Printable {
+public enum SourceIdentifier: Comparable, Hashable, Printable {
 	case Input(Int)
 	case Node(NodeIdentifier, Int)
 
@@ -105,8 +105,14 @@ public func == (left: SourceIdentifier, right: SourceIdentifier) -> Bool {
 	return leftIdentifier == rightIdentifier && leftIndex == rightIndex
 }
 
+public func < (left: SourceIdentifier, right: SourceIdentifier) -> Bool {
+	let (leftIdentifier, leftIndex) = left.destructured
+	let (rightIdentifier, rightIndex) = right.destructured
+	return (leftIdentifier == rightIdentifier) ? leftIndex < rightIndex : false
+}
 
-public enum DestinationIdentifier: Hashable, Printable {
+
+public enum DestinationIdentifier: Comparable, Hashable, Printable {
 	case Output(Int)
 	case Node(NodeIdentifier, Int)
 
@@ -154,6 +160,12 @@ public func == (left: DestinationIdentifier, right: DestinationIdentifier) -> Bo
 	let (leftIdentifier, leftIndex) = left.destructured
 	let (rightIdentifier, rightIndex) = right.destructured
 	return leftIdentifier == rightIdentifier && leftIndex == rightIndex
+}
+
+public func < (left: DestinationIdentifier, right: DestinationIdentifier) -> Bool {
+	let (leftIdentifier, leftIndex) = left.destructured
+	let (rightIdentifier, rightIndex) = right.destructured
+	return  (leftIdentifier == rightIdentifier) ? leftIndex < rightIndex : false
 }
 
 
