@@ -1,6 +1,8 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge: Hashable {
+	public typealias Endpoint = (Identifier, Int)
+
 	public init(_ source: SourceIdentifier, _ destination: DestinationIdentifier) {
 		self.source = source
 		self.destination = destination
