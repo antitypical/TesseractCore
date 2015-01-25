@@ -26,7 +26,7 @@ public func == (left: Edge.Endpoint, right: Edge.Endpoint) -> Bool {
 public func < (left: Edge.Endpoint, right: Edge.Endpoint) -> Bool {
 	return left.identifier == right.identifier ?
 		left.index < right.index
-	:	false
+	:	left.identifier < right.identifier
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
