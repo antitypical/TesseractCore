@@ -64,6 +64,27 @@ public struct Graph<T> {
 	}
 
 
+	public func reduce<Result>(from: Identifier, _ initial: Result, _ combine: (Result, (Identifier, T)) -> Result) -> Result {
+		return reduce(from, [], initial, combine)
+	}
+
+	public func reduce<Result>(from: Identifier, var _ visited: Set<Identifier>, _ initial: Result, _ combine: (Result, (Identifier, T)) -> Result) -> Result {
+		if visited.contains(from) { return initial }
+		visited.append(from)
+
+		if let node = nodes[from] {
+			let inputs = edges
+				|> (flip(Swift.filter) <| { $0.destination.identifier == from })
+				|> (flip(sorted) <| { $0.source < $1.source })
+				|> (flip(Swift.map) <| { $0.source.identifier })
+			return combine(inputs.reduce(initial) { into, each in
+				self.reduce(each.0, visited, into, combine)
+			}, (from, node))
+		}
+		return initial
+	}
+
+
 	// MARK: Private
 
 	private mutating func sanitize(added: Set<Edge>) {

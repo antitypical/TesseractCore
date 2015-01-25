@@ -52,4 +52,17 @@ final class GraphTests: XCTestCase {
 		XCTAssertEqual(abs.nodes.count, 6)
 		XCTAssertEqual(abs.edges.count, 7)
 	}
+
+	func testReductionDoesNotTraverseWithoutEdges() {
+		let graph = Graph(nodes: [ .Output(0): "a", .Node(NodeIdentifier()): "b" ])
+		let result = graph.reduce(.Output(0), "_") { into, each in into + each.1 }
+		XCTAssertEqual(result, "_a")
+	}
+
+	func testReductionTraversesEdges() {
+		let (a, b, c) = (NodeIdentifier(), NodeIdentifier(), NodeIdentifier())
+		let graph = Graph(nodes: [ .Node(a): "a", .Node(b): "b", .Node(c): "c", .Output(0): "!" ], edges: [ Edge(.Node(a, 0), .Output(0)), Edge(.Node(b, 0), .Output(0)), Edge(.Node(c, 0), .Output(0)) ])
+		let result = graph.reduce(.Output(0), "_") { into, each in into + each.1 }
+		XCTAssertEqual(result, "_abc!")
+	}
 }
