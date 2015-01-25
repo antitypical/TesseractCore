@@ -19,6 +19,12 @@ public struct Edge: Hashable {
 	}
 }
 
+public func == (left: Edge.Endpoint, right: Edge.Endpoint) -> Bool {
+	return
+		left.0 == right.0
+	&&	left.1 == right.1
+}
+
 public func == (left: Edge, right: Edge) -> Bool {
 	return left.source == right.source && left.destination == right.destination
 }
