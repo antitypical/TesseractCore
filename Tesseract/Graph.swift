@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge: Hashable {
-	public typealias Endpoint = (Identifier, Int)
+	public typealias Endpoint = (identifier: Identifier, index: Int)
 
 	public init(_ source: SourceIdentifier, _ destination: DestinationIdentifier) {
 		self.source = source
@@ -21,8 +21,8 @@ public struct Edge: Hashable {
 
 public func == (left: Edge.Endpoint, right: Edge.Endpoint) -> Bool {
 	return
-		left.0 == right.0
-	&&	left.1 == right.1
+		left.identifier == right.identifier
+	&&	left.index == right.index
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
