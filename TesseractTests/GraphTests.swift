@@ -5,64 +5,69 @@ import XCTest
 
 final class GraphTests: XCTestCase {
 	func testIdentityGraph() {
-		let graph = Graph(nodes: [ .Input(0): (), .Output(0): () ], edges: [ Edge(.Input(0), .Output(0)) ])
+		let (a, b) = (Identifier(), Identifier())
+		let graph = Graph(nodes: [ a: (), b: () ], edges: [ Edge((a, 0), (b, 0)) ])
+		XCTAssertEqual(graph.nodes.count, 2)
+		XCTAssertEqual(graph.edges.count, 1)
 	}
 
 	func testSanitizesEdgesOnNodesMutation() {
-		var graph = Graph(nodes: [ .Input(0): (), .Output(0): () ], edges: [ Edge(.Input(0), .Output(0)) ])
+		let (a, b) = (Identifier(), Identifier())
+		var graph = Graph(nodes: [ a: (), b: () ], edges: [ Edge((a, 0), (b, 0)) ])
 		XCTAssertEqual(graph.edges.count, 1)
-		graph.nodes.removeValueForKey(.Input(0))
+		graph.nodes.removeValueForKey(a)
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
 	func testSanitizesEdgesOnEdgesMutation() {
 		var graph = Graph<()>()
 		XCTAssertEqual(graph.edges.count, 0)
-		graph.edges.append(Edge(.Input(0), .Output(0)))
+		graph.edges.append(Edge((Identifier(), 0), (Identifier(), 0)))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
 	func testAttachingDataToNodes() {
-		let graph: Graph<Int> = Graph(nodes: [ .Input(0): 0, .Output(0): 1 ])
+		let graph: Graph<Int> = Graph(nodes: [ Identifier(): 0, Identifier(): 1 ])
 	}
 
 	func testAbsoluteValueGraph() {
-		let x = SourceIdentifier.Input(0)
-		let result = DestinationIdentifier.Output(0)
-		let zero = NodeIdentifier()
-		let lessThan = NodeIdentifier()
-		let iff = NodeIdentifier()
-		let unaryMinus = NodeIdentifier()
+		let x = Identifier()
+		let result = Identifier()
+		let zero = Identifier()
+		let lessThan = Identifier()
+		let iff = Identifier()
+		let unaryMinus = Identifier()
 		let abs = Graph<String>(nodes: [
-			x.identifier: "x",
-			result.identifier: "result",
-			zero.identifier: "0",
-			unaryMinus.identifier: "-",
-			iff.identifier: "if",
-			lessThan.identifier: "<"
+			x: "x",
+			result: "result",
+			zero: "0",
+			unaryMinus: "-",
+			iff: "if",
+			lessThan: "<"
 		], edges: [
 			Edge(x, lessThan.input(0)),
-			Edge(zero.output(0), lessThan.input(1)),
-			Edge(lessThan.output(0), iff.input(0)),
+			Edge(zero, lessThan.input(1)),
+			Edge(lessThan, iff.input(0)),
 			Edge(x, unaryMinus.input(0)),
-			Edge(unaryMinus.output(0), iff.input(1)),
+			Edge(unaryMinus, iff.input(1)),
 			Edge(x, iff.input(2)),
-			Edge(iff.output(0), result)
+			Edge(iff, result.input(0))
 		])
 		XCTAssertEqual(abs.nodes.count, 6)
 		XCTAssertEqual(abs.edges.count, 7)
 	}
 
 	func testReductionDoesNotTraverseWithoutEdges() {
-		let graph = Graph(nodes: [ .Output(0): "a", .Node(NodeIdentifier()): "b" ])
-		let result = graph.reduce(.Output(0), "_") { into, each in into + each.1 }
+		let (a, b) = (Identifier(), Identifier())
+		let graph = Graph(nodes: [ a: "a", b: "b" ])
+		let result = graph.reduce(a, "_") { into, each in into + each.1 }
 		XCTAssertEqual(result, "_a")
 	}
 
 	func testReductionTraversesEdges() {
-		let (a, b, c) = (NodeIdentifier(), NodeIdentifier(), NodeIdentifier())
-		let graph = Graph(nodes: [ .Node(a): "a", .Node(b): "b", .Node(c): "c", .Output(0): "!" ], edges: [ Edge(.Node(a, 0), .Output(0)), Edge(.Node(b, 0), .Output(0)), Edge(.Node(c, 0), .Output(0)) ])
-		let result = graph.reduce(.Output(0), "_") { into, each in into + each.1 }
-		XCTAssertEqual(result, "_abc!")
+		let (a, b, c, result) = (Identifier(), Identifier(), Identifier(), Identifier())
+		let graph = Graph(nodes: [ a: "a", b: "b", c: "c", result: "!" ], edges: [ Edge(a, result.input(0)), Edge(b, result.input(0)), Edge(c, result.input(0)) ])
+		let reduced = graph.reduce(result, "_") { into, each in into + each.1 }
+		XCTAssertEqual(reduced, "_abc!")
 	}
 }
