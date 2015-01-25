@@ -8,6 +8,10 @@ public struct Edge: Hashable {
 		self.destination = destination
 	}
 
+	public init (_ source: Identifier, _ destination: Endpoint) {
+		self.init(source.output(0), destination)
+	}
+
 	public let source: Endpoint
 	public let destination: Endpoint
 
