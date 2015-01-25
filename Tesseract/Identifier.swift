@@ -9,11 +9,11 @@ public struct Identifier: Comparable, Hashable, Printable {
 	// MARK: Endpoint constructors
 
 	public func input(index: Int) -> Edge.Destination {
-		return (identifier: self, index: index)
+		return (identifier: self, inputIndex: index)
 	}
 
 	public func output(index: Int) -> Edge.Source {
-		return (identifier: self, index: index)
+		return (identifier: self, outputIndex: index)
 	}
 
 

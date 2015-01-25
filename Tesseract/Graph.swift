@@ -1,9 +1,8 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Edge: Hashable {
-	public typealias Endpoint = (identifier: Identifier, index: Int)
-	public typealias Source = Endpoint
-	public typealias Destination = Endpoint
+	public typealias Source = (identifier: Identifier, outputIndex: Int)
+	public typealias Destination = (identifier: Identifier, inputIndex: Int)
 
 	public init(_ source: Source, _ destination: Destination) {
 		self.source = source
@@ -21,17 +20,27 @@ public struct Edge: Hashable {
 	// MARK: Hashable
 
 	public var hashValue: Int {
-		return (source.identifier.hashValue + source.index) ^ (destination.identifier.hashValue + destination.index)
+		return (source.identifier.hashValue + source.outputIndex) ^ (destination.identifier.hashValue + destination.inputIndex)
 	}
 }
 
-public func == (left: Edge.Endpoint, right: Edge.Endpoint) -> Bool {
-	return left.identifier == right.identifier && left.index == right.index
+public func == (left: Edge.Source, right: Edge.Source) -> Bool {
+	return left.identifier == right.identifier && left.outputIndex == right.outputIndex
 }
 
-public func < (left: Edge.Endpoint, right: Edge.Endpoint) -> Bool {
+public func == (left: Edge.Destination, right: Edge.Destination) -> Bool {
+	return left.identifier == right.identifier && left.inputIndex == right.inputIndex
+}
+
+public func < (left: Edge.Source, right: Edge.Source) -> Bool {
 	return left.identifier == right.identifier ?
-		left.index < right.index
+		left.outputIndex < right.outputIndex
+	:	left.identifier < right.identifier
+}
+
+public func < (left: Edge.Destination, right: Edge.Destination) -> Bool {
+	return left.identifier == right.identifier ?
+		left.inputIndex < right.inputIndex
 	:	left.identifier < right.identifier
 }
 
