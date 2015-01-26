@@ -108,7 +108,8 @@ public func == (left: Value, right: Value) -> Bool {
 	case let (.String(x), .String(y)) where x == y:
 		return true
 
-	default: return false
+	default:
+		return false
 	}
 }
 
