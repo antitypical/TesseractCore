@@ -63,6 +63,14 @@ public struct Graph<T> {
 	}
 
 
+	public func find(predicate: (Identifier, T) -> Bool) -> DictionaryIndex<Identifier, T>? {
+		for index in nodes.startIndex..<nodes.endIndex {
+			if predicate <| nodes[index] { return index }
+		}
+		return nil
+	}
+
+
 	// MARK: Private
 
 	private mutating func sanitize(added: Set<Edge>) {
