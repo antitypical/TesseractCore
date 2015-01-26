@@ -77,5 +77,5 @@ public struct Graph<T> {
 
 // MARK: - Imports
 
-import Set
 import Prelude
+import Set
