@@ -2,8 +2,8 @@
 
 public struct Symbol: Hashable {
 	public let name: String
-	public let parameters: [String]
-	public let returns: [String]
+	public let parameters: Int
+	public let returns: Int
 
 
 	// MARK: Hashable
@@ -11,8 +11,8 @@ public struct Symbol: Hashable {
 	public var hashValue: Int {
 		return
 			name.hashValue
-		^	parameters.reduce(0) { $0 ^ $1.hashValue }
-		^	returns.reduce(0) { $0 ^ $1.hashValue }
+		^	parameters
+		^	returns
 	}
 }
 

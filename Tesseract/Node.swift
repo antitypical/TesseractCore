@@ -12,7 +12,7 @@ public enum Node: Equatable {
 		case let Return(name):
 			return [ name ]
 		case let Abstraction(symbol):
-			return symbol.parameters
+			return map(0..<symbol.parameters, toString)
 		}
 	}
 
@@ -23,7 +23,7 @@ public enum Node: Equatable {
 		case Return:
 			return []
 		case let Abstraction(symbol):
-			return symbol.returns
+			return map(0..<symbol.returns, toString)
 		}
 	}
 }
