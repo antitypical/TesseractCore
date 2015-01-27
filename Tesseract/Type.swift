@@ -8,6 +8,7 @@ public enum Type {
 
 	case Parameter(Int)
 	case Function(Box<Type>, Box<Type>)
+	case Unit
 }
 
 
