@@ -8,6 +8,11 @@ public let Prelude: Environment = [
 ]
 
 
+public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) {
+	return
+}
+
+
 // MARK: - Imports
 
 import Prelude
