@@ -8,11 +8,12 @@ public let Prelude: Environment = [
 ]
 
 
-public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) {
-	return
+public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<String, Value> {
+	return .left("unimplemented")
 }
 
 
 // MARK: - Imports
 
+import Either
 import Prelude
