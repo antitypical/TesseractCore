@@ -5,6 +5,6 @@ public typealias Environment = [Symbol: Binding]
 public let Prelude: Environment = [:]
 
 public enum Binding {
-	case Constant(Value)
-	case Function(Value -> Value)
+	case Constant(Type, Any)
+	case Function(Type, Type, Any -> Any)
 }
