@@ -9,6 +9,15 @@ public let Prelude: Environment = [
 public enum Binding {
 	case Constant(Type, Any)
 	case Function(Type, Type, Any -> Any)
+
+	public var type: Type {
+		switch self {
+		case let Constant(type, _):
+			return type
+		case let Function(a, b, _):
+			return Type(function: a, b)
+		}
+	}
 }
 
 
