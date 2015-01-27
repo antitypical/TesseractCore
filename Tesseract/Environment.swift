@@ -8,8 +8,8 @@ public let Prelude: Environment = [
 ]
 
 
-public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<String, Value> {
-	return .left("unimplemented")
+public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<(Identifier, String), Value> {
+	return .left(from, "unimplemented")
 }
 
 
