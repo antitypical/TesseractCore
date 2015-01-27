@@ -4,6 +4,7 @@ public typealias Environment = [Symbol: Binding]
 
 public let Prelude: Environment = [
 	Symbol(name: "identity", parameters: 1, returns: 1): .Function(.Parameter(0), .Parameter(0), id),
+	Symbol(name: "const", parameters: 1, returns: 1): .Function(.Parameter(0), Type(function: .Parameter(1), .Parameter(0)), const as Any -> Any -> Any),
 ]
 
 
