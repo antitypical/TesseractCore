@@ -1,3 +1,3 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-enum Type {}
+public enum Type {}
