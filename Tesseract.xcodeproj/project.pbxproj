@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
-		D42CAC3C1A429CF80091F6AA /* Term.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42CAC3B1A429CF80091F6AA /* Term.swift */; };
 		D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B564091A4CEF2E00795949 /* Assertions.swift */; };
 		D4B5DE341A4F9527004B4C0C /* TermTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE331A4F9526004B4C0C /* TermTests.swift */; };
 		D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE351A505F66004B4C0C /* Graph.swift */; };
@@ -29,7 +28,6 @@
 		D4ED82881A3F9ADB00D0479E /* Tesseract.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* Tesseract.framework */; };
 		D4ED828F1A3F9ADB00D0479E /* TesseractTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
-		D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED829A1A3F9C4900D0479E /* Type.swift */; };
 		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +43,6 @@
 
 /* Begin PBXFileReference section */
 		D42CAC391A429BFD0091F6AA /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D42CAC3B1A429CF80091F6AA /* Term.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Term.swift; sourceTree = "<group>"; };
 		D4B564091A4CEF2E00795949 /* Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		D4B5DE331A4F9526004B4C0C /* TermTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermTests.swift; sourceTree = "<group>"; };
 		D4B5DE351A505F66004B4C0C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
@@ -65,7 +62,6 @@
 		D4ED828D1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4ED828E1A3F9ADB00D0479E /* TesseractTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TesseractTests.swift; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
-		D4ED829A1A3F9C4900D0479E /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,8 +119,6 @@
 			children = (
 				D4ED827C1A3F9ADB00D0479E /* Tesseract.h */,
 				D4ED82981A3F9C3800D0479E /* Symbol.swift */,
-				D4ED829A1A3F9C4900D0479E /* Type.swift */,
-				D42CAC3B1A429CF80091F6AA /* Term.swift */,
 				D4B5DE351A505F66004B4C0C /* Graph.swift */,
 				D4CB5DBE1A75E12D00672C6B /* Edge.swift */,
 				D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */,
@@ -273,10 +267,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
-				D42CAC3C1A429CF80091F6AA /* Term.swift in Sources */,
 				D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */,
 				D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */,
-				D4ED829B1A3F9C4900D0479E /* Type.swift in Sources */,
 				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 				D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */,
