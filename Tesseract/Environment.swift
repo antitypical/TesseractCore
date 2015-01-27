@@ -3,9 +3,9 @@
 public typealias Environment = [Symbol: Value]
 
 public let Prelude: Environment = [
-	Symbol(name: "identity", parameters: 1, returns: 1): .Function(.Parameter(0), .Parameter(0), id),
-	Symbol(name: "const", parameters: 1, returns: 1): .Function(.Parameter(0), Type(function: .Parameter(1), .Parameter(0)), const as Any -> Any -> Any),
-	Symbol(name: "unit", parameters: 0, returns: 1): .Constant(.Unit, ()),
+	Symbol(name: "identity", parameters: [ .Parameter(0) ], returns: [ .Parameter(0) ]): .Function(id),
+	Symbol(name: "const", parameters: [ .Parameter(0) ], returns: [ Type(function: .Parameter(1), .Parameter(0)) ]): .Function(const as Any -> Any -> Any),
+	Symbol(name: "unit", parameters: [], returns: [ .Unit ]): .Constant(()),
 ]
 
 

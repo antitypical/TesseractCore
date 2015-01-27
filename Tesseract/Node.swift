@@ -5,6 +5,7 @@ public enum Node: Equatable {
 	case Return(String)
 	case Abstraction(Symbol)
 
+
 	public var inputs: [String] {
 		switch self {
 		case Parameter:
@@ -12,7 +13,7 @@ public enum Node: Equatable {
 		case let Return(name):
 			return [ name ]
 		case let Abstraction(symbol):
-			return map(0..<symbol.parameters, toString)
+			return map(0..<symbol.parameters.count, toString)
 		}
 	}
 
@@ -23,7 +24,7 @@ public enum Node: Equatable {
 		case Return:
 			return []
 		case let Abstraction(symbol):
-			return map(0..<symbol.returns, toString)
+			return map(0..<symbol.returns.count, toString)
 		}
 	}
 }
