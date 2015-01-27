@@ -5,6 +5,7 @@ public enum Type {
 		self = Function(Box(from), Box(to))
 	}
 
+
 	case Parameter(Int)
 	case Function(Box<Type>, Box<Type>)
 }
