@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
+		D4B3ECA41A77203B001AD21D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA31A77203B001AD21D /* Type.swift */; };
 		D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B564091A4CEF2E00795949 /* Assertions.swift */; };
 		D4B5DE341A4F9527004B4C0C /* TermTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE331A4F9526004B4C0C /* TermTests.swift */; };
 		D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE351A505F66004B4C0C /* Graph.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		D42CAC391A429BFD0091F6AA /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4B3ECA31A77203B001AD21D /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		D4B564091A4CEF2E00795949 /* Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		D4B5DE331A4F9526004B4C0C /* TermTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermTests.swift; sourceTree = "<group>"; };
 		D4B5DE351A505F66004B4C0C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */,
 				D4CB5DC21A75E53D00672C6B /* Node.swift */,
 				D4CB5DC41A75F45200672C6B /* Environment.swift */,
+				D4B3ECA31A77203B001AD21D /* Type.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
 			);
 			path = Tesseract;
@@ -273,6 +276,7 @@
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 				D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */,
 				D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */,
+				D4B3ECA41A77203B001AD21D /* Type.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
