@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Binding {
+public enum Value {
 	case Constant(Type, Any)
 	case Function(Type, Type, Any -> Any)
 
