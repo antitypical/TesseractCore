@@ -3,6 +3,11 @@
 public struct Environment: DictionaryLiteralConvertible {
 	private let bindings: [Symbol: Value]
 
+	subscript (key: String) -> Value? {
+		let index = find(bindings) { symbol, _ in symbol.name == key }
+		return index.map { self.bindings[$0] }?.1
+	}
+
 
 	// MARK: DictionaryLiteralConvertible
 
