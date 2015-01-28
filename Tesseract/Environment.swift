@@ -3,7 +3,7 @@
 public struct Environment: DictionaryLiteralConvertible {
 	private let bindings: [Symbol: Value]
 
-	subscript (key: String) -> (Symbol, Value)? {
+	public subscript (key: String) -> (Symbol, Value)? {
 		let index = find(bindings) { symbol, _ in symbol.name == key }
 		return index.map { self.bindings[$0] }?
 	}
