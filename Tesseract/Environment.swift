@@ -22,9 +22,10 @@ public let Prelude: Environment = [
 	Symbol(name: "unit", parameters: [], returns: [ .Unit ]): .Constant(()),
 ]
 
+public typealias Error = (Identifier, String)
 
-public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<(Identifier, String), Value> {
-	return .left(from, "unimplemented")
+public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<Error, Value> {
+	return .left((from, "unimplemented"))
 }
 
 
