@@ -25,6 +25,10 @@ public let Prelude: Environment = [
 public typealias Error = (Identifier, String)
 
 public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<Error, Value> {
+	return evaluate(graph, from, environment, [:])
+}
+
+private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, var visited: [Identifier: Value]) -> Either<Error, Value> {
 	return .left((from, "unimplemented"))
 }
 
