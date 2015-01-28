@@ -1,6 +1,15 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public typealias Environment = [Symbol: Value]
+public struct Environment: DictionaryLiteralConvertible {
+	private let bindings: [Symbol: Value]
+
+
+	// MARK: DictionaryLiteralConvertible
+
+	public init(dictionaryLiteral elements: (Symbol, Value)...) {
+		bindings = Dictionary(elements)
+	}
+}
 
 public let Prelude: Environment = [
 	Symbol(name: "identity", parameters: [ .Parameter(0) ], returns: [ .Parameter(0) ]): .Function(id),
