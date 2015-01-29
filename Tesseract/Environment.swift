@@ -35,7 +35,16 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	}
 
 	if let node = graph.nodes[from] {
+		switch node {
+		case let .Abstraction(symbol):
+			break
 
+		case .Parameter:
+			break
+
+		case .Return:
+			break
+		}
 	} else {
 		return error("node does not exist in graph")
 	}
