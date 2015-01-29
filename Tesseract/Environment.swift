@@ -34,6 +34,11 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 		return .left((from, reason))
 	}
 
+	if let node = graph.nodes[from] {
+
+	} else {
+		return error("node does not exist in graph")
+	}
 	return error("unimplemented")
 }
 
