@@ -47,6 +47,9 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 		case .Parameter:
 			break
 
+		case .Return where inputs.count != 1:
+			return error("expected one return edge, but \(inputs.count) were found")
+
 		case .Return:
 			break
 		}
