@@ -38,6 +38,10 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 		return .left((from, reason))
 	}
 
+	if let value = visited[from] {
+		return .right(value)
+	}
+
 	if let node = graph.nodes[from] {
 		let inputs = lazy(graph.edges)
 			.filter { $0.destination.identifier == from }
