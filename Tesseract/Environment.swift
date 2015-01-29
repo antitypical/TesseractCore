@@ -29,7 +29,11 @@ public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environm
 }
 
 private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, var visited: [Identifier: Value]) -> Either<Error, Value> {
-	return .left((from, "unimplemented"))
+	func error(reason: String) -> Either<Error, Value> {
+		return .left((from, reason))
+	}
+
+	return error("unimplemented")
 }
 
 
