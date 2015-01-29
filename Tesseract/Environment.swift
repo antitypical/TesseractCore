@@ -8,6 +8,10 @@ public struct Environment: DictionaryLiteralConvertible {
 		return index.map { self.bindings[$0] }?
 	}
 
+	public subscript (key: Symbol) -> Value? {
+		return bindings[key]
+	}
+
 
 	// MARK: DictionaryLiteralConvertible
 
