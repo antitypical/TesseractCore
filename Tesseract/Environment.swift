@@ -51,7 +51,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 			return error("expected one return edge, but \(inputs.count) were found")
 
 		case .Return:
-			break
+			return evaluate(graph, inputs[0].0.identifier, environment, visited)
 		}
 	} else {
 		return error("node does not exist in graph")
