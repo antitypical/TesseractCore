@@ -64,6 +64,11 @@ extension XCTestCase {
 		return expression().map(const(true)) ?? failure("is nil. " + message, file: file, line: line)
 	}
 
+	func failure<T>(message: String, file: String = __FILE__, line: UInt = __LINE__) -> T? {
+		XCTFail(message, file: file, line: line)
+		return nil
+	}
+
 	func failure(message: String, file: String = __FILE__, line: UInt = __LINE__) -> Bool {
 		XCTFail(message, file: file, line: line)
 		return false
