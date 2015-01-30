@@ -60,8 +60,8 @@ extension XCTestCase {
 		return expression().map { self.failure("\($0) is not nil. " + message, file: file, line: line) } ?? true
 	}
 
-	func assertNotNil<T>(expression: @autoclosure () -> T?, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> Bool {
-		return expression().map(const(true)) ?? failure("is nil. " + message, file: file, line: line)
+	func assertNotNil<T>(expression: @autoclosure () -> T?, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> T? {
+		return expression() ?? failure("is nil. " + message, file: file, line: line)
 	}
 
 	func failure<T>(message: String, file: String = __FILE__, line: UInt = __LINE__) -> T? {
