@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Type: Hashable {
+public enum Type: Hashable, Printable {
 	public init(function from: Type, _ to: Type) {
 		self = Function(Box(from), Box(to))
 	}
@@ -21,6 +21,20 @@ public enum Type: Hashable {
 			return 8471823991 ^ x.value.hashValue ^ y.value.hashValue
 		case Unit:
 			return 4024646491
+		}
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		switch self {
+		case let Parameter(index):
+			return index.description
+		case let Function(parameterType, returnType):
+			return "\(parameterType) → \(returnType)"
+		case Unit:
+			return "Unit"
 		}
 	}
 }
