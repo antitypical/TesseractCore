@@ -24,7 +24,7 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 			return 380371373 ^ index
 		case let Function(x, y):
 			return 8471823991 ^ x.value.hashValue ^ y.value.hashValue
-		case Bool:
+		case Boolean:
 			return 6504993773
 		case Unit:
 			return 4024646491
@@ -40,8 +40,8 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 			return index.description
 		case let Function(parameterType, returnType):
 			return "\(parameterType) → \(returnType)"
-		case Bool:
-			return "Bool"
+		case Boolean:
+			return "Boolean"
 		case Unit:
 			return "Unit"
 		}
