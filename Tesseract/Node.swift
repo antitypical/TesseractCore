@@ -9,29 +9,6 @@ public enum Node: Equatable {
 
 	/// An arbitrary graph node abstracting a symbol.
 	case Abstraction(Symbol)
-
-
-	public var inputs: [String] {
-		switch self {
-		case Parameter:
-			return []
-		case let Return(name):
-			return [ name ]
-		case let Abstraction(symbol):
-			return map(0..<symbol.parameters.count, toString)
-		}
-	}
-
-	public var outputs: [String] {
-		switch self {
-		case let Parameter(name):
-			return [ name ]
-		case Return:
-			return []
-		case let Abstraction(symbol):
-			return map(0..<symbol.returns.count, toString)
-		}
-	}
 }
 
 public func == (left: Node, right: Node) -> Bool {
