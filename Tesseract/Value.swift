@@ -4,7 +4,7 @@ public enum Value {
 	case Constant(Any)
 	case Function(Any -> Any)
 
-	func destructure<T, U, V, W>(constant: T -> W, _ function: (U -> V) -> W) -> W {
+	public func destructure<T, U, V, W>(constant: T -> W, _ function: (U -> V) -> W) -> W {
 		switch self {
 		case let Constant(v):
 			return constant(v as T)
