@@ -1,6 +1,11 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Symbol: Hashable {
+	public init(name: String, type: Type) {
+		self.name = name
+		self.type = type
+	}
+
 	public let name: String
 	public let type: Type
 
