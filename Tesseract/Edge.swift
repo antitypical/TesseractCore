@@ -35,13 +35,13 @@ public func == (left: Edge.Destination, right: Edge.Destination) -> Bool {
 public func < (left: Edge.Source, right: Edge.Source) -> Bool {
 	return left.identifier == right.identifier ?
 		left.outputIndex < right.outputIndex
-		:	left.identifier < right.identifier
+	:	left.identifier < right.identifier
 }
 
 public func < (left: Edge.Destination, right: Edge.Destination) -> Bool {
 	return left.identifier == right.identifier ?
 		left.inputIndex < right.inputIndex
-		:	left.identifier < right.identifier
+	:	left.identifier < right.identifier
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
