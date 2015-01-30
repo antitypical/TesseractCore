@@ -2,7 +2,7 @@
 
 public enum Node: Equatable {
 	/// A parameter of a graph.
-	case Parameter(String)
+	case Parameter(Symbol)
 
 	/// A return of a graph.
 	case Return(String)
