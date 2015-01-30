@@ -14,6 +14,14 @@ public struct Symbol: Hashable {
 		^	parameters.reduce(939965963) { $0 ^ $1.hashValue }
 		^	returns.reduce(904228669) { $0 ^ $1.hashValue }
 	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		let comma = ", "
+		return "\(name) :: (\(comma.join(parameters.map(toString)))) -> (\(comma.join(returns.map(toString))))"
+	}
 }
 
 public func == (left: Symbol, right: Symbol) -> Bool {
