@@ -21,9 +21,9 @@ public struct Environment: DictionaryLiteralConvertible {
 }
 
 public let Prelude: Environment = [
-	Symbol(name: "identity", type: Type(function: .Parameter(0), .Parameter(0))): .Function(id),
-	Symbol(name: "const", type: Type(function: .Parameter(0), Type(function: .Parameter(1), .Parameter(0)))): .Function(const as Any -> Any -> Any),
-	Symbol(name: "unit", type: .Unit): .Constant(()),
+	Symbol("identity", Type(function: .Parameter(0), .Parameter(0))): .Function(id),
+	Symbol("const", Type(function: .Parameter(0), Type(function: .Parameter(1), .Parameter(0)))): .Function(const as Any -> Any -> Any),
+	Symbol("unit", .Unit): .Constant(()),
 ]
 
 

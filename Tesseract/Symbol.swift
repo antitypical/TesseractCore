@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Symbol: Hashable {
-	public init(name: String, type: Type) {
+	public init(_ name: String, _ type: Type) {
 		self.name = name
 		self.type = type
 	}
