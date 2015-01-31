@@ -39,7 +39,7 @@ public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environm
 	return evaluate(graph, from, environment, [:])
 }
 
-private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, var visited: [Identifier: Value]) -> Either<Error, Value> {
+private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Value]) -> Either<Error, Value> {
 
 	if let value = visited[from] {
 		return .right(value)
