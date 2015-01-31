@@ -6,6 +6,6 @@ import XCTest
 
 final class ValueTests: XCTestCase {
 	func testConstantValueDestructuresWithFunctionOfSameType() {
-		assertEqual(Value(constant: 1).constant(id as Int -> Int), 1)
+		assertEqual(Value(constant: 1).constant(), 1)
 	}
 }

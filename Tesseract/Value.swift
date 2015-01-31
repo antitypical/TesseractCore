@@ -12,10 +12,10 @@ public enum Value: Printable {
 	case Constant(Box<Any>)
 	case Function(Box<Any -> Any>)
 
-	public func constant<T, U>(f: T -> U) -> U? {
+	public func constant<T>() -> T? {
 		switch self {
-		case let Constant(v) where v.value is T:
-			return f(v.value as T)
+		case let Constant(v):
+			return v.value as? T
 		default:
 			return nil
 		}
