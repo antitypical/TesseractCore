@@ -21,11 +21,11 @@ public struct Environment: DictionaryLiteralConvertible {
 }
 
 public let Prelude: Environment = [
-	Symbol("unit", .Unit): .Constant(()),
-	Symbol("true", .Boolean): .Constant(true),
-	Symbol("false", .Boolean): .Constant(false),
-	Symbol("identity", 0 --> 0): .Function(id),
-	Symbol("const", 0 --> 1 --> 0): .Function(const as Any -> Any -> Any),
+	Symbol("unit", .Unit): Value(constant: ()),
+	Symbol("true", .Boolean): Value(constant: true),
+	Symbol("false", .Boolean): Value(constant: false),
+	Symbol("identity", 0 --> 0): Value(function: id),
+	Symbol("const", 0 --> 1 --> 0): Value(function: const as Any -> Any -> Any),
 ]
 
 
@@ -54,7 +54,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 		case let .Abstraction(symbol):
 			switch symbol.type {
 			case .Unit:
-				return .right(.Constant(()))
+				return .right(Value(constant: ()))
 
 			default:
 				break
