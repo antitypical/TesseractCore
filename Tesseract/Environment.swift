@@ -40,14 +40,10 @@ public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environm
 }
 
 private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Value]) -> Either<Error, Value> {
-
-	if let value = visited[from] {
-		return .right(value)
-	}
-
-	return graph.nodes[from].map {
-		evaluate(graph, from, environment, visited, $0)
-	} ?? error("could not find identifier in graph", from)
+	return
+		visited[from].map(Either.right)
+	??	graph.nodes[from].map { evaluate(graph, from, environment, visited, $0) }
+	??	error("could not find identifier in graph", from)
 }
 
 private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Value], node: Node) -> Either<Error, Value> {
