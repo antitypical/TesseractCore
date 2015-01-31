@@ -55,7 +55,7 @@ public func == (left: Type, right: Type) -> Bool {
 		return x == y
 	case let (.Function(x1, x2), .Function(y1, y2)):
 		return x1 == y1 && x2 == y2
-	case (.Unit, .Unit):
+	case (.Unit, .Unit), (.Boolean, .Boolean):
 		return true
 
 	default:
