@@ -5,15 +5,15 @@ import Tesseract
 import XCTest
 
 final class ValueTests: XCTestCase {
-	func testConstantValueDestructuresWithFunctionOfSameType() {
+	func testConstantValueDestructuresToSomeOfSameType() {
 		assertEqual(Value(constant: 1).constant(), 1)
 	}
 
-	func testConstantValueDestructuresToNilWithFunctionOfDifferentType() {
+	func testConstantValueDestructuresToNoneOfDifferentType() {
 		assertNil(Value(constant: 1).constant() as ()?)
 	}
 
-	func testFunctionValueDestructuresToNilConstant() {
+	func testFunctionValueDestructuresAsConstantToNone() {
 		assertNil(Value(function: id).constant() as Any?)
 	}
 }
