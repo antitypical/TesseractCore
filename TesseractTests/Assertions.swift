@@ -64,6 +64,11 @@ extension XCTestCase {
 		return expression() ?? failure("is nil. " + message, file: file, line: line)
 	}
 
+	func assertRight<T, U>(expression: @autoclosure () -> Either<T, U>, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> U? {
+		let either = expression()
+		return either.right ?? failure("is \(either), not .Right. " + message, file: file, line: line)
+	}
+
 	func failure<T>(message: String, file: String = __FILE__, line: UInt = __LINE__) -> T? {
 		XCTFail(message, file: file, line: line)
 		return nil
