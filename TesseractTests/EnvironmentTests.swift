@@ -15,9 +15,7 @@ final class EnvironmentTests: XCTestCase {
 		let graph = Graph(nodes: [ a: Node.Abstraction(Prelude["unit"]!.0) ])
 		let evaluated = evaluate(graph, a)
 		let e = evaluated.right
-//		let f = { evaluated.right }
-//		println(e)
-//		println(f())
+//		println(e) // uncomment this line to make the test pass!
 		if let value = assertNotNil(evaluated.right) {
 			if let value: () = value.destructure(id, const(())) {
 
