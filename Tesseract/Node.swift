@@ -5,7 +5,7 @@ public enum Node: Equatable {
 	case Parameter(Symbol)
 
 	/// A return of a graph.
-	case Return(String)
+	case Return(Symbol)
 
 	/// An arbitrary graph node abstracting a symbol.
 	case Abstraction(Symbol)
