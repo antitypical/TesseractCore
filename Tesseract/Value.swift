@@ -5,12 +5,12 @@ public enum Value: Printable {
 		self = Constant(Box(constant))
 	}
 
-	public init(function: Any -> Any) {
+	public init<T, U>(function: T -> U) {
 		self = Function(Box(function))
 	}
 
 	case Constant(Box<Any>)
-	case Function(Box<Any -> Any>)
+	case Function(Box<Any>)
 
 	public func constant<T>() -> T? {
 		switch self {
