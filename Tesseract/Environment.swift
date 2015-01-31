@@ -52,7 +52,13 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 
 		switch node {
 		case let .Abstraction(symbol):
-			break
+			switch symbol.type {
+			case .Unit:
+				return .right(.Constant(()))
+
+			default:
+				break
+			}
 
 		case .Parameter:
 			break
