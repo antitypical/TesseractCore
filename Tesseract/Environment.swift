@@ -55,8 +55,8 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	switch node {
 	case let .Abstraction(symbol):
 		switch symbol.type {
-		case .Unit:
-			return .right(Value(constant: ()))
+		case .Unit, .Boolean:
+			return environment[symbol].map(Either.right) ?? error("\(symbol) not found in environment", from)
 
 		default:
 			return error("\(symbol) not found in environment", from)
