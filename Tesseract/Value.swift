@@ -1,6 +1,14 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public enum Value: Printable {
+	public init(constant: Any) {
+		self = Constant(constant)
+	}
+
+	public init(function: Any -> Any) {
+		self = Function(function)
+	}
+
 	case Constant(Any)
 	case Function(Any -> Any)
 
