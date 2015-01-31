@@ -66,12 +66,12 @@ extension XCTestCase {
 
 	func assertLeft<T, U>(expression: @autoclosure () -> Either<T, U>, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> T? {
 		let either = expression()
-		return either.left ?? failure("is \(either), not .Right. " + message, file: file, line: line)
+		return assertNotNil(either.left, "is \(either), not .Left. " + message, file: file, line: line)
 	}
 
 	func assertRight<T, U>(expression: @autoclosure () -> Either<T, U>, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> U? {
 		let either = expression()
-		return either.right ?? failure("is \(either), not .Right. " + message, file: file, line: line)
+		return assertNotNil(either.right, "is \(either), not .Right. " + message, file: file, line: line)
 	}
 
 	func failure<T>(message: String, file: String = __FILE__, line: UInt = __LINE__) -> T? {
