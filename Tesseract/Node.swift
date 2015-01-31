@@ -9,6 +9,18 @@ public enum Node: Equatable {
 
 	/// An arbitrary graph node referencing a value bound in the environment.
 	case Symbolic(Symbol)
+
+
+	public var symbol: Symbol {
+		switch self {
+		case let Parameter(symbol):
+			return symbol
+		case let Return(symbol):
+			return symbol
+		case let Symbolic(symbol):
+			return symbol
+		}
+	}
 }
 
 public func == (left: Node, right: Node) -> Bool {
