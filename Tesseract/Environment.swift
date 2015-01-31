@@ -59,7 +59,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 			return .right(Value(constant: ()))
 
 		default:
-			break
+			return error("\(symbol) not found in environment", from)
 		}
 
 	case .Parameter:
