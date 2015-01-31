@@ -2,20 +2,20 @@
 
 public enum Value: Printable {
 	public init(constant: Any) {
-		self = Constant(constant)
+		self = Constant(Box(constant))
 	}
 
 	public init(function: Any -> Any) {
-		self = Function(function)
+		self = Function(Box(function))
 	}
 
-	case Constant(Any)
-	case Function(Any -> Any)
+	case Constant(Box<Any>)
+	case Function(Box<Any -> Any>)
 
 	public func constant<T, U>(f: T -> U) -> U? {
 		switch self {
 		case let Constant(v):
-			return f(v as T)
+			return f(v.value as T)
 		default:
 			return nil
 		}
