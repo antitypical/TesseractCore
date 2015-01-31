@@ -10,6 +10,6 @@ final class EnvironmentTests: XCTestCase {
 		let graph = Graph(nodes: [ a: Node.Abstraction(Prelude["unit"]!.0) ])
 		let evaluated = evaluate(graph, a)
 
-		assertNotNil(assertRight(evaluated)?.constant() as ()?)
+		assertEqual(assertNotNil(assertRight(evaluated)?.constant() as ()?), ())
 	}
 }
