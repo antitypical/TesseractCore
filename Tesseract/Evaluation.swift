@@ -25,13 +25,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 
 	switch node {
 	case let .Symbolic(symbol):
-		switch symbol.type {
-		case .Unit, .Boolean:
-			return environment[symbol].map(Either.right) ?? error("\(symbol) not found in environment", from)
-
-		default:
-			return error("\(symbol) not found in environment", from)
-		}
+		return environment[symbol].map(Either.right) ?? error("\(symbol) not found in environment", from)
 
 	case .Parameter:
 		break
