@@ -40,43 +40,42 @@ public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environm
 }
 
 private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, var visited: [Identifier: Value]) -> Either<Error, Value> {
-	func error(reason: String) -> Either<Error, Value> {
-		return .left((from, reason))
-	}
 
 	if let value = visited[from] {
 		return .right(value)
 	}
 
-	if let node = graph.nodes[from] {
-		let inputs = lazy(graph.edges)
-			.filter { $0.destination.identifier == from }
-			.map { ($0.destination, graph.nodes[$0.source.identifier]!) }
-			|> (flip(sorted) <| { $0.0 < $1.0 })
+	return graph.nodes[from].map {
+		evaluate(graph, from, environment, visited, $0)
+	} ?? error("could not find identifier in graph", from)
+}
 
-		switch node {
-		case let .Abstraction(symbol):
-			switch symbol.type {
-			case .Unit:
-				return .right(Value(constant: ()))
+private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Value], node: Node) -> Either<Error, Value> {
+	let inputs = lazy(graph.edges)
+		.filter { $0.destination.identifier == from }
+		.map { ($0.destination, graph.nodes[$0.source.identifier]!) }
+		|> (flip(sorted) <| { $0.0 < $1.0 })
 
-			default:
-				break
-			}
+	switch node {
+	case let .Abstraction(symbol):
+		switch symbol.type {
+		case .Unit:
+			return .right(Value(constant: ()))
 
-		case .Parameter:
+		default:
 			break
-
-		case .Return where inputs.count != 1:
-			return error("expected one return edge, but \(inputs.count) were found")
-
-		case .Return:
-			return evaluate(graph, inputs[0].0.identifier, environment, visited)
 		}
-	} else {
-		return error("node does not exist in graph")
+
+	case .Parameter:
+		break
+
+	case .Return where inputs.count != 1:
+		return error("expected one return edge, but \(inputs.count) were found", from)
+
+	case .Return:
+		return evaluate(graph, inputs[0].0.identifier, environment, visited)
 	}
-	return error("unimplemented")
+	return error("don’t know how to evaluate \(node)", from)
 }
 
 
