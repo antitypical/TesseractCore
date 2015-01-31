@@ -38,7 +38,7 @@ public enum Value: Printable {
 		case let Constant(c):
 			return ".Constant(\(toString(c)))"
 		case let Function(f):
-			return ".Function(f)"
+			return ".Function(\(toString(f)))"
 		}
 	}
 }
