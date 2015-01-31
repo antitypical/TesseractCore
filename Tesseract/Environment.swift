@@ -32,7 +32,7 @@ public let Prelude: Environment = [
 	Symbol("true", .Boolean): Value(constant: true),
 	Symbol("false", .Boolean): Value(constant: false),
 	Symbol("identity", 0 --> 0): Value(function: id as Any -> Any),
-	Symbol("const", 0 --> 1 --> 0): Value(function: const as Any -> Any -> Any),
+	Symbol("constant", 0 --> 1 --> 0): Value(function: const as Any -> Any -> Any),
 ]
 
 
