@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Value {
+public enum Value: Printable {
 	case Constant(Any)
 	case Function(Any -> Any)
 
@@ -10,6 +10,18 @@ public enum Value {
 			return constant(v as T)
 		case let Function(f):
 			return function(f as U -> Any as U -> V)
+		}
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		switch self {
+		case let Constant(c):
+			return ".Constant(\(toString(c))"
+		case let Function(f):
+			return ".Function(f)"
 		}
 	}
 }
