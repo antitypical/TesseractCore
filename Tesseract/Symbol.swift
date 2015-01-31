@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public enum Symbol: Hashable {
+public enum Symbol: Hashable, Printable {
 	public init(_ name: String, _ type: Type) {
 		self = Named(name, type)
 	}
