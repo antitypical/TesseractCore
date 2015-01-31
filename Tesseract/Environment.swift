@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct Environment: DictionaryLiteralConvertible {
+public struct Environment: DictionaryLiteralConvertible, Printable {
 	private let bindings: [Symbol: Value]
 
 	public subscript (key: String) -> (Symbol, Value)? {
@@ -17,6 +17,13 @@ public struct Environment: DictionaryLiteralConvertible {
 
 	public init(dictionaryLiteral elements: (Symbol, Value)...) {
 		bindings = Dictionary(elements)
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		return "[\n" + join("", lazy(bindings).map { "\t\(toString($0)): \(toString($1)),\n" }) + "]"
 	}
 }
 
