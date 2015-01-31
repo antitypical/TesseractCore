@@ -21,6 +21,15 @@ public enum Value: Printable {
 		}
 	}
 
+	public func function<T, U>() -> (T -> U)? {
+		switch self {
+		case let Function(f):
+			return f.value as? T -> U
+		default:
+			return nil
+		}
+	}
+
 
 	// MARK: Printable
 
