@@ -25,7 +25,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 
 	switch node {
 	case let .Symbolic(symbol):
-		return environment[symbol].map(Either.right) ?? error("\(symbol) not found in environment", from)
+		return environment[symbol].map((flip(apply) <| inputs) >>> Either.right) ?? error("\(symbol) not found in environment", from)
 
 	case .Parameter:
 		break
