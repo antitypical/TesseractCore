@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Node: Equatable {
+public enum Node: Equatable, Printable {
 	/// A parameter of a graph.
 	case Parameter(Symbol)
 
@@ -19,6 +19,18 @@ public enum Node: Equatable {
 			return symbol
 		case let Symbolic(symbol):
 			return symbol
+		}
+	}
+
+
+	public var description: String {
+		switch self {
+		case let Parameter(symbol):
+			return ".Parameter(\(symbol))"
+		case let Return(symbol):
+			return ".Return(\(symbol))"
+		case let Symbolic(symbol):
+			return ".Symbolic(\(symbol))"
 		}
 	}
 }
