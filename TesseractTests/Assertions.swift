@@ -61,6 +61,11 @@ extension XCTestCase {
 	}
 
 	func assertNotNil<T>(expression: @autoclosure () -> T?, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> T? {
+//		if let value = expression() {
+//			return value
+//		} else {
+//			return failure("is nil. " + message, file: file, line: line)
+//		}
 		return expression() ?? failure("is nil. " + message, file: file, line: line)
 	}
 
