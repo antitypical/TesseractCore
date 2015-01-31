@@ -4,12 +4,14 @@ public enum Value: Printable {
 	case Constant(Any)
 	case Function(Any -> Any)
 
-	public func destructure<T, U, V, W>(constant: T -> W, _ function: (U -> V) -> W) -> W {
+	public func destructure<T, U, V, W>(constant: T -> W, _ function: (U -> V) -> W) -> W? {
 		switch self {
-		case let Constant(v):
+		case let Constant(v as T):
 			return constant(v as T)
 		case let Function(f):
 			return function(f as U -> Any as U -> V)
+		default:
+			return nil
 		}
 	}
 
