@@ -8,4 +8,8 @@ final class ValueTests: XCTestCase {
 	func testConstantValueDestructuresWithFunctionOfSameType() {
 		assertEqual(Value(constant: 1).constant(), 1)
 	}
+
+	func testConstantValueDestructuresToNilWithFunctionOfDifferentType() {
+		assertNil(Value(constant: 1).constant() as ()?)
+	}
 }
