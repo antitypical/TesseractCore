@@ -16,4 +16,9 @@ final class ValueTests: XCTestCase {
 	func testFunctionValueDestructuresAsConstantToNone() {
 		assertNil(Value(function: id as Any -> Any).constant() as Any?)
 	}
+
+
+	func testFunctionValueDestructuresToSomeOfSameType() {
+		assertNotNil(Value(function: id as Any -> Any).function() as (Any -> Any)?)
+	}
 }
