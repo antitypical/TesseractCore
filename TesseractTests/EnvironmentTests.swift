@@ -11,4 +11,12 @@ final class EnvironmentTests: XCTestCase {
 
 		assertEqual(assertNotNil(assertRight(evaluated)?.constant()), true)
 	}
+
+	func testNodeRepresentingFunctionWithNoInputsEvaluatesToFunction() {
+		let a = Identifier()
+		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["identity"]!.0) ])
+		let evaluated = evaluate(graph, a)
+
+		assertEqual(assertNotNil(assertRight(evaluated)?.function()).map { $0(1) }, 1)
+	}
 }
