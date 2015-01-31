@@ -7,8 +7,8 @@ public enum Node: Equatable {
 	/// A return of a graph.
 	case Return(Symbol)
 
-	/// An arbitrary graph node abstracting a symbol.
-	case Abstraction(Symbol)
+	/// An arbitrary graph node referencing a value bound in the environment.
+	case Symbolic(Symbol)
 }
 
 public func == (left: Node, right: Node) -> Bool {
@@ -17,7 +17,7 @@ public func == (left: Node, right: Node) -> Bool {
 		return x == y
 	case let (.Return(x), .Return(y)):
 		return x == y
-	case let (.Abstraction(x), .Abstraction(y)):
+	case let (.Symbolic(x), .Symbolic(y)):
 		return x == y
 
 	default:

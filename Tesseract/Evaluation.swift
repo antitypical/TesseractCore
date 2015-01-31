@@ -24,7 +24,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 		|> (flip(sorted) <| { $0.0 < $1.0 })
 
 	switch node {
-	case let .Abstraction(symbol):
+	case let .Symbolic(symbol):
 		switch symbol.type {
 		case .Unit, .Boolean:
 			return environment[symbol].map(Either.right) ?? error("\(symbol) not found in environment", from)
