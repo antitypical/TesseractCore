@@ -9,7 +9,7 @@ final class EnvironmentTests: XCTestCase {
 		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["true"]!.0) ])
 		let evaluated = evaluate(graph, a)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.constant()), true)
+		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
 	}
 
 	func testFunctionNodeWithNoBoundInputsEvaluatesToFunction() {
@@ -17,7 +17,7 @@ final class EnvironmentTests: XCTestCase {
 		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["identity"]!.0) ])
 		let evaluated = evaluate(graph, a)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.function() as (Any -> Any)?).map { $0(1) as Int }, 1)
+		assertEqual(assertNotNil(assertRight(evaluated)?.value.function() as (Any -> Any)?).map { $0(1) as Int }, 1)
 	}
 
 	func testFunctionNodeWithBoundInputAppliesInput() {
@@ -25,6 +25,6 @@ final class EnvironmentTests: XCTestCase {
 		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["true"]!.0), b: Node.Symbolic(Prelude["identity"]!.0) ], edges: [ Edge((a, 0), (b, 0)) ])
 		let evaluated = evaluate(graph, b)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.constant()), true)
+		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
 	}
 }

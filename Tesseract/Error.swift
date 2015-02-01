@@ -2,7 +2,7 @@
 
 public typealias Error = (Identifier, String)
 
-internal func error(reason: String, from: Identifier) -> Either<Error, Value> {
+internal func error(reason: String, from: Identifier) -> Either<Error, Memo<Value>> {
 	return .left((from, reason))
 }
 
@@ -10,3 +10,4 @@ internal func error(reason: String, from: Identifier) -> Either<Error, Value> {
 // MARK: - Imports
 
 import Either
+import Memo
