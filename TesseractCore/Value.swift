@@ -46,9 +46,14 @@ public enum Value: Printable {
 
 
 	public func apply(argument: Value) -> Value? {
-		return (function() as (Any -> Any)?)
-			.map { argument.constant().map($0) }?
-			.map { Value(constant: $0) }
+		switch self {
+		case let Function(function) where function.value is Any -> Any:
+			return argument.constant()
+				.map(function.value as Any -> Any)
+				.map { Value(constant: $0) }
+		default:
+			return nil
+		}
 	}
 
 
