@@ -28,6 +28,11 @@ public struct Environment: DictionaryLiteralConvertible, Printable {
 	}
 }
 
+public func + (var left: Environment, right: (Symbol, Value)) -> Environment {
+	left[right.0] = right.1
+	return left
+}
+
 
 // MARK: - Prelude
 
