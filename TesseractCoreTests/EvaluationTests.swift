@@ -4,9 +4,17 @@ import TesseractCore
 import XCTest
 
 final class EvaluationTests: XCTestCase {
-	func testConstantNodeEvaluatesToConstant() {
+	func createGraph(symbol: Symbol) -> (Identifier, Graph<Node>) {
 		let a = Identifier()
-		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["true"]!.0) ])
+		return (a, Graph(nodes: [ a: Node.Symbolic(symbol) ]))
+	}
+
+	var constantGraph: (Identifier, Graph<Node>) {
+		return createGraph(Prelude["true"]!.0)
+	}
+
+	func testConstantNodeEvaluatesToConstant() {
+		let (a, graph) = constantGraph
 		let evaluated = evaluate(graph, a)
 
 		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
