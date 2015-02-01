@@ -35,7 +35,6 @@ public enum Value: Printable {
 		return (function() as (Any -> Any)?)
 			.map { argument.constant().map($0) }
 			.map { Value(constant: $0) }
-		??	nil
 	}
 
 
