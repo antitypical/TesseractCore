@@ -13,7 +13,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	}
 	let inputs = lazy(graph.edges)
 		.filter { $0.destination.identifier == from }
-		.map { ($0.destination, graph.nodes[$0.source.identifier]!) }
+		.map { ($0.destination, recur($0.source)) }
 		|> (flip(sorted) <| { $0.0 < $1.0 })
 
 	switch node {

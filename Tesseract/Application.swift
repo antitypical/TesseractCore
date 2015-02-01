@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public func apply(value: Value, parameters: [(Edge.Destination, Node)]) -> Either<Error, Value> {
+public func apply(value: Value, parameters: [(Edge.Destination, Memo<Either<Error, Value>>)]) -> Either<Error, Value> {
 	return .right(value)
 }
 
@@ -8,3 +8,4 @@ public func apply(value: Value, parameters: [(Edge.Destination, Node)]) -> Eithe
 // MARK: - Imports
 
 import Either
+import Memo
