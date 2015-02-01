@@ -18,11 +18,11 @@ internal func error(reason: String, from: Identifier) -> Either<Error, Memo<Valu
 	return .left(Error(reason, from))
 }
 
-internal func coalesce<T>(eithers: [Either<Error, T>]) -> Either<Error, [T]> {
+internal func coalesce<S, T>(eithers: [(S, Either<Error, T>)]) -> Either<Error, [(S, T)]> {
 	return reduce(eithers, .right([])) { into, each in
 		into.either(
-			{ error in each.left.map { .left(Error(error, $0)) } ?? into },
-			{ value in each.map { value + [ $0 ] } }
+			{ error in each.1.left.map { .left(Error(error, $0)) } ?? into },
+			{ value in each.1.map { value + [ (each.0, $0) ] } }
 		)
 	}
 }
