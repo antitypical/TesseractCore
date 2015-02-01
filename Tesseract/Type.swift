@@ -25,6 +25,15 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 		}
 	}
 
+	public var functionType: (Type, Type)? {
+		switch self {
+		case let Function(t1, t2):
+			return (t1.value, t2.value)
+		default:
+			return nil
+		}
+	}
+
 
 	// MARK: Hashable
 
