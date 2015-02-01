@@ -8,6 +8,9 @@ public func evaluate(graph: Graph<Node>, from: Identifier, _ environment: Enviro
 }
 
 private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Value], node: Node) -> Either<Error, Value> {
+	let recur: Edge.Source -> Memo<Either<Error, Value>> = { source in
+		Memo(evaluate(graph, source.identifier, environment, visited, graph.nodes[source.identifier]!))
+	}
 	let inputs = lazy(graph.edges)
 		.filter { $0.destination.identifier == from }
 		.map { ($0.destination, graph.nodes[$0.source.identifier]!) }
@@ -33,4 +36,5 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 // MARK: - Imports
 
 import Either
+import Memo
 import Prelude
