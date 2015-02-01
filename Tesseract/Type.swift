@@ -16,6 +16,16 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 	case Function(Box<Type>, Box<Type>)
 
 
+	public var arity: Int {
+		switch self {
+		case let Function(_, t):
+			return 1 + t.value.arity
+		default:
+			return 0
+		}
+	}
+
+
 	// MARK: Hashable
 
 	public var hashValue: Int {
