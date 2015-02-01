@@ -1,10 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<Error, Value> {
-	return evaluate(graph, from, environment, [:])
-}
-
-private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Value]) -> Either<Error, Value> {
+public func evaluate(graph: Graph<Node>, from: Identifier, _ environment: Environment = Prelude, _ visited: [Identifier: Value] = [:]) -> Either<Error, Value> {
 	return
 		visited[from].map(Either.right)
 	??	graph.nodes[from].map { evaluate(graph, from, environment, visited, $0) }
