@@ -21,8 +21,7 @@ final class EvaluationTests: XCTestCase {
 	}
 
 	func testFunctionNodeWithNoBoundInputsEvaluatesToFunction() {
-		let a = Identifier()
-		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["identity"]!.0) ])
+		let (a, graph) = createGraph(Prelude["identity"]!.0)
 		let evaluated = evaluate(graph, a)
 
 		assertEqual(assertNotNil(assertRight(evaluated)?.value.function() as (Any -> Any)?).map { $0(1) as Int }, 1)
@@ -34,5 +33,10 @@ final class EvaluationTests: XCTestCase {
 		let evaluated = evaluate(graph, b)
 
 		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
+	}
+
+	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
+		let (a, graph) = constantGraph
+		//
 	}
 }
