@@ -83,6 +83,13 @@ public struct Graph<T> {
 }
 
 
+public func == <T: Equatable> (left: Graph<T>, right: Graph<T>) -> Bool {
+	return
+		left.nodes == right.nodes
+	&&	left.edges == right.edges
+}
+
+
 // MARK: - Imports
 
 import Prelude
