@@ -19,8 +19,12 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	switch node {
 	case let .Symbolic(symbol):
 		return
-			environment[symbol].map(flip(apply) <| inputs <| symbol)
-		??	error("\(symbol) not found in environment", from)
+			reduce(inputs, Either<Error, [(Edge.Destination, Memo<Value>)]>.right([])) { into, each in
+				into >>- { results in (each.1.map { results + [ (each.0, $0) ] }) }
+			} >>- { inputs in
+					environment[symbol].map(flip(apply) <| inputs <| symbol)
+				??	error("\(symbol) not found in environment", from)
+			}
 
 	case .Parameter:
 		break
