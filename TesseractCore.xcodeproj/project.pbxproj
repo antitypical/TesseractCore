@@ -34,7 +34,7 @@
 		D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CB5DC41A75F45200672C6B /* Environment.swift */; };
 		D4CD9E141A5323D200B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
 		D4CD9E151A5323E400B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
-		D4ED827D1A3F9ADB00D0479E /* Tesseract.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* Tesseract.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D4ED827D1A3F9ADB00D0479E /* TesseractCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* TesseractCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4ED82881A3F9ADB00D0479E /* TesseractCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* TesseractCore.framework */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
 		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
@@ -75,7 +75,7 @@
 		D4CD9E131A5323D200B1FF53 /* Set.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Set.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED82771A3F9ADB00D0479E /* TesseractCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TesseractCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED827B1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D4ED827C1A3F9ADB00D0479E /* Tesseract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tesseract.h; sourceTree = "<group>"; };
+		D4ED827C1A3F9ADB00D0479E /* TesseractCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TesseractCore.h; sourceTree = "<group>"; };
 		D4ED82871A3F9ADB00D0479E /* TesseractCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseractCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED828D1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
@@ -137,7 +137,7 @@
 		D4ED82791A3F9ADB00D0479E /* TesseractCore */ = {
 			isa = PBXGroup;
 			children = (
-				D4ED827C1A3F9ADB00D0479E /* Tesseract.h */,
+				D4ED827C1A3F9ADB00D0479E /* TesseractCore.h */,
 				D4ED82981A3F9C3800D0479E /* Symbol.swift */,
 				D4B5DE351A505F66004B4C0C /* Graph.swift */,
 				D4CB5DBE1A75E12D00672C6B /* Edge.swift */,
@@ -193,7 +193,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4ED827D1A3F9ADB00D0479E /* Tesseract.h in Headers */,
+				D4ED827D1A3F9ADB00D0479E /* TesseractCore.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
