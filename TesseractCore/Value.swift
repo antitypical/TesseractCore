@@ -42,10 +42,10 @@ public enum Value: Printable {
 
 	public var description: String {
 		switch self {
-		case let Constant(c):
-			return ".Constant(\(c))"
-		case let Function(f):
-			return ".Function(\(f))"
+		case let Constant(constant):
+			return ".Constant(\(constant))"
+		case let Function(function):
+			return ".Function(\(function))"
 		}
 	}
 }
