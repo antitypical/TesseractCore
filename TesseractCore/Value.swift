@@ -11,6 +11,7 @@ public enum Value: Printable {
 
 	case Constant(Box<Any>)
 	case Function(Box<Any>)
+	case Graph(TesseractCore.Graph<Node>)
 
 	public func constant<T>() -> T? {
 		switch self {
@@ -46,6 +47,8 @@ public enum Value: Printable {
 			return ".Constant(\(constant))"
 		case let Function(function):
 			return ".Function(\(function))"
+		case let Graph(graph):
+			return ".Graph(\(graph))"
 		}
 	}
 }
