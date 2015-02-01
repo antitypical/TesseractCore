@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D4ED82761A3F9ADB00D0479E"
-               BuildableName = "Tesseract.framework"
-               BlueprintName = "Tesseract"
-               ReferencedContainer = "container:Tesseract.xcodeproj">
+               BuildableName = "TesseractCore.framework"
+               BlueprintName = "TesseractCore"
+               ReferencedContainer = "container:TesseractCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D4ED82861A3F9ADB00D0479E"
-               BuildableName = "TesseractTests.xctest"
-               BlueprintName = "TesseractTests"
-               ReferencedContainer = "container:Tesseract.xcodeproj">
+               BuildableName = "TesseractCoreTests.xctest"
+               BlueprintName = "TesseractCoreTests"
+               ReferencedContainer = "container:TesseractCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D4ED82861A3F9ADB00D0479E"
-               BuildableName = "TesseractTests.xctest"
-               BlueprintName = "TesseractTests"
-               ReferencedContainer = "container:Tesseract.xcodeproj">
+               BuildableName = "TesseractCoreTests.xctest"
+               BlueprintName = "TesseractCoreTests"
+               ReferencedContainer = "container:TesseractCore.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4ED82761A3F9ADB00D0479E"
-            BuildableName = "Tesseract.framework"
-            BlueprintName = "Tesseract"
-            ReferencedContainer = "container:Tesseract.xcodeproj">
+            BuildableName = "TesseractCore.framework"
+            BlueprintName = "TesseractCore"
+            ReferencedContainer = "container:TesseractCore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4ED82761A3F9ADB00D0479E"
-            BuildableName = "Tesseract.framework"
-            BlueprintName = "Tesseract"
-            ReferencedContainer = "container:Tesseract.xcodeproj">
+            BuildableName = "TesseractCore.framework"
+            BlueprintName = "TesseractCore"
+            ReferencedContainer = "container:TesseractCore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D4ED82761A3F9ADB00D0479E"
-            BuildableName = "Tesseract.framework"
-            BlueprintName = "Tesseract"
-            ReferencedContainer = "container:Tesseract.xcodeproj">
+            BuildableName = "TesseractCore.framework"
+            BlueprintName = "TesseractCore"
+            ReferencedContainer = "container:TesseractCore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
