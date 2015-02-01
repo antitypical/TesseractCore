@@ -43,9 +43,9 @@ public enum Value: Printable {
 	public var description: String {
 		switch self {
 		case let Constant(c):
-			return ".Constant(\(toString(c)))"
+			return ".Constant(\(c))"
 		case let Function(f):
-			return ".Function(\(toString(f)))"
+			return ".Function(\(f))"
 		}
 	}
 }
