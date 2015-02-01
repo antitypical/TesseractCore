@@ -13,13 +13,13 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	}
 	let inputs = lazy(graph.edges)
 		.filter { $0.destination.identifier == from }
-		.map { ($0.destination, recur($0.source)) }
+		.map { ($0.destination.inputIndex, recur($0.source)) }
 		|> (flip(sorted) <| { $0.0 < $1.0 })
 
 	switch node {
 	case let .Symbolic(symbol):
 		return coalesce(inputs) >>- { inputs in
-				environment[symbol].map(flip(apply) <| inputs <| symbol <| from)
+				environment[symbol].map { apply($0, from, symbol, inputs) }
 			??	error("\(symbol) not found in environment", from)
 		}
 
