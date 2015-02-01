@@ -9,6 +9,10 @@ final class EvaluationTests: XCTestCase {
 		return (a, Graph(nodes: [ a: .Symbolic(symbol) ]))
 	}
 
+	func node(symbolName: String) -> Node {
+		return .Symbolic(Prelude[symbolName]!.0)
+	}
+
 	var constantGraph: (Identifier, Graph<Node>) {
 		return createGraph(Prelude["true"]!.0)
 	}
