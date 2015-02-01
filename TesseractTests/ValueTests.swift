@@ -29,4 +29,10 @@ final class ValueTests: XCTestCase {
 	func testConstantValueDestructuresAsFunctionToNone() {
 		assertNil(Value(constant: ()).function() as (Any -> Any)?)
 	}
+
+
+	func testApplicationOfConstantIsNil() {
+		let value = Value(constant: ())
+		assertNil(value.apply(value))
+	}
 }
