@@ -35,6 +35,15 @@ public enum Value: Printable {
 		}
 	}
 
+	public var graph: TesseractCore.Graph<Node>? {
+		switch self {
+		case let Graph(graph):
+			return graph
+		default:
+			return nil
+		}
+	}
+
 
 	public func apply(argument: Value) -> Value? {
 		return (function() as (Any -> Any)?)
