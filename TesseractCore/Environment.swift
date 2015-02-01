@@ -27,6 +27,9 @@ public struct Environment: DictionaryLiteralConvertible, Printable {
 	}
 }
 
+
+// MARK: - Prelude
+
 public let Prelude: Environment = [
 	Symbol("unit", .Unit): Value(constant: ()),
 	Symbol("true", .Boolean): Value(constant: true),
