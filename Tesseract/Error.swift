@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Error {
+public enum Error: Printable {
 	public init(_ reason: String, _ from: Identifier) {
 		self = Leaf(from, reason)
 	}
@@ -12,6 +12,19 @@ public enum Error {
 
 	case Leaf(Identifier, String)
 	case Branch(Box<Error>, Box<Error>)
+
+
+	// MARK: Printable
+
+	public var description: String {
+		switch self {
+		case let Leaf(identifier, reason):
+			return "\(identifier): \(reason)"
+
+		case let Branch(x, y):
+			return "\(x)\n\(y)"
+		}
+	}
 }
 
 internal func error(reason: String, from: Identifier) -> Either<Error, Memo<Value>> {
