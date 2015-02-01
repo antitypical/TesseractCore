@@ -6,7 +6,7 @@ import XCTest
 final class EvaluationTests: XCTestCase {
 	func createGraph(symbol: Symbol) -> (Identifier, Graph<Node>) {
 		let a = Identifier()
-		return (a, Graph(nodes: [ a: Node.Symbolic(symbol) ]))
+		return (a, Graph(nodes: [ a: .Symbolic(symbol) ]))
 	}
 
 	var constantGraph: (Identifier, Graph<Node>) {
