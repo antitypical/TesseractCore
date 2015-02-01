@@ -17,12 +17,7 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 
 
 	public var arity: Int {
-		switch self {
-		case let Function(_, t):
-			return 1 + t.value.arity
-		default:
-			return 0
-		}
+		return functionType.map { 1 + $1.arity } ?? 0
 	}
 
 	public var functionType: (Type, Type)? {
