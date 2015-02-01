@@ -1,8 +1,8 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Error: Printable {
+public enum Error<Identifier>: Printable {
 	public init(_ reason: String, _ from: Identifier) {
-		self = Leaf(from, reason)
+		self = Leaf(Box(from), reason)
 	}
 
 	public init(_ error1: Error, _ error2: Error) {
@@ -10,7 +10,7 @@ public enum Error: Printable {
 	}
 
 
-	case Leaf(Identifier, String)
+	case Leaf(Box<Identifier>, String)
 	case Branch(Box<Error>, Box<Error>)
 
 
@@ -27,11 +27,11 @@ public enum Error: Printable {
 	}
 }
 
-internal func error(reason: String, from: Identifier) -> Either<Error, Memo<Value>> {
+internal func error(reason: String, from: Identifier) -> Either<Error<Identifier>, Memo<Value>> {
 	return .left(Error(reason, from))
 }
 
-internal func coalesce<S, T>(eithers: [(S, Either<Error, T>)]) -> Either<Error, [(S, T)]> {
+internal func coalesce<S, T, U>(eithers: [(S, Either<Error<U>, T>)]) -> Either<Error<U>, [(S, T)]> {
 	return reduce(eithers, .right([])) { into, each in
 		into.either(
 			{ error in each.1.left.map { .left(Error(error, $0)) } ?? into },

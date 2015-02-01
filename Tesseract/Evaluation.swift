@@ -1,14 +1,14 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public func evaluate(graph: Graph<Node>, from: Identifier, _ environment: Environment = Prelude, _ visited: [Identifier: Memo<Value>] = [:]) -> Either<Error, Memo<Value>> {
+public func evaluate(graph: Graph<Node>, from: Identifier, _ environment: Environment = Prelude, _ visited: [Identifier: Memo<Value>] = [:]) -> Either<Error<Identifier>, Memo<Value>> {
 	return
 		visited[from].map(Either.right)
 	??	graph.nodes[from].map { evaluate(graph, from, environment, visited, $0) }
 	??	error("could not find identifier in graph", from)
 }
 
-private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Memo<Value>], node: Node) -> Either<Error, Memo<Value>> {
-	let recur: Edge.Source -> Either<Error, Memo<Value>> = { source in
+private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, visited: [Identifier: Memo<Value>], node: Node) -> Either<Error<Identifier>, Memo<Value>> {
+	let recur: Edge.Source -> Either<Error<Identifier>, Memo<Value>> = { source in
 		evaluate(graph, source.identifier, environment, visited, graph.nodes[source.identifier]!)
 	}
 	let inputs = lazy(graph.edges)
