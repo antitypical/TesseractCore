@@ -3,7 +3,7 @@
 import Tesseract
 import XCTest
 
-final class EnvironmentTests: XCTestCase {
+final class EvaluationTests: XCTestCase {
 	func testConstantNodeEvaluatesToConstant() {
 		let a = Identifier()
 		let graph = Graph(nodes: [ a: Node.Symbolic(Prelude["true"]!.0) ])
