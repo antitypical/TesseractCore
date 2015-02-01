@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-import Tesseract
+import TesseractCore
 import XCTest
 
 final class EvaluationTests: XCTestCase {
