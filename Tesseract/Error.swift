@@ -1,16 +1,17 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public enum Error {
-	case Node(Identifier, String)
-	case Composition([Error])
+	case Leaf(Identifier, String)
+	case Branch(Box<Error>, Box<Error>)
 }
 
 internal func error(reason: String, from: Identifier) -> Either<Error, Memo<Value>> {
-	return .left(.Node(from, reason))
+	return .left(.Leaf(from, reason))
 }
 
 
 // MARK: - Imports
 
+import Box
 import Either
 import Memo
