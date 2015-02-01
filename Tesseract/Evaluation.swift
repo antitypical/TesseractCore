@@ -1,11 +1,5 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public typealias Error = (Identifier, String)
-
-private func error(reason: String, from: Identifier) -> Either<Error, Value> {
-	return .left((from, reason))
-}
-
 public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment = Prelude) -> Either<Error, Value> {
 	return evaluate(graph, from, environment, [:])
 }
