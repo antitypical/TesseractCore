@@ -9,6 +9,10 @@ public enum Value: Printable {
 		self = Function(Box(function))
 	}
 
+	public init(graph: TesseractCore.Graph<Node>) {
+		self = Graph(graph)
+	}
+
 	case Constant(Box<Any>)
 	case Function(Box<Any>)
 	case Graph(TesseractCore.Graph<Node>)
