@@ -1,9 +1,12 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public typealias Error = (Identifier, String)
+public enum Error {
+	case Node(Identifier, String)
+	case Composition([Error])
+}
 
 internal func error(reason: String, from: Identifier) -> Either<Error, Memo<Value>> {
-	return .left((from, reason))
+	return .left(.Node(from, reason))
 }
 
 
