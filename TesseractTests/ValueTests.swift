@@ -35,4 +35,10 @@ final class ValueTests: XCTestCase {
 		let value = Value(constant: ())
 		assertNil(value.apply(value))
 	}
+
+	func testApplicationOfIdentityIsArgument() {
+		let argument = Value(constant: 1)
+		let identity = Value(function: id as Any -> Any)
+		assertEqual(assertNotNil(identity.apply(argument))?.constant(), 1)
+	}
 }
