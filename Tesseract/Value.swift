@@ -31,6 +31,14 @@ public enum Value: Printable {
 	}
 
 
+	public func apply(argument: Value) -> Value? {
+		return (function() as (Any -> Any)?)
+			.map { argument.constant().map($0) }
+			.map { Value(constant: $0) }
+		??	nil
+	}
+
+
 	// MARK: Printable
 
 	public var description: String {
