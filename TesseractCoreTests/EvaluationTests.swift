@@ -36,7 +36,12 @@ final class EvaluationTests: XCTestCase {
 	}
 
 	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
-		let (a, graph) = constantGraph
-		//
+		let (a, b) = (Identifier(), Identifier())
+		let constant = Graph<Node>(nodes: [ a: .Symbolic(Prelude["true"]!.0), b: .Return(.Named("return", .Boolean)) ], edges: [ Edge((a, 0), (b, 0)) ])
+
+		let truthy = Symbol.Named("truthy", .Boolean)
+		let (c, graph) = createGraph(truthy)
+		let evaluated = evaluate(graph, c, [truthy: Value(graph: constant)])
+		assertEqual(assertRight(evaluated)?.value.graph.map { $0 == constant } ?? false, true)
 	}
 }
