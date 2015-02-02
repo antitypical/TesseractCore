@@ -52,6 +52,11 @@ public enum Value: Printable {
 				.map(function.value as Any -> Any)
 				.map { applied in .right(Memo(Value(constant: applied))) }
 			??	error("could not apply function", identifier)
+		case let Graph(graph):
+			return graph
+				.find { $1.isReturn }
+				.map { evaluate(graph, graph[$0].0, environment) }
+			??	error("could not find return node", identifier)
 		default:
 			return error("cannot apply \(self)", identifier)
 		}
