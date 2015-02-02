@@ -34,7 +34,6 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	case .Return:
 		return inputs[0].1
 	}
-	return error("don’t know how to evaluate \(node)", from)
 }
 
 
