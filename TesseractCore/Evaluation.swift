@@ -19,7 +19,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	switch node {
 	case let .Symbolic(symbol):
 		return coalesce(inputs) >>- { inputs in
-				environment[symbol].map { apply($0, from, symbol, inputs) }
+				environment[symbol].map { apply($0, from, symbol, inputs, environment) }
 			??	error("\(symbol) not found in environment", from)
 		}
 
