@@ -31,14 +31,14 @@ final class ValueTests: XCTestCase {
 	}
 
 
-	func testApplicationOfConstantIsNil() {
+	func testApplicationOfConstantIsError() {
 		let value = Value(constant: ())
-		assertNil(value.apply(value))
+		assertLeft(value.apply(value, Identifier(), [:]))
 	}
 
 	func testApplicationOfIdentityIsArgument() {
 		let argument = Value(constant: 1)
 		let identity = Value(function: id as Any -> Any)
-		assertEqual(assertNotNil(identity.apply(argument))?.constant(), 1)
+		assertEqual(assertNotNil(identity.apply(argument, Identifier(), [:]).right)?.value.constant(), 1)
 	}
 }

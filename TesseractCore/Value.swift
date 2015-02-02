@@ -45,14 +45,15 @@ public enum Value: Printable {
 	}
 
 
-	public func apply(argument: Value, _ identifier: Identifier, _ environment: Environment) -> Value? {
+	public func apply(argument: Value, _ identifier: Identifier, _ environment: Environment) -> Either<Error<Identifier>, Memo<Value>> {
 		switch self {
 		case let Function(function) where function.value is Any -> Any:
 			return argument.constant()
 				.map(function.value as Any -> Any)
-				.map { Value(constant: $0) }
+				.map { applied in .right(Memo(Value(constant: applied))) }
+			??	error("could not apply function", identifier)
 		default:
-			return nil
+			return error("cannot apply \(self)", identifier)
 		}
 	}
 
@@ -75,3 +76,5 @@ public enum Value: Printable {
 // MARK: - Imports
 
 import Box
+import Either
+import Memo
