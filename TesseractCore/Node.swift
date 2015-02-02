@@ -33,6 +33,8 @@ public enum Node: Equatable, Printable {
 	}
 
 
+	// MARK: Printable
+
 	public var description: String {
 		switch self {
 		case let Parameter(symbol):
@@ -44,6 +46,9 @@ public enum Node: Equatable, Printable {
 		}
 	}
 }
+
+
+// MARK: Equatable
 
 public func == (left: Node, right: Node) -> Bool {
 	switch (left, right) {
