@@ -45,7 +45,7 @@ public enum Value: Printable {
 	}
 
 
-	public func apply(argument: Value, _ environment: Environment) -> Value? {
+	public func apply(argument: Value, _ identifier: Identifier, _ environment: Environment) -> Value? {
 		switch self {
 		case let Function(function) where function.value is Any -> Any:
 			return argument.constant()
