@@ -23,8 +23,10 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 			??	error("\(symbol) not found in environment", from)
 		}
 
-	case .Parameter:
-		break
+	case let .Parameter(symbol):
+		return environment[.Parameter(0, .Unit)]
+			.map { .right(Memo($0)) }
+		??	error("did not find parameter in environment", from)
 
 	case .Return where inputs.count != 1:
 		return error("expected one return edge, but \(inputs.count) were found", from)
