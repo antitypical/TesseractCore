@@ -48,4 +48,15 @@ final class EvaluationTests: XCTestCase {
 		let evaluated = evaluate(graph, c, [truthy: Value(graph: constant)])
 		assertEqual(assertRight(evaluated)?.value.graph.map { $0 == constant } ?? false, true)
 	}
+
+	func testGraphNodeWithBoundInputsAppliesInput() {
+		let (a, b) = (Identifier(), Identifier())
+		let identity = Graph<Node>(nodes: [ a: .Parameter(.Parameter(0, .Parameter(0))), b: .Return(.Named("return", .Parameter(0))) ], edges: [ Edge((a, 0), (b, 0)) ])
+
+		let identitySymbol = Symbol.Named("identity", Type(function: 0, 0))
+		let (c, d) = (Identifier(), Identifier())
+		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
+		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)))
+		println(assertRight(evaluated)?.value)
+	}
 }
