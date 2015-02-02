@@ -20,6 +20,10 @@ public struct Graph<T> {
 		}
 	}
 
+	public subscript (position: DictionaryIndex<Identifier, T>) -> (Identifier, T) {
+		return nodes[position]
+	}
+
 	public var edges: Set<Edge> {
 		didSet {
 			sanitize(edges - oldValue)
