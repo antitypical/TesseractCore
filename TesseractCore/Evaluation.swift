@@ -19,12 +19,14 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	switch node {
 	case let .Symbolic(symbol):
 		return coalesce(inputs) >>- { inputs in
-				environment[symbol].map { apply($0, from, symbol, inputs) }
+				environment[symbol].map { apply($0, from, symbol, inputs, environment) }
 			??	error("\(symbol) not found in environment", from)
 		}
 
-	case .Parameter:
-		break
+	case let .Parameter(symbol):
+		return environment[.Parameter(0, .Unit)]
+			.map { .right(Memo($0)) }
+		??	error("did not find parameter in environment", from)
 
 	case .Return where inputs.count != 1:
 		return error("expected one return edge, but \(inputs.count) were found", from)
@@ -32,7 +34,6 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 	case .Return:
 		return inputs[0].1
 	}
-	return error("don’t know how to evaluate \(node)", from)
 }
 
 

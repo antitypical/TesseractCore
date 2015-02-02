@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public struct Environment: DictionaryLiteralConvertible, Printable {
-	private let bindings: [Symbol: Value]
+	private var bindings: [Symbol: Value]
 
 	public subscript (key: String) -> (Symbol, Value)? {
 		let index = find(bindings) { symbol, _ in symbol.name == key }
@@ -9,7 +9,8 @@ public struct Environment: DictionaryLiteralConvertible, Printable {
 	}
 
 	public subscript (key: Symbol) -> Value? {
-		return bindings[key]
+		get { return bindings[key] }
+		set { bindings[key] = newValue }
 	}
 
 
@@ -26,6 +27,14 @@ public struct Environment: DictionaryLiteralConvertible, Printable {
 		return "[\n" + join("", lazy(bindings).map { "\t\(toString($0)): \(toString($1)),\n" }) + "]"
 	}
 }
+
+public func + (var left: Environment, right: (Symbol, Value)) -> Environment {
+	left[right.0] = right.1
+	return left
+}
+
+
+// MARK: - Prelude
 
 public let Prelude: Environment = [
 	Symbol("unit", .Unit): Value(constant: ()),

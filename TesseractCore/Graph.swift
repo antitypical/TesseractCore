@@ -20,6 +20,10 @@ public struct Graph<T> {
 		}
 	}
 
+	public subscript (position: DictionaryIndex<Identifier, T>) -> (Identifier, T) {
+		return nodes[position]
+	}
+
 	public var edges: Set<Edge> {
 		didSet {
 			sanitize(edges - oldValue)
@@ -80,6 +84,13 @@ public struct Graph<T> {
 			!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
 		}
 	}
+}
+
+
+public func == <T: Equatable> (left: Graph<T>, right: Graph<T>) -> Bool {
+	return
+		left.nodes == right.nodes
+	&&	left.edges == right.edges
 }
 
 

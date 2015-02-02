@@ -23,6 +23,16 @@ public enum Node: Equatable, Printable {
 	}
 
 
+	public var isReturn: Bool {
+		switch self {
+		case Return:
+			return true
+		default:
+			return false
+		}
+	}
+
+
 	public var description: String {
 		switch self {
 		case let Parameter(symbol):
