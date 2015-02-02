@@ -55,7 +55,7 @@ public enum Value: Printable {
 		case let Graph(graph):
 			return graph
 				.find { $1.isReturn }
-				.map { evaluate(graph, graph[$0].0, environment) }
+				.map { evaluate(graph, graph[$0].0, environment + (.Parameter(0, .Unit), argument)) }
 			??	error("could not find return node", identifier)
 		default:
 			return error("cannot apply \(self)", identifier)
