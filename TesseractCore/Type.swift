@@ -1,6 +1,10 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public enum Type: Hashable, IntegerLiteralConvertible, Printable {
+	public init(function name: String, _ from: Type, _ to: Type) {
+		self = Function(name, Box(from), Box(to))
+	}
+
 	public init(function from: Type, _ to: Type) {
 		self = Function(nil, Box(from), Box(to))
 	}
