@@ -11,6 +11,7 @@ private func typecheck(graph: Graph<Node>, from: Identifier, node: Node, environ
 	switch node {
 	case let .Parameter(symbol):
 		return .right(symbol.type)
+
 	default:
 		return error("unimplmented", from)
 	}
