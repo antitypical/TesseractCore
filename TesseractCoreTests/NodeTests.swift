@@ -21,4 +21,11 @@ final class NodeTests: XCTestCase {
 		let graph = Graph(nodes: [ a: n ])
 		assertEqual(n.inputs(a, graph).count, 1)
 	}
+
+	func testUnaryFunctionSymbolsAreNamedIncrementallyByDefault() {
+		let a = Identifier()
+		let n = node("identity")
+		let graph = Graph(nodes: [ a: n ])
+		assertEqual(n.inputs(a, graph).first?.0.name, "0")
+	}
 }
