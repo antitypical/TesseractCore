@@ -33,10 +33,10 @@ public enum Node: Equatable, Printable {
 	}
 
 
-	public func inputs(identifier: Identifier, _ graph: Graph<Node>) -> [(Symbol, Node?)] {
+	public func inputs(identifier: Identifier, _ graph: Graph<Node>) -> [(Symbol, (Identifier, Node)?)] {
 		let inputNodes = Dictionary(lazy(graph.edges)
 			.filter { $0.destination.identifier == identifier }
-			.map { ($0.destination.inputIndex, graph.nodes[$0.source.identifier]!) })
+			.map { ($0.destination.inputIndex, ($0.source.identifier, graph.nodes[$0.source.identifier]!)) })
 		let parameters = lazy(symbol.type.parameters).map { Symbol($0, $1) }
 		return map(enumerate(parameters)) { ($1, inputNodes[$0]) }
 	}
