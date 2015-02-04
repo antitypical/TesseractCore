@@ -31,6 +31,10 @@ internal func error(reason: String, from: Identifier) -> Either<Error<Identifier
 	return .left(Error(reason, from))
 }
 
+internal func error(reason: String, from: Identifier) -> Either<Error<Identifier>, Type> {
+	return .left(Error(reason, from))
+}
+
 internal func coalesce<S, T, U>(eithers: [(S, Either<Error<U>, T>)]) -> Either<Error<U>, [(S, T)]> {
 	return reduce(eithers, .right([])) { into, each in
 		into.either(
