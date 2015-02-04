@@ -34,6 +34,16 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 	}
 
 
+	private func parameters(n: Int) -> [(String, Type)] {
+		switch self {
+		case let Function(name, t1, t2):
+			return [(name ?? n.description, t1.value)] + t2.value.parameters(name == nil ? 1 : 0)
+		default:
+			return []
+		}
+	}
+
+
 	// MARK: Hashable
 
 	public var hashValue: Int {
