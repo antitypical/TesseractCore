@@ -14,4 +14,11 @@ final class NodeTests: XCTestCase {
 		let graph = Graph(nodes: [ a: n ])
 		assertEqual(n.inputs(a, graph).count, 0)
 	}
+
+	func testUnaryFunctionSymbolsHaveOneInput() {
+		let a = Identifier()
+		let n = node("identity")
+		let graph = Graph(nodes: [ a: n ])
+		assertEqual(n.inputs(a, graph).count, 1)
+	}
 }
