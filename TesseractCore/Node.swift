@@ -33,6 +33,17 @@ public enum Node: Equatable, Printable {
 	}
 
 
+	public func inputs(identifier: Identifier, _ graph: Graph<Node>) -> [(Symbol, (Identifier, Node)?)] {
+		let inputNodes = Dictionary(lazy(graph.edges)
+			.filter { $0.destination.identifier == identifier }
+			.map { ($0.destination.inputIndex, ($0.source.identifier, graph.nodes[$0.source.identifier]!)) })
+		let parameters = lazy(symbol.type.parameters).map { Symbol($0, $1) }
+		return map(enumerate(parameters)) { ($1, inputNodes[$0]) }
+	}
+
+
+	// MARK: Printable
+
 	public var description: String {
 		switch self {
 		case let Parameter(symbol):
@@ -44,6 +55,9 @@ public enum Node: Equatable, Printable {
 		}
 	}
 }
+
+
+// MARK: Equatable
 
 public func == (left: Node, right: Node) -> Bool {
 	switch (left, right) {
