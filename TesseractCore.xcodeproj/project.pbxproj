@@ -19,8 +19,10 @@
 		D47974101A7DF0300034ABA2 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D479740F1A7DF0300034ABA2 /* TypeTests.swift */; };
 		D481D9321A78771B00044B2F /* Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = D481D9311A78771B00044B2F /* Find.swift */; };
 		D4B1EFA91A81AC5100216B52 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1EFA81A81AC5100216B52 /* NodeTests.swift */; };
+		D4B1EFAB1A81CAD600216B52 /* Typecheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1EFAA1A81CAD600216B52 /* Typecheck.swift */; };
 		D4B3ECA41A77203B001AD21D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA31A77203B001AD21D /* Type.swift */; };
 		D4B3ECA81A772346001AD21D /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA71A772346001AD21D /* Value.swift */; };
+		D4B3FB151A8208BB00DA2AC3 /* TypecheckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3FB141A8208BB00DA2AC3 /* TypecheckTests.swift */; };
 		D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B564091A4CEF2E00795949 /* Assertions.swift */; };
 		D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE351A505F66004B4C0C /* Graph.swift */; };
 		D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */; };
@@ -63,8 +65,10 @@
 		D479740F1A7DF0300034ABA2 /* TypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTests.swift; sourceTree = "<group>"; };
 		D481D9311A78771B00044B2F /* Find.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Find.swift; sourceTree = "<group>"; };
 		D4B1EFA81A81AC5100216B52 /* NodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
+		D4B1EFAA1A81CAD600216B52 /* Typecheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typecheck.swift; sourceTree = "<group>"; };
 		D4B3ECA31A77203B001AD21D /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		D4B3ECA71A772346001AD21D /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
+		D4B3FB141A8208BB00DA2AC3 /* TypecheckTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypecheckTests.swift; sourceTree = "<group>"; };
 		D4B564091A4CEF2E00795949 /* Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		D4B5DE351A505F66004B4C0C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+HigherOrder.swift"; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				D4CB5DC41A75F45200672C6B /* Environment.swift */,
 				D4B3ECA71A772346001AD21D /* Value.swift */,
 				D4B3ECA31A77203B001AD21D /* Type.swift */,
+				D4B1EFAA1A81CAD600216B52 /* Typecheck.swift */,
 				D47974041A7D92E00034ABA2 /* Evaluation.swift */,
 				D47974061A7D99A40034ABA2 /* Application.swift */,
 				D479740B1A7DA6DC0034ABA2 /* Error.swift */,
@@ -175,6 +180,7 @@
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
 				D479740F1A7DF0300034ABA2 /* TypeTests.swift */,
 				D4B1EFA81A81AC5100216B52 /* NodeTests.swift */,
+				D4B3FB141A8208BB00DA2AC3 /* TypecheckTests.swift */,
 				D4ED828C1A3F9ADB00D0479E /* Supporting Files */,
 			);
 			path = TesseractCoreTests;
@@ -296,6 +302,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4B1EFAB1A81CAD600216B52 /* Typecheck.swift in Sources */,
 				D47974071A7D99A40034ABA2 /* Application.swift in Sources */,
 				D481D9321A78771B00044B2F /* Find.swift in Sources */,
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
@@ -318,6 +325,7 @@
 			files = (
 				D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */,
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
+				D4B3FB151A8208BB00DA2AC3 /* TypecheckTests.swift in Sources */,
 				D41275851A78638900CC910A /* EvaluationTests.swift in Sources */,
 				D47974101A7DF0300034ABA2 /* TypeTests.swift in Sources */,
 				D479740E1A7DEE9E0034ABA2 /* ErrorTests.swift in Sources */,
