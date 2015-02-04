@@ -33,6 +33,13 @@ public enum Node: Equatable, Printable {
 	}
 
 
+	public var inputs: [Symbol] {
+		return symbol.type.parameters.map {
+			Symbol($0, $1)
+		}
+	}
+
+
 	// MARK: Printable
 
 	public var description: String {
