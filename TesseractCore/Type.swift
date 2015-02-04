@@ -43,6 +43,10 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 		}
 	}
 
+	public var parameters: [(String, Type)] {
+		return parameters(0)
+	}
+
 
 	// MARK: Hashable
 
