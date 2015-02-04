@@ -23,7 +23,11 @@ private func typecheck(graph: Graph<Node>, from: Identifier, node: Node, environ
 }
 
 private func typecheck(symbol: Symbol, pair: (Identifier, Node)?) -> Either<Error<Identifier>, Type> {
-	return pair.map { $1.symbol.type == symbol.type ? .right($1.symbol.type) : error("", $0) } ?? .right(symbol.type)
+	return pair.map {
+		$1.symbol.type == symbol.type ?
+			.right($1.symbol.type)
+		:	error("expected type \(symbol.type) but got type \($1.symbol.type)", $0)
+	} ?? .right(symbol.type)
 }
 
 
