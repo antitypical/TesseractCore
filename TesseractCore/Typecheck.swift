@@ -9,6 +9,11 @@ public func typecheck(graph: Graph<Node>, from: Identifier, _ environment: Envir
 
 private func typecheck(graph: Graph<Node>, from: Identifier, node: Node, environment: Environment, context: [Identifier: Type]) -> Either<Error<Identifier>, Type> {
 	switch node {
+	case let .Symbolic(symbol):
+		return node.inputs(from, graph).reverse().reduce(.right(symbol.type)) { into, each in
+			combine(into, typecheck(each), +, uncurry(const))
+		}
+
 	case let .Parameter(symbol):
 		return .right(symbol.type)
 
@@ -25,3 +30,4 @@ private func typecheck(symbol: Symbol, pair: (Identifier, Node)?) -> Either<Erro
 // MARK: - Imports
 
 import Either
+import Prelude
