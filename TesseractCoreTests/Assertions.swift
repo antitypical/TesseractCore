@@ -5,9 +5,9 @@ import Prelude
 import XCTest
 
 extension XCTestCase {
-	func assertEqual<T: Equatable>(expression1: @autoclosure () -> T?, _ expression2: @autoclosure () -> T?, _ message: String = "", _ file: String = __FILE__, _ line: UInt = __LINE__) -> Bool {
+	func assertEqual<T: Equatable>(expression1: @autoclosure () -> T?, _ expression2: @autoclosure () -> T?, _ message: String = "", _ file: String = __FILE__, _ line: UInt = __LINE__) -> T? {
 		let (actual, expected) = (expression1(), expression2())
-		return actual == expected || failure("\(actual) is not equal to \(expected). " + message, file: file, line: line)
+		return actual == expected ? actual : failure("\(actual) is not equal to \(expected). " + message, file: file, line: line)
 	}
 
 	func assertEqual<T: Equatable, U: Equatable>(expression1: @autoclosure () -> Either<T, U>?, _ expression2: @autoclosure () -> Either<T, U>?, _ message: String = "", _ file: String = __FILE__, _ line: UInt = __LINE__) -> Bool {
