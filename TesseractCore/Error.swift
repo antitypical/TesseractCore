@@ -52,8 +52,8 @@ internal func coalesce<S, T, U>(eithers: [(S, Either<Error<U>, T>)]) -> Either<E
 /// Combines two `Either`s such that if the result will be `Right` iff both inputs are `Right`. Pairs of `Left`s and `Right`s are combined with `f` and `g` respectively.
 ///
 /// Useful for cases where you want to return all of the occurring errors among independent `Either`s, not just the first encountered, and otherwise combine the success values.
-public func combine<T, U, V, W>(left: Either<T, U>, right: Either<T, V>, f: (T, T) -> T, g: (U, V) -> W) -> Either<T, W> {
-	switch (left, right) {
+public func combine<T, U, V, W>(a: Either<T, U>, b: Either<T, V>, f: (T, T) -> T, g: (U, V) -> W) -> Either<T, W> {
+	switch (a, b) {
 	case let (.Left(x), .Left(y)):
 		return .left(f(x.value, y.value))
 	case let (.Left(x), .Right):
