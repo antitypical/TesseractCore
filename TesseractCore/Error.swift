@@ -27,6 +27,10 @@ public enum Error<Identifier>: Printable {
 	}
 }
 
+public func + <Identifier> (left: Error<Identifier>, right: Error<Identifier>) -> Error<Identifier> {
+	return Error(left, right)
+}
+
 internal func error(reason: String, from: Identifier) -> Either<Error<Identifier>, Memo<Value>> {
 	return .left(Error(reason, from))
 }
