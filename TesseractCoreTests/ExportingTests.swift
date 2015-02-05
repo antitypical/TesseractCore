@@ -1,9 +1,5 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-import Prelude
-import TesseractCore
-import XCTest
-
 final class ExportingTests: XCTestCase {
     func testExporting() {
         let (a, b) = (Identifier(), Identifier())
@@ -11,3 +7,9 @@ final class ExportingTests: XCTestCase {
         XCTAssertEqual(export(graph), "digraph tesseract {\n\t\(a) -> \(b);\n}")
     }
 }
+
+
+// MARK: - Imports
+
+import TesseractCore
+import XCTest
