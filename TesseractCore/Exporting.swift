@@ -2,7 +2,9 @@
 
 public func export<T>(graph: Graph<T>) -> String {
     var result = "digraph tesseract {\n"
-    result += reduce(map(graph.edges, { edge in "\t" + edge.source.identifier.description + " -> " + edge.destination.identifier.description + ";\n" }), "", +)
+	result += reduce(graph.edges, "") {
+		$0 + "\t" + $1.source.identifier.description + " -> " + $1.destination.identifier.description + ";\n"
+	}
     result += "}"
     return result
 }
