@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		11C1526B1A830A160044FCA2 /* Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1526A1A830A160044FCA2 /* Exporting.swift */; };
+		11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */; };
 		D41275851A78638900CC910A /* EvaluationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41275841A78638900CC910A /* EvaluationTests.swift */; };
 		D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
 		D47974031A7D277C0034ABA2 /* ValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47974021A7D277C0034ABA2 /* ValueTests.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		11C1526A1A830A160044FCA2 /* Exporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporting.swift; sourceTree = "<group>"; };
+		11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportingTests.swift; sourceTree = "<group>"; };
 		D41275841A78638900CC910A /* EvaluationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationTests.swift; sourceTree = "<group>"; };
 		D42CAC391A429BFD0091F6AA /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47974021A7D277C0034ABA2 /* ValueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTests.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				D4B3ECA71A772346001AD21D /* Value.swift */,
 				D4B3ECA31A77203B001AD21D /* Type.swift */,
 				D47974041A7D92E00034ABA2 /* Evaluation.swift */,
+				11C1526A1A830A160044FCA2 /* Exporting.swift */,
 				D47974061A7D99A40034ABA2 /* Application.swift */,
 				D479740B1A7DA6DC0034ABA2 /* Error.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
@@ -172,6 +177,7 @@
 				D4C893BC1A51DCC10078743E /* GraphTests.swift */,
 				D41275841A78638900CC910A /* EvaluationTests.swift */,
 				D47974021A7D277C0034ABA2 /* ValueTests.swift */,
+				11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */,
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
 				D479740F1A7DF0300034ABA2 /* TypeTests.swift */,
 				D4B1EFA81A81AC5100216B52 /* NodeTests.swift */,
@@ -306,6 +312,7 @@
 				D4B3ECA81A772346001AD21D /* Value.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 				D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */,
+				11C1526B1A830A160044FCA2 /* Exporting.swift in Sources */,
 				D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */,
 				D47974051A7D92E00034ABA2 /* Evaluation.swift in Sources */,
 				D4B3ECA41A77203B001AD21D /* Type.swift in Sources */,
@@ -318,6 +325,7 @@
 			files = (
 				D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */,
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
+				11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */,
 				D41275851A78638900CC910A /* EvaluationTests.swift in Sources */,
 				D47974101A7DF0300034ABA2 /* TypeTests.swift in Sources */,
 				D479740E1A7DEE9E0034ABA2 /* ErrorTests.swift in Sources */,
