@@ -1,12 +1,6 @@
-//
-//  Exporting.swift
-//  TesseractCore
-//
-//  Created by Alexander Mackworth on 2/4/15.
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
-//
 
-public func concat(strings: [String]) -> String {
+private func concat(strings: [String]) -> String {
     return reduce(strings, "", +)
 }
 
