@@ -11,7 +11,7 @@ public func concat(strings: [String]) -> String {
 }
 
 public func export<T>(graph: Graph<T>) -> String {
-    var result = "digraph graph {\n"
+    var result = "digraph tesseract {\n"
     result += concat(map(graph.edges, { edge in "\t" + edge.source.identifier.description + " -> " + edge.destination.identifier.description + ";\n" }))
     result += "}"
     return result
