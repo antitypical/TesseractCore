@@ -11,14 +11,6 @@ public func export<T>(graph: Graph<T>) -> String {
     return result
 }
 
-public func exportToFile<T>(graph: Graph<T>, filename: String) {
-    let result = export(graph)
-    let filehandle = NSFileHandle(forWritingAtPath: filename)
-    if let data = result.dataUsingEncoding(NSUTF8StringEncoding) {
-        filehandle?.writeData(data)
-    }
-}
-
 // MARK: - Imports
 import Prelude
 import Foundation
