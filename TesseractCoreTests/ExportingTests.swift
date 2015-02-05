@@ -14,6 +14,6 @@ final class ExportingTests: XCTestCase {
     func testExporting() {
         let (a, b) = (Identifier(), Identifier())
         let graph = Graph(nodes: [ a: (), b: () ], edges: [ Edge((a, 0), (b, 0)) ])
-        XCTAssertEqual(export(graph), "digraph graph {\n\t\(a) -> \(b);\n}")
+        XCTAssertEqual(export(graph), "digraph tesseract {\n\t\(a) -> \(b);\n}")
     }
 }
