@@ -3,9 +3,7 @@
 public func export<T>(graph: Graph<T>) -> String {
 	return
 		"digraph tesseract {\n"
-	+	reduce(graph.edges, "") {
-			$0 + "\t" + $1.source.identifier.description + " -> " + $1.destination.identifier.description + ";\n"
-		}
+	+	join("", lazy(graph.edges).map { "\t" + $0.source.identifier.description + " -> " + $0.destination.identifier.description + ";\n" })
 	+	"}"
 }
 
