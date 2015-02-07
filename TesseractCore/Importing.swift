@@ -45,7 +45,6 @@ public func importGraphViz(file: String) -> Graph<Node>? {
         return accum + [Identifier(value: curr.toInt()!): .Symbolic(Symbol(curr, .Unit))]
     }
     
-    let a = Identifier()
     return Graph(nodes: nodes, edges: Set(edges))
 }
 
