@@ -5,7 +5,11 @@ public struct Identifier: Comparable, Hashable, Printable {
 		self.value = Identifier.cursor++
 	}
 
-
+    internal init(value: Int) {
+        self.value = value
+        Identifier.cursor = value
+    }
+    
 	// MARK: Endpoint constructors
 
 	public func input(index: Int) -> Edge.Destination {
