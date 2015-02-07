@@ -24,7 +24,7 @@ public func parseEdge(edge: String) -> (String, String)? {
     return nil
 }
 
-public func importGraphViz(file: String) -> Graph<String>? {
+public func importGraphViz(file: String) -> Graph<Node>? {
     let lines = split(file) { $0 == "\n" }
     let rawLines = lines[1...(lines.count - 2)]
     let rawEdges: [(String, String)] = map(rawLines, { edge in parseEdge(edge) ?? ("","") })
@@ -34,7 +34,7 @@ public func importGraphViz(file: String) -> Graph<String>? {
     let uniqueNodes = nub(rawNodes)
     var inputCount = map(uniqueNodes) { _ in 0 }
     var outputCount = inputCount
-    println(rawEdges)
+
     let edges: [Edge] = map(rawEdges) { edge in
         let (sourceString, destinationString) = edge
         let sourceIndex = find(uniqueNodes, sourceString) ?? 0
@@ -46,9 +46,9 @@ public func importGraphViz(file: String) -> Graph<String>? {
         return Edge(source, destination)
     }
     
-    var emptyDictionary: [Identifier: String] = Dictionary()
+    var emptyDictionary: [Identifier: Node] = Dictionary()
     let nodes = uniqueNodes.reduce(emptyDictionary) { accum, curr in
-        return accum + [Identifier(value: curr.toInt()!): ""]
+        return accum + [Identifier(value: curr.toInt()!): .Symbolic(Symbol(curr, .Unit))]
     }
     
     let a = Identifier()
