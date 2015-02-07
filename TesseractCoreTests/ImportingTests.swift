@@ -24,7 +24,7 @@ final class ImportingTests: XCTestCase {
                 Edge(x, iff.input(2)),
                 Edge(iff, result.input(0))
             ])
-        let parsedGraph = importGraphViz(export(abs))!
+        let parsedGraph = importDOT(exportDOT(abs))!
         XCTAssertEqual(parsedGraph.edges.count, abs.edges.count)
         XCTAssertEqual(parsedGraph.nodes.count, abs.nodes.count)
     }
