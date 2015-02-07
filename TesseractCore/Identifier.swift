@@ -7,7 +7,7 @@ public struct Identifier: Comparable, Hashable, Printable {
 
     internal init(value: Int) {
         self.value = value
-        Identifier.cursor = value
+        Identifier.cursor = max(Identifier.cursor, value + 1)
     }
     
 	// MARK: Endpoint constructors
