@@ -1,13 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-private func nub<T: Equatable>(list: [T]) -> [T] {
-    var unique: [T] = []
-    for item in list {
-        if !contains(unique, item) {
-            unique.append(item)
-        }
-    }
-    return unique
+private func unique<T: Hashable>(list: [T]) -> [T] {
+    return Array(Set(list))
 }
 
 public func parseEdge(edge: String) -> (String, String)? {
@@ -31,7 +25,7 @@ public func importGraphViz(file: String) -> Graph<Node>? {
     let rawSources = map(rawEdges, { edge in edge.0 })
     let rawDestinations = map(rawEdges, { edge in edge.1 })
     let rawNodes = rawSources + rawDestinations
-    let uniqueNodes = nub(rawNodes)
+    let uniqueNodes = unique(rawNodes)
     var inputCount = map(uniqueNodes) { _ in 0 }
     var outputCount = inputCount
 
