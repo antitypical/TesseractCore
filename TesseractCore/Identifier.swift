@@ -5,6 +5,7 @@ public struct Identifier: Comparable, Hashable, Printable {
 		self.value = Identifier.cursor++
 	}
     
+    
 	// MARK: Endpoint constructors
 
 	public func input(index: Int) -> Edge.Destination {
