@@ -3,6 +3,7 @@
 import Either
 import Prelude
 import XCTest
+import TesseractCore
 
 extension XCTestCase {
 	func assertEqual<T: Equatable>(@autoclosure expression1:  () -> T?, @autoclosure _ expression2:  () -> T?, _ message: String = "", _ file: String = __FILE__, _ line: UInt = __LINE__) -> T? {
@@ -55,6 +56,19 @@ extension XCTestCase {
 			return failure("\(actual) is not equal to \(expected). " + message, file: file, line: line)
 		}
 	}
+    
+    func assertEqual<T: Equatable where T: Hashable>(@autoclosure expression1: () -> Graph<T>, @autoclosure _ expression2: () -> Graph<T>, _ message: String = "", _ file: String = __FILE__, _ line: UInt = __LINE__) -> Graph<T>? {
+        let graph1 = expression1()
+        let graph2 = expression2()
+        let lhsNodes = Set(graph1.nodes.values.array)
+        let rhsNodes = Set(graph2.nodes.values.array)
+        if (lhsNodes == rhsNodes && graph1.edges == graph2.edges) {
+            return graph1
+        } else {
+
+            return failure("\(graph1) is not equal to \(graph2)." + message, file: file, line: line)
+        }
+    }
 
 	func assertNil<T>(@autoclosure expression:  () -> T?, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> Bool {
 		return expression().map { self.failure("\($0) is not nil. " + message, file: file, line: line) } ?? true

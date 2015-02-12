@@ -24,6 +24,14 @@ public struct Edge: Hashable {
 	}
 }
 
+extension Edge: Printable {
+    public var description: String {
+        let sourceDescription = source.identifier.description + ": " + source.outputIndex.description
+        let destinationDescription = destination.identifier.description + ": " + destination.inputIndex.description
+        return sourceDescription + " -> " + destinationDescription
+    }
+}
+
 public func == (left: Edge.Source, right: Edge.Source) -> Bool {
 	return left.identifier == right.identifier && left.outputIndex == right.outputIndex
 }

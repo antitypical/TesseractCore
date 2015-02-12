@@ -12,9 +12,9 @@ final class ImportingTests: XCTestCase {
             x: "x",
             result: "result",
             zero: "0",
-            unaryMinus: "-",
+            unaryMinus: "unaryMinus",
             iff: "if",
-            lessThan: "<"
+            lessThan: "lessThan"
             ], edges: [
                 Edge(x, lessThan.input(0)),
                 Edge(zero, lessThan.input(1)),
@@ -24,13 +24,15 @@ final class ImportingTests: XCTestCase {
                 Edge(x, iff.input(2)),
                 Edge(iff, result.input(0))
             ])
-        let parsedGraph = importDOT(exportDOT(abs))!
+        let parsedGraph = importDOT(exportDOT(abs))
+        let parsedNodes = Set(parsedGraph.nodes.values.array)
+        let actualNodes = Set(abs.nodes.values.array)
+        XCTAssertEqual(parsedNodes, actualNodes)
         XCTAssertEqual(parsedGraph.edges.count, abs.edges.count)
-        XCTAssertEqual(parsedGraph.nodes.count, abs.nodes.count)
     }
     
     func testEdgeParsing() {
-        let (source, destination) = parseEdge("\t\"item1\" -> \"item2\";\n")!
+        let (source, destination) = parseEdge("\t\"item1\" -> \"item2\";")!
         XCTAssertEqual(source, "item1")
         XCTAssertEqual(destination, "item2")
     }

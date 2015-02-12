@@ -4,11 +4,6 @@ public struct Identifier: Comparable, Hashable, Printable {
 	public init() {
 		self.value = Identifier.cursor++
 	}
-
-    internal init(value: Int) {
-        self.value = value
-        Identifier.cursor = max(Identifier.cursor, value + 1)
-    }
     
 	// MARK: Endpoint constructors
 
