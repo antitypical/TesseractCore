@@ -10,7 +10,7 @@ public struct Graph<T> {
 
 	// MARK: Primitive methods
 
-	public var nodes: [Identifier: T] {
+	public var nodes: Dictionary<Identifier, T> {
 		willSet {
 			let removed = Set(nodes.keys) - Set(newValue.keys)
 			if removed.count == 0 { return }
