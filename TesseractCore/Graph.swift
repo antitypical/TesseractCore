@@ -12,7 +12,7 @@ public struct Graph<T> {
 
 	public var nodes: Dictionary<Identifier, T> {
 		willSet {
-			let removed = Set(nodes.keys) - Set(newValue.keys)
+			let removed = Set(nodes.keys).subtract(Set(newValue.keys))
 			if removed.count == 0 { return }
 			edges = edges.filter {
 				!removed.contains($0.source.identifier) && !removed.contains($0.destination.identifier)
@@ -26,7 +26,7 @@ public struct Graph<T> {
 
 	public var edges: Set<Edge> {
 		didSet {
-			sanitize(edges - oldValue)
+			sanitize(edges.subtract(oldValue))
 		}
 	}
 
@@ -80,9 +80,9 @@ public struct Graph<T> {
 	private mutating func sanitize(added: Set<Edge>) {
 		if added.count == 0 { return }
 		let keys = nodes.keys
-		edges -= added.filter {
+		edges.subtractInPlace(lazy(added).filter {
 			!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
-		}
+		})
 	}
 }
 
