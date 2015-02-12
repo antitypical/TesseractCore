@@ -27,8 +27,8 @@ public struct Edge: Hashable, Printable {
 	// MARK: Printable
 	
 	public var description: String {
-        return "\(source.identifier): \(source.outputIndex) -> \(destination.identifier): \(destination.inputIndex)"
-    }
+		return "\(source.identifier): \(source.outputIndex) -> \(destination.identifier): \(destination.inputIndex)"
+	}
 }
 
 public func == (left: Edge.Source, right: Edge.Source) -> Bool {
