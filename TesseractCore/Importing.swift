@@ -17,7 +17,9 @@ public func parseEdge(edge: String) -> (String, String)? {
     return nil
 }
 
+// GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
 public func importDOT(file: String) -> Graph<String> {
+	// Skip the title.
     let lines = split(file, { $0 == "\n" })
     let rawLines = lines[1...(lines.count - 2)]
     let rawEdges = map(rawLines, { edge in parseEdge(edge) ?? ("", "")})
