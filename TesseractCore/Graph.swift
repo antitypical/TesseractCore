@@ -14,9 +14,9 @@ public struct Graph<T> {
 		willSet {
 			let removed = Set(nodes.keys).subtract(Set(newValue.keys))
 			if removed.count == 0 { return }
-			edges = edges.filter {
+			edges = Set(lazy(edges).filter {
 				!removed.contains($0.source.identifier) && !removed.contains($0.destination.identifier)
-			}
+			})
 		}
 	}
 
@@ -38,11 +38,11 @@ public struct Graph<T> {
 	}
 
 	public func filter(includeEdge: Edge -> Bool) -> Graph {
-		return Graph(nodes: nodes, edges: edges.filter(includeEdge))
+		return Graph(nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))
 	}
 
 	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
-		return Graph(nodes: nodes.filter(includeNode), edges: edges.filter(includeEdge))
+		return Graph(nodes: nodes.filter(includeNode), edges: Set(lazy(edges).filter(includeEdge)))
 	}
 
 
