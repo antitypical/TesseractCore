@@ -26,9 +26,7 @@ public struct Edge: Hashable {
 
 extension Edge: Printable {
     public var description: String {
-        let sourceDescription = source.identifier.description + ": " + source.outputIndex.description
-        let destinationDescription = destination.identifier.description + ": " + destination.inputIndex.description
-        return sourceDescription + " -> " + destinationDescription
+        return "\(source.identifier): \(source.outputIndex) -> \(destination.identifier): \(destination.inputIndex)"
     }
 }
 
