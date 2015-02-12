@@ -28,7 +28,7 @@ final class EvaluationTests: XCTestCase {
 		let (a, graph) = createGraph(Prelude["identity"]!.0)
 		let evaluated = evaluate(graph, a)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.value.function() as (Any -> Any)?).map { $0(1) as Int }, 1)
+		assertEqual(assertNotNil(assertRight(evaluated)?.value.function() as (Any -> Any)?).map { $0(1) as! Int }, 1)
 	}
 
 	func testFunctionNodeWithBoundInputAppliesInput() {
