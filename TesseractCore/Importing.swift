@@ -27,7 +27,7 @@ public func importDOT(file: String) -> Graph<String> {
 	let rawDestinations = map(rawEdges, { edge in edge.1 })
 	let rawNodes = rawSources + rawDestinations
 	let uniqueNodes = unique(rawNodes)
-	let nodeIdentifiers = map(uniqueNodes, const(Identifier())
+	let nodeIdentifiers = map(uniqueNodes) { _ in Identifier() }
 	var inputCount = map(uniqueNodes, const(0))
 	var outputCount = inputCount
     
@@ -41,8 +41,8 @@ public func importDOT(file: String) -> Graph<String> {
 		let destination = (nodeIdentifiers[destinationIndex], destinationInputNumber)
 		return Edge(source, destination)
 	}
-    
-	let nodes = uniqueNodes.reduce([], combine: { (accum: [Identifier: String], curr: String) in
+	
+	let nodes = uniqueNodes.reduce(Dictionary<Identifier, String>(), combine: { (accum: [Identifier: String], curr: String) in
 		let identifierIndex = find(uniqueNodes, curr) ?? 0
 		let identifier = nodeIdentifiers[identifierIndex]
 		return accum + [identifier: curr]
@@ -53,6 +53,6 @@ public func importDOT(file: String) -> Graph<String> {
 
 // MARK: - Imports
 
-import Set
 import Prelude
+import Set
 import Madness
