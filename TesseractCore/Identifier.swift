@@ -4,9 +4,9 @@ public struct Identifier: Comparable, Hashable, Printable {
 	public init() {
 		self.value = Identifier.cursor++
 	}
-    
-    
-	// MARK: Endpoint constructors
+
+
+    // MARK: Endpoint constructors
 
 	public func input(index: Int) -> Edge.Destination {
 		return (identifier: self, inputIndex: index)
