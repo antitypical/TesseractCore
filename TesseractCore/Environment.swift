@@ -1,11 +1,11 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public struct Environment: DictionaryLiteralConvertible, Printable {
-	private var bindings: [Symbol: Value]
+	private var bindings: Dictionary<Symbol, Value>
 
 	public subscript (key: String) -> (Symbol, Value)? {
 		let index = find(bindings) { symbol, _ in symbol.name == key }
-		return index.map { self.bindings[$0] }?
+		return index.map { self.bindings[$0] }
 	}
 
 	public subscript (key: Symbol) -> Value? {

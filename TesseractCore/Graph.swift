@@ -10,13 +10,13 @@ public struct Graph<T> {
 
 	// MARK: Primitive methods
 
-	public var nodes: [Identifier: T] {
+	public var nodes: Dictionary<Identifier, T> {
 		willSet {
-			let removed = Set(nodes.keys) - Set(newValue.keys)
+			let removed = Set(nodes.keys).subtract(Set(newValue.keys))
 			if removed.count == 0 { return }
-			edges = edges.filter {
+			edges = Set(lazy(edges).filter {
 				!removed.contains($0.source.identifier) && !removed.contains($0.destination.identifier)
-			}
+			})
 		}
 	}
 
@@ -26,7 +26,7 @@ public struct Graph<T> {
 
 	public var edges: Set<Edge> {
 		didSet {
-			sanitize(edges - oldValue)
+			sanitize(edges.subtract(oldValue))
 		}
 	}
 
@@ -41,11 +41,11 @@ public struct Graph<T> {
 	}
 
 	public func filter(includeEdge: Edge -> Bool) -> Graph {
-		return Graph(nodes: nodes, edges: edges.filter(includeEdge))
+		return Graph(nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))
 	}
 
 	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
-		return Graph(nodes: nodes.filter(includeNode), edges: edges.filter(includeEdge))
+		return Graph(nodes: nodes.filter(includeNode), edges: Set(lazy(edges).filter(includeEdge)))
 	}
 
 
@@ -55,7 +55,7 @@ public struct Graph<T> {
 
 	public func reduce<Result>(from: Identifier, var _ visited: Set<Identifier>, _ initial: Result, _ combine: (Result, (Identifier, T)) -> Result) -> Result {
 		if visited.contains(from) { return initial }
-		visited.append(from)
+		visited.insert(from)
 
 		if let node = nodes[from] {
 			let inputs = edges
@@ -83,9 +83,9 @@ public struct Graph<T> {
 	private mutating func sanitize(added: Set<Edge>) {
 		if added.count == 0 { return }
 		let keys = nodes.keys
-		edges -= added.filter {
+		edges.subtractInPlace(lazy(added).filter {
 			!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
-		}
+		})
 	}
 }
 
