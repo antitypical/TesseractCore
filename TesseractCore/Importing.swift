@@ -10,8 +10,8 @@ public func parseEdge(edge: String) -> (String, String)? {
     let edgeParser = ignoreBeginningOfLine ++ (characterParser+) ++ ignore("\" -> \"") ++ characterParser+ ++ ignore("\";");
     
     if let (rawSource, rawDestination) = edgeParser(edge)?.0 {
-        let source = String(rawSource.reduce([], +))
-        let destination = String(rawDestination.reduce([], +))
+        let source = String(rawSource.reduce([], combine: +))
+        let destination = String(rawDestination.reduce([], combine: +))
         return (source, destination)
     }
     
@@ -19,7 +19,7 @@ public func parseEdge(edge: String) -> (String, String)? {
 }
 
 public func importDOT(file: String) -> Graph<Node>? {
-    let lines = split(file) { $0 == "\n" }
+    let lines = split(file, { $0 == "\n" })
     let rawLines = lines[1...(lines.count - 2)]
     let rawEdges: [(String, String)] = map(rawLines, { edge in parseEdge(edge) ?? ("","") })
     let rawSources = map(rawEdges, { edge in edge.0 })
