@@ -58,16 +58,8 @@ extension XCTestCase {
 	}
     
     func assertEqual<T: Equatable where T: Hashable>(@autoclosure expression1: () -> Graph<T>, @autoclosure _ expression2: () -> Graph<T>, _ message: String = "", _ file: String = __FILE__, _ line: UInt = __LINE__) -> Graph<T>? {
-        let graph1 = expression1()
-        let graph2 = expression2()
-        let lhsNodes = Set(graph1.nodes.values.array)
-        let rhsNodes = Set(graph2.nodes.values.array)
-        if (lhsNodes == rhsNodes && graph1.edges == graph2.edges) {
-            return graph1
-        } else {
-
-            return failure("\(graph1) is not equal to \(graph2)." + message, file: file, line: line)
-        }
+        let (graph1, graph2) = (expression1(), expression2())
+        return graph1 == graph2 ? graph1 : failure("\(graph1) is not equal to \(graph2). " + message, file: file, line: line)
     }
 
 	func assertNil<T>(@autoclosure expression:  () -> T?, _ message: String = "", file: String = __FILE__, line: UInt = __LINE__) -> Bool {
