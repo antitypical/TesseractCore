@@ -49,7 +49,7 @@ public enum Value: Printable {
 		switch self {
 		case let Function(function) where function.value is Any -> Any:
 			return argument.constant()
-				.map(function.value as Any -> Any)
+				.map(function.value as! Any -> Any)
 				.map { applied in .right(Memo(evaluated: Value(constant: applied))) }
 			??	error("could not apply function", identifier)
 		case let Graph(graph):
