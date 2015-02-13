@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Graph<T>: Printable {
+public struct Graph<T>: CollectionType, Printable {
 	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
@@ -9,6 +9,10 @@ public struct Graph<T>: Printable {
 
 
 	// MARK: Primitive methods
+
+	public subscript (identifier: Identifier) -> NodeView<T>? {
+		return nodes[identifier].map { NodeView(graph: self, identifier: identifier, value: $0) }
+	}
 
 	public var nodes: Dictionary<Identifier, T> {
 		willSet {
@@ -20,10 +24,6 @@ public struct Graph<T>: Printable {
 		}
 	}
 
-	public subscript (position: DictionaryIndex<Identifier, T>) -> (Identifier, T) {
-		return nodes[position]
-	}
-
 	public var edges: Set<Edge> {
 		didSet {
 			sanitize(edges.subtract(oldValue))
@@ -31,19 +31,6 @@ public struct Graph<T>: Printable {
 	}
 
 
-	// MARK: Node properties
-
-	func indegree(identifier: Identifier) -> Int {
-		return Swift.filter(edges) { $0.destination.identifier == identifier }
-			|> count
-	}
-
-	func outdegree(identifier: Identifier) -> Int {
-		return Swift.filter(edges) { $0.source.identifier == identifier }
-			|> count
-	}
-
-	
 	// MARK: Higher-order methods
 
 	public func map<U>(mapping: T -> U) -> Graph<U> {
@@ -84,6 +71,24 @@ public struct Graph<T>: Printable {
 	}
 
 
+	// MARK: CollectionType
+
+	public typealias Index = Dictionary<Identifier, T>.Index
+
+	public var startIndex: Index {
+		return nodes.startIndex
+	}
+
+	public var endIndex: Index {
+		return nodes.endIndex
+	}
+
+	public subscript(index: Index) -> NodeView<T> {
+		let (identifier, value) = nodes[index]
+		return NodeView(graph: self, identifier: identifier, value: value)
+	}
+
+
 	// MARK: Printable
 
 	public var description: String {
@@ -94,6 +99,15 @@ public struct Graph<T>: Printable {
 			"\t\t\($0)"
 		})
 		return "{\tnodes: (\n\(nodesDescription)\n\t);\n\tedges: (\n\(edgesDescription)\n\t);\n}"
+	}
+
+
+	// MARK: SequenceType
+
+	public func generate() -> GeneratorOf<NodeView<T>> {
+		let views = lazy(self.nodes).map { NodeView(graph: self, identifier: $0, value: $1) }
+		var generator = views.generate()
+		return GeneratorOf(generator)
 	}
 
 
