@@ -38,6 +38,11 @@ public struct Graph<T>: Printable {
 			|> count
 	}
 
+	func outdegree(identifier: Identifier) -> Int {
+		return Swift.filter(edges) { $0.source.identifier == identifier }
+			|> count
+	}
+
 	
 	// MARK: Higher-order methods
 
