@@ -16,12 +16,15 @@ public struct NodeView<T>: Equatable {
 		return inEdges.count
 	}
 
-	public var outEdges: SequenceOf<EdgeView<T>> {
-		return SequenceOf(lazy(graph.edges).filter { $0.source.identifier == self.identifier }.map { EdgeView(graph: self.graph, edge: $0) })
+	public var outEdges: [Int: Set<EdgeView<T>>] {
+		return lazy(graph.edges)
+			.filter { $0.source.identifier == self.identifier }
+			.map { ($0.source.outputIndex, EdgeView(graph: self.graph, edge: $0)) }
+			|>	(flip(reduce) <| (+) <| [:])
 	}
 
 	public var outDegree: Int {
-		return reduce(lazy(outEdges).map(const(1)), 0, +)
+		return outEdges.count
 	}
 }
 
