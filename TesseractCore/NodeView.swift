@@ -13,7 +13,7 @@ public struct NodeView<T>: Equatable {
 	}
 
 	public var inDegree: Int {
-		return inEdges.count
+		return reduce(lazy(inEdges).map { $1.count }, 0, +)
 	}
 
 	public var outEdges: [Int: Set<EdgeView<T>>] {
@@ -24,7 +24,7 @@ public struct NodeView<T>: Equatable {
 	}
 
 	public var outDegree: Int {
-		return outEdges.count
+		return reduce(lazy(outEdges).map { $1.count }, 0, +)
 	}
 }
 
