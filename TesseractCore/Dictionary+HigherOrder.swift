@@ -38,3 +38,9 @@ func + <Key: Hashable, Value, S: SequenceType where S.Generator.Element == Dicti
 	}
 	return left
 }
+
+func + <Key: Hashable, Value: Hashable> (var left: Dictionary<Key, Set<Value>>, right: (Key, Value)) -> Dictionary<Key, Set<Value>> {
+	let set: Set<Value> = [right.1]
+	left[right.0] = left[right.0]?.union(set) ?? set
+	return left
+}
