@@ -9,7 +9,7 @@ public func exportDOT<T>(graph: Graph<T>) -> String {
 		let destinationDescription = destination.map(toString) ?? ""
 		return "\t\"" + sourceDescription + "\" -> \"" + destinationDescription + "\";"
 	})
-	return "digraph tesseract {\n\(edges)\n}"
+	return "digraph \(graph.name) {\n\(edges)\n}"
 }
 
 

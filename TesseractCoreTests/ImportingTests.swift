@@ -8,7 +8,7 @@ final class ImportingTests: XCTestCase {
 		let lessThan = Identifier()
 		let iff = Identifier()
 		let unaryMinus = Identifier()
-		let abs = Graph<String>(nodes: [
+		let abs = Graph<String>(name: "abs", nodes: [
 			x: "x",
 			result: "result",
 			zero: "0",
@@ -27,7 +27,8 @@ final class ImportingTests: XCTestCase {
 		let parsedGraph = importDOT(exportDOT(abs))
 		let parsedNodes = Set(parsedGraph.nodes.values.array)
 		let actualNodes = Set(abs.nodes.values.array)
-
+		
+		XCTAssertEqual(parsedGraph.name, abs.name)
 		XCTAssertEqual(parsedNodes, actualNodes)
 		XCTAssertEqual(parsedGraph.edges.count, abs.edges.count)
 	}
