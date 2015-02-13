@@ -3,10 +3,7 @@
 public struct NodeView<T> {
 	public let graph: Graph<T>
 	public let identifier: Identifier
-
-	public var value: T? {
-		return graph.nodes[identifier]
-	}
+	public let value: T
 
 	public var inEdges: SequenceOf<Edge> {
 		return SequenceOf(lazy(graph.edges).filter { $0.destination.identifier == self.identifier })
