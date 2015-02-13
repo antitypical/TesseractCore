@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Graph<T> {
+public struct Graph<T>: Printable {
 	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
@@ -76,6 +76,19 @@ public struct Graph<T> {
 			if predicate <| nodes[index] { return index }
 		}
 		return nil
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		let nodesDescription = join(",\n", lazy(nodes).map {
+			"\t\t\($0)"
+		})
+		let edgesDescription = join(",\n", lazy(edges).map {
+			"\t\t\($0)"
+		})
+		return "{\tnodes: (\n\(nodesDescription)\n\t);\n\tedges: (\n\(edgesDescription)\n\t);\n}"
 	}
 
 
