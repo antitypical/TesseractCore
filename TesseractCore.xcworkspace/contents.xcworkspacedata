@@ -11,6 +11,9 @@
       location = "group:External/Either/Either.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:../tesseractcore/External/Madness/Madness.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:External/Memo/Memo.xcodeproj">
    </FileRef>
    <FileRef
@@ -18,8 +21,5 @@
    </FileRef>
    <FileRef
       location = "group:External/Set/Set.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:../tesseractcore/External/Madness/Madness.xcodeproj">
    </FileRef>
 </Workspace>
