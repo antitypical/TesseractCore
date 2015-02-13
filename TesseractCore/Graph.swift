@@ -38,7 +38,7 @@ public struct Graph<T>: Printable {
 
     public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
         let thing = nodes.filter(includeNode)
-        return Graph(nodes: nodes.filter(includeNode), edges: edges)
+		return Graph(nodes: nodes.filter(includeNode), edges: edges)
     }
 
 	public func filter(includeEdge: Edge -> Bool) -> Graph {

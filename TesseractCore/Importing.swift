@@ -4,6 +4,16 @@ private func unique<T: Hashable>(list: [T]) -> [T] {
 	return Array(Set(list))
 }
 
+public func parseTitle(line: String) -> String? {
+	let characterParser = %("0"..."9") | %("a"..."z") | %("A"..."Z")
+	let titleParser = ignore("digraph ") ++ characterParser+ ++ ignore(" {")
+	if let rawTitle = titleParser(line)?.0 {
+		return rawTitle.reduce("", combine: +)
+	} else {
+		return nil
+	}
+}
+
 public func parseEdge(edge: String) -> (String, String)? {
 	let characterParser = %("0"..."9") | %("a"..."z") | %("A"..."Z")
 	let ignoreBeginningOfLine = ignore("\t") ++ ignore("\"")
@@ -19,9 +29,10 @@ public func parseEdge(edge: String) -> (String, String)? {
 }
 
 // GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
-public func importDOT(file: String) -> Graph<String> {
-	// Skip the title.
+public func importDOT(file: String) -> (String, Graph<String>) {
 	let lines = split(file, { $0 == "\n" })
+	let name = parseTitle(lines[0]) ?? ""
+	// Skip the title.
 	let rawLines = lines[1...(lines.count - 2)]
 	let rawEdges = map(rawLines) { parseEdge($0) ?? ("", "")}
 	let rawSources = map(rawEdges) { $0.0 }
@@ -49,7 +60,7 @@ public func importDOT(file: String) -> Graph<String> {
 		return accum + [identifier: curr]
     }
     
-	return Graph(nodes: nodes, edges: Set(edges))
+	return (name, Graph(nodes: nodes, edges: Set(edges)))
 }
 
 // MARK: - Imports
