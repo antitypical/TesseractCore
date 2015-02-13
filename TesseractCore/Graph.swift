@@ -31,19 +31,6 @@ public struct Graph<T>: Printable {
 	}
 
 
-	// MARK: Node properties
-
-	func indegree(identifier: Identifier) -> Int {
-		return Swift.filter(edges) { $0.destination.identifier == identifier }
-			|> count
-	}
-
-	func outdegree(identifier: Identifier) -> Int {
-		return Swift.filter(edges) { $0.source.identifier == identifier }
-			|> count
-	}
-
-	
 	// MARK: Higher-order methods
 
 	public func map<U>(mapping: T -> U) -> Graph<U> {
