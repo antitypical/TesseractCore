@@ -1,8 +1,8 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public func exportDOT<T>(graph: Graph<T>) -> String {
+public func exportDOT<T>(name: String, graph: Graph<T>) -> String {
 	let edges = join("\n", lazy(graph.edges).map(serializeEdge <| graph))
-	return "digraph tesseract {\n\(edges)\n}"
+	return "digraph \(name) {\n\(edges)\n}"
 }
 
 
