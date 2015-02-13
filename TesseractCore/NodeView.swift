@@ -9,7 +9,7 @@ public struct NodeView<T>: Equatable {
 		return lazy(graph.edges)
 			.filter { $0.destination.identifier == self.identifier }
 			.map { ($0.destination.inputIndex, EdgeView(graph: self.graph, edge: $0)) }
-			|>	(flip(reduce) <| (+) <| [:])
+			|> (flip(reduce) <| (+) <| [:])
 	}
 
 	public var inDegree: Int {
@@ -20,7 +20,7 @@ public struct NodeView<T>: Equatable {
 		return lazy(graph.edges)
 			.filter { $0.source.identifier == self.identifier }
 			.map { ($0.source.outputIndex, EdgeView(graph: self.graph, edge: $0)) }
-			|>	(flip(reduce) <| (+) <| [:])
+			|> (flip(reduce) <| (+) <| [:])
 	}
 
 	public var outDegree: Int {
