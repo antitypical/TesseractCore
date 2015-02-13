@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Graph<T>: Printable {
+public struct Graph<T>: Printable, SequenceType {
 	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
@@ -81,6 +81,15 @@ public struct Graph<T>: Printable {
 			"\t\t\($0)"
 		})
 		return "{\tnodes: (\n\(nodesDescription)\n\t);\n\tedges: (\n\(edgesDescription)\n\t);\n}"
+	}
+
+
+	// MARK: SequenceType
+
+	public func generate() -> GeneratorOf<NodeView<T>> {
+		let views = lazy(self.nodes).map { NodeView(graph: self, identifier: $0, value: $1) }
+		var generator = views.generate()
+		return GeneratorOf(generator)
 	}
 
 
