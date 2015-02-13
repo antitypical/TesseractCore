@@ -32,6 +32,7 @@ public struct Graph<T>: Printable {
 
 	
 	// MARK: Higher-order methods
+
 	public func map<U>(mapping: T -> U) -> Graph<U> {
 		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
 	}
