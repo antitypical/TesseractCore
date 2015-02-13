@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Identifier: Comparable, Hashable, Printable {
+public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Printable {
 	public init() {
 		self.value = Identifier.cursor++
 	}
@@ -21,6 +21,13 @@ public struct Identifier: Comparable, Hashable, Printable {
 
 	public var hashValue: Int {
 		return value.hashValue
+	}
+
+
+	// MARK: IntegerLiteralConvertible
+
+	public init(integerLiteral value: IntegerLiteralType) {
+		self.value = value
 	}
 
 
