@@ -36,15 +36,6 @@ public struct Graph<T>: Printable {
 		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
 	}
 
-    public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
-        let thing = nodes.filter(includeNode)
-		return Graph(nodes: nodes.filter(includeNode), edges: edges)
-    }
-
-	public func filter(includeEdge: Edge -> Bool) -> Graph {
-		return Graph(nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))
-	}
-
 	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
 		return Graph(nodes: nodes.filter(includeNode), edges: Set(lazy(edges).filter(includeEdge)))
 	}
