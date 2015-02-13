@@ -5,12 +5,15 @@ public struct NodeView<T>: Equatable {
 	public let identifier: Identifier
 	public let value: T
 
-	public var inEdges: SequenceOf<EdgeView<T>> {
-		return SequenceOf(lazy(graph.edges).filter { $0.destination.identifier == self.identifier }.map { EdgeView(graph: self.graph, edge: $0) })
+	public var inEdges: [Int: Set<EdgeView<T>>] {
+		return lazy(graph.edges)
+			.filter { $0.destination.identifier == self.identifier }
+			.map { ($0.destination.inputIndex, EdgeView(graph: self.graph, edge: $0)) }
+			|>	(flip(reduce) <| (+) <| [:])
 	}
 
 	public var inDegree: Int {
-		return reduce(lazy(inEdges).map(const(1)), 0, +)
+		return inEdges.count
 	}
 
 	public var outEdges: SequenceOf<EdgeView<T>> {
