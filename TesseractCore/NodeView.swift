@@ -7,6 +7,10 @@ public struct NodeView<T> {
 	public var inEdges: SequenceOf<Edge> {
 		return SequenceOf(lazy(graph.edges).filter { $0.destination.identifier == self.identifier })
 	}
+
+	public var outEdges: SequenceOf<Edge> {
+		return SequenceOf(lazy(graph.edges).filter { $0.source.identifier == self.identifier })
+	}
 }
 
 public func == <T: Equatable> (left: NodeView<T>, right: NodeView<T>) -> Bool {
