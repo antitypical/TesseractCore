@@ -15,6 +15,10 @@ public struct NodeView<T> {
 	public var outEdges: SequenceOf<Edge> {
 		return SequenceOf(lazy(graph.edges).filter { $0.source.identifier == self.identifier })
 	}
+
+	public var outDegree: Int {
+		return reduce(lazy(outEdges).map(const(1)), 0, +)
+	}
 }
 
 public func == <T: Equatable> (left: NodeView<T>, right: NodeView<T>) -> Bool {
