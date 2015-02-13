@@ -30,6 +30,14 @@ public struct Graph<T>: Printable {
 		}
 	}
 
+
+	// MARK: Node properties
+
+	func indegree(identifier: Identifier) -> Int {
+		return Swift.filter(edges) { $0.destination.identifier == identifier }
+			|> count
+	}
+
 	
 	// MARK: Higher-order methods
 
