@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182B03A1A84381B002E7D2D /* ImportingTests.swift */; };
+		1182B03D1A843B63002E7D2D /* Madness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1182B03C1A843B63002E7D2D /* Madness.framework */; };
 		11C1526B1A830A160044FCA2 /* Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1526A1A830A160044FCA2 /* Exporting.swift */; };
 		11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */; };
+		11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9E2481A83C17F0023AB0D /* Importing.swift */; };
 		D41275851A78638900CC910A /* EvaluationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41275841A78638900CC910A /* EvaluationTests.swift */; };
 		D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
 		D47974031A7D277C0034ABA2 /* ValueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D47974021A7D277C0034ABA2 /* ValueTests.swift */; };
@@ -54,8 +57,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1182B03A1A84381B002E7D2D /* ImportingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImportingTests.swift; path = TesseractCoreTests/ImportingTests.swift; sourceTree = SOURCE_ROOT; };
+		1182B03C1A843B63002E7D2D /* Madness.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Madness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C1526A1A830A160044FCA2 /* Exporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporting.swift; sourceTree = "<group>"; };
 		11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportingTests.swift; sourceTree = "<group>"; };
+		11C9E2481A83C17F0023AB0D /* Importing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Importing.swift; sourceTree = "<group>"; };
 		D41275841A78638900CC910A /* EvaluationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationTests.swift; sourceTree = "<group>"; };
 		D42CAC391A429BFD0091F6AA /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D47974021A7D277C0034ABA2 /* ValueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValueTests.swift; sourceTree = "<group>"; };
@@ -97,6 +103,7 @@
 				D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */,
 				D479740A1A7DA5D80034ABA2 /* Memo.framework in Frameworks */,
 				D4B7EE701A466104006D44E9 /* Either.framework in Frameworks */,
+				1182B03D1A843B63002E7D2D /* Madness.framework in Frameworks */,
 				D4B7EE721A46614C006D44E9 /* Prelude.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -128,6 +135,7 @@
 				D4B7EE711A46614C006D44E9 /* Prelude.framework */,
 				D4CD9E131A5323D200B1FF53 /* Set.framework */,
 				D4ED82781A3F9ADB00D0479E /* Products */,
+				1182B03C1A843B63002E7D2D /* Madness.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +162,7 @@
 				D4B3ECA31A77203B001AD21D /* Type.swift */,
 				D47974041A7D92E00034ABA2 /* Evaluation.swift */,
 				11C1526A1A830A160044FCA2 /* Exporting.swift */,
+				11C9E2481A83C17F0023AB0D /* Importing.swift */,
 				D47974061A7D99A40034ABA2 /* Application.swift */,
 				D479740B1A7DA6DC0034ABA2 /* Error.swift */,
 				D4ED827A1A3F9ADB00D0479E /* Supporting Files */,
@@ -177,6 +186,7 @@
 				D4C893BC1A51DCC10078743E /* GraphTests.swift */,
 				D41275841A78638900CC910A /* EvaluationTests.swift */,
 				D47974021A7D277C0034ABA2 /* ValueTests.swift */,
+				1182B03A1A84381B002E7D2D /* ImportingTests.swift */,
 				11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */,
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
 				D479740F1A7DF0300034ABA2 /* TypeTests.swift */,
@@ -307,6 +317,7 @@
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
 				D479740C1A7DA6DC0034ABA2 /* Error.swift in Sources */,
 				D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */,
+				11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */,
 				D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */,
 				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
 				D4B3ECA81A772346001AD21D /* Value.swift in Sources */,
@@ -325,6 +336,7 @@
 			files = (
 				D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */,
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
+				1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */,
 				11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */,
 				D41275851A78638900CC910A /* EvaluationTests.swift in Sources */,
 				D47974101A7DF0300034ABA2 /* TypeTests.swift in Sources */,
@@ -464,10 +476,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -482,10 +490,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = TesseractCoreTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = TesseractCoreTests;

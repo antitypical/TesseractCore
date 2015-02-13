@@ -32,10 +32,14 @@ public struct Graph<T> {
 
 	
 	// MARK: Higher-order methods
-
-	public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
-		return Graph(nodes: nodes.filter(includeNode), edges: edges)
+	public func map<U>(mapping: T -> U) -> Graph<U> {
+		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
 	}
+
+    public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
+        let thing = nodes.filter(includeNode)
+        return Graph(nodes: nodes.filter(includeNode), edges: edges)
+    }
 
 	public func filter(includeEdge: Edge -> Bool) -> Graph {
 		return Graph(nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))

@@ -57,6 +57,14 @@ final class GraphTests: XCTestCase {
 		XCTAssertEqual(abs.edges.count, 7)
 	}
 
+	func testMappingAcrossGraph() {
+		let (a,b) = (Identifier(), Identifier())
+		let graph = Graph(nodes: [a: "1", b: "2"], edges: [Edge(a, b.input(0))])
+		let newGraph = graph.map { $0.toInt() ?? 0 }
+		let expectedGraph = Graph(nodes: [a: 1, b: 2], edges: [Edge(a, b.input(0))])
+		assertEqual(newGraph, expectedGraph)
+	}
+
 	func testReductionDoesNotTraverseWithoutEdges() {
 		let (a, b) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ a: "a", b: "b" ])

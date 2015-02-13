@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct Edge: Hashable {
+public struct Edge: Hashable, Printable {
 	public typealias Source = (identifier: Identifier, outputIndex: Int)
 	public typealias Destination = (identifier: Identifier, inputIndex: Int)
 
@@ -21,6 +21,13 @@ public struct Edge: Hashable {
 
 	public var hashValue: Int {
 		return (source.identifier.hashValue + source.outputIndex) ^ (destination.identifier.hashValue + destination.inputIndex)
+	}
+
+	
+	// MARK: Printable
+	
+	public var description: String {
+		return "\(source.identifier): \(source.outputIndex) -> \(destination.identifier): \(destination.inputIndex)"
 	}
 }
 
