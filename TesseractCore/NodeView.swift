@@ -8,6 +8,10 @@ public struct NodeView<T> {
 		return SequenceOf(lazy(graph.edges).filter { $0.destination.identifier == self.identifier })
 	}
 
+	public var inDegree: Int {
+		return reduce(lazy(inEdges).map(const(1)), 0, +)
+	}
+
 	public var outEdges: SequenceOf<Edge> {
 		return SequenceOf(lazy(graph.edges).filter { $0.source.identifier == self.identifier })
 	}
@@ -18,3 +22,8 @@ public func == <T: Equatable> (left: NodeView<T>, right: NodeView<T>) -> Bool {
 		left.identifier == right.identifier
 	&&	left.graph == right.graph
 }
+
+
+// MARK: - Imports
+
+import Prelude
