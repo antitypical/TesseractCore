@@ -7,7 +7,12 @@ public func exportDOT<T>(graph: Graph<T>) -> String {
 
 
 private func serializeEdge<T>(graph: Graph<T>, edge: Edge) -> String {
-	return "\t\"\(graph.nodes[edge.source.identifier]!)\" -> \"\(graph.nodes[edge.destination.identifier]!)\";"
+	let node = serializeNode <| graph
+	return "\t\(node(edge.source.identifier)) -> \(node(edge.destination.identifier));"
+}
+
+private func serializeNode<T>(graph: Graph<T>, identifier: Identifier) -> String {
+	return "\"\(graph.nodes[identifier]!)\""
 }
 
 
