@@ -129,13 +129,7 @@
 			children = (
 				D4ED82791A3F9ADB00D0479E /* TesseractCore */,
 				D4ED828B1A3F9ADB00D0479E /* TesseractCoreTests */,
-				D42CAC391A429BFD0091F6AA /* Box.framework */,
-				D4B7EE6F1A466104006D44E9 /* Either.framework */,
-				D47974081A7DA5C20034ABA2 /* Memo.framework */,
-				D4B7EE711A46614C006D44E9 /* Prelude.framework */,
-				D4CD9E131A5323D200B1FF53 /* Set.framework */,
 				D4ED82781A3F9ADB00D0479E /* Products */,
-				1182B03C1A843B63002E7D2D /* Madness.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +170,12 @@
 				D4ED827B1A3F9ADB00D0479E /* Info.plist */,
 				D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */,
 				D481D9311A78771B00044B2F /* Find.swift */,
+				D42CAC391A429BFD0091F6AA /* Box.framework */,
+				D4B7EE6F1A466104006D44E9 /* Either.framework */,
+				1182B03C1A843B63002E7D2D /* Madness.framework */,
+				D47974081A7DA5C20034ABA2 /* Memo.framework */,
+				D4B7EE711A46614C006D44E9 /* Prelude.framework */,
+				D4CD9E131A5323D200B1FF53 /* Set.framework */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";

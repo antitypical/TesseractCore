@@ -30,19 +30,24 @@ public struct Graph<T>: Printable {
 		}
 	}
 
-	
-	// MARK: Higher-order methods
-	public func map<U>(mapping: T -> U) -> Graph<U> {
-		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
+
+	// MARK: Node properties
+
+	func indegree(identifier: Identifier) -> Int {
+		return Swift.filter(edges) { $0.destination.identifier == identifier }
+			|> count
 	}
 
-    public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
-        let thing = nodes.filter(includeNode)
-		return Graph(nodes: nodes.filter(includeNode), edges: edges)
-    }
+	func outdegree(identifier: Identifier) -> Int {
+		return Swift.filter(edges) { $0.source.identifier == identifier }
+			|> count
+	}
 
-	public func filter(includeEdge: Edge -> Bool) -> Graph {
-		return Graph(nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))
+	
+	// MARK: Higher-order methods
+
+	public func map<U>(mapping: T -> U) -> Graph<U> {
+		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
 	}
 
 	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
