@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Graph<T>: Printable, SequenceType {
+public struct Graph<T>: CollectionType, Printable {
 	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
 		self.nodes = nodes
 		self.edges = edges
@@ -18,10 +18,6 @@ public struct Graph<T>: Printable, SequenceType {
 				!removed.contains($0.source.identifier) && !removed.contains($0.destination.identifier)
 			})
 		}
-	}
-
-	public subscript (position: DictionaryIndex<Identifier, T>) -> (Identifier, T) {
-		return nodes[position]
 	}
 
 	public var edges: Set<Edge> {
@@ -68,6 +64,24 @@ public struct Graph<T>: Printable, SequenceType {
 			if predicate <| nodes[index] { return index }
 		}
 		return nil
+	}
+
+
+	// MARK: CollectionType
+
+	public typealias Index = Dictionary<Identifier, T>.Index
+
+	public var startIndex: Index {
+		return nodes.startIndex
+	}
+
+	public var endIndex: Index {
+		return nodes.endIndex
+	}
+
+	public subscript(index: Index) -> NodeView<T> {
+		let (identifier, value) = nodes[index]
+		return NodeView(graph: self, identifier: identifier, value: value)
 	}
 
 
