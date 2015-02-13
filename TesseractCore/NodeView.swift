@@ -5,16 +5,16 @@ public struct NodeView<T> {
 	public let identifier: Identifier
 	public let value: T
 
-	public var inEdges: SequenceOf<Edge> {
-		return SequenceOf(lazy(graph.edges).filter { $0.destination.identifier == self.identifier })
+	public var inEdges: SequenceOf<EdgeView<T>> {
+		return SequenceOf(lazy(graph.edges).filter { $0.destination.identifier == self.identifier }.map { EdgeView(graph: self.graph, edge: $0) })
 	}
 
 	public var inDegree: Int {
 		return reduce(lazy(inEdges).map(const(1)), 0, +)
 	}
 
-	public var outEdges: SequenceOf<Edge> {
-		return SequenceOf(lazy(graph.edges).filter { $0.source.identifier == self.identifier })
+	public var outEdges: SequenceOf<EdgeView<T>> {
+		return SequenceOf(lazy(graph.edges).filter { $0.source.identifier == self.identifier }.map { EdgeView(graph: self.graph, edge: $0) })
 	}
 
 	public var outDegree: Int {
