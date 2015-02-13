@@ -3,4 +3,12 @@
 public struct EdgeView<T> {
 	public let graph: Graph<T>
 	private let edge: Edge
+
+	public var source: (NodeView<T>, Int) {
+		return (graph[edge.source.identifier]!, edge.source.outputIndex)
+	}
+
+	public var destination: (NodeView<T>, Int) {
+		return (graph[edge.destination.identifier]!, edge.destination.inputIndex)
+	}
 }
