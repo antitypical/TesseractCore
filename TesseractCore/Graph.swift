@@ -1,15 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Graph<T>: Printable {
-	public init(name: String, nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
-		self.name = name
-		self.nodes = nodes
-		self.edges = edges
-		sanitize(edges)
-	}
-
 	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
-		self.name = "tesseract"
 		self.nodes = nodes
 		self.edges = edges
 		sanitize(edges)
@@ -41,20 +33,20 @@ public struct Graph<T>: Printable {
 	
 	// MARK: Higher-order methods
 	public func map<U>(mapping: T -> U) -> Graph<U> {
-		return Graph<U>(name: self.name, nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
+		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
 	}
 
     public func filter(includeNode: (Identifier, T) -> Bool) -> Graph {
         let thing = nodes.filter(includeNode)
-		return Graph(name: self.name, nodes: nodes.filter(includeNode), edges: edges)
+		return Graph(nodes: nodes.filter(includeNode), edges: edges)
     }
 
 	public func filter(includeEdge: Edge -> Bool) -> Graph {
-		return Graph(name: self.name, nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))
+		return Graph(nodes: nodes, edges: Set(lazy(edges).filter(includeEdge)))
 	}
 
 	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
-		return Graph(name: self.name, nodes: nodes.filter(includeNode), edges: Set(lazy(edges).filter(includeEdge)))
+		return Graph(nodes: nodes.filter(includeNode), edges: Set(lazy(edges).filter(includeEdge)))
 	}
 
 
@@ -98,8 +90,6 @@ public struct Graph<T>: Printable {
 		})
 		return "{\tnodes: (\n\(nodesDescription)\n\t);\n\tedges: (\n\(edgesDescription)\n\t);\n}"
 	}
-	
-	public let name: String
 
 
 	// MARK: Private
@@ -118,7 +108,6 @@ public func == <T: Equatable> (left: Graph<T>, right: Graph<T>) -> Bool {
 	return
 		left.nodes == right.nodes
 	&&	left.edges == right.edges
-	&&	left.name == right.name
 }
 
 

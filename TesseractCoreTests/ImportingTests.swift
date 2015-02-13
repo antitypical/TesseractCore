@@ -8,7 +8,7 @@ final class ImportingTests: XCTestCase {
 		let lessThan = Identifier()
 		let iff = Identifier()
 		let unaryMinus = Identifier()
-		let abs = Graph<String>(name: "abs", nodes: [
+		let abs = Graph<String>(nodes: [
 			x: "x",
 			result: "result",
 			zero: "0",
@@ -24,15 +24,28 @@ final class ImportingTests: XCTestCase {
 				Edge(x, iff.input(2)),
 				Edge(iff, result.input(0))
 			])
-		let parsedGraph = importDOT(exportDOT(abs))
+		let (name, parsedGraph) = importDOT(exportDOT("absoluteValue", abs))
 		let parsedNodes = Set(parsedGraph.nodes.values.array)
 		let actualNodes = Set(abs.nodes.values.array)
 		
-		XCTAssertEqual(parsedGraph.name, abs.name)
+		XCTAssertEqual(name, "absoluteValue")
 		XCTAssertEqual(parsedNodes, actualNodes)
 		XCTAssertEqual(parsedGraph.edges.count, abs.edges.count)
 	}
+	
+	func testMapAcrossImportedGraph() {
+		let rawGraph = "digraph test {\n\t\"1\" -> \"2\";\n}"
+		let (_, parsedGraph) = importDOT(rawGraph)
+		let graph = parsedGraph.map { $0.toInt() ?? 0 }
+		let (a, b) = (Identifier(), Identifier())
+		let expectedGraph = Graph(nodes: [a: 1, b: 2], edges: Set([Edge(a, b.input(0))]))
+		let parsedNodes = Set(graph.nodes.values.array)
+		let expectedNodes = Set(expectedGraph.nodes.values.array)
 
+		XCTAssertEqual(parsedNodes, expectedNodes)
+		XCTAssertEqual(parsedGraph.edges.count, expectedGraph.edges.count)
+	}
+	
 	func testEdgeParsing() {
 		let (source, destination) = parseEdge("\t\"item1\" -> \"item2\";")!
 		XCTAssertEqual(source, "item1")

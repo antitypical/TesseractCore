@@ -29,7 +29,7 @@ public func parseEdge(edge: String) -> (String, String)? {
 }
 
 // GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
-public func importDOT(file: String) -> Graph<String> {
+public func importDOT(file: String) -> (String, Graph<String>) {
 	let lines = split(file, { $0 == "\n" })
 	let name = parseTitle(lines[0]) ?? ""
 	// Skip the title.
@@ -60,7 +60,7 @@ public func importDOT(file: String) -> Graph<String> {
 		return accum + [identifier: curr]
     }
     
-	return Graph(name: name, nodes: nodes, edges: Set(edges))
+	return (name, Graph(nodes: nodes, edges: Set(edges)))
 }
 
 // MARK: - Imports
