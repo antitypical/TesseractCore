@@ -7,7 +7,7 @@ public func exportDOT<T>(name: String, graph: Graph<T>) -> String {
 		let destination = graph.nodes[destinationID]
 		let sourceDescription = source.map(toString) ?? ""
 		let destinationDescription = destination.map(toString) ?? ""
-		return "\t\"\(sourceDescription)\" -> \"\(destinationDescription)\";"
+		return "\t\"\(sourceDescription)\" -> \"\(destinationDescription)\" [sametail=\(edge.source.outputIndex),headlabel=\(edge.destination.inputIndex)];"
 	})
 	return "digraph \(name) {\n\(edges)\n}"
 }
