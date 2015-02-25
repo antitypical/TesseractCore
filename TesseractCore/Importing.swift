@@ -22,7 +22,7 @@ private let graph: Parser<String, Graph<String>>.Function = edge+ --> { _, _, ed
 	let nodeIdentifiers = Dictionary(nodeData.map(swap))
 	let nodes = Dictionary(nodeData)
 	let ed = lazy(edges).map { source, destination, attributes in
-		(nodeIdentifiers[source] &&& nodeIdentifiers[destination]).map { Edge(($0, attributes["headlabel"]?.toInt() ?? 0), ($1, attributes["sametail"]?.toInt() ?? 0)) }
+		(nodeIdentifiers[source] &&& nodeIdentifiers[destination]).map { Edge(($0, attributes["sametail"]?.toInt() ?? 0), ($1, attributes["headlabel"]?.toInt() ?? 0)) }
 	}
 	let edges: Set<Edge> = reduce(ed, []) { edges, edge in
 		edges.union(edge.map { [ $0 ] } ?? [])
