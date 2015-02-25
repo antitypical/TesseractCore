@@ -6,6 +6,7 @@ private let uppercase: Parser<String, String>.Function = %("A"..."Z")
 private let ws: Parser<String, Ignore>.Function = ignore(%" " | %"\t" | %"\n")+
 private let quot: Parser<String, Ignore>.Function = ignore("\"")
 private let word: Parser<String, String>.Function = (lowercase | uppercase | digit)+ --> { "".join($0) }
+private let string: Parser<String, String>.Function = quot ++ word ++ quot
 
 private let title: Parser<String, String>.Function = ignore("digraph ") ++ word ++ ignore(" {")
 private let edge: Parser<String, (String, String)>.Function = ws ++ quot ++ word ++ ignore("\" -> \"") ++ word ++ ignore("\";")
