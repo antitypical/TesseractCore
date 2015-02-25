@@ -46,7 +46,8 @@ final class EvaluationTests: XCTestCase {
 		let truthy = Symbol.Named("truthy", .Boolean)
 		let (c, graph) = createGraph(truthy)
 		let evaluated = evaluate(graph, c, [truthy: Value(graph: constant)])
-		assertEqual(assertRight(evaluated)?.value.graph.map { $0 == constant } ?? false, true)
+		let right = assertRight(evaluated)?.value.graph.map { $0 == constant }
+		assertEqual(right ?? false, true)
 	}
 
 	func testGraphNodeWithBoundInputsAppliesInput() {
