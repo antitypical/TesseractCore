@@ -47,6 +47,8 @@ final class ImportingTests: XCTestCase {
 
 			XCTAssertEqual(parsedNodes, expectedNodes)
 			XCTAssertEqual(parsedGraph.edges.count, expectedGraph.edges.count)
+		} else {
+			XCTFail("could not parse the DOT")
 		}
 	}
 }
