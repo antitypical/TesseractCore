@@ -2,7 +2,8 @@
 
 final class ImportingTests: XCTestCase {
 	func testImporting() {
-		if let (name, parsedGraph) = importDOT(exportDOT("absoluteValue", absoluteValue)) {
+		let dot = exportDOT("absoluteValue", absoluteValue)
+		if let (name, parsedGraph) = importDOT(dot) {
 			let parsedNodes = Set(parsedGraph.nodes.values.array)
 			let actualNodes = Set(absoluteValue.nodes.values.array)
 
@@ -10,7 +11,7 @@ final class ImportingTests: XCTestCase {
 			XCTAssertEqual(parsedNodes, actualNodes)
 			XCTAssertEqual(parsedGraph.edges.count, absoluteValue.edges.count)
 		} else {
-			XCTFail("could not parse the DOT")
+			XCTFail("could not parse \(dot)")
 		}
 	}
 	
@@ -26,7 +27,7 @@ final class ImportingTests: XCTestCase {
 			XCTAssertEqual(parsedNodes, expectedNodes)
 			XCTAssertEqual(parsedGraph.edges.count, expectedGraph.edges.count)
 		} else {
-			XCTFail("could not parse the DOT")
+			XCTFail("could not parse \(rawGraph)")
 		}
 	}
 }
