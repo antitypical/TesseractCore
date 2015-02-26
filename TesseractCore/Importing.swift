@@ -8,7 +8,7 @@ private func log<C: CollectionType, T>(message: String?, parser: (Parser<C, T>.F
 	return { collection, index in
 		let trace = "\(file):\(line):\(column):\(function):" + (message.map { " \($0)" } ?? "")
 		if let (tree, rest) = parser(collection, index) {
-			println("\(trace) matched in \(index)..<\(rest)")
+			println("\(trace) matched in \(index)..<\(rest): \(tree)")
 			return (tree, rest)
 		}
 		println("\(trace) unmatched at \(index)")
