@@ -46,10 +46,13 @@ private let graph: Parser<String, Graph<String>>.Function = edge+ --> { _, _, ed
 	return Graph(nodes: nodes, edges: edges)
 }
 
-// GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
+/// Returns a graph and its name from a string in the DOT language.
+///
+/// GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
 public func importDOT(string: String) -> (String, Graph<String>)? {
 	return parse(title ++ graph ++ ignore("}"), string)
 }
+
 
 // MARK: - Imports
 
