@@ -2,54 +2,33 @@
 
 final class ImportingTests: XCTestCase {
 	func testImporting() {
-		let x = Identifier()
-		let result = Identifier()
-		let zero = Identifier()
-		let lessThan = Identifier()
-		let iff = Identifier()
-		let unaryMinus = Identifier()
-		let abs = Graph<String>(nodes: [
-			x: "x",
-			result: "result",
-			zero: "0",
-			unaryMinus: "unaryMinus",
-			iff: "if",
-			lessThan: "lessThan"
-			], edges: [
-				Edge(x, lessThan.input(0)),
-				Edge(zero, lessThan.input(1)),
-				Edge(lessThan, iff.input(0)),
-				Edge(x, unaryMinus.input(0)),
-				Edge(unaryMinus, iff.input(1)),
-				Edge(x, iff.input(2)),
-				Edge(iff, result.input(0))
-			])
-		let (name, parsedGraph) = importDOT(exportDOT("absoluteValue", abs))
-		let parsedNodes = Set(parsedGraph.nodes.values.array)
-		let actualNodes = Set(abs.nodes.values.array)
-		
-		XCTAssertEqual(name, "absoluteValue")
-		XCTAssertEqual(parsedNodes, actualNodes)
-		XCTAssertEqual(parsedGraph.edges.count, abs.edges.count)
+		let dot = exportDOT("absoluteValue", absoluteValue)
+		if let (name, parsedGraph) = importDOT(dot) {
+			let parsedNodes = Set(parsedGraph.nodes.values.array)
+			let actualNodes = Set(absoluteValue.nodes.values.array)
+
+			XCTAssertEqual(name, "absoluteValue")
+			XCTAssertEqual(parsedNodes, actualNodes)
+			XCTAssertEqual(parsedGraph.edges.count, absoluteValue.edges.count)
+		} else {
+			XCTFail("could not parse \(dot)")
+		}
 	}
 	
 	func testMapAcrossImportedGraph() {
-		let rawGraph = "digraph test {\n\t\"1\" -> \"2\";\n}"
-		let (_, parsedGraph) = importDOT(rawGraph)
-		let graph = parsedGraph.map { $0.toInt() ?? 0 }
-		let (a, b) = (Identifier(), Identifier())
-		let expectedGraph = Graph(nodes: [a: 1, b: 2], edges: Set([Edge(a, b.input(0))]))
-		let parsedNodes = Set(graph.nodes.values.array)
-		let expectedNodes = Set(expectedGraph.nodes.values.array)
+		let rawGraph = "digraph test {\n\t\"1\" -> \"2\" [sametail=0,headlabel=0];\n}"
+		if let (_, parsedGraph) = importDOT(rawGraph) {
+			let graph = parsedGraph.map { $0.toInt() ?? 0 }
+			let (a, b) = (Identifier(), Identifier())
+			let expectedGraph = Graph(nodes: [a: 1, b: 2], edges: Set([Edge(a, b.input(0))]))
+			let parsedNodes = Set(graph.nodes.values.array)
+			let expectedNodes = Set(expectedGraph.nodes.values.array)
 
-		XCTAssertEqual(parsedNodes, expectedNodes)
-		XCTAssertEqual(parsedGraph.edges.count, expectedGraph.edges.count)
-	}
-	
-	func testEdgeParsing() {
-		let (source, destination) = parseEdge("\t\"item1\" -> \"item2\";")!
-		XCTAssertEqual(source, "item1")
-		XCTAssertEqual(destination, "item2")
+			XCTAssertEqual(parsedNodes, expectedNodes)
+			XCTAssertEqual(parsedGraph.edges.count, expectedGraph.edges.count)
+		} else {
+			XCTFail("could not parse \(rawGraph)")
+		}
 	}
 }
 

@@ -1,9 +1,12 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func evaluate(graph: Graph<Node>, from: Identifier, _ environment: Environment = Prelude, _ visited: [Identifier: Memo<Value>] = [:]) -> Either<Error<Identifier>, Memo<Value>> {
+	if let cached = visited[from].map(Either<Error<Identifier>, Memo<Value>>.right) {
+		return cached
+	}
+
 	return
-		visited[from].map(Either.right)
-	??	graph.nodes[from].map { evaluate(graph, from, environment, visited, $0) }
+		graph.nodes[from].map { evaluate(graph, from, environment, visited, $0) }
 	??	error("could not find identifier in graph", from)
 }
 

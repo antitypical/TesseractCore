@@ -1,70 +1,60 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-private func unique<T: Hashable>(list: [T]) -> [T] {
-	return Array(Set(list))
+private func log<C: CollectionType, T>(parser: (Parser<C, T>.Function), function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, column: Int = __COLUMN__) -> Parser<C, T>.Function {
+	return log(nil, parser, function: function, file: file, line: line, column: column)
 }
 
-public func parseTitle(line: String) -> String? {
-	let characterParser = %("0"..."9") | %("a"..."z") | %("A"..."Z")
-	let titleParser = ignore("digraph ") ++ characterParser+ ++ ignore(" {")
-	if let rawTitle = titleParser(line)?.0 {
-		return rawTitle.reduce("", combine: +)
-	} else {
+private func log<C: CollectionType, T>(message: String?, parser: (Parser<C, T>.Function), function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, column: Int = __COLUMN__) -> Parser<C, T>.Function {
+	return { collection, index in
+		let trace = "\(file):\(line):\(column):\(function):" + (message.map { " \($0)" } ?? "")
+		if let (tree, rest) = parser(collection, index) {
+			println("\(trace) matched in \(index)..<\(rest): \(tree)")
+			return (tree, rest)
+		}
+		println("\(trace) unmatched at \(index)")
 		return nil
 	}
 }
 
-public func parseEdge(edge: String) -> (String, String)? {
-	let characterParser = %("0"..."9") | %("a"..."z") | %("A"..."Z")
-	let ignoreBeginningOfLine = ignore("\t") ++ ignore("\"")
-	let edgeParser = ignoreBeginningOfLine ++ characterParser+ ++ ignore("\" -> \"") ++ characterParser+ ++ ignore("\";");
+private let digit: Parser<String, String>.Function = %("0"..."9")
+private let lowercase: Parser<String, String>.Function = %("a"..."z")
+private let uppercase: Parser<String, String>.Function = %("A"..."Z")
+private let ws: Parser<String, Ignore>.Function = ignore(%" " | %"\t" | %"\n")*
+private let quot: Parser<String, Ignore>.Function = ignore("\"")
+private let word: Parser<String, String>.Function = (lowercase | uppercase | digit)+ --> { "".join($0) }
+private let string: Parser<String, String>.Function = quot ++ word ++ quot
 
-	if let (rawSource, rawDestination) = edgeParser(edge)?.0 {
-		let source = String(rawSource.reduce([], combine: +))
-		let destination = String(rawDestination.reduce([], combine: +))
-		return (source, destination)
-	}
+private let title: Parser<String, String>.Function = ignore("digraph ") ++ word ++ ignore(" {")
+private let sourceAndIdentifier: Parser<String, (String, String)>.Function = string ++ ignore(" -> ") ++ string
+private let terminator = ignore(";") ++ ws
+private let edge: Parser<String, ((String, Int), (String, Int))>.Function = ws ++ sourceAndIdentifier ++ ws ++ attributes ++ terminator --> { (($0.0, $1["sametail"]?.toInt() ?? 0), ($0.1, $1["headlabel"]?.toInt() ?? 0)) }
 
-	return nil
+private let attribute: Parser<String, (String, String)>.Function = word ++ ignore("=") ++ word
+private let comma: Parser<String, Ignore>.Function = ws ++ ignore(",") ++ ws
+private let attributeList: Parser<String, [String: String]>.Function = attribute ++ (comma ++ attribute)* --> { Dictionary([ $0 ] + $1) }
+private let attributes: Parser<String, [String: String]>.Function = (ignore("[") ++ attributeList ++ ignore("]")) | { _, index in ([:], index) }
+
+private let graph: Parser<String, Graph<String>>.Function = edge+ --> { _, _, edgeParses in
+	let nodeData = map(Set(lazy(edgeParses).flatMap { source, destination in [source.0, destination.0] })) { (Identifier(), $0) }
+	let nodeIdentifiers = Dictionary(nodeData.map(swap))
+	let nodes = Dictionary(nodeData)
+	let edges: Set<Edge> = reduce(lazy(edgeParses).map { source, destination in
+		(nodeIdentifiers[source.0] &&& nodeIdentifiers[destination.0]).map {
+			[ Edge(($0, source.1), ($1, destination.1)) ]
+		} ?? []
+	}, [], { $0.union($1) })
+	return Graph(nodes: nodes, edges: edges)
 }
 
-// GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
-public func importDOT(file: String) -> (String, Graph<String>) {
-	let lines = split(file, { $0 == "\n" })
-	let name = parseTitle(lines[0]) ?? ""
-	// Skip the title.
-	let rawLines = lines[1...(lines.count - 2)]
-	let rawEdges = map(rawLines) { parseEdge($0) ?? ("", "")}
-	let rawSources = map(rawEdges) { $0.0 }
-	let rawDestinations = map(rawEdges) { edge in edge.1 }
-	let rawNodes = rawSources + rawDestinations
-	let uniqueNodes = unique(rawNodes)
-	let nodeIdentifiers = map(uniqueNodes) { _ in Identifier() }
-	var inputCount = map(uniqueNodes, const(0))
-	var outputCount = inputCount
-    
-	let edges: [Edge] = map(rawEdges) { edge in
-		let (sourceString, destinationString) = edge
-		let sourceIndex = find(uniqueNodes, sourceString) ?? 0
-		let destinationIndex = find(uniqueNodes, destinationString) ?? 0
-		let sourceOutputNumber = outputCount[sourceIndex] + 1
-		let destinationInputNumber = inputCount[sourceIndex] + 1
-		let source = (nodeIdentifiers[sourceIndex], sourceOutputNumber)
-		let destination = (nodeIdentifiers[destinationIndex], destinationInputNumber)
-		return Edge(source, destination)
-	}
-	
-	let nodes = uniqueNodes.reduce(Dictionary<Identifier, String>()) { (accum: [Identifier: String], curr: String) in
-		let identifierIndex = find(uniqueNodes, curr) ?? 0
-		let identifier = nodeIdentifiers[identifierIndex]
-		return accum + [identifier: curr]
-    }
-    
-	return (name, Graph(nodes: nodes, edges: Set(edges)))
+/// Returns a graph and its name from a string in the DOT language.
+///
+/// GraphViz (.dot) file spec: http://graphviz.org/content/dot-language
+public func importDOT(string: String) -> (String, Graph<String>)? {
+	return parse(title ++ graph ++ ignore("}"), string)
 }
+
 
 // MARK: - Imports
 
 import Prelude
-import Set
 import Madness
