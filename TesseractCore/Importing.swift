@@ -1,5 +1,21 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
+private func log<C: CollectionType, T>(parser: (Parser<C, T>.Function), function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, column: Int = __COLUMN__) -> Parser<C, T>.Function {
+	return log(nil, parser, function: function, file: file, line: line, column: column)
+}
+
+private func log<C: CollectionType, T>(message: String?, parser: (Parser<C, T>.Function), function: String = __FUNCTION__, file: String = __FILE__, line: Int = __LINE__, column: Int = __COLUMN__) -> Parser<C, T>.Function {
+	return { collection, index in
+		let trace = "\(file):\(line):\(column):\(function):" + (message.map { " \($0)" } ?? "")
+		if let (tree, rest) = parser(collection, index) {
+			println("\(trace) matched in \(index)..<\(rest)")
+			return (tree, rest)
+		}
+		println("\(trace) unmatched at \(index)")
+		return nil
+	}
+}
+
 private let digit: Parser<String, String>.Function = %("0"..."9")
 private let lowercase: Parser<String, String>.Function = %("a"..."z")
 private let uppercase: Parser<String, String>.Function = %("A"..."Z")
