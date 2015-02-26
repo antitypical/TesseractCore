@@ -15,7 +15,7 @@ final class ImportingTests: XCTestCase {
 	}
 	
 	func testMapAcrossImportedGraph() {
-		let rawGraph = "digraph test {\n\t\"1\" -> \"2\";\n}"
+		let rawGraph = "digraph test {\n\t\"1\" -> \"2\" [sametail=0,headlabel=0];\n}"
 		if let (_, parsedGraph) = importDOT(rawGraph) {
 			let graph = parsedGraph.map { $0.toInt() ?? 0 }
 			let (a, b) = (Identifier(), Identifier())
