@@ -26,7 +26,8 @@ private let string: Parser<String, String>.Function = quot ++ word ++ quot
 
 private let title: Parser<String, String>.Function = ignore("digraph ") ++ word ++ ignore(" {")
 private let sourceAndIdentifier: Parser<String, (String, String)>.Function = string ++ ignore(" -> ") ++ string
-private let edge: Parser<String, (String, String, [String: String])>.Function = ws ++ sourceAndIdentifier ++ ws ++ attributes ++ ignore(";\n") --> { ($0.0, $0.1, $1) }
+private let terminator = ignore(";") ++ ws
+private let edge: Parser<String, (String, String, [String: String])>.Function = ws ++ sourceAndIdentifier ++ ws ++ attributes ++ terminator --> { ($0.0, $0.1, $1) }
 
 private let attribute: Parser<String, (String, String)>.Function = word ++ ignore("=") ++ word
 private let comma: Parser<String, Ignore>.Function = ws ++ ignore(",") ++ ws
