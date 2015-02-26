@@ -19,7 +19,7 @@ private func log<C: CollectionType, T>(message: String?, parser: (Parser<C, T>.F
 private let digit: Parser<String, String>.Function = %("0"..."9")
 private let lowercase: Parser<String, String>.Function = %("a"..."z")
 private let uppercase: Parser<String, String>.Function = %("A"..."Z")
-private let ws: Parser<String, Ignore>.Function = ignore(%" " | %"\t" | %"\n")+
+private let ws: Parser<String, Ignore>.Function = ignore(%" " | %"\t" | %"\n")*
 private let quot: Parser<String, Ignore>.Function = ignore("\"")
 private let word: Parser<String, String>.Function = (lowercase | uppercase | digit)+ --> { "".join($0) }
 private let string: Parser<String, String>.Function = quot ++ word ++ quot
