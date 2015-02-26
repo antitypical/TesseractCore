@@ -34,8 +34,8 @@ internal func error(reason: String, from: Identifier) -> Either<Error<Identifier
 internal func coalesce<S, T, U>(eithers: [(S, Either<Error<U>, T>)]) -> Either<Error<U>, [(S, T)]> {
 	return reduce(eithers, .right([])) { into, each in
 		into.either(
-			{ error in each.1.left.map { .left(Error(error, $0)) } ?? into },
-			{ value in each.1.map { value + [ (each.0, $0) ] } }
+			ifLeft: { error in each.1.left.map { .left(Error(error, $0)) } ?? into },
+			ifRight: { value in each.1.map { value + [ (each.0, $0) ] } }
 		)
 	}
 }
