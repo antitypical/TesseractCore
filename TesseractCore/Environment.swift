@@ -21,7 +21,7 @@ public struct Environment: CollectionType, DictionaryLiteralConvertible, Printab
 	}
 
 	public var endIndex: Dictionary<Symbol, Value>.Index {
-		return bindings.startIndex
+		return bindings.endIndex
 	}
 
 	public subscript (index: Dictionary<Symbol, Value>.Index) -> (Symbol, Value) {
