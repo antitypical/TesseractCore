@@ -58,10 +58,13 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 
 	// MARK: Printable
 
+	private static var alphabet = Array("abcdefghijklmnopqrstuvwxyz")
+
 	public var description: String {
 		switch self {
 		case let Parameter(index):
-			return index.description
+			let laps = (index / Type.alphabet.count) + 1
+			return String(count: laps, repeatedValue: Type.alphabet[index % Type.alphabet.count])
 		case let Function(parameterType, returnType):
 			return "\(parameterType) → \(returnType)"
 		case Boolean:
