@@ -22,3 +22,15 @@ public struct SetDifferential<T: Hashable>: DifferentialType {
 		return SetDifferential(inserted: after.subtract(before), deleted: before.subtract(after))
 	}
 }
+
+extension Dictionary {
+	subscript (keys: Set<Key>) -> Dictionary {
+		var result: Dictionary = [:]
+		for key in keys {
+			if let value = self[key] {
+				result.updateValue(value, forKey: key)
+			}
+		}
+		return result
+	}
+}
