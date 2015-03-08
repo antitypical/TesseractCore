@@ -37,8 +37,8 @@ public enum Node: Equatable, Printable {
 		let inputNodes = Dictionary(lazy(graph.edges)
 			.filter { $0.destination.identifier == identifier }
 			.map { ($0.destination.inputIndex, ($0.source.identifier, graph.nodes[$0.source.identifier]!)) })
-		let parameters = lazy(symbol.type.parameters).map { Symbol($0, $1) }
-		return map(enumerate(parameters)) { ($1, inputNodes[$0]) }
+		return Array(lazy(enumerate(symbol.type.parameters))
+			.map { (Symbol($0, $1), inputNodes[$0]) })
 	}
 
 
