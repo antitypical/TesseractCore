@@ -42,6 +42,9 @@ public struct DictionaryDifferential<Key: Hashable, Value>: DifferentialType {
 	}
 }
 
+
+// MARK: - Implementation details
+
 extension Dictionary {
 	subscript (keys: Set<Key>) -> Dictionary {
 		var result: Dictionary = [:]
