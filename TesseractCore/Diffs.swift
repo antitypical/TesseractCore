@@ -6,6 +6,9 @@ public protocol DifferentialType {
 	static func differentiate(#before: Differentiable, after: Differentiable) -> Self
 }
 
+
+// MARK: - Set
+
 public struct SetDifferential<T: Hashable>: DifferentialType {
 	public init(inserted: Set<T>, deleted: Set<T>) {
 		self.inserted = inserted
@@ -22,6 +25,9 @@ public struct SetDifferential<T: Hashable>: DifferentialType {
 		return SetDifferential(inserted: after.subtract(before), deleted: before.subtract(after))
 	}
 }
+
+
+// MARK: - Dictionary
 
 public struct DictionaryDifferential<Key: Hashable, Value>: DifferentialType {
 	public init(inserted: [Key: Value], deleted: Set<Key>) {
