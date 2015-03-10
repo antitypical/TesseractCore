@@ -34,7 +34,7 @@ public struct Graph<T>: CollectionType, Printable {
 	// MARK: Higher-order methods
 
 	public func map<U>(mapping: T -> U) -> Graph<U> {
-		return Graph<U>(nodes: nodes.map({ (id, value) in (id, mapping(value)) }), edges: edges)
+		return Graph<U>(nodes: nodes.map { ($0, mapping($1)) }, edges: edges)
 	}
 
 	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
