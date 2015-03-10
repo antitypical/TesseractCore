@@ -50,6 +50,7 @@
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
 		D4F48AC41AAE90D70017504F /* SetDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC31AAE90D70017504F /* SetDifferential.swift */; };
 		D4F48AC61AAE91380017504F /* DictionaryDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */; };
+		D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferential.swift */; };
 		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +106,7 @@
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
 		D4F48AC31AAE90D70017504F /* SetDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDifferential.swift; sourceTree = "<group>"; };
 		D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDifferential.swift; sourceTree = "<group>"; };
+		D4F48AC71AAE918C0017504F /* GraphDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferential.swift; sourceTree = "<group>"; };
 		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -230,6 +232,7 @@
 				D49A4B5B1AAD10600093641A /* Diffs.swift */,
 				D4F48AC31AAE90D70017504F /* SetDifferential.swift */,
 				D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */,
+				D4F48AC71AAE918C0017504F /* GraphDifferential.swift */,
 			);
 			name = Diffs;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 				D42F30E91A8DAD3500F3EA38 /* NodeView.swift in Sources */,
 				D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */,
+				D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */,
 				11C1526B1A830A160044FCA2 /* Exporting.swift in Sources */,
 				D49A4B5C1AAD10600093641A /* Diffs.swift in Sources */,
 				D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */,
