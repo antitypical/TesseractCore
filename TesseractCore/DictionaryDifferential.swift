@@ -14,8 +14,10 @@ public struct DictionaryDifferential<Key: Hashable, Value: Equatable>: Different
 
 	public static func differentiate(#before: Dictionary<Key, Value>, after: Dictionary<Key, Value>) -> DictionaryDifferential {
 		let (beforeKeys, afterKeys) = (Set(before.keys), Set(after.keys))
+		let changedKeys = Set(lazy(beforeKeys.intersect(afterKeys))
+			.filter { before[$0] != after[$0] })
 
-		return DictionaryDifferential(inserted: after[afterKeys.subtract(beforeKeys)], deleted: before[beforeKeys.subtract(afterKeys)])
+		return DictionaryDifferential(inserted: after[afterKeys.subtract(beforeKeys).union(changedKeys)], deleted: before[beforeKeys.subtract(afterKeys).union(changedKeys)])
 	}
 }
 
