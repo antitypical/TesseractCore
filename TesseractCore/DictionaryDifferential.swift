@@ -1,13 +1,13 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public struct DictionaryDifferential<Key: Hashable, Value: Equatable>: DifferentialType {
-	public init(inserted: [Key: Value], deleted: Set<Key>) {
+	public init(inserted: [Key: Value], deleted: [Key: Value]) {
 		self.inserted = inserted
 		self.deleted = deleted
 	}
 
 	public let inserted: [Key: Value]
-	public let deleted: Set<Key>
+	public let deleted: [Key: Value]
 
 
 	// MARK: DifferentialType
@@ -15,7 +15,7 @@ public struct DictionaryDifferential<Key: Hashable, Value: Equatable>: Different
 	public static func differentiate(#before: Dictionary<Key, Value>, after: Dictionary<Key, Value>) -> DictionaryDifferential {
 		let (beforeKeys, afterKeys) = (Set(before.keys), Set(after.keys))
 
-		return DictionaryDifferential(inserted: after[afterKeys.subtract(beforeKeys)], deleted: beforeKeys.subtract(afterKeys))
+		return DictionaryDifferential(inserted: after[afterKeys.subtract(beforeKeys)], deleted: before[beforeKeys.subtract(afterKeys)])
 	}
 }
 
