@@ -48,6 +48,7 @@
 		D4ED827D1A3F9ADB00D0479E /* TesseractCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* TesseractCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4ED82881A3F9ADB00D0479E /* TesseractCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* TesseractCore.framework */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
+		D4F01E961AAFB0FA0060C95F /* FloatingPointDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01E951AAFB0FA0060C95F /* FloatingPointDifferential.swift */; };
 		D4F48AC41AAE90D70017504F /* SetDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC31AAE90D70017504F /* SetDifferential.swift */; };
 		D4F48AC61AAE91380017504F /* DictionaryDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */; };
 		D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferential.swift */; };
@@ -105,6 +106,7 @@
 		D4ED82871A3F9ADB00D0479E /* TesseractCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseractCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED828D1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
+		D4F01E951AAFB0FA0060C95F /* FloatingPointDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointDifferential.swift; sourceTree = "<group>"; };
 		D4F48AC31AAE90D70017504F /* SetDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDifferential.swift; sourceTree = "<group>"; };
 		D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDifferential.swift; sourceTree = "<group>"; };
 		D4F48AC71AAE918C0017504F /* GraphDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferential.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */,
 				D4F48AC71AAE918C0017504F /* GraphDifferential.swift */,
 				D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */,
+				D4F01E951AAFB0FA0060C95F /* FloatingPointDifferential.swift */,
 			);
 			name = Diffs;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */,
 				11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */,
 				D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */,
+				D4F01E961AAFB0FA0060C95F /* FloatingPointDifferential.swift in Sources */,
 				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
 				D4B3ECA81A772346001AD21D /* Value.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
