@@ -20,18 +20,3 @@ public struct DictionaryDifferential<Key: Hashable, Value: Equatable>: Different
 		return DictionaryDifferential(inserted: after[afterKeys.subtract(beforeKeys).union(changedKeys)], deleted: before[beforeKeys.subtract(afterKeys).union(changedKeys)])
 	}
 }
-
-
-// MARK: - Implementation details
-
-extension Dictionary {
-	subscript (keys: Set<Key>) -> Dictionary {
-		var result: Dictionary = [:]
-		for key in keys {
-			if let value = self[key] {
-				result.updateValue(value, forKey: key)
-			}
-		}
-		return result
-	}
-}
