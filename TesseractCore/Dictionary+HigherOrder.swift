@@ -27,6 +27,17 @@ extension Dictionary {
 	func reduce<Into>(initial: Into, combine: (Into, Element) -> Into) -> Into {
 		return Swift.reduce(self, initial, combine)
 	}
+
+
+	subscript (keys: Set<Key>) -> Dictionary {
+		var result: Dictionary = [:]
+		for key in keys {
+			if let value = self[key] {
+				result.updateValue(value, forKey: key)
+			}
+		}
+		return result
+	}
 }
 
 
