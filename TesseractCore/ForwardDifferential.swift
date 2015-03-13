@@ -51,7 +51,7 @@ public enum ForwardDifferential<C: CollectionType where C.Generator.Element: Equ
 
 		switch (stream(xs, xindex, xoffset), stream(ys, yindex, yoffset)) {
 		case let (.Some(x, xsuccessor, xnext), .Some(y, ysuccessor, ynext)):
-			if x == y {
+			if equals(x, y) {
 				return differentiate(xs, xsuccessor, xnext, ys, ysuccessor, ynext, equals)
 			} else {
 				let insert = ForwardDifferential.Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext, equals)))
