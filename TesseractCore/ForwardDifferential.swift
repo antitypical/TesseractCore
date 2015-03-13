@@ -35,10 +35,14 @@ public enum ForwardDifferential<C: CollectionType where C.Generator.Element: Equ
 	// MARK: DifferentialType
 
 	public static func differentiate(#before: C, after: C) -> ForwardDifferential {
-		return differentiate(before, before.startIndex, 0, after, after.startIndex, 0)
+		return differentiate(before: before, after: after) { $0 == $1 }
 	}
 
-	private static func differentiate(xs: C, _ xindex: C.Index, _ xoffset: C.Index.Distance, _ ys: C, _ yindex: C.Index, _ yoffset: C.Index.Distance) -> ForwardDifferential {
+	public static func differentiate(#before: C, after: C, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
+		return differentiate(before, before.startIndex, 0, after, after.startIndex, 0, equals)
+	}
+
+	private static func differentiate(xs: C, _ xindex: C.Index, _ xoffset: C.Index.Distance, _ ys: C, _ yindex: C.Index, _ yoffset: C.Index.Distance, _ equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
 		func stream(collection: C, index: C.Index, offset: C.Index.Distance) -> (C.Generator.Element, C.Index, C.Index.Distance)? {
 			return index != collection.endIndex ?
 				(collection[index], index.successor(), offset + 1)
@@ -48,16 +52,16 @@ public enum ForwardDifferential<C: CollectionType where C.Generator.Element: Equ
 		switch (stream(xs, xindex, xoffset), stream(ys, yindex, yoffset)) {
 		case let (.Some(x, xsuccessor, xnext), .Some(y, ysuccessor, ynext)):
 			if x == y {
-				return differentiate(xs, xsuccessor, xnext, ys, ysuccessor, ynext)
+				return differentiate(xs, xsuccessor, xnext, ys, ysuccessor, ynext, equals)
 			} else {
-				let insert = ForwardDifferential.Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext)))
-				let delete = ForwardDifferential.Delete(Box(xoffset, x, differentiate(xs, xsuccessor, xnext, ys, yindex, yoffset)))
+				let insert = ForwardDifferential.Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext, equals)))
+				let delete = ForwardDifferential.Delete(Box(xoffset, x, differentiate(xs, xsuccessor, xnext, ys, yindex, yoffset, equals)))
 				return insert.count < delete.count ? insert : delete
 			}
 		case let (.Some(x, xsuccessor, xnext), .None):
-			return .Delete(Box(xoffset, x, differentiate(xs, xsuccessor, xnext, ys, yindex, yoffset)))
+			return .Delete(Box(xoffset, x, differentiate(xs, xsuccessor, xnext, ys, yindex, yoffset, equals)))
 		case let (.None, .Some(y, ysuccessor, ynext)):
-			return .Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext)))
+			return .Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext, equals)))
 		case (.None, .None):
 			return .End
 		}
