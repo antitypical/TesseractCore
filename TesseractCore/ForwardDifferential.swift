@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 /// O(MN) diffing over forward-indexed collections.
-public enum ForwardDifferential<I: SignedIntegerType, T> {
+public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	case Insert(Box<(I, T, ForwardDifferential)>)
 	case Delete(Box<(I, T, ForwardDifferential)>)
 	case End
@@ -72,6 +72,20 @@ public enum ForwardDifferential<I: SignedIntegerType, T> {
 			return .Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext, equals)))
 		case (.None, .None):
 			return .End
+		}
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		switch self {
+		case let Insert(values):
+			return "+\(values.value.0)\(values.value.1) \(values.value.2)"
+		case let Delete(values):
+			return "-\(values.value.0)\(values.value.1) \(values.value.2)"
+		case End:
+			return ""
 		}
 	}
 }
