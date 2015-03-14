@@ -1,9 +1,9 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 /// O(MN) diffing over forward-indexed collections.
-public enum ForwardDifferential<C: CollectionType> {
-	case Insert(Box<(C.Index.Distance, C.Generator.Element, ForwardDifferential)>)
-	case Delete(Box<(C.Index.Distance, C.Generator.Element, ForwardDifferential)>)
+public enum ForwardDifferential<I: SignedIntegerType, T> {
+	case Insert(Box<(I, T, ForwardDifferential)>)
+	case Delete(Box<(I, T, ForwardDifferential)>)
 	case End
 
 
@@ -18,7 +18,7 @@ public enum ForwardDifferential<C: CollectionType> {
 		}
 	}
 
-	public func apply<R: RangeReplaceableCollectionType where R.Generator.Element == C.Generator.Element, R.Index == C.Index>(inout collection: R, delta: C.Index.Distance = 0) {
+	public func apply<R: RangeReplaceableCollectionType where R.Generator.Element == T, R.Index.Distance == I>(inout collection: R, delta: I = 0) {
 		switch self {
 		case let Insert(values):
 			collection.insert(values.value.1, atIndex: advance(collection.startIndex, values.value.0 - -delta))
@@ -34,11 +34,11 @@ public enum ForwardDifferential<C: CollectionType> {
 
 	// MARK: DifferentialType
 
-	public static func differentiate(#before: C, after: C, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
+	public static func differentiate<C: CollectionType where C.Generator.Element == T, C.Index.Distance == I>(#before: C, after: C, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
 		return differentiate(before, before.startIndex, 0, after, after.startIndex, 0, equals)
 	}
 
-	private static func differentiate(xs: C, _ xindex: C.Index, _ xoffset: C.Index.Distance, _ ys: C, _ yindex: C.Index, _ yoffset: C.Index.Distance, _ equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
+	private static func differentiate<C: CollectionType where C.Generator.Element == T, C.Index.Distance == I>(xs: C, _ xindex: C.Index, _ xoffset: C.Index.Distance, _ ys: C, _ yindex: C.Index, _ yoffset: C.Index.Distance, _ equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
 		func stream(collection: C, index: C.Index, offset: C.Index.Distance) -> (C.Generator.Element, C.Index, C.Index.Distance)? {
 			return index != collection.endIndex ?
 				(collection[index], index.successor(), offset + 1)
