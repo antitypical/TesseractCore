@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 /// O(MN) diffing over forward-indexed collections.
-public enum ForwardDifferential<C: CollectionType where C.Generator.Element: Equatable>: DifferentialType {
+public enum ForwardDifferential<C: CollectionType> {
 	case Insert(Box<(C.Index.Distance, C.Generator.Element, ForwardDifferential)>)
 	case Delete(Box<(C.Index.Distance, C.Generator.Element, ForwardDifferential)>)
 	case End
@@ -33,10 +33,6 @@ public enum ForwardDifferential<C: CollectionType where C.Generator.Element: Equ
 
 
 	// MARK: DifferentialType
-
-	public static func differentiate(#before: C, after: C) -> ForwardDifferential {
-		return differentiate(before: before, after: after) { $0 == $1 }
-	}
 
 	public static func differentiate(#before: C, after: C, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
 		return differentiate(before, before.startIndex, 0, after, after.startIndex, 0, equals)
