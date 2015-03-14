@@ -44,6 +44,30 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 			ifInsert: { ForwardDifferential<I, U>.Insert(Box($0, transform($1), $2.map(transform))) },
 			ifDelete: { ForwardDifferential<I, U>.Delete(Box($0, transform($1), $2.map(transform))) },
 			ifEnd: ForwardDifferential<I, U>.End)
+	}
+
+
+	private var destructured: DestructuredForwardDifferential<I, T> {
+		return analysis(
+			ifInsert: { .Insert(Box($0), Box($1), $2) },
+			ifDelete: { .Delete(Box($0), Box($1), $2) },
+			ifEnd: .End)
+	}
+
+
+	/// Prune nilpotent diffs.
+	public func normalize(equals: (T, T) -> Bool) -> ForwardDifferential {
+		switch destructured.destructured {
+		case let .Insert(i, u, .Delete(j, v, rest)) where i == j && equals(u.value, v.value):
+			return rest
+		case let .Delete(i, u, .Insert(j, v, rest)) where i == j && equals(u.value, v.value):
+			return rest
+		case let .Insert(i, u, rest):
+			return Insert(Box(i.value, u.value, rest.restructured.normalize(equals)))
+		case let .Delete(i, u, rest):
+			return Delete(Box(i.value, u.value, rest.restructured.normalize(equals)))
+		case .End:
+			return End
 		}
 	}
 
@@ -88,6 +112,40 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 			ifDelete: { "-\($0)\($1) \($2)" },
 			ifEnd: "")
 	}
+}
+
+private enum DestructuredForwardDifferential<I: SignedIntegerType, T> {
+	case Insert(Box<I>, Box<T>, ForwardDifferential<I, T>)
+	case Delete(Box<I>, Box<T>, ForwardDifferential<I, T>)
+	case End
+
+	var destructured: DestructuredForwardDifferential2<I, T> {
+		switch self {
+		case let Insert(i, v, rest):
+			return .Insert(i, v, rest.destructured)
+		case let Delete(i, v, rest):
+			return .Delete(i, v, rest.destructured)
+		case End:
+			return .End
+		}
+	}
+
+	var restructured: ForwardDifferential<I, T> {
+		switch self {
+		case let Insert(i, v, rest):
+			return .Insert(Box(i.value, v.value, rest))
+		case let Delete(i, v, rest):
+			return .Delete(Box(i.value, v.value, rest))
+		case End:
+			return .End
+		}
+	}
+}
+
+private enum DestructuredForwardDifferential2<I: SignedIntegerType, T> {
+	case Insert(Box<I>, Box<T>, DestructuredForwardDifferential<I, T>)
+	case Delete(Box<I>, Box<T>, DestructuredForwardDifferential<I, T>)
+	case End
 }
 
 
