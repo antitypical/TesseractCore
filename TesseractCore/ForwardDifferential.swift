@@ -25,6 +25,13 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 			ifEnd: 0)
 	}
 
+	public var counts: (Int, Int) {
+		return analysis(
+			ifInsert: { $2.counts |> { ($0 + 1, $1) } },
+			ifDelete: { $2.counts |> { ($0, $1 + 1) } },
+			ifEnd: (0, 0))
+	}
+
 	public func apply<R: RangeReplaceableCollectionType where R.Generator.Element == T, R.Index.Distance == I>(inout collection: R, delta: I = 0) {
 		switch self {
 		case let Insert(values):
