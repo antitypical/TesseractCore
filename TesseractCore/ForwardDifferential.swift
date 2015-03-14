@@ -6,16 +6,23 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	case Delete(Box<(I, T, ForwardDifferential)>)
 	case End
 
-
-	public var count: Int {
+	public func analysis<Result>(@noescape #ifInsert: (I, T, ForwardDifferential) -> Result, @noescape ifDelete: (I, T, ForwardDifferential) -> Result, @autoclosure ifEnd: () -> Result) -> Result {
 		switch self {
 		case let Insert(values):
-			return 1 + values.value.2.count
+			return ifInsert(values.value)
 		case let Delete(values):
-			return 1 + values.value.2.count
+			return ifDelete(values.value)
 		case End:
-			return 0
+			return ifEnd()
 		}
+	}
+
+
+	public var count: Int {
+		return analysis(
+			ifInsert: { 1 + $2.count },
+			ifDelete: { 1 + $2.count },
+			ifEnd: 0)
 	}
 
 	public func apply<R: RangeReplaceableCollectionType where R.Generator.Element == T, R.Index.Distance == I>(inout collection: R, delta: I = 0) {
@@ -33,13 +40,10 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 
 
 	public func map<U>(transform: T -> U) -> ForwardDifferential<I, U> {
-		switch self {
-		case let Insert(values):
-			return .Insert(Box(values.value.0, transform(values.value.1), values.value.2.map(transform)))
-		case let Delete(values):
-			return .Delete(Box(values.value.0, transform(values.value.1), values.value.2.map(transform)))
-		case let End:
-			return .End
+		return analysis(
+			ifInsert: { ForwardDifferential<I, U>.Insert(Box($0, transform($1), $2.map(transform))) },
+			ifDelete: { ForwardDifferential<I, U>.Delete(Box($0, transform($1), $2.map(transform))) },
+			ifEnd: ForwardDifferential<I, U>.End)
 		}
 	}
 
@@ -79,14 +83,10 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	// MARK: Printable
 
 	public var description: String {
-		switch self {
-		case let Insert(values):
-			return "+\(values.value.0)\(values.value.1) \(values.value.2)"
-		case let Delete(values):
-			return "-\(values.value.0)\(values.value.1) \(values.value.2)"
-		case End:
-			return ""
-		}
+		return analysis(
+			ifInsert: { "+\($0)\($1) \($2)" },
+			ifDelete: { "-\($0)\($1) \($2)" },
+			ifEnd: "")
 	}
 }
 
