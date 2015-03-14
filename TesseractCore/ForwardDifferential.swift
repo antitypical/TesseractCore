@@ -18,10 +18,10 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	}
 
 
-	public var count: Int {
+	public var editDistance: Int {
 		return analysis(
-			ifInsert: { 1 + $2.count },
-			ifDelete: { 1 + $2.count },
+			ifInsert: { 1 + $2.editDistance },
+			ifDelete: { 1 + $2.editDistance },
 			ifEnd: 0)
 	}
 
@@ -105,7 +105,7 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 			} else {
 				let insert = ForwardDifferential.Insert(Box(xoffset, y, differentiate(xs, xindex, xoffset, ys, ysuccessor, ynext, equals)))
 				let delete = ForwardDifferential.Delete(Box(xoffset, x, differentiate(xs, xsuccessor, xnext, ys, yindex, yoffset, equals)))
-				return insert.count < delete.count ? insert : delete
+				return insert.editDistance < delete.editDistance ? insert : delete
 			}
 		case let (.Some(x, xsuccessor, xnext), .None):
 			return .Delete(Box(xoffset, x, differentiate(xs, xsuccessor, xnext, ys, yindex, yoffset, equals)))
@@ -165,3 +165,4 @@ private enum DestructuredForwardDifferential2<I: SignedIntegerType, T> {
 // MARK: - Imports
 
 import Box
+import Prelude
