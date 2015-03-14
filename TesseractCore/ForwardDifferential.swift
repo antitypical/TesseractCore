@@ -38,6 +38,19 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 		}
 	}
 
+	public func apply(delta: I = 0, ifInsert: (I, T) -> (), ifDelete: (I, T) -> ()) {
+		switch self {
+		case let Insert(values):
+			ifInsert(values.value.0 - -delta, values.value.1)
+			values.value.2.apply(delta: delta + 1, ifInsert: ifInsert, ifDelete: ifDelete)
+		case let Delete(values):
+			ifDelete(values.value.0 - -delta, values.value.1)
+			values.value.2.apply(delta: delta - 1, ifInsert: ifInsert, ifDelete: ifDelete)
+		case End:
+			break
+		}
+	}
+
 
 	public func map<U>(transform: T -> U) -> ForwardDifferential<I, U> {
 		return analysis(
