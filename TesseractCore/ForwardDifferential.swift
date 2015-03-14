@@ -32,6 +32,18 @@ public enum ForwardDifferential<I: SignedIntegerType, T> {
 	}
 
 
+	public func map<U>(transform: T -> U) -> ForwardDifferential<I, U> {
+		switch self {
+		case let Insert(values):
+			return .Insert(Box(values.value.0, transform(values.value.1), values.value.2.map(transform)))
+		case let Delete(values):
+			return .Delete(Box(values.value.0, transform(values.value.1), values.value.2.map(transform)))
+		case let End:
+			return .End
+		}
+	}
+
+
 	// MARK: DifferentialType
 
 	public static func differentiate<C: CollectionType where C.Generator.Element == T, C.Index.Distance == I>(#before: C, after: C, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
