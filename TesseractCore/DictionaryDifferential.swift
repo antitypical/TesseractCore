@@ -10,8 +10,6 @@ public struct DictionaryDifferential<Key: Hashable, Value: Equatable> {
 	public let deleted: [Key: Value]
 
 
-	// MARK: DifferentialType
-
 	public static func differentiate(#before: Dictionary<Key, Value>, after: Dictionary<Key, Value>) -> DictionaryDifferential {
 		let (beforeKeys, afterKeys) = (Set(before.keys), Set(after.keys))
 		let changedKeys = Set(lazy(beforeKeys.intersect(afterKeys))

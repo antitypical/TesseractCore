@@ -92,7 +92,7 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	}
 
 
-	// MARK: DifferentialType
+	// MARK: Differentiation
 
 	public static func differentiate<C: CollectionType where C.Generator.Element == T, C.Index.Distance == I>(#before: C, after: C, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> ForwardDifferential {
 		return differentiate(before, before.startIndex, 0, after, after.startIndex, 0, equals)

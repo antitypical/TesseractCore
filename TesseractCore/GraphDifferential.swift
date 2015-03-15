@@ -2,12 +2,10 @@
 
 public struct GraphDifferential<T: Equatable> {
 	public let nodes: DictionaryDifferential<Identifier, T>
-	public let edges: SetDifferential<Edge>
+	public let edges: UnorderedDifferential<Edge>
 
-
-	// MARK: DifferentialType
 
 	public static func differentiate(#before: Graph<T>, after: Graph<T>) -> GraphDifferential {
-		return GraphDifferential(nodes: .differentiate(before: before.nodes, after: after.nodes), edges: .differentiate(before: before.edges, after: after.edges))
+		return GraphDifferential(nodes: .differentiate(before: before.nodes, after: after.nodes), edges: SetDifferential.differentiate(before: before.edges, after: after.edges))
 	}
 }
