@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct FloatingPointDifferential<FP: FloatingPointType where FP.Stride == FP>: DifferentialType {
+public struct FloatingPointDifferential<FP: FloatingPointType where FP.Stride == FP>: DifferentiatorType {
 	public let delta: FP
 
 

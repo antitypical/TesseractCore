@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct SetDifferential<T: Hashable>: DifferentialType {
+public struct SetDifferential<T: Hashable>: DifferentiatorType {
 	public init<S1: SequenceType, S2: SequenceType where S1.Generator.Element == T, S2.Generator.Element == T>(inserted: S1, deleted: S2) {
 		self.inserted = Set(inserted)
 		self.deleted = Set(deleted)
