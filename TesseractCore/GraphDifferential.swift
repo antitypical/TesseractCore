@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct GraphDifferential<T: Equatable>: DifferentiatorType {
+public struct GraphDifferential<T: Equatable> {
 	public let nodes: DictionaryDifferential<Identifier, T>
 	public let edges: SetDifferential<Edge>
 

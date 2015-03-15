@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct DictionaryDifferential<Key: Hashable, Value: Equatable>: DifferentiatorType {
+public struct DictionaryDifferential<Key: Hashable, Value: Equatable> {
 	public init(inserted: [Key: Value], deleted: [Key: Value]) {
 		self.inserted = inserted
 		self.deleted = deleted
