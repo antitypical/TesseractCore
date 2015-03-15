@@ -2,6 +2,7 @@
 
 public protocol DifferentiatorType {
 	typealias Differentiable
+	typealias Differential
 
-	static func differentiate(#before: Differentiable, after: Differentiable) -> Self
+	static func differentiate(#before: Differentiable, after: Differentiable) -> Differential
 }
