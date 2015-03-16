@@ -11,4 +11,9 @@ public struct UnorderedDifferential<T> {
 
 	public let inserted: [T]
 	public let deleted: [T]
+
+
+	public func map<U>(transform: T -> U) -> UnorderedDifferential<U> {
+		return UnorderedDifferential<U>(inserted: lazy(inserted).map(transform), deleted: lazy(deleted).map(transform))
+	}
 }
