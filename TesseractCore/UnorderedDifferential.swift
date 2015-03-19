@@ -16,6 +16,10 @@ public struct UnorderedDifferential<T> {
 	public func map<U>(transform: T -> U) -> UnorderedDifferential<U> {
 		return UnorderedDifferential<U>(inserted: lazy(inserted).map(transform), deleted: lazy(deleted).map(transform))
 	}
+
+	public func filter(predicate: T -> Bool) -> UnorderedDifferential<T> {
+		return UnorderedDifferential(inserted: lazy(inserted).filter(predicate), deleted: lazy(deleted).filter(predicate))
+	}
 }
 
 
