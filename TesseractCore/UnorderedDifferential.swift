@@ -20,6 +20,20 @@ public struct UnorderedDifferential<T> {
 	public func filter(predicate: T -> Bool) -> UnorderedDifferential<T> {
 		return UnorderedDifferential(inserted: lazy(inserted).filter(predicate), deleted: lazy(deleted).filter(predicate))
 	}
+
+	public func partition(predicate: T -> Bool) -> (UnorderedDifferential<T>, UnorderedDifferential<T>) {
+		let i = partition(inserted, predicate)
+		let d = partition(deleted, predicate)
+		return (UnorderedDifferential(inserted: i.0, deleted: d.0), UnorderedDifferential(inserted: i.1, deleted: d.1))
+	}
+
+	private func partition<S: SequenceType>(sequence: S, _ predicate: S.Generator.Element -> Bool) -> ([S.Generator.Element], [S.Generator.Element]) {
+		return reduce(sequence, ([], [])) {
+			predicate($1) ?
+				($0.0 + [$1], $0.1)
+				:	($0.0, $0.1 + [$1])
+		}
+	}
 }
 
 
