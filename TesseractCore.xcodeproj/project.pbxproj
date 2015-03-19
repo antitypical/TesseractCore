@@ -17,6 +17,7 @@
 		D41ECE341ABB86C40068AAAC /* Manifold.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE321ABB86C40068AAAC /* Manifold.framework */; };
 		D41ECE351ABB87A00068AAAC /* DisjointSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE311ABB86C40068AAAC /* DisjointSet.framework */; };
 		D41ECE361ABB87A00068AAAC /* Manifold.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE321ABB86C40068AAAC /* Manifold.framework */; };
+		D41ECE381ABB87F90068AAAC /* Assertions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE371ABB87F90068AAAC /* Assertions.framework */; };
 		D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
 		D42F30E91A8DAD3500F3EA38 /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42F30E81A8DAD3500F3EA38 /* NodeView.swift */; };
 		D42F30EB1A8DB64000F3EA38 /* EdgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42F30EA1A8DB64000F3EA38 /* EdgeView.swift */; };
@@ -79,6 +80,7 @@
 		D41275841A78638900CC910A /* EvaluationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationTests.swift; sourceTree = "<group>"; };
 		D41ECE311ABB86C40068AAAC /* DisjointSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DisjointSet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41ECE321ABB86C40068AAAC /* Manifold.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Manifold.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D41ECE371ABB87F90068AAAC /* Assertions.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Assertions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42CAC391A429BFD0091F6AA /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Box.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D42F30E81A8DAD3500F3EA38 /* NodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
 		D42F30EA1A8DB64000F3EA38 /* EdgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EdgeView.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41ECE381ABB87F90068AAAC /* Assertions.framework in Frameworks */,
 				D41ECE361ABB87A00068AAAC /* Manifold.framework in Frameworks */,
 				D4B7EE731A47226B006D44E9 /* Box.framework in Frameworks */,
 				D41ECE351ABB87A00068AAAC /* DisjointSet.framework in Frameworks */,
@@ -204,6 +207,7 @@
 				D4ED827B1A3F9ADB00D0479E /* Info.plist */,
 				D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */,
 				D481D9311A78771B00044B2F /* Find.swift */,
+				D41ECE371ABB87F90068AAAC /* Assertions.framework */,
 				D42CAC391A429BFD0091F6AA /* Box.framework */,
 				D41ECE311ABB86C40068AAAC /* DisjointSet.framework */,
 				D4B7EE6F1A466104006D44E9 /* Either.framework */,
