@@ -1,8 +1,5 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-import TesseractCore
-import XCTest
-
 final class EvaluationTests: XCTestCase {
 	func createGraph(symbol: Symbol) -> (Identifier, Graph<Node>) {
 		let a = Identifier()
@@ -21,14 +18,14 @@ final class EvaluationTests: XCTestCase {
 		let (a, graph) = constantGraph
 		let evaluated = evaluate(graph, a)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
+		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 
 	func testFunctionNodeWithNoBoundInputsEvaluatesToFunction() {
 		let (a, graph) = createGraph(Prelude["identity"]!.0)
 		let evaluated = evaluate(graph, a)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.value.function() as (Any -> Any)?).map { $0(1) as! Int }, 1)
+		assertEqual(assertNotNil(evaluated.right?.value.function() as (Any -> Any)?).map { $0(1) as! Int }, 1)
 	}
 
 	func testFunctionNodeWithBoundInputAppliesInput() {
@@ -36,7 +33,7 @@ final class EvaluationTests: XCTestCase {
 		let graph = Graph(nodes: [ a: node("true"), b: node("identity") ], edges: [ Edge((a, 0), (b, 0)) ])
 		let evaluated = evaluate(graph, b)
 
-		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
+		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 
 	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
@@ -46,7 +43,7 @@ final class EvaluationTests: XCTestCase {
 		let truthy = Symbol.Named("truthy", .Boolean)
 		let (c, graph) = createGraph(truthy)
 		let evaluated = evaluate(graph, c, [truthy: Value(graph: constant)])
-		let right = assertRight(evaluated)?.value.graph.map { $0 == constant }
+		let right = evaluated.right?.value.graph.map { $0 == constant }
 		assertEqual(right ?? false, true)
 	}
 
@@ -58,6 +55,13 @@ final class EvaluationTests: XCTestCase {
 		let (c, d) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
 		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)))
-		assertEqual(assertNotNil(assertRight(evaluated)?.value.constant()), true)
+		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 }
+
+
+// MARK: - Imports
+
+import Assertions
+import TesseractCore
+import XCTest

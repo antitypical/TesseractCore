@@ -1,8 +1,5 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-import TesseractCore
-import XCTest
-
 final class NodeTests: XCTestCase {
 	func node(symbolName: String) -> Node {
 		return .Symbolic(Prelude[symbolName]!.0)
@@ -29,3 +26,10 @@ final class NodeTests: XCTestCase {
 		assertEqual(n.inputs(a, graph).first?.0.name, "0")
 	}
 }
+
+
+// MARK: - Imports
+
+import Assertions
+import TesseractCore
+import XCTest

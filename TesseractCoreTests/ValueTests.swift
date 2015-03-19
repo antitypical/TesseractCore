@@ -1,12 +1,8 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-import Prelude
-import TesseractCore
-import XCTest
-
 final class ValueTests: XCTestCase {
 	func testConstantValueDestructuresToSomeOfSameType() {
-		assertEqual(Value(constant: 1).constant(), 1)
+		assert(Value(constant: 1).constant(), ==, 1)
 	}
 
 	func testConstantValueDestructuresToNoneOfDifferentType() {
@@ -33,7 +29,7 @@ final class ValueTests: XCTestCase {
 
 	func testApplicationOfConstantIsError() {
 		let value = Value(constant: ())
-		assertLeft(value.apply(value, Identifier(), [:]))
+		assertNotNil(value.apply(value, Identifier(), [:]).left)
 	}
 
 	func testApplicationOfIdentityIsArgument() {
@@ -42,3 +38,11 @@ final class ValueTests: XCTestCase {
 		assertEqual(assertNotNil(identity.apply(argument, Identifier(), [:]).right)?.value.constant(), 1)
 	}
 }
+
+
+// MARK: - Imports
+
+import Assertions
+import Prelude
+import TesseractCore
+import XCTest

@@ -36,7 +36,6 @@
 		D4B3ECA81A772346001AD21D /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA71A772346001AD21D /* Value.swift */; };
 		D4B5220D1A9D896500F33502 /* FlatMapSequenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5220C1A9D896500F33502 /* FlatMapSequenceView.swift */; };
 		D4B5220F1A9D952500F33502 /* Fixtures.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5220E1A9D952500F33502 /* Fixtures.swift */; };
-		D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B564091A4CEF2E00795949 /* Assertions.swift */; };
 		D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5DE351A505F66004B4C0C /* Graph.swift */; };
 		D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */; };
 		D4B7EE701A466104006D44E9 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE6F1A466104006D44E9 /* Either.framework */; };
@@ -98,7 +97,6 @@
 		D4B3ECA71A772346001AD21D /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		D4B5220C1A9D896500F33502 /* FlatMapSequenceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatMapSequenceView.swift; sourceTree = "<group>"; };
 		D4B5220E1A9D952500F33502 /* Fixtures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fixtures.swift; sourceTree = "<group>"; };
-		D4B564091A4CEF2E00795949 /* Assertions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assertions.swift; sourceTree = "<group>"; };
 		D4B5DE351A505F66004B4C0C /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+HigherOrder.swift"; sourceTree = "<group>"; };
 		D4B7EE6F1A466104006D44E9 /* Either.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Either.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -207,7 +205,6 @@
 				D4ED827B1A3F9ADB00D0479E /* Info.plist */,
 				D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */,
 				D481D9311A78771B00044B2F /* Find.swift */,
-				D41ECE371ABB87F90068AAAC /* Assertions.framework */,
 				D42CAC391A429BFD0091F6AA /* Box.framework */,
 				D41ECE311ABB86C40068AAAC /* DisjointSet.framework */,
 				D4B7EE6F1A466104006D44E9 /* Either.framework */,
@@ -240,7 +237,7 @@
 		D4ED828C1A3F9ADB00D0479E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				D4B564091A4CEF2E00795949 /* Assertions.swift */,
+				D41ECE371ABB87F90068AAAC /* Assertions.framework */,
 				D4ED828D1A3F9ADB00D0479E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -397,7 +394,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D4B5640A1A4CEF2E00795949 /* Assertions.swift in Sources */,
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
 				1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */,
 				D4B5220F1A9D952500F33502 /* Fixtures.swift in Sources */,

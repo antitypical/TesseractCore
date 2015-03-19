@@ -1,8 +1,5 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-import TesseractCore
-import XCTest
-
 final class GraphTests: XCTestCase {
 	func testIdentityGraph() {
 		let (a, b) = (Identifier(), Identifier())
@@ -40,7 +37,7 @@ final class GraphTests: XCTestCase {
 		let graph = Graph(nodes: [a: "1", b: "2"], edges: [Edge(a, b.input(0))])
 		let newGraph = graph.map { $0.toInt() ?? 0 }
 		let expectedGraph = Graph(nodes: [a: 1, b: 2], edges: [Edge(a, b.input(0))])
-		assertEqual(newGraph, expectedGraph)
+		assert(newGraph, ==, expectedGraph)
 	}
 
 	func testReductionDoesNotTraverseWithoutEdges() {
@@ -57,3 +54,10 @@ final class GraphTests: XCTestCase {
 		XCTAssertEqual(reduced, "_abc!")
 	}
 }
+
+
+// MARK: - Imports
+
+import Assertions
+import TesseractCore
+import XCTest
