@@ -58,7 +58,7 @@ public enum Type: Hashable, IntegerLiteralConvertible, Printable {
 
 	// MARK: Printable
 
-	private static var alphabet = Array("abcdefghijklmnopqrstuvwxyz")
+	private static let alphabet = Array("abcdefghijklmnopqrstuvwxyz")
 
 	public var description: String {
 		switch self {

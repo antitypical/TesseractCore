@@ -25,7 +25,7 @@
 		D479740E1A7DEE9E0034ABA2 /* ErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */; };
 		D47974101A7DF0300034ABA2 /* TypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D479740F1A7DF0300034ABA2 /* TypeTests.swift */; };
 		D481D9321A78771B00044B2F /* Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = D481D9311A78771B00044B2F /* Find.swift */; };
-		D49A4B5C1AAD10600093641A /* DifferentialType.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49A4B5B1AAD10600093641A /* DifferentialType.swift */; };
+		D4AE08BE1AB62D2B00F1CD10 /* UnorderedDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AE08BD1AB62D2B00F1CD10 /* UnorderedDifferential.swift */; };
 		D4B1EFA91A81AC5100216B52 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B1EFA81A81AC5100216B52 /* NodeTests.swift */; };
 		D4B3ECA41A77203B001AD21D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA31A77203B001AD21D /* Type.swift */; };
 		D4B3ECA81A772346001AD21D /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA71A772346001AD21D /* Value.swift */; };
@@ -48,10 +48,10 @@
 		D4ED827D1A3F9ADB00D0479E /* TesseractCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* TesseractCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4ED82881A3F9ADB00D0479E /* TesseractCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* TesseractCore.framework */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
-		D4F01E961AAFB0FA0060C95F /* FloatingPointDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01E951AAFB0FA0060C95F /* FloatingPointDifferential.swift */; };
-		D4F48AC41AAE90D70017504F /* SetDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC31AAE90D70017504F /* SetDifferential.swift */; };
-		D4F48AC61AAE91380017504F /* DictionaryDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */; };
-		D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferential.swift */; };
+		D4F01E961AAFB0FA0060C95F /* FloatingPointDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */; };
+		D4F48AC41AAE90D70017504F /* SetDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC31AAE90D70017504F /* SetDifferentiator.swift */; };
+		D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC51AAE91380017504F /* DictionaryDifferentiator.swift */; };
+		D4F48AC81AAE918C0017504F /* GraphDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */; };
 		D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */; };
 		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
 /* End PBXBuildFile section */
@@ -84,7 +84,7 @@
 		D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
 		D479740F1A7DF0300034ABA2 /* TypeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTests.swift; sourceTree = "<group>"; };
 		D481D9311A78771B00044B2F /* Find.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Find.swift; sourceTree = "<group>"; };
-		D49A4B5B1AAD10600093641A /* DifferentialType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DifferentialType.swift; sourceTree = "<group>"; };
+		D4AE08BD1AB62D2B00F1CD10 /* UnorderedDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnorderedDifferential.swift; sourceTree = "<group>"; };
 		D4B1EFA81A81AC5100216B52 /* NodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 		D4B3ECA31A77203B001AD21D /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
 		D4B3ECA71A772346001AD21D /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
@@ -106,10 +106,10 @@
 		D4ED82871A3F9ADB00D0479E /* TesseractCoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TesseractCoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4ED828D1A3F9ADB00D0479E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4ED82981A3F9C3800D0479E /* Symbol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Symbol.swift; sourceTree = "<group>"; };
-		D4F01E951AAFB0FA0060C95F /* FloatingPointDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointDifferential.swift; sourceTree = "<group>"; };
-		D4F48AC31AAE90D70017504F /* SetDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDifferential.swift; sourceTree = "<group>"; };
-		D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDifferential.swift; sourceTree = "<group>"; };
-		D4F48AC71AAE918C0017504F /* GraphDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferential.swift; sourceTree = "<group>"; };
+		D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointDifferentiator.swift; sourceTree = "<group>"; };
+		D4F48AC31AAE90D70017504F /* SetDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDifferentiator.swift; sourceTree = "<group>"; };
+		D4F48AC51AAE91380017504F /* DictionaryDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDifferentiator.swift; sourceTree = "<group>"; };
+		D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferentiator.swift; sourceTree = "<group>"; };
 		D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardDifferential.swift; sourceTree = "<group>"; };
 		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -233,12 +233,12 @@
 		D4F48AC21AAE90CB0017504F /* Diffs */ = {
 			isa = PBXGroup;
 			children = (
-				D49A4B5B1AAD10600093641A /* DifferentialType.swift */,
-				D4F48AC31AAE90D70017504F /* SetDifferential.swift */,
-				D4F48AC51AAE91380017504F /* DictionaryDifferential.swift */,
-				D4F48AC71AAE918C0017504F /* GraphDifferential.swift */,
+				D4F48AC31AAE90D70017504F /* SetDifferentiator.swift */,
+				D4F48AC51AAE91380017504F /* DictionaryDifferentiator.swift */,
+				D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */,
 				D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */,
-				D4F01E951AAFB0FA0060C95F /* FloatingPointDifferential.swift */,
+				D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */,
+				D4AE08BD1AB62D2B00F1CD10 /* UnorderedDifferential.swift */,
 			);
 			name = Diffs;
 			sourceTree = "<group>";
@@ -350,26 +350,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4AE08BE1AB62D2B00F1CD10 /* UnorderedDifferential.swift in Sources */,
 				D47974071A7D99A40034ABA2 /* Application.swift in Sources */,
 				D4B5220D1A9D896500F33502 /* FlatMapSequenceView.swift in Sources */,
 				D481D9321A78771B00044B2F /* Find.swift in Sources */,
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
 				D479740C1A7DA6DC0034ABA2 /* Error.swift in Sources */,
-				D4F48AC41AAE90D70017504F /* SetDifferential.swift in Sources */,
+				D4F48AC41AAE90D70017504F /* SetDifferentiator.swift in Sources */,
 				D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */,
-				D4F48AC61AAE91380017504F /* DictionaryDifferential.swift in Sources */,
+				D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */,
 				D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */,
 				11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */,
 				D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */,
-				D4F01E961AAFB0FA0060C95F /* FloatingPointDifferential.swift in Sources */,
+				D4F01E961AAFB0FA0060C95F /* FloatingPointDifferentiator.swift in Sources */,
 				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
 				D4B3ECA81A772346001AD21D /* Value.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 				D42F30E91A8DAD3500F3EA38 /* NodeView.swift in Sources */,
 				D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */,
-				D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */,
+				D4F48AC81AAE918C0017504F /* GraphDifferentiator.swift in Sources */,
 				11C1526B1A830A160044FCA2 /* Exporting.swift in Sources */,
-				D49A4B5C1AAD10600093641A /* DifferentialType.swift in Sources */,
 				D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */,
 				D42F30EB1A8DB64000F3EA38 /* EdgeView.swift in Sources */,
 				D47974051A7D92E00034ABA2 /* Evaluation.swift in Sources */,
