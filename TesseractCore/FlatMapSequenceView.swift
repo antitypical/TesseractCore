@@ -35,11 +35,6 @@ private func next<T>(outer: () -> Bool, inner: () -> T?) -> T? {
 }
 
 
-public func flatMap<Base: SequenceType, Each: SequenceType>(base: Base, transform: Base.Generator.Element -> Each) -> FlatMapSequenceView<Base, Each> {
-	return FlatMapSequenceView(base, transform)
-}
-
-
 extension LazySequence {
 	func flatMap<Each: SequenceType>(transform: S.Generator.Element -> Each) -> LazySequence<FlatMapSequenceView<LazySequence<S>, Each>> {
 		return lazy(FlatMapSequenceView(self, transform))
