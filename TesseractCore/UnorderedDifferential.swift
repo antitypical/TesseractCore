@@ -17,3 +17,9 @@ public struct UnorderedDifferential<T> {
 		return UnorderedDifferential<U>(inserted: lazy(inserted).map(transform), deleted: lazy(deleted).map(transform))
 	}
 }
+
+
+/// Returns the union of two unordered differentials. Makes no effort to normalize.
+public func + <T> (left: UnorderedDifferential<T>, right: UnorderedDifferential<T>) -> UnorderedDifferential<T> {
+	return UnorderedDifferential(inserted: left.inserted + right.inserted, deleted: left.deleted + right.deleted)
+}
