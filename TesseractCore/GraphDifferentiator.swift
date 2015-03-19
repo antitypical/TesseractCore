@@ -1,6 +1,5 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-
 public struct GraphDifferentiator<T: Equatable> {
 	public typealias Differential = (nodes: UnorderedDifferential<(Identifier, T)>, edges: UnorderedDifferential<Edge>)
 
