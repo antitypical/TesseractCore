@@ -46,3 +46,9 @@ extension LazyForwardCollection {
 		return lazy(FlatMapSequenceView(self, transform))
 	}
 }
+
+extension LazyBidirectionalCollection {
+	func flatMap<Each: SequenceType>(transform: S.Generator.Element -> Each) -> LazySequence<FlatMapSequenceView<LazyBidirectionalCollection<S>, Each>> {
+		return lazy(FlatMapSequenceView(self, transform))
+	}
+}
