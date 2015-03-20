@@ -38,9 +38,9 @@ final class EvaluationTests: XCTestCase {
 
 	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
 		let (a, b) = (Identifier(), Identifier())
-		let constant = Graph<Node>(nodes: [ a: node("true"), b: .Return(.Named("return", .Boolean)) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let constant = Graph<Node>(nodes: [ a: node("true"), b: .Return(.Named("return", .Bool)) ], edges: [ Edge((a, 0), (b, 0)) ])
 
-		let truthy = Symbol.Named("truthy", .Boolean)
+		let truthy = Symbol.Named("truthy", .Bool)
 		let (c, graph) = createGraph(truthy)
 		let evaluated = evaluate(graph, c, [truthy: Value(graph: constant)])
 		let right = evaluated.right?.value.graph.map { $0 == constant }
@@ -49,9 +49,9 @@ final class EvaluationTests: XCTestCase {
 
 	func testGraphNodeWithBoundInputsAppliesInput() {
 		let (a, b) = (Identifier(), Identifier())
-		let identity = Graph<Node>(nodes: [ a: .Parameter(.Parameter(0, .Parameter(0))), b: .Return(.Named("return", .Parameter(0))) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let identity = Graph<Node>(nodes: [ a: .Parameter(.Parameter(0, Term(0))), b: .Return(.Named("return", Term(0))) ], edges: [ Edge((a, 0), (b, 0)) ])
 
-		let identitySymbol = Symbol.Named("identity", Type(function: 0, 0))
+		let identitySymbol = Symbol.Named("identity", Term.forall([ 0 ], .function(Term(0), Term(0))))
 		let (c, d) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
 		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)))
@@ -63,5 +63,6 @@ final class EvaluationTests: XCTestCase {
 // MARK: - Imports
 
 import Assertions
+import Manifold
 import TesseractCore
 import XCTest
