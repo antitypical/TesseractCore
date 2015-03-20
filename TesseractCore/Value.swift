@@ -51,20 +51,20 @@ public enum Value: Printable {
 
 
 	public func apply(argument: Value, _ identifier: Identifier, _ environment: Environment) -> Either<Error<Identifier>, Memo<Value>> {
-		switch self {
-		case let Function(function) where function.value is Any -> Any:
-			return argument.constant()
-				.map(function.value as! Any -> Any)
-				.map { applied in .right(Memo(evaluated: Value(constant: applied))) }
-			??	error("could not apply function", identifier)
-		case let Graph(graph):
-			return graph
-				.find { $1.isReturn }
-				.map { evaluate(graph, graph[$0].identifier, environment + (.Parameter(0, .Unit), argument)) }
-			??	error("could not find return node", identifier)
-		default:
-			return error("cannot apply \(self)", identifier)
-		}
+		return analysis(
+			ifConstant: const(error("cannot apply \(self)", identifier)),
+			ifFunction: { function in
+				(argument.constant()
+					|>	(flip(flatMap) <| { (function as? Any -> Any)?($0) }))
+					.map { .right(Memo(evaluated: Value(constant: $0))) }
+				??	error("could not apply function", identifier)
+			},
+			ifGraph: { graph in
+				graph
+					.find { $1.isReturn }
+					.map { evaluate(graph, graph[$0].identifier, environment + (.Parameter(0, .Unit), argument)) }
+				??	error("could not find return node", identifier)
+			})
 	}
 
 
