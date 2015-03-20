@@ -5,13 +5,22 @@
       location = "group:TesseractCore.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:External/Assertions/Assertions.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:External/Box/Box.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:External/DisjointSet/DisjointSet.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:External/Either/Either.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:../tesseractcore/External/Madness/Madness.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:External/Manifold/Manifold.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:External/Memo/Memo.xcodeproj">

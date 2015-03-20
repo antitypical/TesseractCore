@@ -16,3 +16,12 @@
 [submodule "External/Madness"]
 	path = External/Madness
 	url = https://github.com/robrix/Madness
+[submodule "External/Manifold"]
+	path = External/Manifold
+	url = https://github.com/antitypical/Manifold.git
+[submodule "External/DisjointSet"]
+	path = External/DisjointSet
+	url = https://github.com/antitypical/DisjointSet.git
+[submodule "External/Assertions"]
+	path = External/Assertions
+	url = https://github.com/antitypical/Assertions.git

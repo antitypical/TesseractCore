@@ -1,17 +1,17 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Symbol: Hashable, Printable {
-	public init(_ name: String, _ type: Type) {
+	public init(_ name: String, _ type: Term) {
 		self = Named(name, type)
 	}
 
-	public init(_ index: Int, _ type: Type) {
+	public init(_ index: Int, _ type: Term) {
 		self = Parameter(index, type)
 	}
 
 
-	case Named(String, Type)
-	case Parameter(Int, Type)
+	case Named(String, Term)
+	case Parameter(Int, Term)
 
 
 	public var name: String {
@@ -23,7 +23,7 @@ public enum Symbol: Hashable, Printable {
 		}
 	}
 
-	public var type: Type {
+	public var type: Term {
 		switch self {
 		case let Named(_, type):
 			return type
@@ -55,3 +55,8 @@ public func == (left: Symbol, right: Symbol) -> Bool {
 		left.name == right.name
 	&&	left.type == right.type
 }
+
+
+// MARK: - Imports
+
+import Manifold
