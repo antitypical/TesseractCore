@@ -16,14 +16,14 @@ final class EvaluationTests: XCTestCase {
 
 	func testConstantNodeEvaluatesToConstant() {
 		let (a, graph) = constantGraph
-		let evaluated = evaluate(graph, a)
+		let evaluated = evaluate(graph, a, Prelude)
 
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 
 	func testFunctionNodeWithNoBoundInputsEvaluatesToFunction() {
 		let (a, graph) = createGraph(Prelude["identity"]!.0)
-		let evaluated = evaluate(graph, a)
+		let evaluated = evaluate(graph, a, Prelude)
 
 		assertEqual(assertNotNil(evaluated.right?.value.function() as (Any -> Any)?).map { $0(1) as! Int }, 1)
 	}
@@ -31,7 +31,7 @@ final class EvaluationTests: XCTestCase {
 	func testFunctionNodeWithBoundInputAppliesInput() {
 		let (a, b) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ a: node("true"), b: node("identity") ], edges: [ Edge((a, 0), (b, 0)) ])
-		let evaluated = evaluate(graph, b)
+		let evaluated = evaluate(graph, b, Prelude)
 
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
@@ -54,7 +54,7 @@ final class EvaluationTests: XCTestCase {
 		let identitySymbol = Symbol.Named("identity", Term.forall([ 0 ], .function(Term(0), Term(0))))
 		let (c, d) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
-		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)))
+		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)), Prelude)
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 }
