@@ -60,13 +60,14 @@ public func + (var left: Environment, right: (Symbol, Value)) -> Environment {
 
 public let Prelude: Environment = [
 	Symbol("unit", .Unit): Value(constant: ()),
-	Symbol("true", .Boolean): Value(constant: true),
-	Symbol("false", .Boolean): Value(constant: false),
-	Symbol("identity", 0 --> 0): Value(function: id as Any -> Any),
-	Symbol("constant", 0 --> 1 --> 0): Value(function: const as Any -> Any -> Any),
+	Symbol("true", .Bool): Value(constant: true),
+	Symbol("false", .Bool): Value(constant: false),
+	Symbol("identity", Term.forall([0], Term.function(Term(0), Term(0)))): Value(function: id as Any -> Any),
+	Symbol("constant", Term.forall([0, 1], Term.function(Term(0), Term.function(Term(1), Term(0))))): Value(function: const as Any -> Any -> Any),
 ]
 
 
 // MARK: - Imports
 
 import Prelude
+import Manifold
