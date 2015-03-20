@@ -29,12 +29,10 @@ public enum Value: Printable {
 	}
 
 	public func constant<T>() -> T? {
-		switch self {
-		case let Constant(v):
-			return v.value as? T
-		default:
-			return nil
-		}
+		return analysis(
+			ifConstant: { $0 as? T },
+			ifFunction: const(nil),
+			ifGraph: const(nil))
 	}
 
 	public func function<T, U>() -> (T -> U)? {
