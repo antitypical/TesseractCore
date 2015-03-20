@@ -43,12 +43,10 @@ public enum Value: Printable {
 	}
 
 	public var graph: TesseractCore.Graph<Node>? {
-		switch self {
-		case let Graph(graph):
-			return graph
-		default:
-			return nil
-		}
+		return analysis(
+			ifConstant: const(nil),
+			ifFunction: const(nil),
+			ifGraph: unit)
 	}
 
 
