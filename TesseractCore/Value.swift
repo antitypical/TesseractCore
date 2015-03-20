@@ -36,12 +36,10 @@ public enum Value: Printable {
 	}
 
 	public func function<T, U>() -> (T -> U)? {
-		switch self {
-		case let Function(f):
-			return f.value as? T -> U
-		default:
-			return nil
-		}
+		return analysis(
+			ifConstant: const(nil),
+			ifFunction: { $0 as? T -> U },
+			ifGraph: const(nil))
 	}
 
 	public var graph: TesseractCore.Graph<Node>? {
