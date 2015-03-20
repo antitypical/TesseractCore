@@ -71,14 +71,10 @@ public enum Value: Printable {
 	// MARK: Printable
 
 	public var description: String {
-		switch self {
-		case let Constant(constant):
-			return ".Constant(\(constant))"
-		case let Function(function):
-			return ".Function(\(function))"
-		case let Graph(graph):
-			return ".Graph(\(graph))"
-		}
+		return analysis(
+			ifConstant: { ".Constant(\($0))" },
+			ifFunction: { ".Function(\($0))" },
+			ifGraph: { ".Graph(\($0))" })
 	}
 }
 
