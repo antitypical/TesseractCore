@@ -17,6 +17,17 @@ public enum Value: Printable {
 	case Function(Box<Any>)
 	case Graph(TesseractCore.Graph<Node>)
 
+	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifFunction: Any -> Result, @noescape ifGraph: TesseractCore.Graph<Node> -> Result) -> Result {
+		switch self {
+		case let Constant(v):
+			return ifConstant(v.value)
+		case let Function(v):
+			return ifFunction(v.value)
+		case let Graph(g):
+			return ifGraph(g)
+		}
+	}
+
 	public func constant<T>() -> T? {
 		switch self {
 		case let Constant(v):
