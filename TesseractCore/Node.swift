@@ -11,6 +11,19 @@ public enum Node: Equatable, Printable {
 	case Symbolic(Symbol)
 
 
+	/// Case analysis.
+	public func analysis<Result>(@noescape #ifParameter: Symbol -> Result, @noescape ifReturn: Symbol -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
+		switch self {
+		case let Parameter(symbol):
+			return ifParameter(symbol)
+		case let Return(symbol):
+			return ifReturn(symbol)
+		case let Symbolic(symbol):
+			return ifSymbolic(symbol)
+		}
+	}
+
+
 	public var isReturn: Bool {
 		switch self {
 		case Return:
