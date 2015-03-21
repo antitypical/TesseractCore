@@ -59,11 +59,11 @@ public func + (var left: Environment, right: (Symbol, Value)) -> Environment {
 // MARK: - Prelude
 
 public let Prelude: Environment = [
-	Symbol("unit", .Unit): Value(()),
-	Symbol("true", .Bool): Value(true),
-	Symbol("false", .Bool): Value(false),
-	Symbol("identity", Term.forall([0], .function(0, 0))): Value(id as Any -> Any),
-	Symbol("constant", Term.forall([0, 1], .function(0, .function(1, 0)))): Value(const as Any -> Any -> Any),
+	Symbol.named("unit", .Unit): Value(()),
+	Symbol.named("true", .Bool): Value(true),
+	Symbol.named("false", .Bool): Value(false),
+	Symbol.named("identity", Term.forall([0], .function(0, 0))): Value(id as Any -> Any),
+	Symbol.named("constant", Term.forall([0, 1], .function(0, .function(1, 0)))): Value(const as Any -> Any -> Any),
 ]
 
 

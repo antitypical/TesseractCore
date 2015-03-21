@@ -1,14 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public enum Symbol: Hashable, Printable {
-	public init(_ name: String, _ type: Term) {
-		self = Named(name, type)
-	}
-
-	public init(_ index: Int, _ type: Term) {
-		self = Index(index, type)
-	}
-
 	public static func named(name: String, _ type: Term) -> Symbol {
 		return Named(name, type)
 	}
