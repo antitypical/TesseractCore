@@ -57,8 +57,6 @@ public enum Node: Equatable, Printable {
 }
 
 
-// MARK: Equatable
-
 public func == (left: Node, right: Node) -> Bool {
 	switch (left, right) {
 	case let (.Parameter(x), .Parameter(y)):
