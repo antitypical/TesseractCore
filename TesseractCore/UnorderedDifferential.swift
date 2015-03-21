@@ -4,6 +4,10 @@
 ///
 /// This does not conform to DifferentialType because it does not do any diffing itself; rather, it can be used as an intermediate diff between other representations, or otherwise constructed manually.
 public struct UnorderedDifferential<T> {
+	public init() {
+		self.init(inserted: [], deleted: [])
+	}
+
 	public init<S1: SequenceType, S2: SequenceType where S1.Generator.Element == T, S2.Generator.Element == T>(inserted: S1, deleted: S2) {
 		self.inserted = Array(inserted)
 		self.deleted = Array(deleted)
