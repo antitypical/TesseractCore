@@ -9,10 +9,6 @@ final class ValueTests: XCTestCase {
 		assertNil(Value(1).constant() as ()?)
 	}
 
-	func testFunctionValueDestructuresAsConstantToNone() {
-		assertNil(Value(id as Any -> Any).constant() as Any?)
-	}
-
 
 	func testFunctionValueDestructuresToSomeOfSameType() {
 		assertNotNil(Value(id as Any -> Any).function() as (Any -> Any)?)
