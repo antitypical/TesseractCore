@@ -49,7 +49,7 @@ final class EvaluationTests: XCTestCase {
 
 	func testGraphNodeWithBoundInputsAppliesInput() {
 		let (a, b) = (Identifier(), Identifier())
-		let identity = Graph<Node>(nodes: [ a: .Parameter(.Parameter(0, Term(0))), b: .Return(.Named("return", Term(0))) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let identity = Graph<Node>(nodes: [ a: .Parameter(.Index(0, Term(0))), b: .Return(.Named("return", Term(0))) ], edges: [ Edge((a, 0), (b, 0)) ])
 
 		let identitySymbol = Symbol.Named("identity", Term.forall([ 0 ], .function(Term(0), Term(0))))
 		let (c, d) = (Identifier(), Identifier())

@@ -23,7 +23,7 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 		}
 
 	case let .Parameter(symbol):
-		return environment[.Parameter(0, .Unit)]
+		return environment[.Index(0, .Unit)]
 			.map { .right(Memo(evaluated: $0)) }
 		??	error("did not find parameter in environment", from)
 

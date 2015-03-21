@@ -50,7 +50,7 @@ public enum Value: Printable {
 		let g = graph.map { graph in
 			graph
 				.find { $1.isReturn }
-				.map { evaluate(graph, graph[$0].identifier, environment + (.Parameter(0, .Unit), argument)) }
+				.map { evaluate(graph, graph[$0].identifier, environment + (.Index(0, .Unit), argument)) }
 			??	error("could not find return node", identifier)
 		}
 		return f ?? g ?? error("cannot apply \(self)", identifier)
