@@ -10,16 +10,16 @@ final class ValueTests: XCTestCase {
 	}
 
 	func testFunctionValueDestructuresAsConstantToNone() {
-		assertNil(Value(function: id as Any -> Any).constant() as Any?)
+		assertNil(Value(id as Any -> Any).constant() as Any?)
 	}
 
 
 	func testFunctionValueDestructuresToSomeOfSameType() {
-		assertNotNil(Value(function: id as Any -> Any).function() as (Any -> Any)?)
+		assertNotNil(Value(id as Any -> Any).function() as (Any -> Any)?)
 	}
 
 	func testFunctionValueDestructuresToNoneOfDifferentType() {
-		assertNil(Value(function: id as Any -> Any).function() as (Int -> Int)?)
+		assertNil(Value(id as Any -> Any).function() as (Int -> Int)?)
 	}
 
 	func testConstantValueDestructuresAsFunctionToNone() {
@@ -34,7 +34,7 @@ final class ValueTests: XCTestCase {
 
 	func testApplicationOfIdentityIsArgument() {
 		let argument = Value(1)
-		let identity = Value(function: id as Any -> Any)
+		let identity = Value(id as Any -> Any)
 		assertEqual(assertNotNil(identity.apply(argument, Identifier(), [:]).right)?.value.constant(), 1)
 	}
 }

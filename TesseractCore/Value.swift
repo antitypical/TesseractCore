@@ -5,10 +5,6 @@ public enum Value: Printable {
 		self = Constant(Box(constant))
 	}
 
-	public init<T, U>(function: T -> U) {
-		self = Function(Box(function))
-	}
-
 	public init(_ graph: TesseractCore.Graph<Node>) {
 		self = Graph(graph)
 	}
