@@ -38,6 +38,13 @@ public enum Node: Equatable, Printable {
 			ifSymbolic: const(nil))
 	}
 
+	public var `return`: Symbol.IndexType? {
+		return analysis(
+			ifParameter: const(nil),
+			ifReturn: unit,
+			ifSymbolic: const(nil))
+	}
+
 	public var isParameter: Bool {
 		return analysis(
 			ifParameter: const(true),
