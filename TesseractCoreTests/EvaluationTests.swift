@@ -54,7 +54,7 @@ final class EvaluationTests: XCTestCase {
 		let identitySymbol = Symbol.Named("identity", Term.forall([ 0 ], .function(Term(0), Term(0))))
 		let (c, d) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
-		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)), Prelude)
+		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)))
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 }
