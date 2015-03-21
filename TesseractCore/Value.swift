@@ -54,6 +54,7 @@ public enum Value: Printable {
 		return analysis(
 			ifConstant: const(error("cannot apply \(self)", identifier)),
 			ifFunction: { function in
+				// fixme: this wrongly rejects higher-order functions (because constant() returns nil for function values)
 				(argument.constant()
 					|>	(flip(flatMap) <| { (function as? Any -> Any)?($0) }))
 					.map { .right(Memo(evaluated: Value(constant: $0))) }
