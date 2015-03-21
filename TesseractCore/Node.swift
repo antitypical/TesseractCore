@@ -11,18 +11,6 @@ public enum Node: Equatable, Printable {
 	case Symbolic(Symbol)
 
 
-	public var symbol: Symbol {
-		switch self {
-		case let Parameter(symbol):
-			return symbol
-		case let Return(symbol):
-			return symbol
-		case let Symbolic(symbol):
-			return symbol
-		}
-	}
-
-
 	public var isReturn: Bool {
 		switch self {
 		case Return:
