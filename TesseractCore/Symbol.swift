@@ -9,6 +9,14 @@ public enum Symbol: Hashable, Printable {
 		self = Index(index, type)
 	}
 
+	public static func named(name: String, _ type: Term) -> Symbol {
+		return Named(name, type)
+	}
+
+	public static func index(index: Int, _ type: Term) -> Symbol {
+		return Index(index, type)
+	}
+
 
 	case Named(String, Term)
 	case Index(Int, Term)
