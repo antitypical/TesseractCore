@@ -31,6 +31,13 @@ public enum Node: Equatable, Printable {
 			ifSymbolic: id)
 	}
 
+	public var isParameter: Bool {
+		return analysis(
+			ifParameter: const(true),
+			ifReturn: const(false),
+			ifSymbolic: const(false))
+	}
+
 	public var isReturn: Bool {
 		return analysis(
 			ifParameter: const(false),
