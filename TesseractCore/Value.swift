@@ -49,7 +49,7 @@ public enum Value: Printable {
 		}
 		let g = graph.map { graph in
 			graph
-				.find { $1.isReturn }
+				.find { $1.`return` != nil }
 				.map { evaluate(graph, graph[$0].identifier, environment + (.Index(0, .Unit), argument)) }
 			??	error("could not find return node", identifier)
 		}

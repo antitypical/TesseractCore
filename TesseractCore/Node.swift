@@ -45,20 +45,6 @@ public enum Node: Equatable, Printable {
 			ifSymbolic: const(nil))
 	}
 
-	public var isParameter: Bool {
-		return analysis(
-			ifParameter: const(true),
-			ifReturn: const(false),
-			ifSymbolic: const(false))
-	}
-
-	public var isReturn: Bool {
-		return analysis(
-			ifParameter: const(false),
-			ifReturn: const(true),
-			ifSymbolic: const(false))
-	}
-
 
 	// MARK: Printable
 
