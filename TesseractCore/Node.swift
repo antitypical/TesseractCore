@@ -24,6 +24,13 @@ public enum Node: Equatable, Printable {
 	}
 
 
+	public var symbol: Symbol {
+		return analysis(
+			ifParameter: id,
+			ifReturn: id,
+			ifSymbolic: id)
+	}
+
 	public var isReturn: Bool {
 		switch self {
 		case Return:
@@ -58,3 +65,8 @@ public func == (left: Node, right: Node) -> Bool {
 		return false
 	}
 }
+
+
+// MARK: - Imports
+
+import Prelude
