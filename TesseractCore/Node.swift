@@ -11,14 +11,15 @@ public enum Node: Equatable, Printable {
 	case Symbolic(Symbol)
 
 
-	public var symbol: Symbol {
+	/// Case analysis.
+	public func analysis<Result>(@noescape #ifParameter: Symbol -> Result, @noescape ifReturn: Symbol -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
 		switch self {
 		case let Parameter(symbol):
-			return symbol
+			return ifParameter(symbol)
 		case let Return(symbol):
-			return symbol
+			return ifReturn(symbol)
 		case let Symbolic(symbol):
-			return symbol
+			return ifSymbolic(symbol)
 		}
 	}
 
@@ -33,31 +34,16 @@ public enum Node: Equatable, Printable {
 	}
 
 
-	public func inputs(identifier: Identifier, _ graph: Graph<Node>) -> [(Symbol, (Identifier, Node)?)] {
-		let inputNodes = Dictionary(lazy(graph.edges)
-			.filter { $0.destination.identifier == identifier }
-			.map { ($0.destination.inputIndex, ($0.source.identifier, graph.nodes[$0.source.identifier]!)) })
-		return Array(lazy(enumerate(symbol.type.parameters))
-			.map { (Symbol($0, $1), inputNodes[$0]) })
-	}
-
-
 	// MARK: Printable
 
 	public var description: String {
-		switch self {
-		case let Parameter(symbol):
-			return ".Parameter(\(symbol))"
-		case let Return(symbol):
-			return ".Return(\(symbol))"
-		case let Symbolic(symbol):
-			return ".Symbolic(\(symbol))"
-		}
+		return analysis(
+			ifParameter: { ".Parameter(\($0))" },
+			ifReturn: { ".Return(\($0))" },
+			ifSymbolic: { ".Symbolic(\($0))" })
 	}
 }
 
-
-// MARK: Equatable
 
 public func == (left: Node, right: Node) -> Bool {
 	switch (left, right) {

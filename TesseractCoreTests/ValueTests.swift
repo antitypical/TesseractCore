@@ -2,39 +2,35 @@
 
 final class ValueTests: XCTestCase {
 	func testConstantValueDestructuresToSomeOfSameType() {
-		assert(Value(constant: 1).constant(), ==, 1)
+		assert(Value(1).constant(), ==, 1)
 	}
 
 	func testConstantValueDestructuresToNoneOfDifferentType() {
-		assertNil(Value(constant: 1).constant() as ()?)
-	}
-
-	func testFunctionValueDestructuresAsConstantToNone() {
-		assertNil(Value(function: id as Any -> Any).constant() as Any?)
+		assertNil(Value(1).constant() as ()?)
 	}
 
 
 	func testFunctionValueDestructuresToSomeOfSameType() {
-		assertNotNil(Value(function: id as Any -> Any).function() as (Any -> Any)?)
+		assertNotNil(Value(id as Any -> Any).function() as (Any -> Any)?)
 	}
 
 	func testFunctionValueDestructuresToNoneOfDifferentType() {
-		assertNil(Value(function: id as Any -> Any).function() as (Int -> Int)?)
+		assertNil(Value(id as Any -> Any).function() as (Int -> Int)?)
 	}
 
 	func testConstantValueDestructuresAsFunctionToNone() {
-		assertNil(Value(constant: ()).function() as (Any -> Any)?)
+		assertNil(Value(()).function() as (Any -> Any)?)
 	}
 
 
 	func testApplicationOfConstantIsError() {
-		let value = Value(constant: ())
+		let value = Value(())
 		assertNotNil(value.apply(value, Identifier(), [:]).left)
 	}
 
 	func testApplicationOfIdentityIsArgument() {
-		let argument = Value(constant: 1)
-		let identity = Value(function: id as Any -> Any)
+		let argument = Value(1)
+		let identity = Value(id as Any -> Any)
 		assertEqual(assertNotNil(identity.apply(argument, Identifier(), [:]).right)?.value.constant(), 1)
 	}
 }

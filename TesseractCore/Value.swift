@@ -1,79 +1,68 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public enum Value: Printable {
-	public init(constant: Any) {
+	public init(_ constant: Any) {
 		self = Constant(Box(constant))
 	}
 
-	public init<T, U>(function: T -> U) {
-		self = Function(Box(function))
-	}
-
-	public init(graph: TesseractCore.Graph<Node>) {
+	public init(_ graph: TesseractCore.Graph<Node>) {
 		self = Graph(graph)
 	}
 
 	case Constant(Box<Any>)
-	case Function(Box<Any>)
 	case Graph(TesseractCore.Graph<Node>)
 
-	public func constant<T>() -> T? {
+	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifGraph: TesseractCore.Graph<Node> -> Result) -> Result {
 		switch self {
 		case let Constant(v):
-			return v.value as? T
-		default:
-			return nil
+			return ifConstant(v.value)
+		case let Graph(g):
+			return ifGraph(g)
 		}
+	}
+
+	public func constant<T>() -> T? {
+		return analysis(
+			ifConstant: { $0 as? T },
+			ifGraph: const(nil))
 	}
 
 	public func function<T, U>() -> (T -> U)? {
-		switch self {
-		case let Function(f):
-			return f.value as? T -> U
-		default:
-			return nil
-		}
+		return analysis(
+			ifConstant: { $0 as? T -> U },
+			ifGraph: const(nil))
 	}
 
 	public var graph: TesseractCore.Graph<Node>? {
-		switch self {
-		case let Graph(graph):
-			return graph
-		default:
-			return nil
-		}
+		return analysis(
+			ifConstant: const(nil),
+			ifGraph: unit)
 	}
 
 
 	public func apply(argument: Value, _ identifier: Identifier, _ environment: Environment) -> Either<Error<Identifier>, Memo<Value>> {
-		switch self {
-		case let Function(function) where function.value is Any -> Any:
-			return argument.constant()
-				.map(function.value as! Any -> Any)
-				.map { applied in .right(Memo(evaluated: Value(constant: applied))) }
+		let f = function().map { (function: Any -> Any) in
+			(argument.constant()
+				|>	(flip(flatMap) <| function >>> unit))
+				.map { .right(Memo(evaluated: Value($0))) }
 			??	error("could not apply function", identifier)
-		case let Graph(graph):
-			return graph
-				.find { $1.isReturn }
-				.map { evaluate(graph, graph[$0].identifier, environment + (.Parameter(0, .Unit), argument)) }
-			??	error("could not find return node", identifier)
-		default:
-			return error("cannot apply \(self)", identifier)
 		}
+		let g = graph.map { graph in
+			graph
+				.find { $1.isReturn }
+				.map { evaluate(graph, graph[$0].identifier, environment + (.Index(0, .Unit), argument)) }
+			??	error("could not find return node", identifier)
+		}
+		return f ?? g ?? error("cannot apply \(self)", identifier)
 	}
 
 
 	// MARK: Printable
 
 	public var description: String {
-		switch self {
-		case let Constant(constant):
-			return ".Constant(\(constant))"
-		case let Function(function):
-			return ".Function(\(function))"
-		case let Graph(graph):
-			return ".Graph(\(graph))"
-		}
+		return analysis(
+			ifConstant: { ".Constant(\($0))" },
+			ifGraph: { ".Graph(\($0))" })
 	}
 }
 
@@ -82,4 +71,5 @@ public enum Value: Printable {
 
 import Box
 import Either
+import Prelude
 import Memo

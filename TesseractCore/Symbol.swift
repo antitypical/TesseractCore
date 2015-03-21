@@ -6,19 +6,19 @@ public enum Symbol: Hashable, Printable {
 	}
 
 	public init(_ index: Int, _ type: Term) {
-		self = Parameter(index, type)
+		self = Index(index, type)
 	}
 
 
 	case Named(String, Term)
-	case Parameter(Int, Term)
+	case Index(Int, Term)
 
 
 	public var name: String {
 		switch self {
 		case let Named(name, _):
 			return name
-		case let Parameter(index, _):
+		case let Index(index, _):
 			return index.description
 		}
 	}
@@ -27,7 +27,7 @@ public enum Symbol: Hashable, Printable {
 		switch self {
 		case let Named(_, type):
 			return type
-		case let Parameter(_, type):
+		case let Index(_, type):
 			return type
 		}
 	}
