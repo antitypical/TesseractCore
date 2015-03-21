@@ -2,20 +2,20 @@
 
 public enum Node: Equatable, Printable {
 	/// A parameter of a graph.
-	case Parameter(Symbol)
+	case Parameter(Symbol.IndexType)
 
 	/// A return of a graph.
-	case Return(Symbol)
+	case Return(Symbol.IndexType)
 
 	/// An arbitrary graph node referencing a value bound in the environment.
 	case Symbolic(Symbol)
 
 
 	/// Case analysis.
-	public func analysis<Result>(@noescape #ifParameter: Symbol -> Result, @noescape ifReturn: Symbol -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
+	public func analysis<Result>(@noescape #ifParameter: (Int, Term) -> Result, @noescape ifReturn: (Int, Term) -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
 		switch self {
-		case let Parameter(symbol):
-			return ifParameter(symbol)
+		case let Parameter(index, type):
+			return ifParameter(index, type)
 		case let Return(symbol):
 			return ifReturn(symbol)
 		case let Symbolic(symbol):
@@ -26,8 +26,8 @@ public enum Node: Equatable, Printable {
 
 	public var symbol: Symbol {
 		return analysis(
-			ifParameter: id,
-			ifReturn: id,
+			ifParameter: Symbol.index,
+			ifReturn: Symbol.index,
 			ifSymbolic: id)
 	}
 
@@ -75,3 +75,4 @@ public func == (left: Node, right: Node) -> Bool {
 // MARK: - Imports
 
 import Prelude
+import Manifold
