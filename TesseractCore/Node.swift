@@ -37,14 +37,10 @@ public enum Node: Equatable, Printable {
 	// MARK: Printable
 
 	public var description: String {
-		switch self {
-		case let Parameter(symbol):
-			return ".Parameter(\(symbol))"
-		case let Return(symbol):
-			return ".Return(\(symbol))"
-		case let Symbolic(symbol):
-			return ".Symbolic(\(symbol))"
-		}
+		return analysis(
+			ifParameter: { ".Parameter(\($0))" },
+			ifReturn: { ".Return(\($0))" },
+			ifSymbolic: { ".Symbolic(\($0))" })
 	}
 }
 
