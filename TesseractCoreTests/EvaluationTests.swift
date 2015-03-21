@@ -42,7 +42,7 @@ final class EvaluationTests: XCTestCase {
 
 		let truthy = Symbol.Named("truthy", .Bool)
 		let (c, graph) = createGraph(truthy)
-		let evaluated = evaluate(graph, c, [truthy: Value(graph: constant)])
+		let evaluated = evaluate(graph, c, [truthy: Value(constant)])
 		let right = evaluated.right?.value.graph.map { $0 == constant }
 		assertEqual(right ?? false, true)
 	}
@@ -54,7 +54,7 @@ final class EvaluationTests: XCTestCase {
 		let identitySymbol = Symbol.Named("identity", Term.forall([ 0 ], .function(Term(0), Term(0))))
 		let (c, d) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
-		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(graph: identity)))
+		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(identity)))
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 }

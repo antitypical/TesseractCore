@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public enum Value: Printable {
-	public init(constant: Any) {
+	public init(_ constant: Any) {
 		self = Constant(Box(constant))
 	}
 
@@ -9,7 +9,7 @@ public enum Value: Printable {
 		self = Function(Box(function))
 	}
 
-	public init(graph: TesseractCore.Graph<Node>) {
+	public init(_ graph: TesseractCore.Graph<Node>) {
 		self = Graph(graph)
 	}
 
@@ -57,7 +57,7 @@ public enum Value: Printable {
 				// fixme: this wrongly rejects higher-order functions (because constant() returns nil for function values)
 				(argument.constant()
 					|>	(flip(flatMap) <| { (function as? Any -> Any)?($0) }))
-					.map { .right(Memo(evaluated: Value(constant: $0))) }
+					.map { .right(Memo(evaluated: Value($0))) }
 				??	error("could not apply function", identifier)
 			},
 			ifGraph: { graph in
