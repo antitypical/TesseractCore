@@ -53,9 +53,14 @@ public enum Symbol: Hashable, Printable {
 }
 
 public func == (left: Symbol, right: Symbol) -> Bool {
-	return
-		left.name == right.name
-	&&	left.type == right.type
+	switch (left, right) {
+	case let (.Named(x1, x2), .Named(y1, y2)):
+		return x1 == y1 && x2 == y2
+	case let (.Index(x1, x2), .Index(y1, y2)):
+		return x1 == y1 && x2 == y2
+	default:
+		return false
+	}
 }
 
 
