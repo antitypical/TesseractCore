@@ -21,6 +21,10 @@ public struct UnorderedDifferential<T> {
 		return UnorderedDifferential<U>(inserted: lazy(inserted).map(transform), deleted: lazy(deleted).map(transform))
 	}
 
+	public func flatMap<S: SequenceType>(transform: T -> S) -> UnorderedDifferential<S.Generator.Element> {
+		return UnorderedDifferential<S.Generator.Element>(inserted: lazy(inserted).flatMap(transform), deleted: lazy(deleted).flatMap(transform))
+	}
+
 	public func filter(predicate: T -> Bool) -> UnorderedDifferential<T> {
 		return UnorderedDifferential(inserted: lazy(inserted).filter(predicate), deleted: lazy(deleted).filter(predicate))
 	}
