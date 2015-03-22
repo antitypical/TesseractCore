@@ -59,10 +59,10 @@ public enum Node: Equatable, Printable {
 
 public func == (left: Node, right: Node) -> Bool {
 	switch (left, right) {
-	case let (.Parameter(x), .Parameter(y)):
-		return x == y
-	case let (.Return(x), .Return(y)):
-		return x == y
+	case let (.Parameter(x1, x2), .Parameter(y1, y2)):
+		return x1 == y1 && x2 == y2
+	case let (.Return(x1, x2), .Return(y1, y2)):
+		return x1 == y1 && x2 == y2
 	case let (.Symbolic(x), .Symbolic(y)):
 		return x == y
 
