@@ -55,7 +55,7 @@ final class EvaluationTests: XCTestCase {
 		let (c, d) = (Identifier(), Identifier())
 		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
 		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(identity)))
-		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
+		assert(evaluated.right?.value.constant(), ==, true)
 	}
 }
 
