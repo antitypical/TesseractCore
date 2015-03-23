@@ -31,24 +31,14 @@ public struct Edge: Hashable, Printable {
 	}
 }
 
-public func == (left: Edge.Source, right: Edge.Source) -> Bool {
-	return left.identifier == right.identifier && left.outputIndex == right.outputIndex
+public func == (left: (Identifier, Int), right: (Identifier, Int)) -> Bool {
+	return left.0 == right.0 && left.1 == right.1
 }
 
-public func == (left: Edge.Destination, right: Edge.Destination) -> Bool {
-	return left.identifier == right.identifier && left.inputIndex == right.inputIndex
-}
-
-public func < (left: Edge.Source, right: Edge.Source) -> Bool {
-	return left.identifier == right.identifier ?
-		left.outputIndex < right.outputIndex
-	:	left.identifier < right.identifier
-}
-
-public func < (left: Edge.Destination, right: Edge.Destination) -> Bool {
-	return left.identifier == right.identifier ?
-		left.inputIndex < right.inputIndex
-	:	left.identifier < right.identifier
+public func < (left: (Identifier, Int), right: (Identifier, Int)) -> Bool {
+	return left.0 == right.0 ?
+		left.1 < right.1
+	:	left.0 < right.0
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
