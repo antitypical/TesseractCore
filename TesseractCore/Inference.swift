@@ -1,12 +1,12 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
-	let parameters = Node.parameters(graph)
-	let returns = Node.returns(graph)
-	let returnType: Term = reduce(returns, nil) { $0.0.map { .product(Term(), $0) } ?? Term() } ?? .Unit
-	return (simplify(reduce(parameters, returnType) {
-		.function(Term(), $0.0)
-	}), [])
+	let types = graph.map { $0.symbol.type }
+
+	let returns = Node.returns(graph).map { typeOf(graph, $0.0)! }
+	let parameters = Node.parameters(graph).map { typeOf(graph, $0.0)! }
+	let returnType: Term? = reduce(returns, nil) { previous, each in previous.map { Term.product(each, $0) } ?? each }
+	return (simplify(reduce(parameters, returnType ?? .Unit, flip(Term.function))), [])
 }
 
 
