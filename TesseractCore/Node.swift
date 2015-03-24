@@ -27,8 +27,8 @@ public enum Node: Equatable, Printable {
 		switch self {
 		case let Parameter(index, type):
 			return ifParameter(index, type)
-		case let Return(symbol):
-			return ifReturn(symbol)
+		case let Return(index, type):
+			return ifReturn(index, type)
 		case let Symbolic(symbol):
 			return ifSymbolic(symbol)
 		}
