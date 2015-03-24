@@ -11,7 +11,15 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 
 
 private func simplify(type: Term) -> Term {
-	return Substitution(lazy(enumerate(type.freeVariables |> (flip(sorted) <| { $0.value < $1.value }))).map { ($1, Term(integerLiteral: $0)) }).apply(type)
+	return Substitution(
+		(type.freeVariables
+			|>	(flip(sorted) <| { $0.value < $1.value })
+			|>	reverse
+			|>	enumerate
+			|>	lazy)
+			.map {
+				($1, Term(integerLiteral: $0))
+			}).apply(type)
 }
 
 
