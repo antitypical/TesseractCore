@@ -13,7 +13,7 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 private func simplify(type: Term) -> Term {
 	return Substitution(
 		(type.freeVariables
-			|>	(flip(sorted) <| { $0.value < $1.value })
+			|>	sorted
 			|>	reverse
 			|>	enumerate
 			|>	lazy)
