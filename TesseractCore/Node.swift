@@ -11,6 +11,12 @@ public enum Node: Equatable, Printable {
 	case Symbolic(Symbol)
 
 
+	/// All returns in a given `graph`.
+	public static func returns(graph: Graph<Node>) -> [(Identifier, Node)] {
+		return []
+	}
+
+
 	/// Case analysis.
 	public func analysis<Result>(@noescape #ifParameter: (Int, Term) -> Result, @noescape ifReturn: (Int, Term) -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
 		switch self {

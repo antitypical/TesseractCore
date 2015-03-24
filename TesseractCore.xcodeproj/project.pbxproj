@@ -55,6 +55,7 @@
 		D4F48AC81AAE918C0017504F /* GraphDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */; };
 		D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */; };
 		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
+		D4FF06B71AC10900004DB780 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF06B61AC10900004DB780 /* NodeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferentiator.swift; sourceTree = "<group>"; };
 		D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardDifferential.swift; sourceTree = "<group>"; };
 		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		D4FF06B61AC10900004DB780 /* NodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,6 +218,7 @@
 				D4C893BC1A51DCC10078743E /* GraphTests.swift */,
 				D41275841A78638900CC910A /* EvaluationTests.swift */,
 				D47974021A7D277C0034ABA2 /* ValueTests.swift */,
+				D4FF06B61AC10900004DB780 /* NodeTests.swift */,
 				1182B03A1A84381B002E7D2D /* ImportingTests.swift */,
 				11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */,
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
@@ -387,6 +390,7 @@
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
 				1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */,
 				D4B5220F1A9D952500F33502 /* Fixtures.swift in Sources */,
+				D4FF06B71AC10900004DB780 /* NodeTests.swift in Sources */,
 				11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */,
 				D41275851A78638900CC910A /* EvaluationTests.swift in Sources */,
 				D479740E1A7DEE9E0034ABA2 /* ErrorTests.swift in Sources */,
