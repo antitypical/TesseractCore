@@ -7,6 +7,11 @@ final class InferenceTests: XCTestCase {
 }
 
 
+private func simplify(type: Term) -> Term {
+	return Substitution(lazy(enumerate(type.freeVariables)).map { ($1, Term(integerLiteral: $0)) }).apply(type)
+}
+
+
 import Assertions
 import Manifold
 import TesseractCore
