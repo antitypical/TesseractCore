@@ -6,8 +6,7 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
-		let generated = constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit))], edges: []))
-		assert(simplify(generated.0), == ,.function(0, .Unit))
+		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit))], edges: [])), ==, .function(0, .Unit))
 	}
 }
 
