@@ -20,6 +20,10 @@ final class InferenceTests: XCTestCase {
 	func testGraphsWithMultipleParametersHaveCurriedFunctionType() {
 		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit))])), ==, .function(1, .function(0, .Unit)))
 	}
+
+	func testGraphsWithMultipleReturnsHaveProductType() {
+		assert(type(Graph(nodes: [Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])), ==, .product(1, 0))
+	}
 }
 
 
