@@ -4,10 +4,16 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 	let parameters = Node.parameters(graph)
 	let returns = Node.returns(graph)
 	let returnType: Term = reduce(returns, nil) { $0.0.map { .product(Term(), $0) } ?? Term() } ?? .Unit
-	return (reduce(parameters, returnType) {
+	return (simplify(reduce(parameters, returnType) {
 		.function(Term(), $0.0)
-	}, [])
+	}), [])
+}
+
+
+private func simplify(type: Term) -> Term {
+	return Substitution(lazy(enumerate(type.freeVariables |> (flip(sorted) <| { $0.value < $1.value }))).map { ($1, Term(integerLiteral: $0)) }).apply(type)
 }
 
 
 import Manifold
+import Prelude
