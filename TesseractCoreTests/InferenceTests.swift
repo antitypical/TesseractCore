@@ -2,7 +2,7 @@
 
 final class InferenceTests: XCTestCase {
 	func testGraphsWithoutReturnsHaveUnitType() {
-		assert(constraints(Graph()).0, ==, .Unit)
+		assert(type(Graph()), ==, .Unit)
 	}
 
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
