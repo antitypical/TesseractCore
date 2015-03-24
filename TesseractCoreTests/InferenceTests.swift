@@ -31,6 +31,8 @@ final class InferenceTests: XCTestCase {
 }
 
 
+// MARK: Helpers
+
 private func type(graph: Graph<Node>) -> Term {
 	return simplify(constraints(graph).0)
 }
