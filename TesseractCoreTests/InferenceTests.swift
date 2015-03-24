@@ -42,6 +42,14 @@ private func simplify(type: Term) -> Term {
 }
 
 
+// MARK: Fixtures
+
+private let identity: Graph<Node> = {
+	let (a, b) = (Identifier(), Identifier())
+	return Graph(nodes: [ a: .Parameter((0, .Unit)), b: .Return((0, .Unit)) ], edges: [ Edge((a, 0), (b, 0)) ])
+}()
+
+
 import Assertions
 import Manifold
 import Prelude
