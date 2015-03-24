@@ -14,19 +14,19 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testGraphsWithOneParameterAndOneReturnHaveFunctionTypeFromVariableToDifferentVariable() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Return((0, .Unit))])).0, ==, .function(1, 0))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Return((0, .Unit))])).0, ==, .function(0, 1))
 	}
 
 	func testGraphsWithMultipleParametersHaveCurriedFunctionType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit))])).0, ==, .function(1, .function(0, .Unit)))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit))])).0, ==, .function(0, .function(1, .Unit)))
 	}
 
 	func testGraphsWithMultipleReturnsHaveProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, .product(1, 0))
+		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, .product(0, 1))
 	}
 
 	func testGraphsWithMultipleParametersAndMultipleReturnsHaveCurriedFunctionTypeProducingProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit)), Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, .function(3, .function(2, .product(1, 0))))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit)), Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, .function(0, .function(1, .product(2, 3))))
 	}
 }
 
