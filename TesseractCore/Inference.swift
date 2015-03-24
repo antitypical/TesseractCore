@@ -14,6 +14,10 @@ private func typeOf(graph: Graph<Node>, identifier: Identifier) -> Term? {
 	return graph.nodes[identifier]?.type
 }
 
+private func typeOf(graph: Graph<Node>, endpoint: (identifier: Identifier, inputIndex: Int)) -> Term? {
+	return graph.nodes[endpoint.identifier]?.symbol.type.parameters[endpoint.inputIndex]
+}
+
 
 private func simplify(type: Term) -> Term {
 	return Substitution(
