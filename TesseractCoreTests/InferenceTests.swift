@@ -7,7 +7,7 @@ final class InferenceTests: XCTestCase {
 		assert(constraints(Graph()).0, ==, .Unit)
 	}
 
-	func testGraphsWithOneReturnHaveVariableType() {
+	func testGraphsWithOneReturnArePolymorphic() {
 		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit))])).0, ==, .forall([ 0 ], 0))
 	}
 
@@ -15,7 +15,7 @@ final class InferenceTests: XCTestCase {
 		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit))])).0, ==, Term.function(0, .Unit).generalize())
 	}
 
-	func testGraphsWithOneParameterAndOneReturnHaveFunctionTypeFromVariableToDifferentVariable() {
+	func testGraphsWithOneParameterAndOneReturnHavePolymorphicFunctionType() {
 		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Return((0, .Unit))])).0, ==, Term.function(0, 1).generalize())
 	}
 
