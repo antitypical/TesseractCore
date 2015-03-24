@@ -14,6 +14,7 @@ private func typeOf(graph: Graph<Node>, identifier: Identifier) -> Term? {
 	return graph.nodes[identifier]?.type
 }
 
+/// Returns the type of the node input at `endpoint` in `graph`. For `return` nodes (which have no parameters), this will be the node’s type.
 private func typeOf(graph: Graph<Node>, endpoint: (identifier: Identifier, inputIndex: Int)) -> Term? {
 	return graph.nodes[endpoint.identifier].map {
 		$0.`return` != nil ?
