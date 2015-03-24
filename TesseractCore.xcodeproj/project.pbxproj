@@ -55,6 +55,8 @@
 		D4F48AC81AAE918C0017504F /* GraphDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */; };
 		D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */; };
 		D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */; };
+		D4FF06B31AC10612004DB780 /* Inference.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF06B21AC10612004DB780 /* Inference.swift */; };
+		D4FF06B51AC10735004DB780 /* InferenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF06B41AC10735004DB780 /* InferenceTests.swift */; };
 		D4FF06B71AC10900004DB780 /* NodeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF06B61AC10900004DB780 /* NodeTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +115,8 @@
 		D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferentiator.swift; sourceTree = "<group>"; };
 		D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardDifferential.swift; sourceTree = "<group>"; };
 		D4F5A8CD1A520E7F0058EFDC /* Identifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifier.swift; sourceTree = "<group>"; };
+		D4FF06B21AC10612004DB780 /* Inference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inference.swift; sourceTree = "<group>"; };
+		D4FF06B41AC10735004DB780 /* InferenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InferenceTests.swift; sourceTree = "<group>"; };
 		D4FF06B61AC10900004DB780 /* NodeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -184,6 +188,7 @@
 				D47974041A7D92E00034ABA2 /* Evaluation.swift */,
 				11C1526A1A830A160044FCA2 /* Exporting.swift */,
 				11C9E2481A83C17F0023AB0D /* Importing.swift */,
+				D4FF06B21AC10612004DB780 /* Inference.swift */,
 				D47974061A7D99A40034ABA2 /* Application.swift */,
 				D479740B1A7DA6DC0034ABA2 /* Error.swift */,
 				D42F30E81A8DAD3500F3EA38 /* NodeView.swift */,
@@ -219,6 +224,7 @@
 				D41275841A78638900CC910A /* EvaluationTests.swift */,
 				D47974021A7D277C0034ABA2 /* ValueTests.swift */,
 				D4FF06B61AC10900004DB780 /* NodeTests.swift */,
+				D4FF06B41AC10735004DB780 /* InferenceTests.swift */,
 				1182B03A1A84381B002E7D2D /* ImportingTests.swift */,
 				11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */,
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
@@ -366,6 +372,7 @@
 				D4F48AC41AAE90D70017504F /* SetDifferentiator.swift in Sources */,
 				D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */,
 				D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */,
+				D4FF06B31AC10612004DB780 /* Inference.swift in Sources */,
 				D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */,
 				11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */,
 				D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */,
@@ -388,6 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
+				D4FF06B51AC10735004DB780 /* InferenceTests.swift in Sources */,
 				1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */,
 				D4B5220F1A9D952500F33502 /* Fixtures.swift in Sources */,
 				D4FF06B71AC10900004DB780 /* NodeTests.swift in Sources */,
