@@ -1,6 +1,8 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 final class InferenceTests: XCTestCase {
+	// MARK: Types
+
 	func testGraphsWithoutReturnsHaveUnitType() {
 		assert(constraints(Graph()).0, ==, .Unit)
 	}
