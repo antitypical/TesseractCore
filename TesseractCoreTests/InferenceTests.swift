@@ -18,7 +18,7 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testGraphsWithMultipleParametersHaveCurriedFunctionType() {
-		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((0, .Unit))])), ==, .function(1, .function(0, .Unit)))
+		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit))])), ==, .function(1, .function(0, .Unit)))
 	}
 }
 
