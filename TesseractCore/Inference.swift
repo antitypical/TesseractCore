@@ -5,8 +5,11 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 
 	let returns = Node.returns(graph).map { typeOf(graph, $0.0)! }
 	let parameters = Node.parameters(graph).map { typeOf(graph, $0.0)! }
+
+	let constraints = ConstraintSet(lazy(graph.edges).flatMap { [ typeOf(graph, $0.source.identifier)!.`return` === typeOf(graph, $0.destination)! ] })
+
 	let returnType: Term? = reduce(returns, nil) { previous, each in previous.map { Term.product(each, $0) } ?? each }
-	return (simplify(reduce(parameters, returnType ?? .Unit, flip(Term.function))), [])
+	return (simplify(reduce(parameters, returnType ?? .Unit, flip(Term.function))), constraints)
 }
 
 
