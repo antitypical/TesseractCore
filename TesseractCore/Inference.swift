@@ -3,10 +3,9 @@
 public func constraints(graph: Graph<Node>) -> (Term, assumptions: AssumptionSet, constraints: ConstraintSet) {
 	let parameters = Node.parameters(graph)
 	let returns = Node.returns(graph)
-	if returns.count == 0 {
-		return (.Unit, [:], [])
-	}
-	return (Term(), [:], [])
+	return (reduce(parameters, Term.Unit) {
+		.function(Term(), $0.0)
+	}, [:], [])
 }
 
 

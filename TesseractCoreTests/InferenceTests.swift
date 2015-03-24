@@ -4,6 +4,11 @@ final class InferenceTests: XCTestCase {
 	func testGraphsWithoutReturnsHaveUnitType() {
 		assert(constraints(Graph()).0, ==, .Unit)
 	}
+
+	func testGraphsWithOneParameterAndNoReturnsHaveFunctionType() {
+		let generated = constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit))], edges: []))
+		assert(simplify(generated.0), == ,.function(0, .Unit))
+	}
 }
 
 
