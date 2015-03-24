@@ -1,6 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func constraints(graph: Graph<Node>) -> (Term, assumptions: AssumptionSet, constraints: ConstraintSet) {
+	let parameters = Node.parameters(graph)
 	let returns = Node.returns(graph)
 	if returns.count == 0 {
 		return (.Unit, [:], [])
