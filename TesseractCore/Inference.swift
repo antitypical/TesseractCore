@@ -10,6 +10,11 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 }
 
 
+private func typeOf(graph: Graph<Node>, identifier: Identifier) -> Term? {
+	return graph.nodes[identifier]?.type
+}
+
+
 private func simplify(type: Term) -> Term {
 	return Substitution(
 		(type.freeVariables
