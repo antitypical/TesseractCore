@@ -19,7 +19,9 @@ private func simplify(type: Term) -> Term {
 			|>	lazy)
 			.map {
 				($1, Term(integerLiteral: $0))
-			}).apply(type)
+			})
+		.apply(type)
+		.generalize()
 }
 
 

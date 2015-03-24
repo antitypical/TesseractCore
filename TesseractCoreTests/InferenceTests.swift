@@ -8,27 +8,27 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testGraphsWithOneReturnHaveVariableType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit))])).0, ==, 0)
+		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit))])).0, ==, .forall([ 0 ], 0))
 	}
 
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit))])).0, ==, .function(0, .Unit))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit))])).0, ==, Term.function(0, .Unit).generalize())
 	}
 
 	func testGraphsWithOneParameterAndOneReturnHaveFunctionTypeFromVariableToDifferentVariable() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Return((0, .Unit))])).0, ==, .function(0, 1))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Return((0, .Unit))])).0, ==, Term.function(0, 1).generalize())
 	}
 
 	func testGraphsWithMultipleParametersHaveCurriedFunctionType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit))])).0, ==, .function(0, .function(1, .Unit)))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit))])).0, ==, Term.function(0, .function(1, .Unit)).generalize())
 	}
 
 	func testGraphsWithMultipleReturnsHaveProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, .product(0, 1))
+		assert(constraints(Graph(nodes: [Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, Term.product(0, 1).generalize())
 	}
 
 	func testGraphsWithMultipleParametersAndMultipleReturnsHaveCurriedFunctionTypeProducingProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit)), Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, .function(0, .function(1, .product(2, 3))))
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit)), Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])).0, ==, Term.function(0, .function(1, .product(2, 3))).generalize())
 	}
 }
 
