@@ -13,7 +13,7 @@ public enum Node: Equatable, Printable {
 
 	/// All returns in a given `graph`.
 	public static func returns(graph: Graph<Node>) -> [(Identifier, Node)] {
-		return []
+		return Array(graph.nodes.filter { $1.`return` != nil })
 	}
 
 
