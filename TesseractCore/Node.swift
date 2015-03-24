@@ -35,6 +35,13 @@ public enum Node: Equatable, Printable {
 	}
 
 
+	public var type: Term {
+		return analysis(
+			ifParameter: { $1 ?? Term() },
+			ifReturn: { $1 ?? Term() },
+			ifSymbolic: { $0.type })
+	}
+
 	public var symbol: Symbol {
 		return analysis(
 			ifParameter: Symbol.index,
