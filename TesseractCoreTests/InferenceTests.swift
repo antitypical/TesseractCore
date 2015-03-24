@@ -12,6 +12,10 @@ final class InferenceTests: XCTestCase {
 }
 
 
+private func type(graph: Graph<Node>) -> Term {
+	return simplify(constraints(graph).0)
+}
+
 private func simplify(type: Term) -> Term {
 	return Substitution(lazy(enumerate(type.freeVariables |> (flip(sorted) <| { $0.value < $1.value }))).map { ($1, Term(integerLiteral: $0)) }).apply(type)
 }
