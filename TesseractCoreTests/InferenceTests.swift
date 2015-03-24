@@ -8,6 +8,10 @@ final class InferenceTests: XCTestCase {
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
 		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit))], edges: [])), ==, .function(0, .Unit))
 	}
+
+	func testGraphsWithOneParameterAndOneReturnHaveFunctionTypeFromVariableToDifferentVariable() {
+		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Return((0, .Unit))], edges: [])), ==, .function(1, 0))
+	}
 }
 
 
