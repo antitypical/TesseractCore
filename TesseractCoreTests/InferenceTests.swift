@@ -5,6 +5,10 @@ final class InferenceTests: XCTestCase {
 		assert(type(Graph()), ==, .Unit)
 	}
 
+	func testGraphsWithOneReturnHaveVariableType() {
+		assert(type(Graph(nodes: [Identifier(): .Return((0, .Unit))])), ==, 0)
+	}
+
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
 		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit))], edges: [])), ==, .function(0, .Unit))
 	}
