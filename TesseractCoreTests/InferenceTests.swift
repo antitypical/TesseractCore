@@ -13,11 +13,12 @@ final class InferenceTests: XCTestCase {
 
 
 private func simplify(type: Term) -> Term {
-	return Substitution(lazy(enumerate(type.freeVariables)).map { ($1, Term(integerLiteral: $0)) }).apply(type)
+	return Substitution(lazy(enumerate(type.freeVariables |> (flip(sorted) <| { $0.value < $1.value }))).map { ($1, Term(integerLiteral: $0)) }).apply(type)
 }
 
 
 import Assertions
 import Manifold
+import Prelude
 import TesseractCore
 import XCTest
