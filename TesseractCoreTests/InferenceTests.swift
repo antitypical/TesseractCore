@@ -24,6 +24,10 @@ final class InferenceTests: XCTestCase {
 	func testGraphsWithMultipleReturnsHaveProductType() {
 		assert(type(Graph(nodes: [Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])), ==, .product(1, 0))
 	}
+
+	func testGraphsWithMultipleParametersAndMultipleReturnsHaveCurriedFunctionTypeProducingProductType() {
+		assert(type(Graph(nodes: [Identifier(): .Parameter((0, .Unit)), Identifier(): .Parameter((1, .Unit)), Identifier(): .Return((0, .Unit)), Identifier(): .Return((1, .Unit))])), ==, .function(3, .function(2, .product(1, 0))))
+	}
 }
 
 
