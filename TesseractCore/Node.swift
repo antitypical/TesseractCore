@@ -16,6 +16,11 @@ public enum Node: Equatable, Printable {
 		return Array(graph.nodes.filter { $1.`return` != nil })
 	}
 
+	/// All parameters in a given `graph`.
+	public static func parameters(graph: Graph<Node>) -> [(Identifier, Node)] {
+		return Array(graph.nodes.filter { $1.parameter != nil })
+	}
+
 
 	/// Case analysis.
 	public func analysis<Result>(@noescape #ifParameter: (Int, Term) -> Result, @noescape ifReturn: (Int, Term) -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {

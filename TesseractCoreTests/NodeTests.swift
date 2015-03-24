@@ -10,6 +10,16 @@ final class NodeTests: XCTestCase {
 		let graph = Graph(nodes: [Identifier(): node], edges: [])
 		assert(Node.returns(graph).first?.1, ==, node)
 	}
+
+	func testEmptyGraphsHaveNoParameters() {
+		assert(Node.parameters(Graph()), ==, [])
+	}
+
+	func testFindsParametersInWellFormedGraphs() {
+		let node = Node.Parameter((0, .Unit))
+		let graph = Graph(nodes: [Identifier(): node], edges: [])
+		assert(Node.parameters(graph).first?.1, ==, node)
+	}
 }
 
 
