@@ -41,6 +41,14 @@ final class InferenceTests: XCTestCase {
 	func testIdentityGraphHasConstraintsRelatingItsTypeVariables() {
 		assert(constraints(identity).1, ==, [ 0 === 1 ])
 	}
+
+
+	// MARK: Types
+
+	func testIdentityIsGeneralized() {
+		assert(typeOf(identity).left, ==, nil)
+		assert(typeOf(identity).right, ==, Term.function(0, 0).generalize())
+	}
 }
 
 
