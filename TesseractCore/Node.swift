@@ -2,10 +2,10 @@
 
 public enum Node: Equatable, Printable {
 	/// A parameter of a graph.
-	case Parameter(Int, Term?)
+	case Parameter(Int, Term)
 
 	/// A return of a graph.
-	case Return(Int, Term?)
+	case Return(Int, Term)
 
 	/// An arbitrary graph node referencing a value bound in the environment.
 	case Symbolic(Symbol)
@@ -23,7 +23,7 @@ public enum Node: Equatable, Printable {
 
 
 	/// Case analysis.
-	public func analysis<Result>(@noescape #ifParameter: (Int, Term?) -> Result, @noescape ifReturn: (Int, Term?) -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
+	public func analysis<Result>(@noescape #ifParameter: (Int, Term) -> Result, @noescape ifReturn: (Int, Term) -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
 		switch self {
 		case let Parameter(index, type):
 			return ifParameter(index, type)
@@ -37,8 +37,8 @@ public enum Node: Equatable, Printable {
 
 	public var type: Term {
 		return analysis(
-			ifParameter: { $1 ?? Term() },
-			ifReturn: { $1 ?? Term() },
+			ifParameter: { $1 },
+			ifReturn: { $1 },
 			ifSymbolic: { $0.type })
 	}
 
@@ -49,14 +49,14 @@ public enum Node: Equatable, Printable {
 			ifSymbolic: id)
 	}
 
-	public var parameter: (Int, Term?)? {
+	public var parameter: (Int, Term)? {
 		return analysis(
 			ifParameter: unit,
 			ifReturn: const(nil),
 			ifSymbolic: const(nil))
 	}
 
-	public var `return`: (Int, Term?)? {
+	public var `return`: (Int, Term)? {
 		return analysis(
 			ifParameter: const(nil),
 			ifReturn: unit,
