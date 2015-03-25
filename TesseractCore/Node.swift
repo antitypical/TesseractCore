@@ -13,12 +13,18 @@ public enum Node: Equatable, Printable {
 
 	/// All returns in a given `graph`.
 	public static func returns(graph: Graph<Node>) -> [(Identifier, Node)] {
-		return Array(graph.nodes.filter { $1.`return` != nil })
+		return Array(
+			(lazy(graph.nodes)
+				.filter { $1.`return` != nil })
+				|>	(flip(sorted) <| { $0.1.index! < $1.1.index! }))
 	}
 
 	/// All parameters in a given `graph`.
 	public static func parameters(graph: Graph<Node>) -> [(Identifier, Node)] {
-		return Array(graph.nodes.filter { $1.parameter != nil })
+		return Array(
+			(lazy(graph.nodes)
+				.filter { $1.parameter != nil })
+				|>	(flip(sorted) <| { $0.1.index! < $1.1.index! }))
 	}
 
 
