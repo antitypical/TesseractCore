@@ -1,8 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
-	let types = graph.map { $0.symbol.type }
-
 	let returns = Node.returns(graph).map { typeOf(graph, $0.0)! }
 	let parameters = Node.parameters(graph).map { typeOf(graph, $0.0)! }
 
