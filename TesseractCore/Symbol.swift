@@ -13,8 +13,6 @@ public enum Symbol: Hashable, Printable {
 	case Named(String, Term)
 	case Index(Int, Term)
 
-	public typealias IndexType = (Int, Term)
-
 
 	public var name: String {
 		switch self {

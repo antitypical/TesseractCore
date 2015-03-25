@@ -2,13 +2,30 @@
 
 public enum Node: Equatable, Printable {
 	/// A parameter of a graph.
-	case Parameter(Symbol.IndexType)
+	case Parameter(Int, Term)
 
 	/// A return of a graph.
-	case Return(Symbol.IndexType)
+	case Return(Int, Term)
 
 	/// An arbitrary graph node referencing a value bound in the environment.
 	case Symbolic(Symbol)
+
+
+	/// All returns in a given `graph`.
+	public static func returns(graph: Graph<Node>) -> [(Identifier, Node)] {
+		return Array(
+			(lazy(graph.nodes)
+				.filter { $1.`return` != nil })
+				|>	(flip(sorted) <| { $0.1.index! < $1.1.index! }))
+	}
+
+	/// All parameters in a given `graph`.
+	public static func parameters(graph: Graph<Node>) -> [(Identifier, Node)] {
+		return Array(
+			(lazy(graph.nodes)
+				.filter { $1.parameter != nil })
+				|>	(flip(sorted) <| { $0.1.index! < $1.1.index! }))
+	}
 
 
 	/// Case analysis.
@@ -16,33 +33,45 @@ public enum Node: Equatable, Printable {
 		switch self {
 		case let Parameter(index, type):
 			return ifParameter(index, type)
-		case let Return(symbol):
-			return ifReturn(symbol)
+		case let Return(index, type):
+			return ifReturn(index, type)
 		case let Symbolic(symbol):
 			return ifSymbolic(symbol)
 		}
 	}
 
 
+	public var type: Term {
+		return analysis(
+			ifParameter: { $1 },
+			ifReturn: { $1 },
+			ifSymbolic: { $0.type })
+	}
+
 	public var symbol: Symbol {
 		return analysis(
-			ifParameter: Symbol.index,
-			ifReturn: Symbol.index,
+			ifParameter: { Symbol.index($0.0, type) },
+			ifReturn: { Symbol.index($0.0, type) },
 			ifSymbolic: id)
 	}
 
-	public var parameter: Symbol.IndexType? {
+	public var parameter: (Int, Term)? {
 		return analysis(
 			ifParameter: unit,
 			ifReturn: const(nil),
 			ifSymbolic: const(nil))
 	}
 
-	public var `return`: Symbol.IndexType? {
+	public var `return`: (Int, Term)? {
 		return analysis(
 			ifParameter: const(nil),
 			ifReturn: unit,
 			ifSymbolic: const(nil))
+	}
+
+	/// The index of parameter/return nodes, nil for symbolic nodes.
+	public var index: Int? {
+		return parameter?.0 ?? `return`?.0
 	}
 
 
