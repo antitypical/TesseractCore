@@ -8,31 +8,31 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testGraphsWithOneReturnArePolymorphic() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0)])).0, ==, .forall([ 0 ], 0))
+		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0)])).0, ==, 0)
 	}
 
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0)])).0, ==, Term.function(0, .Unit).generalize())
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0)])).0, ==, Term.function(0, .Unit))
 	}
 
 	func testGraphsWithOneParameterAndOneReturnHavePolymorphicFunctionType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Return(0, 1)])).0, ==, Term.function(0, 1).generalize())
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Return(0, 1)])).0, ==, Term.function(0, 1))
 	}
 
 	func testGraphsWithMultipleParametersHaveCurriedFunctionType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1)])).0, ==, Term.function(0, .function(1, .Unit)).generalize())
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1)])).0, ==, Term.function(0, .function(1, .Unit)))
 	}
 
 	func testGraphsWithMultipleReturnsHaveProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0), Identifier(): .Return(1, 1)])).0, ==, Term.product(0, 1).generalize())
+		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0), Identifier(): .Return(1, 1)])).0, ==, Term.product(0, 1))
 	}
 
 	func testGraphsWithSeveralReturnsEtc() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0), Identifier(): .Return(1, 1), Identifier(): .Return(2, 2)])).0, ==, Term.product(0, .product(1, 2)).generalize())
+		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0), Identifier(): .Return(1, 1), Identifier(): .Return(2, 2)])).0, ==, Term.product(0, .product(1, 2)))
 	}
 
 	func testGraphsWithMultipleParametersAndMultipleReturnsHaveCurriedFunctionTypeProducingProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1), Identifier(): .Return(0, 2), Identifier(): .Return(1, 3)])).0, ==, Term.function(0, .function(1, .product(2, 3))).generalize())
+		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1), Identifier(): .Return(0, 2), Identifier(): .Return(1, 3)])).0, ==, Term.function(0, .function(1, .product(2, 3))))
 	}
 
 

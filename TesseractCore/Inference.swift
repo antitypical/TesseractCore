@@ -7,7 +7,7 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 	let constraints = ConstraintSet(lazy(graph.edges).flatMap { [ typeOf(graph, $0.source.identifier)!.`return` === typeOf(graph, $0.destination)! ] })
 
 	let returnType: Term = first(returns).map { reduce(dropFirst(returns), $0, flip(Term.product)) } ?? .Unit
-	return (reduce(parameters, returnType, flip(Term.function)).generalize(), constraints)
+	return (reduce(parameters, returnType, flip(Term.function)), constraints)
 }
 
 
