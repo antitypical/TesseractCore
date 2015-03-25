@@ -1,5 +1,13 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
+public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
+	let (type, constraints) = TesseractCore.constraints(graph)
+	return solve(constraints).either(
+		ifLeft: { Either.left(Error($0.description, Identifier())) },
+		ifRight: { Either.right($0.apply(type)) })
+}
+
+
 public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
 	let parameters = Node.parameters(graph).map { typeOf(graph, $0.0)! }.reverse()
 	let returns = Node.returns(graph).map { typeOf(graph, $0.0)! }.reverse()
@@ -25,5 +33,6 @@ private func typeOf(graph: Graph<Node>, endpoint: (identifier: Identifier, input
 }
 
 
+import Either
 import Manifold
 import Prelude
