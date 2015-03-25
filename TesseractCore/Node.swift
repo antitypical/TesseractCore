@@ -63,6 +63,11 @@ public enum Node: Equatable, Printable {
 			ifSymbolic: const(nil))
 	}
 
+	/// The index of parameter/return nodes, nil for symbolic nodes.
+	public var index: Int? {
+		return parameter?.0 ?? `return`?.0
+	}
+
 
 	// MARK: Printable
 
