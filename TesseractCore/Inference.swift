@@ -1,8 +1,8 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
-	let returns = Node.returns(graph).map { typeOf(graph, $0.0)! }
-	let parameters = Node.parameters(graph).map { typeOf(graph, $0.0)! }
+	let parameters = Node.parameters(graph).map { typeOf(graph, $0.0)! }.reverse()
+	let returns = Node.returns(graph).map { typeOf(graph, $0.0)! }.reverse()
 
 	let constraints = ConstraintSet(lazy(graph.edges).flatMap { [ typeOf(graph, $0.source.identifier)!.`return` === typeOf(graph, $0.destination)! ] })
 
