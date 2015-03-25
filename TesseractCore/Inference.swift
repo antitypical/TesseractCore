@@ -25,20 +25,5 @@ private func typeOf(graph: Graph<Node>, endpoint: (identifier: Identifier, input
 }
 
 
-private func simplify(type: Term) -> Term {
-	return Substitution(
-		(type.freeVariables
-			|>	sorted
-			|>	reverse
-			|>	enumerate
-			|>	lazy)
-			.map {
-				($1, Term(integerLiteral: $0))
-			})
-		.apply(type)
-		.generalize()
-}
-
-
 import Manifold
 import Prelude
