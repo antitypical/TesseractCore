@@ -38,7 +38,7 @@ final class EvaluationTests: XCTestCase {
 
 	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
 		let (a, b) = (Identifier(), Identifier())
-		let constant = Graph<Node>(nodes: [ a: node("true"), b: .Return(0, nil) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let constant = Graph<Node>(nodes: [ a: node("true"), b: .Return(0, 0) ], edges: [ Edge((a, 0), (b, 0)) ])
 
 		let truthy = Symbol.Named("truthy", .Bool)
 		let (c, graph) = createGraph(truthy)
@@ -49,7 +49,7 @@ final class EvaluationTests: XCTestCase {
 
 	func testGraphNodeWithBoundInputsAppliesInput() {
 		let (a, b) = (Identifier(), Identifier())
-		let identity = Graph<Node>(nodes: [ a: .Parameter(0, nil), b: .Return(0, nil) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let identity = Graph<Node>(nodes: [ a: .Parameter(0, 0), b: .Return(0, 0) ], edges: [ Edge((a, 0), (b, 0)) ])
 
 		let identitySymbol = Symbol.Named("identity", .forall([ 0 ], .function(0, 0)))
 		let (c, d) = (Identifier(), Identifier())
