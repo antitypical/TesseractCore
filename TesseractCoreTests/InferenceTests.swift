@@ -50,6 +50,10 @@ final class InferenceTests: XCTestCase {
 		assert(constraints(identity).1, ==, [ 0 === 1 ])
 	}
 
+	func testConstantGraphHasConstraintRelatingFirstParameterTypeToReturnType() {
+		assert(constraints(constant).1, ==, [ 0 === 2 ])
+	}
+
 
 	// MARK: Types
 
