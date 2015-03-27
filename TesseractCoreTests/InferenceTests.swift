@@ -63,6 +63,11 @@ private let identity: Graph<Node> = {
 	return Graph(nodes: [ a: .Parameter(0, 0), b: .Return(0, 1) ], edges: [ Edge((a, 0), (b, 0)) ])
 }()
 
+private let constant: Graph<Node> = {
+	let (a, b, c) = (Identifier(), Identifier(), Identifier())
+	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2) ], edges: [ Edge((a, 0), (c, 0)) ])
+}()
+
 
 import Assertions
 import Manifold
