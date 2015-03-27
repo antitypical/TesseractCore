@@ -21,6 +21,10 @@ public struct UnorderedDifferential<T> {
 		return UnorderedDifferential<U>(inserted: lazy(inserted).map(transform), deleted: lazy(deleted).map(transform))
 	}
 
+	public func mapAll<S: SequenceType>(transform: [T] -> S) -> UnorderedDifferential<S.Generator.Element> {
+		return UnorderedDifferential<S.Generator.Element>(inserted: transform(inserted), deleted: transform(deleted))
+	}
+
 	public func flatMap<S: SequenceType>(transform: T -> S) -> UnorderedDifferential<S.Generator.Element> {
 		return UnorderedDifferential<S.Generator.Element>(inserted: lazy(inserted).flatMap(transform), deleted: lazy(deleted).flatMap(transform))
 	}
@@ -41,10 +45,6 @@ public struct UnorderedDifferential<T> {
 				($0.0 + [$1], $0.1)
 			:	($0.0, $0.1 + [$1])
 		}
-	}
-
-	public func sorted(comparison: (T, T) -> Bool) -> UnorderedDifferential {
-		return UnorderedDifferential(inserted: inserted |> (flip(Swift.sorted) <| comparison), deleted: deleted |> (flip(Swift.sorted) <| comparison))
 	}
 }
 
