@@ -61,6 +61,11 @@ final class InferenceTests: XCTestCase {
 		assert(typeOf(identity).left, ==, nil)
 		assert(typeOf(identity).right, ==, Term.function(0, 0).generalize())
 	}
+
+	func testConstantIsGeneralized() {
+		assert(typeOf(constant).left, ==, nil)
+		assert(typeOf(constant).right, ==, Term.function(0, .function(1, 0)).generalize())
+	}
 }
 
 
