@@ -39,6 +39,10 @@ final class InferenceTests: XCTestCase {
 		assert(constraints(identity).0.freeVariables, ==, [0, 1])
 	}
 
+	func testConstantGraphTypeInitiallyHasThreeTypeVariables() {
+		assert(constraints(constant).0.freeVariables, ==, [0, 1, 2])
+	}
+
 
 	// MARK: Constraints
 
