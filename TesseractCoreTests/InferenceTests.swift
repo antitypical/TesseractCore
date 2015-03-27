@@ -35,6 +35,10 @@ final class InferenceTests: XCTestCase {
 		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1), Identifier(): .Return(0, 2), Identifier(): .Return(1, 3)])).0, ==, Term.function(0, .function(1, .product(2, 3))))
 	}
 
+	func testIdentityGraphTypeInitiallyHasTwoTypeVariables() {
+		assert(constraints(identity).0.freeVariables, ==, [0, 1])
+	}
+
 
 	// MARK: Constraints
 
