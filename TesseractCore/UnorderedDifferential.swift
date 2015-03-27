@@ -42,6 +42,10 @@ public struct UnorderedDifferential<T> {
 			:	($0.0, $0.1 + [$1])
 		}
 	}
+
+	public func sorted(comparison: (T, T) -> Bool) -> UnorderedDifferential {
+		return UnorderedDifferential(inserted: inserted |> (flip(Swift.sorted) <| comparison), deleted: deleted |> (flip(Swift.sorted) <| comparison))
+	}
 }
 
 
@@ -49,3 +53,6 @@ public struct UnorderedDifferential<T> {
 public func + <T> (left: UnorderedDifferential<T>, right: UnorderedDifferential<T>) -> UnorderedDifferential<T> {
 	return UnorderedDifferential(inserted: left.inserted + right.inserted, deleted: left.deleted + right.deleted)
 }
+
+
+import Prelude
