@@ -15,6 +15,10 @@ final class TypeDifferentialTests: XCTestCase {
 		assert(TypeDifferentiator.differentiate(before: .function(.Unit, .function(.Unit, .Unit)), after: .function(.Unit, .function(.Unit, .Bool))), ==, TypeDifferential.function(.Empty, .function(.Empty, .Bool)))
 	}
 
+	func testTheDiffOfAVariableWithAConstructorReplacesIt() {
+		assert(TypeDifferentiator.differentiate(before: 0, after: .Unit), ==, TypeDifferential.Unit)
+	}
+
 
 	// MARK: Patching
 
