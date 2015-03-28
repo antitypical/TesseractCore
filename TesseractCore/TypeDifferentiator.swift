@@ -8,6 +8,17 @@ public enum TypeDifferential: FixpointType {
 	case Empty
 
 
+	/// Case analysis.
+	public func analysis<Result>(@noescape #ifPatch: Type<TypeDifferential> -> Result, @noescape ifEmpty: () -> Result) -> Result {
+		switch self {
+		case let Patch(patch):
+			return ifPatch(patch)
+		case Empty:
+			return ifEmpty()
+		}
+	}
+
+
 	// MARK: FixpointType
 
 	public typealias Recur = Type<TypeDifferential>
