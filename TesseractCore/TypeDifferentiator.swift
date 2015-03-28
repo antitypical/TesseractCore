@@ -1,6 +1,12 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public enum TypeDifferential: Equatable, FixpointType, Printable {
+	// MARK: Constructors
+
+	public static func variable(v: Variable) -> TypeDifferential {
+		return In(.Variable(v))
+	}
+
 
 	// MARK: Cases
 
