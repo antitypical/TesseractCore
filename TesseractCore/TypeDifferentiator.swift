@@ -30,6 +30,15 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
+	public static var Unit: TypeDifferential {
+		return constructed(.Unit)
+	}
+
+	public static var Bool: TypeDifferential {
+		return sum(Unit, Unit)
+	}
+
+
 	// MARK: Cases
 
 	case Patch(Type<TypeDifferential>)
