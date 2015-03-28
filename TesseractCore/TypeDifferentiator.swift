@@ -121,5 +121,12 @@ public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 }
 
 
+extension Term {
+	public var differential: TypeDifferential {
+		return TypeDifferential.In(type.map { $0.differential })
+	}
+}
+
+
 import Manifold
 import Prelude
