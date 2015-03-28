@@ -2,6 +2,11 @@
 
 final class TypeDifferentialTests: XCTestCase {
 
+	// MARK: Patching
+
+	func testEmptyDiffIsIdempotent() {
+		assert(TypeDifferential.Empty.apply(Term.Bool), ==, Term.Bool)
+	}
 }
 
 
