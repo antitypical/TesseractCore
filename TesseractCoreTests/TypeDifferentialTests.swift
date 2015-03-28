@@ -1,6 +1,12 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 final class TypeDifferentialTests: XCTestCase {
+	// MARK: Diffing
+
+	func testTheDiffOfATypeWithItselfIsEmpty() {
+		assert(TypeDifferentiator.differentiate(before: .Bool, after: .Bool), ==, TypeDifferential.Empty)
+	}
+
 
 	// MARK: Patching
 
