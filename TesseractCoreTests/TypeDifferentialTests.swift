@@ -11,6 +11,10 @@ final class TypeDifferentialTests: XCTestCase {
 	func testUnitDiffReplacesOtherConstructors() {
 		assert(TypeDifferential.Patch(Type.constructed(.Unit)).apply(Term.Bool), ==, Term.Unit)
 	}
+
+	func testUnitDiffDoesNotReplaceVariables() {
+		assert(TypeDifferential.Patch(Type.constructed(.Unit)).apply(0), ==, 0)
+	}
 }
 
 
