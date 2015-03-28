@@ -130,7 +130,7 @@ public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 public struct TypeDifferentiator {
 	public static func differentiate(#before: Term, after: Term) -> TypeDifferential {
 		if before == after { return .Empty }
-		if let (v1, v2) = before.variable &&& after.variable {
+		if let v1 = before.variable, let v2 = after.variable {
 			return TypeDifferential.variable(v2)
 		} else if let (c1, c2) = before.constructed &&& after.constructed {
 			if c2.isUnit {
@@ -142,7 +142,7 @@ public struct TypeDifferentiator {
 			} else if let t1 = c1.product, let t2 = c2.product {
 				return TypeDifferential.product(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
 			}
-		} else if let (u1, u2) = before.universal &&& after.universal {
+		} else if let u1 = before.universal, let u2 = after.universal {
 			return TypeDifferential.universal(u2.0, differentiate(before: u1.1, after: u2.1))
 		}
 		return TypeDifferential.In(after.type.map { $0.differential })
