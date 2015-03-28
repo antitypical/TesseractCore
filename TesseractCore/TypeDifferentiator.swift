@@ -8,6 +8,10 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
+	public static func constructed(c: Constructor<TypeDifferential>) -> TypeDifferential {
+		return In(.constructed(c))
+	}
+
 	// MARK: Cases
 
 	case Patch(Type<TypeDifferential>)
