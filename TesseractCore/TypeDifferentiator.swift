@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum TypeDifferential: FixpointType, Printable {
+public enum TypeDifferential: Equatable, FixpointType, Printable {
 
 	// MARK: Cases
 
@@ -38,6 +38,17 @@ public enum TypeDifferential: FixpointType, Printable {
 		return analysis(
 			ifPatch: { "\($0)" },
 			ifEmpty: { ".Empty" })
+	}
+}
+
+public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
+	switch (left, right) {
+	case let (.Patch(p1), .Patch(p2)):
+		return p1 == p2
+	case (.Empty, .Empty):
+		return true
+	default:
+		return false
 	}
 }
 
