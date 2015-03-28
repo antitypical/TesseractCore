@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum TypeDifferential: FixpointType {
+public enum TypeDifferential: FixpointType, Printable {
 
 	// MARK: Cases
 
@@ -29,6 +29,15 @@ public enum TypeDifferential: FixpointType {
 
 	public static func out(diff: TypeDifferential) -> Recur {
 		return diff.analysis(ifPatch: unit, ifEmpty: const(nil))!
+	}
+
+
+	// MARK: Printable
+
+	public var description: String {
+		return analysis(
+			ifPatch: { "\($0)" },
+			ifEmpty: { ".Empty" })
 	}
 }
 
