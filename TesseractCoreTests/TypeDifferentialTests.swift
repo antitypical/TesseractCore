@@ -7,6 +7,10 @@ final class TypeDifferentialTests: XCTestCase {
 	func testEmptyDiffIsIdempotent() {
 		assert(TypeDifferential.Empty.apply(Term.Bool), ==, Term.Bool)
 	}
+
+	func testUnitDiffReplacesOtherConstructors() {
+		assert(TypeDifferential.Patch(Type.constructed(.Unit)).apply(Term.Bool), ==, Term.Unit)
+	}
 }
 
 
