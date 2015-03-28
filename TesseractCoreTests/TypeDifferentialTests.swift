@@ -7,6 +7,10 @@ final class TypeDifferentialTests: XCTestCase {
 		assert(TypeDifferentiator.differentiate(before: .Bool, after: .Bool), ==, TypeDifferential.Empty)
 	}
 
+	func testTheDiffOfAConstructorWithADifferentConstructorReplacesIt() {
+		assert(TypeDifferentiator.differentiate(before: .Unit, after: .Bool), ==, TypeDifferential.Bool)
+	}
+
 
 	// MARK: Patching
 
