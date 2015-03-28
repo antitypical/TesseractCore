@@ -56,6 +56,37 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
+	/// Applies the diff to a type.
+	public func apply(type: Term) -> Term {
+		switch self {
+		case let .Patch(patch):
+			switch patch {
+			case let .Variable(variable) where type.variable != nil:
+				return Term(variable)
+			case let .Constructed(constructor) where type.constructed != nil:
+				switch constructor.value {
+				case .Unit:
+					return .Unit
+				case let .Function(x, y) where type.function != nil:
+					return Term.function(x.value.apply(type.function!.0), y.value.apply(type.function!.1))
+				case let .Sum(x, y) where type.sum != nil:
+					return Term.sum(x.value.apply(type.sum!.0), y.value.apply(type.sum!.1))
+				case let .Product(x, y) where type.product != nil:
+					return Term.product(x.value.apply(type.product!.0), y.value.apply(type.product!.1))
+				default:
+					return type
+				}
+			case let .Universal(variables, quantified) where type.universal != nil:
+				return Term.forall(variables, quantified.value.apply(type.universal!.1))
+			default:
+				return type
+			}
+		case .Empty:
+			return type
+		}
+	}
+
+
 	// MARK: FixpointType
 
 	public typealias Recur = Type<TypeDifferential>
