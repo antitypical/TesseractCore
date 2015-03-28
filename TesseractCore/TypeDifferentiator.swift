@@ -25,6 +25,11 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
+	public static func universal(s: Set<Variable>, _ t: TypeDifferential) -> TypeDifferential {
+		return In(.universal(s, t))
+	}
+
+
 	// MARK: Cases
 
 	case Patch(Type<TypeDifferential>)
