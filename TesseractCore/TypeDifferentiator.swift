@@ -121,6 +121,29 @@ public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 }
 
 
+public struct TypeDifferentiator {
+	public static func differentiate(#before: Term, after: Term) -> TypeDifferential {
+		if before == after { return .Empty }
+		if let (v1, v2) = before.variable &&& after.variable {
+			return TypeDifferential.variable(v2)
+		} else if let (c1, c2) = before.constructed &&& after.constructed {
+			if c2.isUnit {
+				return TypeDifferential.constructed(.Unit)
+			} else if let t1 = c1.function, let t2 = c2.function {
+				return TypeDifferential.function(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
+			} else if let t1 = c1.sum, let t2 = c2.sum {
+				return TypeDifferential.sum(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
+			} else if let t1 = c1.product, let t2 = c2.product {
+				return TypeDifferential.product(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
+			}
+		} else if let (u1, u2) = before.universal &&& after.universal {
+			return TypeDifferential.universal(u2.0, differentiate(before: u1.1, after: u2.1))
+		}
+		return TypeDifferential.In(after.type.map { $0.differential })
+	}
+}
+
+
 extension Term {
 	public var differential: TypeDifferential {
 		return TypeDifferential.In(type.map { $0.differential })
