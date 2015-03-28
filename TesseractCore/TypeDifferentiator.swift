@@ -41,7 +41,7 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 
 	// MARK: Cases
 
-	case Patch(Type<TypeDifferential>)
+	case Patch(Recur)
 	case Empty
 
 
