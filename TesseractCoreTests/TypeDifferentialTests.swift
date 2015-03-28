@@ -11,6 +11,10 @@ final class TypeDifferentialTests: XCTestCase {
 		assert(TypeDifferentiator.differentiate(before: .Unit, after: .Bool), ==, TypeDifferential.Bool)
 	}
 
+	func testTheDiffOfNestedFunctionsIsPartial() {
+		assert(TypeDifferentiator.differentiate(before: .function(.Unit, .function(.Unit, .Unit)), after: .function(.Unit, .function(.Unit, .Bool))), ==, TypeDifferential.function(.Empty, .function(.Empty, .Bool)))
+	}
+
 
 	// MARK: Patching
 
