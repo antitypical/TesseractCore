@@ -70,6 +70,11 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 		return merge { before, _ in before }
 	}
 
+	/// Returns the type after diffing.
+	public var after: Term {
+		return merge { _, after in after }
+	}
+
 
 	// MARK: FixpointType
 
