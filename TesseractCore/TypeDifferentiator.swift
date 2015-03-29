@@ -56,6 +56,16 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
+	/// Merges patches into terms using `transform` and reconstructs a `Term` from the resulting instances.
+	public func merge(transform: (Term, Term) -> Term) -> Term {
+		return analysis(
+			ifPatch: transform,
+			ifCopy: {
+				Term.In($0.map { $0.merge(transform) })
+			})
+	}
+
+
 	// MARK: FixpointType
 
 	public typealias Recur = Type<TypeDifferential>
