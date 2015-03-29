@@ -18,21 +18,6 @@ final class TypeDifferentialTests: XCTestCase {
 	func testTheDiffOfAVariableWithAConstructorReplacesIt() {
 		assert(TypeDifferentiator.differentiate(before: 0, after: .Unit), ==, TypeDifferential.Unit)
 	}
-
-
-	// MARK: Patching
-
-	func testEmptyDiffIsIdempotent() {
-		assert(TypeDifferential.Empty.apply(Term.Bool), ==, Term.Bool)
-	}
-
-	func testUnitDiffReplacesOtherConstructors() {
-		assert(TypeDifferential.Patch(Type.constructed(.Unit)).apply(Term.Bool), ==, Term.Unit)
-	}
-
-	func testUnitDiffDoesNotReplaceVariables() {
-		assert(TypeDifferential.Patch(Type.constructed(.Unit)).apply(0), ==, 0)
-	}
 }
 
 
