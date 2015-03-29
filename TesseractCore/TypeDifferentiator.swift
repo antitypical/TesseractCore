@@ -39,12 +39,6 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
-	/// Returns the represented Type or nil.
-	private var type: Recur? {
-		return analysis(ifPatch: unit, ifEmpty: const(nil))
-	}
-
-
 	// MARK: Cases
 
 	case Patch(Recur)
