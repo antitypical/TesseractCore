@@ -41,17 +41,17 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 
 	// MARK: Cases
 
-	case Patch(Recur)
-	case Empty
+	case Patch(Term, Term)
+	case Copy(Recur)
 
 
 	/// Case analysis.
-	public func analysis<Result>(@noescape #ifPatch: Type<TypeDifferential> -> Result, @noescape ifEmpty: () -> Result) -> Result {
+	public func analysis<Result>(@noescape #ifPatch: (Term, Term) -> Result, @noescape ifCopy: Recur -> Result) -> Result {
 		switch self {
-		case let Patch(patch):
-			return ifPatch(patch)
-		case Empty:
-			return ifEmpty()
+		case let Patch(before, after):
+			return ifPatch(before, after)
+		case let Copy(type):
+			return ifCopy(type)
 		}
 	}
 
@@ -61,11 +61,11 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	public typealias Recur = Type<TypeDifferential>
 
 	public static func In(type: Recur) -> TypeDifferential {
-		return .Patch(type)
+		return .Copy(type)
 	}
 
 	public static func out(diff: TypeDifferential) -> Recur {
-		return diff.analysis(ifPatch: unit, ifEmpty: const(nil))!
+		return diff.analysis(ifPatch: { $1.type.map { $0.differential } }, ifCopy: id)
 	}
 
 
@@ -73,17 +73,17 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 
 	public var description: String {
 		return analysis(
-			ifPatch: { "\($0)" },
-			ifEmpty: { ".Empty" })
+			ifPatch: { "{ \($0) => \($1) }" },
+			ifCopy: toString)
 	}
 }
 
 public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 	switch (left, right) {
-	case let (.Patch(p1), .Patch(p2)):
-		return p1 == p2
-	case (.Empty, .Empty):
-		return true
+	case let (.Patch(p1, p2), .Patch(q1, q2)):
+		return p1 == q1 && p2 == q2
+	case let (.Copy(t), .Copy(u)):
+		return t == u
 	default:
 		return false
 	}
@@ -92,7 +92,7 @@ public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 
 public struct TypeDifferentiator {
 	public static func differentiate(#before: Term, after: Term) -> TypeDifferential {
-		if before == after { return .Empty }
+		if before == after { return .Copy(after.type.map { $0.differential }) }
 		if let v1 = before.variable, let v2 = after.variable {
 			return TypeDifferential.variable(v2)
 		} else if let (c1, c2) = before.constructed &&& after.constructed {
@@ -108,7 +108,7 @@ public struct TypeDifferentiator {
 		} else if let u1 = before.universal, let u2 = after.universal {
 			return TypeDifferential.universal(u2.0, differentiate(before: u1.1, after: u2.1))
 		}
-		return TypeDifferential.In(after.type.map { $0.differential })
+		return TypeDifferential.Patch(before, after)
 	}
 }
 

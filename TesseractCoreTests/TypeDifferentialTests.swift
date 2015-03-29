@@ -3,20 +3,20 @@
 final class TypeDifferentialTests: XCTestCase {
 	// MARK: Diffing
 
-	func testTheDiffOfATypeWithItselfIsEmpty() {
-		assert(TypeDifferentiator.differentiate(before: .Bool, after: .Bool), ==, TypeDifferential.Empty)
+	func testTheDiffOfATypeWithItselfIsIdempotent() {
+		assert(TypeDifferentiator.differentiate(before: .Bool, after: .Bool), ==, .Bool)
 	}
 
 	func testTheDiffOfAConstructorWithADifferentConstructorReplacesIt() {
-		assert(TypeDifferentiator.differentiate(before: .Unit, after: .Bool), ==, TypeDifferential.Bool)
-	}
-
-	func testTheDiffOfNestedFunctionsIsPartial() {
-		assert(TypeDifferentiator.differentiate(before: .function(.Unit, .function(.Unit, .Unit)), after: .function(.Unit, .function(.Unit, .Bool))), ==, TypeDifferential.function(.Empty, .function(.Empty, .Bool)))
+		assert(TypeDifferentiator.differentiate(before: .Unit, after: .Bool), ==, .Patch(.Unit, .Bool))
 	}
 
 	func testTheDiffOfAVariableWithAConstructorReplacesIt() {
-		assert(TypeDifferentiator.differentiate(before: 0, after: .Unit), ==, TypeDifferential.Unit)
+		assert(TypeDifferentiator.differentiate(before: 0, after: .Unit), ==, TypeDifferential.Patch(.variable(0), .Unit))
+	}
+
+	func testComputesLocalPatches() {
+		assert(TypeDifferentiator.differentiate(before: .function(.Unit, .Unit), after: .function(.Unit, .Bool)), ==, .function(.Unit, .Patch(.Unit, .Bool)))
 	}
 }
 
