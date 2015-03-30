@@ -27,7 +27,7 @@ private func typeOf(graph: Graph<Node>, identifier: Identifier) -> Term? {
 private func typeOf(graph: Graph<Node>, endpoint: (identifier: Identifier, inputIndex: Int)) -> Term? {
 	return graph.nodes[endpoint.identifier].map {
 		$0.`return` != nil ?
-			$0.type
+			$0.type.instantiate()
 		:	$0.type.parameters[endpoint.inputIndex]
 	}
 }
