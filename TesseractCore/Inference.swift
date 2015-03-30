@@ -2,9 +2,14 @@
 
 public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
 	let (type, constraints) = TesseractCore.constraints(graph)
-	return solve(constraints).either(
+	return solve(constraints)
+		.either(
 		ifLeft: { Either.left(Error($0.description, Identifier())) },
-		ifRight: { Either.right(normalize($0.apply(type)).generalize()) })
+		ifRight: {
+			let t = $0.apply(type)
+			let n = normalization(t)
+			return Either.right(n.apply(t).generalize())
+		})
 }
 
 
@@ -27,7 +32,7 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 
 
 /// Substitute the variables in a type such that it is represented densely with variables in-order starting at 0.
-private func normalize(type: Term) -> Term {
+private func normalization(type: Term) -> Substitution {
 	/// Produce the free variables of `type` in depth first order.
 	func freeVariables(type: Type<(Set<Variable>, [Variable])>) -> (Set<Variable>, [Variable]) {
 		let binary: ((Set<Variable>, [Variable]), (Set<Variable>, [Variable])) -> (Set<Variable>, [Variable]) = { t1, t2 in
@@ -51,7 +56,6 @@ private func normalize(type: Term) -> Term {
 			.map {
 				($1, Term(integerLiteral: $0))
 			})
-			.apply(type)
 }
 
 
