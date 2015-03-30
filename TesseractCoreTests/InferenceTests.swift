@@ -73,9 +73,8 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testInstantiatesNodeTypes() {
-		let result = typeOf(constantByWrappingNode)
-		assert(result.left, ==, nil)
-		assert(result.right, ==, Term.function(0, .function(1, 0)).generalize())
+		assert(typeOf(constantByWrappingNode).left, ==, nil)
+		assert(typeOf(constantByWrappingNode).right, ==, Term.function(0, .function(1, 0)).generalize())
 	}
 }
 

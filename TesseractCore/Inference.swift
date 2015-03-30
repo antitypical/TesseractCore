@@ -1,14 +1,32 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
-	let (type, constraints) = TesseractCore.constraints(graph)
-	return solve(constraints).either(
+	let (type, constraints, _) = TesseractCore.constraints(graph)
+	return solve(constraints)
+		.either(
 		ifLeft: { Either.left(Error($0.description, Identifier())) },
-		ifRight: { Either.right(normalize($0.apply(type)).generalize()) })
+		ifRight: {
+			let t = $0.apply(type)
+			let n = normalization(t)
+			return Either.right(n.apply(t).generalize())
+		})
+}
+
+public func typeOf(graph: Graph<Node>) -> (Either<Error<Identifier>, Term>, Graph<Term>) {
+	let (type, constraints, types) = TesseractCore.constraints(graph)
+	return solve(constraints)
+		.map { normalization(type).compose($0) }
+		.either(
+			ifLeft: { (Either.left(Error($0.description, Identifier())), types) },
+			ifRight: { s in
+				let t = s.apply(type)
+				let n = normalization(t)
+				return (Either.right(n.apply(t).generalize()), types.map { n.apply(s.apply($0)) })
+			})
 }
 
 
-public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
+public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet, graph: Graph<Term>) {
 	var cursor = 0
 	let instantiated = graph.map { $0.type.instantiate { Variable(integerLiteral: --cursor) } }
 
@@ -22,12 +40,12 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 	})
 
 	let returnType: Term = first(returns).map { reduce(dropFirst(returns), $0, flip(Term.product)) } ?? .Unit
-	return (reduce(parameters, returnType, flip(Term.function)), constraints)
+	return (reduce(parameters, returnType, flip(Term.function)), constraints, instantiated)
 }
 
 
 /// Substitute the variables in a type such that it is represented densely with variables in-order starting at 0.
-private func normalize(type: Term) -> Term {
+private func normalization(type: Term) -> Substitution {
 	/// Produce the free variables of `type` in depth first order.
 	func freeVariables(type: Type<(Set<Variable>, [Variable])>) -> (Set<Variable>, [Variable]) {
 		let binary: ((Set<Variable>, [Variable]), (Set<Variable>, [Variable])) -> (Set<Variable>, [Variable]) = { t1, t2 in
@@ -51,7 +69,6 @@ private func normalize(type: Term) -> Term {
 			.map {
 				($1, Term(integerLiteral: $0))
 			})
-			.apply(type)
 }
 
 
