@@ -28,7 +28,7 @@ private func typeOf(graph: Graph<Node>, endpoint: (identifier: Identifier, input
 	return graph.nodes[endpoint.identifier].map {
 		$0.`return` != nil ?
 			$0.type.instantiate()
-		:	$0.type.parameters[endpoint.inputIndex]
+		:	$0.type.parameters[endpoint.inputIndex].instantiate()
 	}
 }
 
