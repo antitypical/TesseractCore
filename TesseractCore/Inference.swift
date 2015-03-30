@@ -12,6 +12,19 @@ public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
 		})
 }
 
+public func typeOf(graph: Graph<Node>) -> (Either<Error<Identifier>, Term>, Graph<Term>) {
+	let (type, constraints, types) = TesseractCore.constraints(graph)
+	return solve(constraints)
+		.map { normalization(type).compose($0) }
+		.either(
+			ifLeft: { (Either.left(Error($0.description, Identifier())), types) },
+			ifRight: { s in
+				let t = s.apply(type)
+				let n = normalization(t)
+				return (Either.right(n.apply(t).generalize()), types.map { n.apply(s.apply($0)) })
+			})
+}
+
 
 public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet, graph: Graph<Term>) {
 	var cursor = 0
