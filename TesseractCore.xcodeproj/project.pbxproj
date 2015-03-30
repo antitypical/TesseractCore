@@ -40,6 +40,8 @@
 		D4B7EE731A47226B006D44E9 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D42CAC391A429BFD0091F6AA /* Box.framework */; };
 		D4B7EE741A47226B006D44E9 /* Either.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE6F1A466104006D44E9 /* Either.framework */; };
 		D4B7EE751A47226B006D44E9 /* Prelude.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4B7EE711A46614C006D44E9 /* Prelude.framework */; };
+		D4C0FAFB1AC537B900936032 /* TypeDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C0FAFA1AC537B900936032 /* TypeDifferentiator.swift */; };
+		D4C0FAFD1AC5873500936032 /* TypeDifferentialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C0FAFC1AC5873500936032 /* TypeDifferentialTests.swift */; };
 		D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C893BC1A51DCC10078743E /* GraphTests.swift */; };
 		D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CB5DBE1A75E12D00672C6B /* Edge.swift */; };
 		D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CB5DC21A75E53D00672C6B /* Node.swift */; };
@@ -98,6 +100,8 @@
 		D4B695431A7330D200619555 /* Dictionary+HigherOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+HigherOrder.swift"; sourceTree = "<group>"; };
 		D4B7EE6F1A466104006D44E9 /* Either.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Either.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4B7EE711A46614C006D44E9 /* Prelude.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Prelude.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4C0FAFA1AC537B900936032 /* TypeDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeDifferentiator.swift; sourceTree = "<group>"; };
+		D4C0FAFC1AC5873500936032 /* TypeDifferentialTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeDifferentialTests.swift; sourceTree = "<group>"; };
 		D4C893BC1A51DCC10078743E /* GraphTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
 		D4CB5DBE1A75E12D00672C6B /* Edge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Edge.swift; sourceTree = "<group>"; };
 		D4CB5DC21A75E53D00672C6B /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 				1182B03A1A84381B002E7D2D /* ImportingTests.swift */,
 				11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */,
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
+				D4C0FAFC1AC5873500936032 /* TypeDifferentialTests.swift */,
 				D4B5220E1A9D952500F33502 /* Fixtures.swift */,
 				D4ED828C1A3F9ADB00D0479E /* Supporting Files */,
 			);
@@ -251,6 +256,7 @@
 				D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */,
 				D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */,
 				D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */,
+				D4C0FAFA1AC537B900936032 /* TypeDifferentiator.swift */,
 				D4AE08BD1AB62D2B00F1CD10 /* UnorderedDifferential.swift */,
 			);
 			name = Diffs;
@@ -370,6 +376,7 @@
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
 				D479740C1A7DA6DC0034ABA2 /* Error.swift in Sources */,
 				D4F48AC41AAE90D70017504F /* SetDifferentiator.swift in Sources */,
+				D4C0FAFB1AC537B900936032 /* TypeDifferentiator.swift in Sources */,
 				D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */,
 				D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */,
 				D4FF06B31AC10612004DB780 /* Inference.swift in Sources */,
@@ -400,6 +407,7 @@
 				D4B5220F1A9D952500F33502 /* Fixtures.swift in Sources */,
 				D4FF06B71AC10900004DB780 /* NodeTests.swift in Sources */,
 				11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */,
+				D4C0FAFD1AC5873500936032 /* TypeDifferentialTests.swift in Sources */,
 				D41275851A78638900CC910A /* EvaluationTests.swift in Sources */,
 				D479740E1A7DEE9E0034ABA2 /* ErrorTests.swift in Sources */,
 				D47974031A7D277C0034ABA2 /* ValueTests.swift in Sources */,
