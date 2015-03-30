@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
-	let (type, constraints) = TesseractCore.constraints(graph)
+	let (type, constraints, _) = TesseractCore.constraints(graph)
 	return solve(constraints)
 		.either(
 		ifLeft: { Either.left(Error($0.description, Identifier())) },
@@ -13,7 +13,7 @@ public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
 }
 
 
-public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
+public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet, graph: Graph<Term>) {
 	var cursor = 0
 	let instantiated = graph.map { $0.type.instantiate { Variable(integerLiteral: --cursor) } }
 
@@ -27,7 +27,7 @@ public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet
 	})
 
 	let returnType: Term = first(returns).map { reduce(dropFirst(returns), $0, flip(Term.product)) } ?? .Unit
-	return (reduce(parameters, returnType, flip(Term.function)), constraints)
+	return (reduce(parameters, returnType, flip(Term.function)), constraints, instantiated)
 }
 
 
