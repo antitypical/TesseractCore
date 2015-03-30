@@ -68,12 +68,9 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testInstantiatesNodeTypes() {
-		let constantType = Term.forall([0, 1], .function(0, .function(1, 0)))
-		let (a, b, c, d) = (Identifier(), Identifier(), Identifier(), Identifier())
-		let graph = Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2), d: Node.Symbolic(Symbol.named("constant", constantType)) ], edges: [ Edge((a, 0), (d, 0)), Edge((b, 0), (d, 1)), Edge((d, 0), (c, 0)) ])
-		let result = typeOf(graph)
+		let result = typeOf(constantByWrappingNode)
 		assert(result.left, ==, nil)
-		assert(result.right, ==, constantType)
+		assert(result.right, ==, Term.function(0, .function(1, 0)).generalize())
 	}
 }
 
@@ -88,6 +85,12 @@ private let identity: Graph<Node> = {
 private let constant: Graph<Node> = {
 	let (a, b, c) = (Identifier(), Identifier(), Identifier())
 	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2) ], edges: [ Edge((a, 0), (c, 0)) ])
+}()
+
+private let constantByWrappingNode: Graph<Node> = {
+	let constantType = Term.forall([0, 1], .function(0, .function(1, 0)))
+	let (a, b, c, d) = (Identifier(), Identifier(), Identifier(), Identifier())
+	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2), d: Node.Symbolic(Symbol.named("constant", constantType)) ], edges: [ Edge((a, 0), (d, 0)), Edge((b, 0), (d, 1)), Edge((d, 0), (c, 0)) ])
 }()
 
 
