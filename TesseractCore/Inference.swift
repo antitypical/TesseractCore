@@ -46,7 +46,6 @@ private func normalize(type: Term) -> Term {
 	}
 	return Substitution(
 		(cata(freeVariables)(type).1
-			|>	sorted
 			|>	enumerate
 			|>	lazy)
 			.map {
