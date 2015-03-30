@@ -9,7 +9,8 @@ public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
 
 
 public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet) {
-	let instantiated = graph.map { $0.type.instantiate() }
+	var cursor = reduce(lazy(graph.nodes.values).flatMap { $0.type.freeVariables }, -1) { max($1.value, $0) }
+	let instantiated = graph.map { $0.type.instantiate { Variable(integerLiteral: ++cursor) } }
 
 	let parameters = Node.parameters(graph).map { instantiated.nodes[$0.0]! }.reverse()
 	let returns = Node.returns(graph).map { instantiated.nodes[$0.0]! }.reverse()
