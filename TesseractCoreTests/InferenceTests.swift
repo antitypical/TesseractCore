@@ -56,7 +56,7 @@ final class InferenceTests: XCTestCase {
 
 	func testWrappingANodeIntroducesConstraintsAgainstInstantiatedTypes() {
 		let result = constraints(constantByWrappingNode).1
-		assert(result, ==, [ 3 === 0, 4 === 1, 3 === 2 ])
+		assert(result, ==, [ 0 === -1, 1 === -2, 2 === -1 ])
 	}
 
 
