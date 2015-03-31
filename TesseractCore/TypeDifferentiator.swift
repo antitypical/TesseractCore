@@ -111,16 +111,14 @@ public struct TypeDifferentiator {
 		if before == after { return .Copy(after.type.map { $0.differential }) }
 		if let v1 = before.variable, let v2 = after.variable {
 			return TypeDifferential.variable(v2)
-		} else if let (c1, c2) = before.constructed &&& after.constructed {
-			if c2.isUnit {
-				return TypeDifferential.constructed(.Unit)
-			} else if let t1 = c1.function, let t2 = c2.function {
-				return TypeDifferential.function(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
-			} else if let t1 = c1.sum, let t2 = c2.sum {
-				return TypeDifferential.sum(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
-			} else if let t1 = c1.product, let t2 = c2.product {
-				return TypeDifferential.product(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
-			}
+		} else if after.isUnit {
+			return TypeDifferential.Unit
+		} else if let t1 = before.function, let t2 = after.function {
+			return TypeDifferential.function(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
+		} else if let t1 = before.sum, let t2 = after.sum {
+			return TypeDifferential.sum(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
+		} else if let t1 = before.product, let t2 = after.product {
+			return TypeDifferential.product(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
 		} else if let u1 = before.universal, let u2 = after.universal {
 			return TypeDifferential.universal(u2.0, differentiate(before: u1.1, after: u2.1))
 		}
