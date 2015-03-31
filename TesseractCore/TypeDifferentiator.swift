@@ -8,10 +8,6 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 
 
-	public static func constructed(c: Constructor<TypeDifferential>) -> TypeDifferential {
-		return In(.constructed(c))
-	}
-
 	public static func function(t1: TypeDifferential, _ t2: TypeDifferential) -> TypeDifferential {
 		return constructed(.function(t1, t2))
 	}
