@@ -53,13 +53,10 @@ private func normalization(type: Term) -> Substitution {
 		}
 		return type.analysis(
 			ifVariable: { ([$0], [$0]) },
-			ifConstructed: {
-				$0.analysis(
-					ifUnit: ([], []),
-					ifFunction: binary,
-					ifSum: binary,
-					ifProduct: binary)
-			},
+			ifUnit: const([], []),
+			ifFunction: binary,
+			ifSum: binary,
+			ifProduct: binary,
 			ifUniversal: { $1 })
 	}
 	return Substitution(
