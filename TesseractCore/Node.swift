@@ -10,6 +10,9 @@ public enum Node: Equatable, Printable {
 	/// An arbitrary graph node referencing a value bound in the environment.
 	case Symbolic(Symbol)
 
+	/// A graph node parameterized by a literal value.
+	case Literal(Symbol, Value)
+
 
 	/// All returns in a given `graph`.
 	public static func returns(graph: Graph<Node>) -> [(Identifier, Node)] {
@@ -29,14 +32,16 @@ public enum Node: Equatable, Printable {
 
 
 	/// Case analysis.
-	public func analysis<Result>(@noescape #ifParameter: (Int, Term) -> Result, @noescape ifReturn: (Int, Term) -> Result, @noescape ifSymbolic: Symbol -> Result) -> Result {
+	public func analysis<Result>(@noescape #ifParameter: (Int, Term) -> Result, @noescape ifReturn: (Int, Term) -> Result, @noescape ifSymbolic: Symbol -> Result, @noescape ifLiteral: (Symbol, Value) -> Result) -> Result {
 		switch self {
-		case let Parameter(index, type):
+		case let .Parameter(index, type):
 			return ifParameter(index, type)
-		case let Return(index, type):
+		case let .Return(index, type):
 			return ifReturn(index, type)
-		case let Symbolic(symbol):
+		case let .Symbolic(symbol):
 			return ifSymbolic(symbol)
+		case let .Literal(symbol, value):
+			return ifLiteral(symbol, value)
 		}
 	}
 
@@ -45,28 +50,32 @@ public enum Node: Equatable, Printable {
 		return analysis(
 			ifParameter: { $1 },
 			ifReturn: { $1 },
-			ifSymbolic: { $0.type })
+			ifSymbolic: { $0.type },
+			ifLiteral: { $0.0.type })
 	}
 
 	public var symbol: Symbol {
 		return analysis(
 			ifParameter: { Symbol.index($0.0, type) },
 			ifReturn: { Symbol.index($0.0, type) },
-			ifSymbolic: id)
+			ifSymbolic: id,
+			ifLiteral: { $0.0 })
 	}
 
 	public var parameter: (Int, Term)? {
 		return analysis(
 			ifParameter: unit,
 			ifReturn: const(nil),
-			ifSymbolic: const(nil))
+			ifSymbolic: const(nil),
+			ifLiteral: const(nil))
 	}
 
 	public var `return`: (Int, Term)? {
 		return analysis(
 			ifParameter: const(nil),
 			ifReturn: unit,
-			ifSymbolic: const(nil))
+			ifSymbolic: const(nil),
+			ifLiteral: const(nil))
 	}
 
 	/// The index of parameter/return nodes, nil for symbolic nodes.
@@ -81,7 +90,8 @@ public enum Node: Equatable, Printable {
 		return analysis(
 			ifParameter: { ".Parameter(\($0))" },
 			ifReturn: { ".Return(\($0))" },
-			ifSymbolic: { ".Symbolic(\($0))" })
+			ifSymbolic: { ".Symbolic(\($0))" },
+			ifLiteral: { ".Literal(\($0, $1))" })
 	}
 }
 
@@ -94,6 +104,8 @@ public func == (left: Node, right: Node) -> Bool {
 		return x1 == y1 && x2 == y2
 	case let (.Symbolic(x), .Symbolic(y)):
 		return x == y
+	case let (.Literal(x1, x2), .Literal(y1, y2)):
+		return x1 == y1
 
 	default:
 		return false

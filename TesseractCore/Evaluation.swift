@@ -22,6 +22,9 @@ private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environ
 			??	error("\(symbol) not found in environment", from)
 		}
 
+	case let .Literal(symbol, value):
+		return .right(Memo(evaluated: value))
+
 	case let .Parameter(symbol):
 		return environment[.Index(0, .Unit)]
 			.map { .right(Memo(evaluated: $0)) }
