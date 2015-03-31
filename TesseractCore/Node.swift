@@ -62,6 +62,14 @@ public enum Node: Equatable, Printable {
 			ifLiteral: { $0.0 })
 	}
 
+	public var literal: Value? {
+		return analysis(
+			ifParameter: const(nil),
+			ifReturn: const(nil),
+			ifSymbolic: const(nil),
+			ifLiteral: { $1 })
+	}
+
 	public var parameter: (Int, Term)? {
 		return analysis(
 			ifParameter: unit,
