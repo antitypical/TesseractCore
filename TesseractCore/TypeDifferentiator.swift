@@ -111,8 +111,6 @@ public struct TypeDifferentiator {
 		if before == after { return .Copy(after.type.map { $0.differential }) }
 		if let v1 = before.variable, let v2 = after.variable {
 			return TypeDifferential.variable(v2)
-		} else if after.isUnit {
-			return TypeDifferential.Unit
 		} else if let t1 = before.function, let t2 = after.function {
 			return TypeDifferential.function(differentiate(before: t1.0, after: t2.0), differentiate(before: t1.1, after: t2.1))
 		} else if let t1 = before.sum, let t2 = after.sum {
