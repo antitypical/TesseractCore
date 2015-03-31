@@ -9,15 +9,15 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 
 
 	public static func function(t1: TypeDifferential, _ t2: TypeDifferential) -> TypeDifferential {
-		return constructed(.function(t1, t2))
+		return In(.function(t1, t2))
 	}
 
 	public static func sum(t1: TypeDifferential, _ t2: TypeDifferential) -> TypeDifferential {
-		return constructed(.sum(t1, t2))
+		return In(.sum(t1, t2))
 	}
 
 	public static func product(t1: TypeDifferential, _ t2: TypeDifferential) -> TypeDifferential {
-		return constructed(.product(t1, t2))
+		return In(.product(t1, t2))
 	}
 
 
@@ -27,7 +27,7 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 
 
 	public static var Unit: TypeDifferential {
-		return constructed(.Unit)
+		return In(.Unit)
 	}
 
 	public static var Bool: TypeDifferential {
