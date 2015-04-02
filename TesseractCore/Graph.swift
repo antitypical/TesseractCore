@@ -11,6 +11,10 @@ public struct Graph<T>: CollectionType, Printable {
 		self.init(nodes: nodes, edges: [])
 	}
 
+	public init<S2: SequenceType where S2.Generator.Element == Edge>(nodes: [T], edges: S2) {
+		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: edges)
+	}
+
 	public init() {
 		self.init(nodes: [:], edges: [])
 	}
