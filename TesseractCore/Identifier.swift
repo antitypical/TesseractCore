@@ -45,8 +45,6 @@ public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Print
 	// MARK: Private
 
 	private let value: Int
-
-	private static var cursor = 0
 }
 
 public func == (left: Identifier, right: Identifier) -> Bool {
