@@ -2,11 +2,11 @@
 
 public struct Identifier: Comparable, Hashable, Printable {
 	public init(graph: Graph<Node>) {
-		value = graph.nodes.isEmpty ? 0 : maxElement(graph.nodes.keys).value + 1
+		self.init(graph.nodes.isEmpty ? 0 : maxElement(graph.nodes.keys).value + 1)
 	}
 
 	public init() {
-		self.value = Identifier.cursor++
+		self.init(Identifier.cursor++)
 	}
 
 
