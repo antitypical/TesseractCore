@@ -15,6 +15,10 @@ public struct Graph<T>: CollectionType, Printable {
 		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: edges)
 	}
 
+	public init(nodes: [T]) {
+		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: [])
+	}
+
 	public init() {
 		self.init(nodes: [:], edges: [])
 	}
