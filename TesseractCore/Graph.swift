@@ -1,8 +1,8 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Graph<T>: CollectionType, Printable {
-	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
-		self.nodes = nodes
+	public init<S: SequenceType where S.Generator.Element == (Identifier, T)>(nodes: S, edges: Set<Edge> = []) {
+		self.nodes = Dictionary(nodes)
 		self.edges = edges
 		sanitize(edges)
 	}
