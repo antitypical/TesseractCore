@@ -1,6 +1,6 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Identifier: Comparable, Hashable, Printable {
+public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Printable {
 	public init(_ graph: Graph<Node>) {
 		self.init(graph.nodes.isEmpty ? 0 : maxElement(graph.nodes.keys).value + 1)
 	}
@@ -25,6 +25,13 @@ public struct Identifier: Comparable, Hashable, Printable {
 
 	public var hashValue: Int {
 		return value.hashValue
+	}
+
+
+	// MARK: IntegerLiteralConvertible
+
+	public init(integerLiteral: Int) {
+		self.init(integerLiteral)
 	}
 
 
