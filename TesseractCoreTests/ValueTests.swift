@@ -25,13 +25,13 @@ final class ValueTests: XCTestCase {
 
 	func testApplicationOfConstantIsError() {
 		let value = Value(())
-		assertNotNil(value.apply(value, Identifier(), [:]).left)
+		assertNotNil(value.apply(value, 0, [:]).left)
 	}
 
 	func testApplicationOfIdentityIsArgument() {
 		let argument = Value(1)
 		let identity = Value(id as Any -> Any)
-		assertEqual(assertNotNil(identity.apply(argument, Identifier(), [:]).right)?.value.constant(), 1)
+		assertEqual(assertNotNil(identity.apply(argument, 0, [:]).right)?.value.constant(), 1)
 	}
 }
 

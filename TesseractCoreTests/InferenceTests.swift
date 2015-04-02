@@ -8,31 +8,31 @@ final class InferenceTests: XCTestCase {
 	}
 
 	func testGraphsWithOneReturnArePolymorphic() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0)])).0, ==, 0)
+		assert(constraints(Graph(nodes: [.Return(0, 0)])).0, ==, 0)
 	}
 
 	func testGraphsWithOneParameterAndNoReturnsHaveFunctionTypeReturningUnit() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0)])).0, ==, Term.function(0, .Unit))
+		assert(constraints(Graph(nodes: [.Parameter(0, 0)])).0, ==, Term.function(0, .Unit))
 	}
 
 	func testGraphsWithOneParameterAndOneReturnHavePolymorphicFunctionType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Return(0, 1)])).0, ==, Term.function(0, 1))
+		assert(constraints(Graph(nodes: [.Parameter(0, 0), .Return(0, 1)])).0, ==, Term.function(0, 1))
 	}
 
 	func testGraphsWithMultipleParametersHaveCurriedFunctionType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1)])).0, ==, Term.function(0, .function(1, .Unit)))
+		assert(constraints(Graph(nodes: [.Parameter(0, 0), .Parameter(1, 1)])).0, ==, Term.function(0, .function(1, .Unit)))
 	}
 
 	func testGraphsWithMultipleReturnsHaveProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0), Identifier(): .Return(1, 1)])).0, ==, Term.product(0, 1))
+		assert(constraints(Graph(nodes: [.Return(0, 0), .Return(1, 1)])).0, ==, Term.product(0, 1))
 	}
 
 	func testGraphsWithSeveralReturnsEtc() {
-		assert(constraints(Graph(nodes: [Identifier(): .Return(0, 0), Identifier(): .Return(1, 1), Identifier(): .Return(2, 2)])).0, ==, Term.product(0, .product(1, 2)))
+		assert(constraints(Graph(nodes: [.Return(0, 0), .Return(1, 1), .Return(2, 2)])).0, ==, Term.product(0, .product(1, 2)))
 	}
 
 	func testGraphsWithMultipleParametersAndMultipleReturnsHaveCurriedFunctionTypeProducingProductType() {
-		assert(constraints(Graph(nodes: [Identifier(): .Parameter(0, 0), Identifier(): .Parameter(1, 1), Identifier(): .Return(0, 2), Identifier(): .Return(1, 3)])).0, ==, Term.function(0, .function(1, .product(2, 3))))
+		assert(constraints(Graph(nodes: [.Parameter(0, 0), .Parameter(1, 1), .Return(0, 2), .Return(1, 3)])).0, ==, Term.function(0, .function(1, .product(2, 3))))
 	}
 
 	func testIdentityGraphTypeInitiallyHasTwoTypeVariables() {
@@ -82,18 +82,18 @@ final class InferenceTests: XCTestCase {
 // MARK: Fixtures
 
 private let identity: Graph<Node> = {
-	let (a, b) = (Identifier(), Identifier())
+	let (a, b) = (Identifier(0), Identifier(1))
 	return Graph(nodes: [ a: .Parameter(0, 0), b: .Return(0, 1) ], edges: [ Edge((a, 0), (b, 0)) ])
 }()
 
 private let constant: Graph<Node> = {
-	let (a, b, c) = (Identifier(), Identifier(), Identifier())
+	let (a, b, c) = (Identifier(0), Identifier(1), Identifier(2))
 	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2) ], edges: [ Edge((a, 0), (c, 0)) ])
 }()
 
 private let constantByWrappingNode: Graph<Node> = {
 	let constantType = Term.forall([0, 1], .function(0, .function(1, 0)))
-	let (a, b, c, d) = (Identifier(), Identifier(), Identifier(), Identifier())
+	let (a, b, c, d) = (Identifier(0), Identifier(1), Identifier(2), Identifier(3))
 	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2), d: Node.Symbolic(Symbol.named("constant", constantType)) ], edges: [ Edge((a, 0), (d, 0)), Edge((b, 0), (d, 1)), Edge((d, 0), (c, 0)) ])
 }()
 

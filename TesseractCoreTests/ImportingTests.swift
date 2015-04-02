@@ -19,8 +19,7 @@ final class ImportingTests: XCTestCase {
 		let rawGraph = "digraph test {\n\t\"1\" -> \"2\" [sametail=0,headlabel=0];\n}"
 		if let (_, parsedGraph) = importDOT(rawGraph) {
 			let graph = parsedGraph.map { $0.toInt() ?? 0 }
-			let (a, b) = (Identifier(), Identifier())
-			let expectedGraph = Graph(nodes: [a: 1, b: 2], edges: Set([Edge(a, b.input(0))]))
+			let expectedGraph = Graph(nodes: [1, 2], edges: Set([Edge(0, Identifier(1).input(0))]))
 			let parsedNodes = Set(graph.nodes.values.array)
 			let expectedNodes = Set(expectedGraph.nodes.values.array)
 

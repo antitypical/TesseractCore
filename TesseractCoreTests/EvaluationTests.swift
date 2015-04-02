@@ -2,8 +2,7 @@
 
 final class EvaluationTests: XCTestCase {
 	func createGraph(symbol: Symbol) -> (Identifier, Graph<Node>) {
-		let a = Identifier()
-		return (a, Graph(nodes: [ a: .Symbolic(symbol) ]))
+		return (Identifier(0), Graph(nodes: [ .Symbolic(symbol) ]))
 	}
 
 	func node(symbolName: String) -> Node {
@@ -29,16 +28,14 @@ final class EvaluationTests: XCTestCase {
 	}
 
 	func testFunctionNodeWithBoundInputAppliesInput() {
-		let (a, b) = (Identifier(), Identifier())
-		let graph = Graph(nodes: [ a: node("true"), b: node("identity") ], edges: [ Edge((a, 0), (b, 0)) ])
-		let evaluated = evaluate(graph, b, Prelude)
+		let graph = Graph(nodes: [ node("true"), node("identity") ], edges: [ Edge((0, 0), (1, 0)) ])
+		let evaluated = evaluate(graph, 1, Prelude)
 
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 
 	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
-		let (a, b) = (Identifier(), Identifier())
-		let constant = Graph<Node>(nodes: [ a: node("true"), b: .Return(0, 0) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let constant = Graph<Node>(nodes: [ node("true"), .Return(0, 0) ], edges: [ Edge((0, 0), (1, 0)) ])
 
 		let truthy = Symbol.Named("truthy", .Bool)
 		let (c, graph) = createGraph(truthy)
@@ -48,13 +45,11 @@ final class EvaluationTests: XCTestCase {
 	}
 
 	func testGraphNodeWithBoundInputsAppliesInput() {
-		let (a, b) = (Identifier(), Identifier())
-		let identity = Graph<Node>(nodes: [ a: .Parameter(0, 0), b: .Return(0, 0) ], edges: [ Edge((a, 0), (b, 0)) ])
+		let identity = Graph<Node>(nodes: [ .Parameter(0, 0), .Return(0, 0) ], edges: [ Edge((0, 0), (1, 0)) ])
 
 		let identitySymbol = Symbol.Named("identity", .forall([ 0 ], .function(0, 0)))
-		let (c, d) = (Identifier(), Identifier())
-		let graph = Graph(nodes: [ c: node("true"), d: .Symbolic(identitySymbol) ], edges: [ Edge((c, 0), (d, 0)) ])
-		let evaluated = evaluate(graph, d, Prelude + (identitySymbol, Value(identity)))
+		let graph = Graph(nodes: [ node("true"), .Symbolic(identitySymbol) ], edges: [ Edge((0, 0), (1, 0)) ])
+		let evaluated = evaluate(graph, 1, Prelude + (identitySymbol, Value(identity)))
 		assert(evaluated.right?.value.constant(), ==, true)
 	}
 }
