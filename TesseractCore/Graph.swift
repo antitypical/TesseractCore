@@ -7,6 +7,10 @@ public struct Graph<T>: CollectionType, Printable {
 		sanitize(edges)
 	}
 
+	public init() {
+		self.init(nodes: [])
+	}
+
 
 	// MARK: Primitive methods
 
