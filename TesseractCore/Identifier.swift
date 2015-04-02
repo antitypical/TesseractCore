@@ -5,10 +5,6 @@ public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Print
 		self.init(graph.nodes.isEmpty ? 0 : maxElement(graph.nodes.keys).value + 1)
 	}
 
-	public init() {
-		self.init(Identifier.cursor++)
-	}
-
 	public init(_ value: Int) {
 		self.value = value
 	}
