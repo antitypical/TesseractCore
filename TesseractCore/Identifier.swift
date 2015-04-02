@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Identifier: Comparable, Hashable, Printable {
-	public init(graph: Graph<Node>) {
+	public init(_ graph: Graph<Node>) {
 		self.init(graph.nodes.isEmpty ? 0 : maxElement(graph.nodes.keys).value + 1)
 	}
 
