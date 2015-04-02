@@ -1,10 +1,26 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Graph<T>: CollectionType, Printable {
-	public init(nodes: [Identifier: T] = [:], edges: Set<Edge> = []) {
-		self.nodes = nodes
-		self.edges = edges
-		sanitize(edges)
+	public init<S1: SequenceType, S2: SequenceType where S1.Generator.Element == (Identifier, T), S2.Generator.Element == Edge>(nodes: S1, edges: S2) {
+		self.nodes = Dictionary(nodes)
+		self.edges = Set(edges)
+		sanitize(self.edges)
+	}
+
+	public init<S: SequenceType where S.Generator.Element == Dictionary<Identifier, T>.Generator.Element>(nodes: S) {
+		self.init(nodes: nodes, edges: [])
+	}
+
+	public init<S2: SequenceType where S2.Generator.Element == Edge>(nodes: [T], edges: S2) {
+		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: edges)
+	}
+
+	public init(nodes: [T]) {
+		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: [])
+	}
+
+	public init() {
+		self.init(nodes: [:], edges: [])
 	}
 
 

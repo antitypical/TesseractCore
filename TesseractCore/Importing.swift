@@ -35,7 +35,7 @@ private let attributeList: Parser<String, [String: String]>.Function = attribute
 private let attributes: Parser<String, [String: String]>.Function = (ignore("[") ++ attributeList ++ ignore("]")) | { _, index in ([:], index) }
 
 private let graph: Parser<String, Graph<String>>.Function = edge+ --> { _, _, edgeParses in
-	let nodeData = map(Set(lazy(edgeParses).flatMap { source, destination in [source.0, destination.0] })) { (Identifier(), $0) }
+	let nodeData = map(enumerate(Set(lazy(edgeParses).flatMap { source, destination in [source.0, destination.0] }))) { (Identifier($0), $1) }
 	let nodeIdentifiers = Dictionary(nodeData.map(swap))
 	let nodes = Dictionary(nodeData)
 	let edges: Set<Edge> = reduce(lazy(edgeParses).map { source, destination in

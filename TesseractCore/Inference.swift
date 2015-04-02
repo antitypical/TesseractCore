@@ -4,7 +4,7 @@ public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
 	let (type, constraints, _) = TesseractCore.constraints(graph)
 	return solve(constraints)
 		.either(
-		ifLeft: { Either.left(Error($0.description, Identifier())) },
+		ifLeft: { Either.left(Error($0.description, Identifier(graph))) },
 		ifRight: {
 			let t = $0.apply(type)
 			let n = normalization(t)
@@ -17,7 +17,7 @@ public func typeOf(graph: Graph<Node>) -> (Either<Error<Identifier>, Term>, Grap
 	return solve(constraints)
 		.map { normalization(type).compose($0) }
 		.either(
-			ifLeft: { (Either.left(Error($0.description, Identifier())), types) },
+			ifLeft: { (Either.left(Error($0.description, Identifier(graph))), types) },
 			ifRight: { s in
 				let t = s.apply(type)
 				let n = normalization(t)

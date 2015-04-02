@@ -1,9 +1,16 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Identifier: Comparable, Hashable, Printable {
-	public init() {
-		self.value = Identifier.cursor++
+public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Printable {
+	public init(_ graph: Graph<Node>) {
+		self.init(graph.nodes.isEmpty ? 0 : maxElement(graph.nodes.keys).value + 1)
 	}
+
+	public init(_ value: Int) {
+		self.value = value
+	}
+
+
+	public let value: Int
 
 
 	// MARK: Endpoint constructors
@@ -24,18 +31,18 @@ public struct Identifier: Comparable, Hashable, Printable {
 	}
 
 
+	// MARK: IntegerLiteralConvertible
+
+	public init(integerLiteral: Int) {
+		self.init(integerLiteral)
+	}
+
+
 	// MARK: Printable
 
 	public var description: String {
 		return value.description
 	}
-
-
-	// MARK: Private
-
-	private let value: Int
-
-	private static var cursor = 0
 }
 
 public func == (left: Identifier, right: Identifier) -> Bool {

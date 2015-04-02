@@ -7,7 +7,7 @@ final class NodeTests: XCTestCase {
 
 	func testFindsReturnsInWellFormedGraphs() {
 		let node = Node.Return(0, 0)
-		let graph = Graph(nodes: [Identifier(): node], edges: [])
+		let graph = Graph(nodes: [0: node], edges: [])
 		assert(Node.returns(graph).first?.1, ==, node)
 	}
 
@@ -17,7 +17,7 @@ final class NodeTests: XCTestCase {
 
 	func testFindsParametersInWellFormedGraphs() {
 		let node = Node.Parameter(0, 0)
-		let graph = Graph(nodes: [Identifier(): node], edges: [])
+		let graph = Graph(nodes: [0: node], edges: [])
 		assert(Node.parameters(graph).first?.1, ==, node)
 	}
 }
