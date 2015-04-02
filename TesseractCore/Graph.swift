@@ -1,14 +1,14 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Graph<T>: CollectionType, Printable {
-	public init<S: SequenceType where S.Generator.Element == (Identifier, T)>(nodes: S, edges: Set<Edge> = []) {
+	public init<S1: SequenceType, S2: SequenceType where S1.Generator.Element == (Identifier, T), S2.Generator.Element == Edge>(nodes: S1, edges: S2) {
 		self.nodes = Dictionary(nodes)
-		self.edges = edges
-		sanitize(edges)
+		self.edges = Set(edges)
+		sanitize(self.edges)
 	}
 
 	public init() {
-		self.init(nodes: [])
+		self.init(nodes: [:], edges: [])
 	}
 
 
