@@ -7,6 +7,10 @@ public struct Graph<T>: CollectionType, Printable {
 		sanitize(self.edges)
 	}
 
+	public init<S: SequenceType where S.Generator.Element == Dictionary<Identifier, T>.Generator.Element>(nodes: S) {
+		self.init(nodes: nodes, edges: [])
+	}
+
 	public init() {
 		self.init(nodes: [:], edges: [])
 	}
