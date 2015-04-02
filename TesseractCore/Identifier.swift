@@ -37,6 +37,10 @@ public struct Identifier: Comparable, Hashable, Printable {
 
 	// MARK: Private
 
+	private init(_ value: Int) {
+		self.value = value
+	}
+
 	private let value: Int
 
 	private static var cursor = 0
