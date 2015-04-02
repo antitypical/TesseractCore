@@ -9,6 +9,10 @@ public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Print
 		self.init(Identifier.cursor++)
 	}
 
+	public init(_ value: Int) {
+		self.value = value
+	}
+
 
 	// MARK: Endpoint constructors
 
@@ -43,10 +47,6 @@ public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Print
 
 
 	// MARK: Private
-
-	private init(_ value: Int) {
-		self.value = value
-	}
 
 	private let value: Int
 
