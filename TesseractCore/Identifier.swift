@@ -10,6 +10,9 @@ public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Print
 	}
 
 
+	public let value: Int
+
+
 	// MARK: Endpoint constructors
 
 	public func input(index: Int) -> Edge.Destination {
@@ -40,11 +43,6 @@ public struct Identifier: Comparable, Hashable, IntegerLiteralConvertible, Print
 	public var description: String {
 		return value.description
 	}
-
-
-	// MARK: Private
-
-	private let value: Int
 }
 
 public func == (left: Identifier, right: Identifier) -> Bool {
