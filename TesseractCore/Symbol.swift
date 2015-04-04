@@ -14,22 +14,27 @@ public enum Symbol: Hashable, Printable {
 	case Index(Int, Term)
 
 
-	public var name: String {
+	/// Case analysis.
+	public func analysis<Result>(@noescape #ifNamed: (String, Term) -> Result, @noescape ifIndex: (Int, Term) -> Result) -> Result {
 		switch self {
-		case let Named(name, _):
-			return name
-		case let Index(index, _):
-			return index.description
+		case let Named(name, type):
+			return ifNamed(name, type)
+		case let Index(index, type):
+			return ifIndex(index, type)
 		}
 	}
 
+
+	public var name: String {
+		return analysis(
+			ifNamed: { $0.0 },
+			ifIndex: { toString($0.0) })
+	}
+
 	public var type: Term {
-		switch self {
-		case let Named(_, type):
-			return type
-		case let Index(_, type):
-			return type
-		}
+		return analysis(
+			ifNamed: { $1 },
+			ifIndex: { $1 })
 	}
 
 
