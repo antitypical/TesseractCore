@@ -27,6 +27,12 @@ public enum Value: Printable {
 			ifGraph: const(nil))
 	}
 
+	public func constant<T>(_: T.Type) -> T? {
+		return analysis(
+			ifConstant: { $0 as? T },
+			ifGraph: const(nil))
+	}
+
 	public func function<T, U>() -> (T -> U)? {
 		return analysis(
 			ifConstant: { $0 as? T -> U },
