@@ -26,12 +26,9 @@ public enum Symbol: Hashable, Printable {
 
 
 	public var name: String {
-		switch self {
-		case let Named(name, _):
-			return name
-		case let Index(index, _):
-			return index.description
-		}
+		return analysis(
+			ifNamed: { $0.0 },
+			ifIndex: { toString($0.0) })
 	}
 
 	public var type: Term {
