@@ -32,12 +32,9 @@ public enum Symbol: Hashable, Printable {
 	}
 
 	public var type: Term {
-		switch self {
-		case let Named(_, type):
-			return type
-		case let Index(_, type):
-			return type
-		}
+		return analysis(
+			ifNamed: { $1 },
+			ifIndex: { $1 })
 	}
 
 
