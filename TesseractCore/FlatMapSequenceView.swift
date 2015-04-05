@@ -1,7 +1,7 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public struct FlatMapSequenceView<Base: SequenceType, Each: SequenceType>: SequenceType {
-	private init(_ base: Base, _ transform: Base.Generator.Element -> Each) {
+	public init(_ base: Base, _ transform: Base.Generator.Element -> Each) {
 		self.base = base
 		self.transform = transform
 	}
