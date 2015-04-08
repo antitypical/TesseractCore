@@ -113,7 +113,7 @@ public func == (left: Node, right: Node) -> Bool {
 	case let (.Symbolic(x), .Symbolic(y)):
 		return x == y
 	case let (.Literal(x1, x2), .Literal(y1, y2)):
-		return x1 == y1
+		return x1 == y1 && x2 == y2
 
 	default:
 		return false
