@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public enum Value: Printable {
+public enum Value: Equatable, Printable {
 	public init(_ constant: Any) {
 		self = Constant(Box(constant))
 	}
@@ -70,6 +70,20 @@ public enum Value: Printable {
 			ifConstant: { ".Constant(\($0))" },
 			ifGraph: { ".Graph(\($0))" })
 	}
+}
+
+/// Value equality.
+///
+/// Two values are equal iff their state is of the same known equatable type and equal.
+///
+/// “Known equatable types” currently include:
+///
+/// - Bool
+public func == (left: Value, right: Value) -> Bool {
+	if let a = left.constant(Bool.self), let b = right.constant(Bool.self) {
+		return a == b
+	}
+	return false
 }
 
 
