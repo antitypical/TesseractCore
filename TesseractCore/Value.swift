@@ -79,9 +79,12 @@ public enum Value: Equatable, Printable {
 /// “Known equatable types” currently include:
 ///
 /// - Bool
+/// - Void
 public func == (left: Value, right: Value) -> Bool {
 	if let a = left.constant(Bool.self), let b = right.constant(Bool.self) {
 		return a == b
+	} else if let a: () = left.constant(Void.self), let b: () = right.constant(Void.self) {
+		return true
 	}
 	return false
 }
