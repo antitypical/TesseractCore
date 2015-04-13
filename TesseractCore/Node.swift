@@ -15,19 +15,23 @@ public enum Node: Equatable, Printable {
 
 
 	/// All returns in a given `graph`.
-	public static func returns(graph: Graph<Node>) -> [(Identifier, Node)] {
-		return Array(
-			(lazy(graph.nodes)
-				.filter { $1.`return` != nil })
-				|>	(flip(sorted) <| { $0.1.index! < $1.1.index! }))
+	public static func returns(graph: Graph<[Node]>) -> [(index: Graph<[Node]>.Index, element: Node)] {
+		let returns = filter(enumerate(graph.nodes)) { $1.`return` != nil }
+		return sorted(returns) {
+			$0.index == $1.index ?
+				$0.element.index! < $1.element.index!
+			:	$0.index < $1.index
+		}
 	}
 
 	/// All parameters in a given `graph`.
-	public static func parameters(graph: Graph<Node>) -> [(Identifier, Node)] {
-		return Array(
-			(lazy(graph.nodes)
-				.filter { $1.parameter != nil })
-				|>	(flip(sorted) <| { $0.1.index! < $1.1.index! }))
+	public static func parameters(graph: Graph<[Node]>) -> [(index: Graph<[Node]>.Index, element: Node)] {
+		let parameters = filter(enumerate(graph.nodes)) { $1.parameter != nil }
+		return sorted(parameters) {
+			$0.index == $1.index ?
+				$0.element.index! < $1.element.index!
+			:	$0.index < $1.index
+		}
 	}
 
 
@@ -42,6 +46,19 @@ public enum Node: Equatable, Printable {
 			return ifSymbolic(symbol)
 		case let .Literal(symbol, value):
 			return ifLiteral(symbol, value)
+		}
+	}
+
+	public func analysis<Result>(ifParameter: ((Int, Term) -> Result)? = nil, ifReturn: ((Int, Term) -> Result)? = nil, ifSymbolic: (Symbol -> Result)? = nil, ifLiteral: ((Symbol, Value) -> Result)? = nil, otherwise: () -> Result) -> Result {
+		switch self {
+		case let .Parameter(index, type):
+			return ifParameter?(index, type) ?? otherwise()
+		case let .Return(index, type):
+			return ifReturn?(index, type) ?? otherwise()
+		case let .Symbolic(symbol):
+			return ifSymbolic?(symbol) ?? otherwise()
+		case let .Literal(symbol, value):
+			return ifLiteral?(symbol, value) ?? otherwise()
 		}
 	}
 
@@ -64,26 +81,20 @@ public enum Node: Equatable, Printable {
 
 	public var literal: Value? {
 		return analysis(
-			ifParameter: const(nil),
-			ifReturn: const(nil),
-			ifSymbolic: const(nil),
-			ifLiteral: { $1 })
+			ifLiteral: { $1 },
+			otherwise: const(nil))
 	}
 
 	public var parameter: (Int, Term)? {
 		return analysis(
 			ifParameter: unit,
-			ifReturn: const(nil),
-			ifSymbolic: const(nil),
-			ifLiteral: const(nil))
+			otherwise: const(nil))
 	}
 
 	public var `return`: (Int, Term)? {
 		return analysis(
-			ifParameter: const(nil),
 			ifReturn: unit,
-			ifSymbolic: const(nil),
-			ifLiteral: const(nil))
+			otherwise: const(nil))
 	}
 
 	/// The index of parameter/return nodes, nil for symbolic nodes.

@@ -10,19 +10,19 @@ final class GraphTests: XCTestCase {
 	func testSanitizesEdgesOnNodesMutation() {
 		var graph = Graph(nodes: [ (), () ], edges: [ Edge((0, 0), (1, 0)) ])
 		XCTAssertEqual(graph.edges.count, 1)
-		graph.nodes.removeValueForKey(0)
+		graph.nodes.removeAtIndex(0)
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
 	func testSanitizesEdgesOnEdgesMutation() {
-		var graph = Graph<()>()
+		var graph = Graph<[()]>(nodes: [])
 		XCTAssertEqual(graph.edges.count, 0)
 		graph.edges.insert(Edge((0, 0), (1, 0)))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
 	func testAttachingDataToNodes() {
-		let graph: Graph<Int> = Graph(nodes: [ 0, 1 ])
+		let graph: Graph<[Int]> = Graph(nodes: [ 0, 1 ])
 	}
 
 	func testAbsoluteValueGraph() {
@@ -31,21 +31,21 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testMappingAcrossGraph() {
-		let graph = Graph(nodes: [ "1", "2" ], edges: [Edge(0, Identifier(1).input(0))])
+		let graph = Graph(nodes: [ "1", "2" ], edges: [Edge(0, (1, 0))])
 		let newGraph = graph.map { $0.toInt() ?? 0 }
-		let expectedGraph = Graph(nodes: [ 1, 2 ], edges: [Edge(0, Identifier(1).input(0))])
+		let expectedGraph = Graph(nodes: [ 1, 2 ], edges: [Edge(0, (1, 0))])
 		assert(newGraph, ==, expectedGraph)
 	}
 
 	func testReductionDoesNotTraverseWithoutEdges() {
 		let graph = Graph(nodes: [ "a", "b" ])
-		let result = graph.reduce(0, "_") { into, each in into + each.1 }
+		let result = graph.reduce(0, "_") { into, each in into + each }
 		XCTAssertEqual(result, "_a")
 	}
 
 	func testReductionTraversesEdges() {
-		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(0, Identifier(3).input(0)), Edge(1, Identifier(3).input(0)), Edge(2, Identifier(3).input(0)) ])
-		let reduced = graph.reduce(3, "_") { into, each in into + each.1 }
+		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(0, (3, 0)), Edge(1, (3, 1)), Edge(2, (3, 2)) ])
+		let reduced = graph.reduce(3, "_") { into, each in into + each }
 		XCTAssertEqual(reduced, "_abc!")
 	}
 }

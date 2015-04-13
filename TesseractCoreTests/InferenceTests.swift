@@ -4,7 +4,7 @@ final class InferenceTests: XCTestCase {
 	// MARK: Types
 
 	func testGraphsWithoutReturnsHaveUnitType() {
-		assert(constraints(Graph()).0, ==, .Unit)
+		assert(constraints(Graph<[Node]>(nodes: [])).0, ==, .Unit)
 	}
 
 	func testGraphsWithOneReturnArePolymorphic() {
@@ -81,20 +81,17 @@ final class InferenceTests: XCTestCase {
 
 // MARK: Fixtures
 
-private let identity: Graph<Node> = {
-	let (a, b) = (Identifier(0), Identifier(1))
-	return Graph(nodes: [ a: .Parameter(0, 0), b: .Return(0, 1) ], edges: [ Edge((a, 0), (b, 0)) ])
+private let identity: Graph<[Node]> = {
+	return Graph(nodes: [ .Parameter(0, 0), .Return(0, 1) ], edges: [ Edge((0, 0), (1, 0)) ])
 }()
 
-private let constant: Graph<Node> = {
-	let (a, b, c) = (Identifier(0), Identifier(1), Identifier(2))
-	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2) ], edges: [ Edge((a, 0), (c, 0)) ])
+private let constant: Graph<[Node]> = {
+	return Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2) ], edges: [ Edge((0, 0), (2, 0)) ])
 }()
 
-private let constantByWrappingNode: Graph<Node> = {
+private let constantByWrappingNode: Graph<[Node]> = {
 	let constantType = Term.forall([0, 1], .function(0, .function(1, 0)))
-	let (a, b, c, d) = (Identifier(0), Identifier(1), Identifier(2), Identifier(3))
-	return Graph(nodes: [ a: .Parameter(0, 0), b: .Parameter(1, 1), c: .Return(0, 2), d: Node.Symbolic(Symbol.named("constant", constantType)) ], edges: [ Edge((a, 0), (d, 0)), Edge((b, 0), (d, 1)), Edge((d, 0), (c, 0)) ])
+	return Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2), .Symbolic(Symbol.named("constant", constantType)) ], edges: [ Edge((0, 0), (3, 0)), Edge((1, 0), (3, 1)), Edge((3, 0), (2, 0)) ])
 }()
 
 

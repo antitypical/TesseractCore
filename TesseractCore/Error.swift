@@ -27,7 +27,7 @@ public enum Error<Identifier>: Printable {
 	}
 }
 
-internal func error(reason: String, from: Identifier) -> Either<Error<Identifier>, Memo<Value>> {
+internal func error<Identifier>(reason: String, from: Identifier) -> Either<Error<Identifier>, Memo<Value>> {
 	return .left(Error(reason, from))
 }
 

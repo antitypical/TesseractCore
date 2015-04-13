@@ -5,14 +5,14 @@ public enum Value: Equatable, Printable {
 		self = Constant(Box(constant))
 	}
 
-	public init(_ graph: TesseractCore.Graph<Node>) {
+	public init(_ graph: TesseractCore.Graph<[Node]>) {
 		self = Graph(graph)
 	}
 
 	case Constant(Box<Any>)
-	case Graph(TesseractCore.Graph<Node>)
+	case Graph(TesseractCore.Graph<[Node]>)
 
-	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifGraph: TesseractCore.Graph<Node> -> Result) -> Result {
+	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifGraph: TesseractCore.Graph<[Node]> -> Result) -> Result {
 		switch self {
 		case let Constant(v):
 			return ifConstant(v.value)
@@ -39,27 +39,25 @@ public enum Value: Equatable, Printable {
 			ifGraph: const(nil))
 	}
 
-	public var graph: TesseractCore.Graph<Node>? {
+	public var graph: TesseractCore.Graph<[Node]>? {
 		return analysis(
 			ifConstant: const(nil),
 			ifGraph: unit)
 	}
 
 
-	public func apply(argument: Value, _ identifier: Identifier, _ environment: Environment) -> Either<Error<Identifier>, Memo<Value>> {
-		let f = function().map { (function: Any -> Any) in
-			(argument.constant()
+	public func apply(argument: Value, _ index: TesseractCore.Graph<[Node]>.Index, _ environment: Environment) -> Either<Error<TesseractCore.Graph<[Node]>.Index>, Memo<Value>> {
+		if let function: Any -> Any = function() {
+			return (argument.constant()
 				|>	(flip(flatMap) <| function >>> unit))
 				.map { .right(Memo(evaluated: Value($0))) }
-			??	error("could not apply function", identifier)
+			??	error("could not apply function", index)
+		} else if let graph = graph {
+			return find(graph.nodes) { $0.`return` != nil }
+				.map { evaluate(graph, $0, environment + (.Index(0, .Unit), argument)) }
+			??	error("could not find return node", index)
 		}
-		let g = graph.map { graph in
-			graph
-				.find { $1.`return` != nil }
-				.map { evaluate(graph, graph[$0].0, environment + (.Index(0, .Unit), argument)) }
-			??	error("could not find return node", identifier)
-		}
-		return f ?? g ?? error("cannot apply \(self)", identifier)
+		return error("cannot apply \(self)", index)
 	}
 
 

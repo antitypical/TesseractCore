@@ -1,17 +1,17 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment) -> Either<Error<Identifier>, Memo<Value>> {
-	return
-		graph.nodes[from].map { evaluate(graph, from, environment, $0) }
-	??	error("could not find identifier in graph", from)
+public func evaluate(graph: Graph<[Node]>, from: Graph<[Node]>.Index, environment: Environment) -> Either<Error<Int>, Memo<Value>> {
+	return count(graph.nodes) > from ?
+		evaluate(graph, from, environment, graph.nodes[from])
+	:	error("could not find identifier in graph", from)
 }
 
-private func evaluate(graph: Graph<Node>, from: Identifier, environment: Environment, node: Node) -> Either<Error<Identifier>, Memo<Value>> {
-	let recur: Edge.Source -> Either<Error<Identifier>, Memo<Value>> = { source in
-		evaluate(graph, source.identifier, environment, graph.nodes[source.identifier]!)
+private func evaluate(graph: Graph<[Node]>, from: Graph<[Node]>.Index, environment: Environment, node: Node) -> Either<Error<Int>, Memo<Value>> {
+	let recur: Edge<[Node]>.Source -> Either<Error<Int>, Memo<Value>> = { source in
+		evaluate(graph, source.index, environment, graph.nodes[source.index])
 	}
 	let inputs = lazy(graph.edges)
-		.filter { $0.destination.identifier == from }
+		.filter { $0.destination.index == from }
 		.map { ($0.destination.inputIndex, recur($0.source)) }
 		|> (flip(sorted) <| { $0.0 < $1.0 })
 

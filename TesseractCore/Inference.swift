@@ -1,10 +1,10 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
+public func typeOf(graph: Graph<[Node]>) -> Either<Error<Graph<[Node]>.Index>, Term> {
 	let (type, constraints, _) = TesseractCore.constraints(graph)
 	return solve(constraints)
 		.either(
-		ifLeft: { Either.left(Error($0.description, Identifier(graph))) },
+		ifLeft: { Either.left(Error($0.description, count(graph.nodes))) },
 		ifRight: {
 			let t = $0.apply(type)
 			let n = normalization(t)
@@ -12,30 +12,32 @@ public func typeOf(graph: Graph<Node>) -> Either<Error<Identifier>, Term> {
 		})
 }
 
-public func typeOf(graph: Graph<Node>) -> (Either<Error<Identifier>, Term>, Graph<Term>) {
+public func typeOf(graph: Graph<[Node]>) -> (Either<Error<Graph<[Node]>.Index>, Term>, Graph<[Term]>) {
 	let (type, constraints, types) = TesseractCore.constraints(graph)
 	return solve(constraints)
 		.map { normalization(type).compose($0) }
 		.either(
-			ifLeft: { (Either.left(Error($0.description, Identifier(graph))), types) },
+			ifLeft: { (Either.left(Error($0.description, count(graph.nodes))), types) },
 			ifRight: { s in
 				let t = s.apply(type)
 				let n = normalization(t)
-				return (Either.right(n.apply(t).generalize()), types.map { n.apply(s.apply($0)) })
+				let applied = Graph(nodes: types.nodes.map { n.apply(s.apply($0)) }, edges: types.edges)
+				return (Either.right(n.apply(t).generalize()), applied)
 			})
 }
 
 
-public func constraints(graph: Graph<Node>) -> (Term, constraints: ConstraintSet, graph: Graph<Term>) {
+public func constraints(graph: Graph<[Node]>) -> (Term, constraints: ConstraintSet, graph: Graph<[Term]>) {
 	var cursor = 0
 	let instantiated = graph.map { $0.type.instantiate { Variable(integerLiteral: --cursor) } }
 
-	let parameters = Node.parameters(graph).map { instantiated.nodes[$0.0]! }.reverse()
-	let returns = Node.returns(graph).map { instantiated.nodes[$0.0]! }.reverse()
+	let parameters = Node.parameters(graph).map { instantiated.nodes[$0.0] }.reverse()
+	let returns = Node.returns(graph).map { instantiated.nodes[$0.0] }.reverse()
 
 	let constraints = ConstraintSet(lazy(graph.edges).flatMap { (edge: Edge) -> [Constraint] in
-		let source = instantiated.nodes[edge.source.identifier]!.returns[edge.source.outputIndex]
-		let destination = instantiated.nodes[edge.destination.identifier].map { $0.parameters.isEmpty ? $0 : $0.parameters[edge.destination.inputIndex] }!
+		let source = instantiated.nodes[edge.source.index].returns[edge.source.outputIndex]
+		let node = instantiated.nodes[edge.destination.index]
+		let destination = node.parameters.isEmpty ? node : node.parameters[edge.destination.inputIndex]
 		return [ source === destination ]
 	})
 
