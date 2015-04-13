@@ -26,10 +26,6 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: Primitive methods
 
-	public subscript (identifier: Identifier) -> NodeView<T>? {
-		return nodes[identifier].map { NodeView(graph: self, identifier: identifier, value: $0) }
-	}
-
 	public var nodes: Dictionary<Identifier, T> {
 		willSet {
 			let removed = Set(nodes.keys).subtract(Set(newValue.keys))
