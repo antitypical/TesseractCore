@@ -95,9 +95,8 @@ public struct Graph<T>: CollectionType, Printable {
 		return nodes.endIndex
 	}
 
-	public subscript(index: Index) -> NodeView<T> {
-		let (identifier, value) = nodes[index]
-		return NodeView(graph: self, identifier: identifier, value: value)
+	public subscript(index: Index) -> (Identifier, T) {
+		return nodes[index]
 	}
 
 
