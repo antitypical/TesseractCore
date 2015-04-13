@@ -15,7 +15,7 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testSanitizesEdgesOnEdgesMutation() {
-		var graph = Graph<()>()
+		var graph = Graph<[()]>(nodes: [])
 		XCTAssertEqual(graph.edges.count, 0)
 		graph.edges.insert(Edge((0, 0), (1, 0)))
 		XCTAssertEqual(graph.edges.count, 0)

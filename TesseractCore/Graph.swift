@@ -19,10 +19,6 @@ public struct Graph<T>: CollectionType, Printable {
 		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: [])
 	}
 
-	public init() {
-		self.init(nodes: [:], edges: [])
-	}
-
 
 	// MARK: Primitive methods
 

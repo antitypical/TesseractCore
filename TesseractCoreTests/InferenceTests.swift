@@ -4,7 +4,7 @@ final class InferenceTests: XCTestCase {
 	// MARK: Types
 
 	func testGraphsWithoutReturnsHaveUnitType() {
-		assert(constraints(Graph()).0, ==, .Unit)
+		assert(constraints(Graph<[Node]>(nodes: [])).0, ==, .Unit)
 	}
 
 	func testGraphsWithOneReturnArePolymorphic() {

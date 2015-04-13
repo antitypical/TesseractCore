@@ -2,7 +2,7 @@
 
 final class NodeTests: XCTestCase {
 	func testEmptyGraphsHaveNoReturns() {
-		assert(Node.returns(Graph()), ==, [])
+		assert(Node.returns(Graph(nodes: [])), ==, [])
 	}
 
 	func testFindsReturnsInWellFormedGraphs() {
@@ -12,7 +12,7 @@ final class NodeTests: XCTestCase {
 	}
 
 	func testEmptyGraphsHaveNoParameters() {
-		assert(Node.parameters(Graph()), ==, [])
+		assert(Node.parameters(Graph(nodes: [])), ==, [])
 	}
 
 	func testFindsParametersInWellFormedGraphs() {
