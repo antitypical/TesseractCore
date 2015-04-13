@@ -1,38 +1,27 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
-public struct Graph<T>: CollectionType, Printable {
-	public init<S1: SequenceType, S2: SequenceType where S1.Generator.Element == (Identifier, T), S2.Generator.Element == Edge>(nodes: S1, edges: S2) {
-		self.nodes = Dictionary(nodes)
+public struct Graph<C: CollectionType>: CollectionType, Printable {
+	public init<S: SequenceType where S.Generator.Element == Edge<C>>(nodes: C, edges: S) {
+		self.nodes = nodes
 		self.edges = Set(edges)
 		sanitize(self.edges)
 	}
 
-	public init<S: SequenceType where S.Generator.Element == Dictionary<Identifier, T>.Generator.Element>(nodes: S) {
+	public init(nodes: C) {
 		self.init(nodes: nodes, edges: [])
 	}
 
-	public init<S2: SequenceType where S2.Generator.Element == Edge>(nodes: [T], edges: S2) {
-		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: edges)
-	}
-
-	public init(nodes: [T]) {
-		self.init(nodes: lazy(enumerate(nodes)).map { (Identifier($0), $1) }, edges: [])
-	}
-
-
-	// MARK: Primitive methods
-
-	public var nodes: Dictionary<Identifier, T> {
+	public var nodes: C {
 		willSet {
-			let removed = Set(nodes.keys).subtract(Set(newValue.keys))
+			let removed = lazy(indices(nodes)).filter { contains(indices(newValue), $0) }.array
 			if removed.count == 0 { return }
-			edges = Set(lazy(edges).filter {
-				!removed.contains($0.source.identifier) && !removed.contains($0.destination.identifier)
+			edges = Set(lazy(edges).filter { edge in
+				!contains(removed, { $0 == edge.source.index || $0 == edge.destination.index })
 			})
 		}
 	}
 
-	public var edges: Set<Edge> {
+	public var edges: Set<Edge<C>> {
 		didSet {
 			sanitize(edges.subtract(oldValue))
 		}
@@ -41,37 +30,34 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: Higher-order methods
 
-	public func map<U>(mapping: T -> U) -> Graph<U> {
-		return Graph<U>(nodes: nodes.map { ($0, mapping($1)) }, edges: edges)
+	public func map<U>(transform: Element -> U) -> Graph<[U]> {
+		return Graph<[U]>(nodes: Swift.map(nodes, transform), edges: Set(lazy(edges).map {
+			Edge<[U]>((index: Int(distance(self.nodes.startIndex, $0.source.index).toIntMax()), outputIndex: $0.source.outputIndex), (index: Int(distance(self.nodes.startIndex, $0.destination.index).toIntMax()), inputIndex: $0.destination.inputIndex))
+		}))
 	}
 
-	public func filter(includeNode: (Identifier, T) -> Bool = const(true), includeEdge: Edge -> Bool = const(true)) -> Graph {
-		return Graph(nodes: nodes.filter(includeNode), edges: Set(lazy(edges).filter(includeEdge)))
-	}
 
-
-	public func reduce<Result>(from: Identifier, _ initial: Result, _ combine: (Result, (Identifier, T)) -> Result) -> Result {
+	public func reduce<Result>(from: Index, _ initial: Result, _ combine: (Result, Element) -> Result) -> Result {
 		return reduce(from, [], initial, combine)
 	}
 
-	public func reduce<Result>(from: Identifier, var _ visited: Set<Identifier>, _ initial: Result, _ combine: (Result, (Identifier, T)) -> Result) -> Result {
-		if visited.contains(from) { return initial }
-		visited.insert(from)
+	public func reduce<Result>(from: Index, var _ visited: [Index], _ initial: Result, _ combine: (Result, Element) -> Result) -> Result {
+		if from == nodes.endIndex { return initial }
 
-		if let node = nodes[from] {
-			let inputs = edges
-				|> (flip(Swift.filter) <| { $0.destination.identifier == from })
-				|> (flip(sorted) <| { $0.source < $1.source })
-				|> (flip(Swift.map) <| { $0.source.identifier })
-			return combine(inputs.reduce(initial) { into, each in
-				self.reduce(each.0, visited, into, combine)
-			}, (from, node))
-		}
-		return initial
+		if contains(visited, from) { return initial }
+		visited.append(from)
+
+		let node = nodes[from]
+		let inputEdges = filter(edges) { $0.destination.index == from }
+		let inputs = sorted(inputEdges) { $0.destination.inputIndex < $1.destination.inputIndex }
+			.map { $0.source.index }
+		return combine(Swift.reduce(inputs, initial) { into, each in
+			self.reduce(each.0, visited, into, combine)
+		}, node)
 	}
 
 
-	public func find(predicate: (Identifier, T) -> Bool) -> DictionaryIndex<Identifier, T>? {
+	public func find(predicate: Element -> Bool) -> Index? {
 		for index in nodes.startIndex..<nodes.endIndex {
 			if predicate <| nodes[index] { return index }
 		}
@@ -81,7 +67,8 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: CollectionType
 
-	public typealias Index = Dictionary<Identifier, T>.Index
+	public typealias Index = C.Index
+	public typealias Element = C.Generator.Element
 
 	public var startIndex: Index {
 		return nodes.startIndex
@@ -91,7 +78,7 @@ public struct Graph<T>: CollectionType, Printable {
 		return nodes.endIndex
 	}
 
-	public subscript(index: Index) -> (Identifier, T) {
+	public subscript(index: Index) -> Element {
 		return nodes[index]
 	}
 
@@ -118,19 +105,20 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: Private
 
-	private mutating func sanitize(added: Set<Edge>) {
+	private mutating func sanitize(added: Set<Edge<C>>) {
 		if added.count == 0 { return }
-		let keys = nodes.keys
-		edges.subtractInPlace(lazy(added).filter {
-			!contains(keys, $0.source.identifier) && !contains(keys, $0.destination.identifier)
+		let extant = indices(nodes)
+		edges.subtractInPlace(lazy(added).filter { edge in
+			!contains(extant, { $0 == edge.source.index || $0 == edge.destination.index })
 		})
 	}
 }
 
 
-public func == <T: Equatable> (left: Graph<T>, right: Graph<T>) -> Bool {
+public func == <C: CollectionType where C.Generator.Element: Equatable> (left: Graph<C>, right: Graph<C>) -> Bool {
 	return
-		left.nodes == right.nodes
+		count(left.nodes) == count(right.nodes)
+	&&	reduce(lazy(zip(left.nodes, right.nodes)).map { $0 == $1 }, true, { $0 && $1 })
 	&&	left.edges == right.edges
 }
 

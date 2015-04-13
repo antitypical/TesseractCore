@@ -10,7 +10,7 @@ final class GraphTests: XCTestCase {
 	func testSanitizesEdgesOnNodesMutation() {
 		var graph = Graph(nodes: [ (), () ], edges: [ Edge((0, 0), (1, 0)) ])
 		XCTAssertEqual(graph.edges.count, 1)
-		graph.nodes.removeValueForKey(0)
+		graph.nodes.removeAtIndex(0)
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
@@ -22,7 +22,7 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testAttachingDataToNodes() {
-		let graph: Graph<Int> = Graph(nodes: [ 0, 1 ])
+		let graph: Graph<[Int]> = Graph(nodes: [ 0, 1 ])
 	}
 
 	func testAbsoluteValueGraph() {
@@ -39,13 +39,13 @@ final class GraphTests: XCTestCase {
 
 	func testReductionDoesNotTraverseWithoutEdges() {
 		let graph = Graph(nodes: [ "a", "b" ])
-		let result = graph.reduce(0, "_") { into, each in into + each.1 }
+		let result = graph.reduce(0, "_") { into, each in into + each }
 		XCTAssertEqual(result, "_a")
 	}
 
 	func testReductionTraversesEdges() {
-		let reduced = graph.reduce(3, "_") { into, each in into + each.1 }
 		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(0, (3, 0)), Edge(1, (3, 1)), Edge(2, (3, 2)) ])
+		let reduced = graph.reduce(3, "_") { into, each in into + each }
 		XCTAssertEqual(reduced, "_abc!")
 	}
 }

@@ -1,9 +1,9 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct GraphDifferentiator<T: Equatable> {
-	public typealias Differential = (nodes: UnorderedDifferential<(Identifier, T)>, edges: UnorderedDifferential<Edge>)
+public struct GraphDifferentiator<C: CollectionType where C.Generator.Element: Equatable, C.Index.Distance: SignedIntegerType> {
+	public typealias Differential = (nodes: ForwardDifferential<C.Index.Distance, C.Generator.Element>, edges: UnorderedDifferential<Edge<C>>)
 
-	public static func differentiate(#before: Graph<T>, after: Graph<T>) -> Differential {
-		return Differential(nodes: DictionaryDifferentiator.differentiate(before: before.nodes, after: after.nodes), edges: SetDifferentiator.differentiate(before: before.edges, after: after.edges))
+	public static func differentiate(#before: Graph<C>, after: Graph<C>) -> Differential {
+		return Differential(nodes: ForwardDifferential.differentiate(before: before.nodes, after: after.nodes) { $0 == $1 }, edges: SetDifferentiator.differentiate(before: before.edges, after: after.edges))
 	}
 }

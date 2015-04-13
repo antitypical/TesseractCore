@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-let absoluteValue = Graph<String>(nodes: [
+let absoluteValue = Graph<[String]>(nodes: [
 	"x",
 	"result",
 	"0",
