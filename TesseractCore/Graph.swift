@@ -26,10 +26,6 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: Primitive methods
 
-	public subscript (identifier: Identifier) -> NodeView<T>? {
-		return nodes[identifier].map { NodeView(graph: self, identifier: identifier, value: $0) }
-	}
-
 	public var nodes: Dictionary<Identifier, T> {
 		willSet {
 			let removed = Set(nodes.keys).subtract(Set(newValue.keys))
@@ -99,9 +95,8 @@ public struct Graph<T>: CollectionType, Printable {
 		return nodes.endIndex
 	}
 
-	public subscript(index: Index) -> NodeView<T> {
-		let (identifier, value) = nodes[index]
-		return NodeView(graph: self, identifier: identifier, value: value)
+	public subscript(index: Index) -> (Identifier, T) {
+		return nodes[index]
 	}
 
 
@@ -120,10 +115,8 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: SequenceType
 
-	public func generate() -> GeneratorOf<NodeView<T>> {
-		let views = lazy(self.nodes).map { NodeView(graph: self, identifier: $0, value: $1) }
-		var generator = views.generate()
-		return GeneratorOf(generator)
+	public func generate() -> IndexingGenerator<Graph> {
+		return IndexingGenerator(self)
 	}
 
 
