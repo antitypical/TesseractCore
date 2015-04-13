@@ -42,5 +42,7 @@ public func < (left: (Identifier, Int), right: (Identifier, Int)) -> Bool {
 }
 
 public func == (left: Edge, right: Edge) -> Bool {
-	return left.source == right.source && left.destination == right.destination
+	return
+		left.source.index == right.source.index && left.source.outputIndex == right.source.outputIndex
+	&&	left.destination.index == right.destination.index && left.destination.inputIndex == right.destination.inputIndex
 }
