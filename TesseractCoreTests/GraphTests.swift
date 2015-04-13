@@ -31,9 +31,9 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testMappingAcrossGraph() {
-		let graph = Graph(nodes: [ "1", "2" ], edges: [Edge(0, Identifier(1).input(0))])
+		let graph = Graph(nodes: [ "1", "2" ], edges: [Edge(0, (1, 0))])
 		let newGraph = graph.map { $0.toInt() ?? 0 }
-		let expectedGraph = Graph(nodes: [ 1, 2 ], edges: [Edge(0, Identifier(1).input(0))])
+		let expectedGraph = Graph(nodes: [ 1, 2 ], edges: [Edge(0, (1, 0))])
 		assert(newGraph, ==, expectedGraph)
 	}
 
