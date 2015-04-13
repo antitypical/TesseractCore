@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1182B03D1A843B63002E7D2D /* Madness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1182B03C1A843B63002E7D2D /* Madness.framework */; };
 		D41275851A78638900CC910A /* EvaluationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41275841A78638900CC910A /* EvaluationTests.swift */; };
 		D41ECE331ABB86C40068AAAC /* DisjointSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE311ABB86C40068AAAC /* DisjointSet.framework */; };
 		D41ECE341ABB86C40068AAAC /* Manifold.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE321ABB86C40068AAAC /* Manifold.framework */; };
@@ -127,7 +126,6 @@
 				D42CAC3A1A429BFD0091F6AA /* Box.framework in Frameworks */,
 				D479740A1A7DA5D80034ABA2 /* Memo.framework in Frameworks */,
 				D4B7EE701A466104006D44E9 /* Either.framework in Frameworks */,
-				1182B03D1A843B63002E7D2D /* Madness.framework in Frameworks */,
 				D4B7EE721A46614C006D44E9 /* Prelude.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
