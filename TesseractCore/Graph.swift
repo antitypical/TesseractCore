@@ -63,6 +63,8 @@ public struct Graph<T>: CollectionType, Printable {
 	}
 
 	public func reduce<Result>(from: Identifier, var _ visited: Set<Identifier>, _ initial: Result, _ combine: (Result, (Identifier, T)) -> Result) -> Result {
+		if from == nodes.endIndex { return initial }
+
 		if visited.contains(from) { return initial }
 		visited.insert(from)
 
