@@ -77,26 +77,20 @@ public enum Node: Equatable, Printable {
 
 	public var literal: Value? {
 		return analysis(
-			ifParameter: const(nil),
-			ifReturn: const(nil),
-			ifSymbolic: const(nil),
-			ifLiteral: { $1 })
+			ifLiteral: { $1 },
+			otherwise: const(nil))
 	}
 
 	public var parameter: (Int, Term)? {
 		return analysis(
 			ifParameter: unit,
-			ifReturn: const(nil),
-			ifSymbolic: const(nil),
-			ifLiteral: const(nil))
+			otherwise: const(nil))
 	}
 
 	public var `return`: (Int, Term)? {
 		return analysis(
-			ifParameter: const(nil),
 			ifReturn: unit,
-			ifSymbolic: const(nil),
-			ifLiteral: const(nil))
+			otherwise: const(nil))
 	}
 
 	/// The index of parameter/return nodes, nil for symbolic nodes.
