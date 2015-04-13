@@ -7,11 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1182B03A1A84381B002E7D2D /* ImportingTests.swift */; };
 		1182B03D1A843B63002E7D2D /* Madness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1182B03C1A843B63002E7D2D /* Madness.framework */; };
 		11C1526B1A830A160044FCA2 /* Exporting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1526A1A830A160044FCA2 /* Exporting.swift */; };
 		11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */; };
-		11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C9E2481A83C17F0023AB0D /* Importing.swift */; };
 		D41275851A78638900CC910A /* EvaluationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41275841A78638900CC910A /* EvaluationTests.swift */; };
 		D41ECE331ABB86C40068AAAC /* DisjointSet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE311ABB86C40068AAAC /* DisjointSet.framework */; };
 		D41ECE341ABB86C40068AAAC /* Manifold.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D41ECE321ABB86C40068AAAC /* Manifold.framework */; };
@@ -73,11 +71,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1182B03A1A84381B002E7D2D /* ImportingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImportingTests.swift; path = TesseractCoreTests/ImportingTests.swift; sourceTree = SOURCE_ROOT; };
 		1182B03C1A843B63002E7D2D /* Madness.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Madness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		11C1526A1A830A160044FCA2 /* Exporting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Exporting.swift; sourceTree = "<group>"; };
 		11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportingTests.swift; sourceTree = "<group>"; };
-		11C9E2481A83C17F0023AB0D /* Importing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Importing.swift; sourceTree = "<group>"; };
 		D41275841A78638900CC910A /* EvaluationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EvaluationTests.swift; sourceTree = "<group>"; };
 		D41ECE311ABB86C40068AAAC /* DisjointSet.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DisjointSet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D41ECE321ABB86C40068AAAC /* Manifold.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Manifold.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,7 +187,6 @@
 				D4B3ECA71A772346001AD21D /* Value.swift */,
 				D47974041A7D92E00034ABA2 /* Evaluation.swift */,
 				11C1526A1A830A160044FCA2 /* Exporting.swift */,
-				11C9E2481A83C17F0023AB0D /* Importing.swift */,
 				D4FF06B21AC10612004DB780 /* Inference.swift */,
 				D47974061A7D99A40034ABA2 /* Application.swift */,
 				D479740B1A7DA6DC0034ABA2 /* Error.swift */,
@@ -229,7 +224,6 @@
 				D47974021A7D277C0034ABA2 /* ValueTests.swift */,
 				D4FF06B61AC10900004DB780 /* NodeTests.swift */,
 				D4FF06B41AC10735004DB780 /* InferenceTests.swift */,
-				1182B03A1A84381B002E7D2D /* ImportingTests.swift */,
 				11C1526C1A830FFA0044FCA2 /* ExportingTests.swift */,
 				D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */,
 				D4C0FAFC1AC5873500936032 /* TypeDifferentialTests.swift */,
@@ -381,7 +375,6 @@
 				D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */,
 				D4FF06B31AC10612004DB780 /* Inference.swift in Sources */,
 				D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */,
-				11C9E2491A83C17F0023AB0D /* Importing.swift in Sources */,
 				D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */,
 				D4F01E961AAFB0FA0060C95F /* FloatingPointDifferentiator.swift in Sources */,
 				D4F5A8CE1A520E7F0058EFDC /* Identifier.swift in Sources */,
@@ -403,7 +396,6 @@
 			files = (
 				D4C893BD1A51DCC10078743E /* GraphTests.swift in Sources */,
 				D4FF06B51AC10735004DB780 /* InferenceTests.swift in Sources */,
-				1182B03B1A84381B002E7D2D /* ImportingTests.swift in Sources */,
 				D4B5220F1A9D952500F33502 /* Fixtures.swift in Sources */,
 				D4FF06B71AC10900004DB780 /* NodeTests.swift in Sources */,
 				11C1526D1A830FFA0044FCA2 /* ExportingTests.swift in Sources */,
