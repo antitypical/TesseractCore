@@ -45,6 +45,19 @@ public enum Node: Equatable, Printable {
 		}
 	}
 
+	public func analysis<Result>(ifParameter: ((Int, Term) -> Result)? = nil, ifReturn: ((Int, Term) -> Result)? = nil, ifSymbolic: (Symbol -> Result)? = nil, ifLiteral: ((Symbol, Value) -> Result)? = nil, otherwise: () -> Result) -> Result {
+		switch self {
+		case let .Parameter(index, type):
+			return ifParameter?(index, type) ?? otherwise()
+		case let .Return(index, type):
+			return ifReturn?(index, type) ?? otherwise()
+		case let .Symbolic(symbol):
+			return ifSymbolic?(symbol) ?? otherwise()
+		case let .Literal(symbol, value):
+			return ifLiteral?(symbol, value) ?? otherwise()
+		}
+	}
+
 
 	public var type: Term {
 		return analysis(
