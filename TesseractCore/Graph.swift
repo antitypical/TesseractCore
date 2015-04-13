@@ -116,10 +116,8 @@ public struct Graph<T>: CollectionType, Printable {
 
 	// MARK: SequenceType
 
-	public func generate() -> GeneratorOf<NodeView<T>> {
-		let views = lazy(self.nodes).map { NodeView(graph: self, identifier: $0, value: $1) }
-		var generator = views.generate()
-		return GeneratorOf(generator)
+	public func generate() -> IndexingGenerator<Graph> {
+		return IndexingGenerator(self)
 	}
 
 
