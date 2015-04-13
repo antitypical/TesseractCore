@@ -44,8 +44,8 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testReductionTraversesEdges() {
-		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(0, Identifier(3).input(0)), Edge(1, Identifier(3).input(0)), Edge(2, Identifier(3).input(0)) ])
 		let reduced = graph.reduce(3, "_") { into, each in into + each.1 }
+		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(0, (3, 0)), Edge(1, (3, 1)), Edge(2, (3, 2)) ])
 		XCTAssertEqual(reduced, "_abc!")
 	}
 }

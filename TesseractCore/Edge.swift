@@ -10,7 +10,7 @@ public struct Edge: Hashable, Printable {
 	}
 
 	public init (_ source: Identifier, _ destination: Destination) {
-		self.init(source.output(0), destination)
+		self.init((source, 0), destination)
 	}
 
 	public let source: Source
