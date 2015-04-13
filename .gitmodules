@@ -13,9 +13,6 @@
 [submodule "External/Memo"]
 	path = External/Memo
 	url = https://github.com/robrix/Memo.git
-[submodule "External/Madness"]
-	path = External/Madness
-	url = https://github.com/robrix/Madness
 [submodule "External/Manifold"]
 	path = External/Manifold
 	url = https://github.com/antitypical/Manifold.git
