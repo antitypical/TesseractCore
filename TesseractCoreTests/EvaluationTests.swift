@@ -28,14 +28,14 @@ final class EvaluationTests: XCTestCase {
 	}
 
 	func testFunctionNodeWithBoundInputAppliesInput() {
-		let graph = Graph(nodes: [ node("true"), node("identity") ], edges: [ Edge((0, 0), (1, 0)) ])
+		let graph = Graph(nodes: [ node("true"), node("identity") ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 		let evaluated = evaluate(graph, 1, Prelude)
 
 		assertEqual(assertNotNil(evaluated.right?.value.constant()), true)
 	}
 
 	func testGraphNodeWithNoBoundInputsEvaluatesToGraph() {
-		let constant = Graph<[Node]>(nodes: [ node("true"), .Return(0, 0) ], edges: [ Edge((0, 0), (1, 0)) ])
+		let constant = Graph<[Node]>(nodes: [ node("true"), .Return(0, 0) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 
 		let truthy = Symbol.Named("truthy", .Bool)
 		let graph = createGraph(truthy)
@@ -45,10 +45,10 @@ final class EvaluationTests: XCTestCase {
 	}
 
 	func testGraphNodeWithBoundInputsAppliesInput() {
-		let identity = Graph<[Node]>(nodes: [ .Parameter(0, 0), .Return(0, 0) ], edges: [ Edge((0, 0), (1, 0)) ])
+		let identity = Graph<[Node]>(nodes: [ .Parameter(0, 0), .Return(0, 0) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 
 		let identitySymbol = Symbol.Named("identity", .forall([ 0 ], .function(0, 0)))
-		let graph = Graph(nodes: [ node("true"), .Symbolic(identitySymbol) ], edges: [ Edge((0, 0), (1, 0)) ])
+		let graph = Graph(nodes: [ node("true"), .Symbolic(identitySymbol) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 		let evaluated = evaluate(graph, 1, Prelude + (identitySymbol, Value(identity)))
 		assert(evaluated.right?.value.constant(), ==, true)
 	}

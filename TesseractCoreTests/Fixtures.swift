@@ -8,13 +8,13 @@ let absoluteValue = Graph<[String]>(nodes: [
 	"if",
 	"lessThan"
 ], edges: [
-	Edge(0, (5, 0)),
-	Edge(2, (5, 1)),
-	Edge(5, (4, 0)),
-	Edge(0, (3, 0)),
-	Edge(3, (5, 1)),
-	Edge(0, (4, 2)),
-	Edge(4, (1, 0))
+	Edge(Source(nodeIndex: 0), Destination(nodeIndex: 5, inputIndex: 0)),
+	Edge(Source(nodeIndex: 2), Destination(nodeIndex: 5, inputIndex: 1)),
+	Edge(Source(nodeIndex: 5), Destination(nodeIndex: 4, inputIndex: 0)),
+	Edge(Source(nodeIndex: 0), Destination(nodeIndex: 3, inputIndex: 0)),
+	Edge(Source(nodeIndex: 3), Destination(nodeIndex: 5, inputIndex: 1)),
+	Edge(Source(nodeIndex: 0), Destination(nodeIndex: 4, inputIndex: 2)),
+	Edge(Source(nodeIndex: 4), Destination(nodeIndex: 1, inputIndex: 0))
 ])
 
 
