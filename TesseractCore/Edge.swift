@@ -1,17 +1,20 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public struct Edge<C: CollectionType>: Hashable, Printable {
-	public init(_ source: Source<C>, _ destination: Destination<C>) {
+	public init(_ source: Source, _ destination: Destination) {
 		self.source = source
 		self.destination = destination
 	}
 
-	public init (_ source: C.Index, _ destination: Destination<C>) {
+	public init (_ source: C.Index, _ destination: Destination) {
 		self.init(Source(nodeIndex: source, outputIndex: 0), destination)
 	}
 
-	public let source: Source<C>
-	public let destination: Destination<C>
+	public typealias Source = TesseractCore.Source<C>
+	public typealias Destination = TesseractCore.Destination<C>
+
+	public let source: Source
+	public let destination: Destination
 
 
 	// MARK: Hashable
