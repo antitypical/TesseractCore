@@ -2,13 +2,13 @@
 
 final class GraphTests: XCTestCase {
 	func testIdentityGraph() {
-		let graph = Graph(nodes: [ (), () ], edges: [ Edge((0, 0), (1, 0)) ])
+		let graph = Graph(nodes: [ (), () ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 		XCTAssertEqual(graph.nodes.count, 2)
 		XCTAssertEqual(graph.edges.count, 1)
 	}
 
 	func testSanitizesEdgesOnNodesMutation() {
-		var graph = Graph(nodes: [ (), () ], edges: [ Edge((0, 0), (1, 0)) ])
+		var graph = Graph(nodes: [ (), () ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 		XCTAssertEqual(graph.edges.count, 1)
 		graph.nodes.removeAtIndex(0)
 		XCTAssertEqual(graph.edges.count, 0)
@@ -17,7 +17,7 @@ final class GraphTests: XCTestCase {
 	func testSanitizesEdgesOnEdgesMutation() {
 		var graph = Graph<[()]>(nodes: [])
 		XCTAssertEqual(graph.edges.count, 0)
-		graph.edges.insert(Edge((0, 0), (1, 0)))
+		graph.edges.insert(Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)))
 		XCTAssertEqual(graph.edges.count, 0)
 	}
 
@@ -31,9 +31,9 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testMappingAcrossGraph() {
-		let graph = Graph(nodes: [ "1", "2" ], edges: [Edge(0, (1, 0))])
+		let graph = Graph(nodes: [ "1", "2" ], edges: [ Edge(Source(nodeIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 		let newGraph = graph.map { $0.toInt() ?? 0 }
-		let expectedGraph = Graph(nodes: [ 1, 2 ], edges: [Edge(0, (1, 0))])
+		let expectedGraph = Graph(nodes: [ 1, 2 ], edges: [ Edge(Source(nodeIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 		assert(newGraph, ==, expectedGraph)
 	}
 
@@ -44,7 +44,7 @@ final class GraphTests: XCTestCase {
 	}
 
 	func testReductionTraversesEdges() {
-		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(0, (3, 0)), Edge(1, (3, 1)), Edge(2, (3, 2)) ])
+		let graph = Graph(nodes: [ "a", "b", "c", "!" ], edges: [ Edge(Source(nodeIndex: 0), Destination(nodeIndex: 3, inputIndex: 0)), Edge(Source(nodeIndex: 1), Destination(nodeIndex: 3, inputIndex: 1)), Edge(Source(nodeIndex: 2), Destination(nodeIndex: 3, inputIndex: 2)) ])
 		let reduced = graph.reduce(3, "_") { into, each in into + each }
 		XCTAssertEqual(reduced, "_abc!")
 	}

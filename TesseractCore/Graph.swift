@@ -13,10 +13,10 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 
 	public var nodes: C {
 		willSet {
-			let removed = lazy(indices(nodes)).filter { contains(indices(newValue), $0) }.array
+			let removed = lazy(indices(nodes)).filter { !contains(indices(newValue), $0) }.array
 			if removed.count == 0 { return }
 			edges = Set(lazy(edges).filter { edge in
-				!contains(removed, { $0 == edge.source.index || $0 == edge.destination.index })
+				!contains(removed, { $0 == edge.source.nodeIndex || $0 == edge.destination.nodeIndex })
 			})
 		}
 	}
@@ -32,7 +32,7 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 
 	public func map<U>(transform: Element -> U) -> Graph<[U]> {
 		return Graph<[U]>(nodes: Swift.map(nodes, transform), edges: Set(lazy(edges).map {
-			Edge<[U]>((index: Int(distance(self.nodes.startIndex, $0.source.index).toIntMax()), outputIndex: $0.source.outputIndex), (index: Int(distance(self.nodes.startIndex, $0.destination.index).toIntMax()), inputIndex: $0.destination.inputIndex))
+			Edge<[U]>(Source(nodeIndex: Int(distance(self.nodes.startIndex, $0.source.nodeIndex).toIntMax()), outputIndex: $0.source.outputIndex), Destination(nodeIndex: Int(distance(self.nodes.startIndex, $0.destination.nodeIndex).toIntMax()), inputIndex: $0.destination.inputIndex))
 		}))
 	}
 
@@ -48,9 +48,9 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 		visited.append(from)
 
 		let node = nodes[from]
-		let inputEdges = filter(edges) { $0.destination.index == from }
+		let inputEdges = filter(edges) { $0.destination.nodeIndex == from }
 		let inputs = sorted(inputEdges) { $0.destination.inputIndex < $1.destination.inputIndex }
-			.map { $0.source.index }
+			.map { $0.source.nodeIndex }
 		return combine(Swift.reduce(inputs, initial) { into, each in
 			self.reduce(each.0, visited, into, combine)
 		}, node)
@@ -109,7 +109,7 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 		if added.count == 0 { return }
 		let extant = indices(nodes)
 		edges.subtractInPlace(lazy(added).filter { edge in
-			!contains(extant, { $0 == edge.source.index || $0 == edge.destination.index })
+			!contains(extant, { $0 == edge.source.nodeIndex || $0 == edge.destination.nodeIndex })
 		})
 	}
 }

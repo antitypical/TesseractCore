@@ -22,6 +22,7 @@
 		D479740C1A7DA6DC0034ABA2 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = D479740B1A7DA6DC0034ABA2 /* Error.swift */; };
 		D479740E1A7DEE9E0034ABA2 /* ErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */; };
 		D481D9321A78771B00044B2F /* Find.swift in Sources */ = {isa = PBXBuildFile; fileRef = D481D9311A78771B00044B2F /* Find.swift */; };
+		D48813D51ADC846C00816911 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = D48813D41ADC846C00816911 /* Endpoint.swift */; };
 		D4AE08BE1AB62D2B00F1CD10 /* UnorderedDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AE08BD1AB62D2B00F1CD10 /* UnorderedDifferential.swift */; };
 		D4B3ECA81A772346001AD21D /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B3ECA71A772346001AD21D /* Value.swift */; };
 		D4B5220D1A9D896500F33502 /* FlatMapSequenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4B5220C1A9D896500F33502 /* FlatMapSequenceView.swift */; };
@@ -78,6 +79,7 @@
 		D479740B1A7DA6DC0034ABA2 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		D479740D1A7DEE9E0034ABA2 /* ErrorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorTests.swift; sourceTree = "<group>"; };
 		D481D9311A78771B00044B2F /* Find.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Find.swift; sourceTree = "<group>"; };
+		D48813D41ADC846C00816911 /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		D4AE08BD1AB62D2B00F1CD10 /* UnorderedDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnorderedDifferential.swift; sourceTree = "<group>"; };
 		D4B3ECA71A772346001AD21D /* Value.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		D4B5220C1A9D896500F33502 /* FlatMapSequenceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlatMapSequenceView.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				D4B5DE351A505F66004B4C0C /* Graph.swift */,
 				D4F48AC21AAE90CB0017504F /* Diffs */,
 				D4CB5DBE1A75E12D00672C6B /* Edge.swift */,
+				D48813D41ADC846C00816911 /* Endpoint.swift */,
 				D4CB5DC21A75E53D00672C6B /* Node.swift */,
 				D4CB5DC41A75F45200672C6B /* Environment.swift */,
 				D4B3ECA71A772346001AD21D /* Value.swift */,
@@ -353,6 +356,7 @@
 				D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */,
 				D479740C1A7DA6DC0034ABA2 /* Error.swift in Sources */,
 				D4F48AC41AAE90D70017504F /* SetDifferentiator.swift in Sources */,
+				D48813D51ADC846C00816911 /* Endpoint.swift in Sources */,
 				D4C0FAFB1AC537B900936032 /* TypeDifferentiator.swift in Sources */,
 				D4CB5DBF1A75E12D00672C6B /* Edge.swift in Sources */,
 				D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */,
