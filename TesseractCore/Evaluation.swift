@@ -7,11 +7,11 @@ public func evaluate(graph: Graph<[Node]>, from: Graph<[Node]>.Index, environmen
 }
 
 private func evaluate(graph: Graph<[Node]>, from: Graph<[Node]>.Index, environment: Environment, node: Node) -> Either<Error<Int>, Memo<Value>> {
-	let recur: Edge<[Node]>.Source -> Either<Error<Int>, Memo<Value>> = { source in
-		evaluate(graph, source.index, environment, graph.nodes[source.index])
+	let recur: Source<[Node]> -> Either<Error<Graph<[Node]>.Index>, Memo<Value>> = { source in
+		evaluate(graph, source.nodeIndex, environment, graph.nodes[source.nodeIndex])
 	}
 	let inputs = lazy(graph.edges)
-		.filter { $0.destination.index == from }
+		.filter { $0.destination.nodeIndex == from }
 		.map { ($0.destination.inputIndex, recur($0.source)) }
 		|> (flip(sorted) <| { $0.0 < $1.0 })
 

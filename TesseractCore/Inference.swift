@@ -35,8 +35,8 @@ public func constraints(graph: Graph<[Node]>) -> (Term, constraints: ConstraintS
 	let returns = Node.returns(graph).map { instantiated.nodes[$0.0] }.reverse()
 
 	let constraints = ConstraintSet(lazy(graph.edges).flatMap { (edge: Edge) -> [Constraint] in
-		let source = instantiated.nodes[edge.source.index].returns[edge.source.outputIndex]
-		let node = instantiated.nodes[edge.destination.index]
+		let source = instantiated.nodes[edge.source.nodeIndex].returns[edge.source.outputIndex]
+		let node = instantiated.nodes[edge.destination.nodeIndex]
 		let destination = node.parameters.isEmpty ? node : node.parameters[edge.destination.inputIndex]
 		return [ source === destination ]
 	})
