@@ -94,8 +94,12 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 		switch destructured.destructured {
 		case let .Insert(i, u, .Delete(j, v, rest)) where i.value == (j.value + 1) && equals(u.value, v.value):
 			return rest.normalize(equals)
+		case let .Insert(i, u, .Delete(j, v, rest)) where i.value == (j.value + 1):
+			return Change(Box(i.value, v.value, u.value, rest.normalize(equals)))
 		case let .Delete(i, u, .Insert(j, v, rest)) where i.value == (j.value - 1) && equals(u.value, v.value):
 			return rest.normalize(equals)
+		case let .Delete(i, u, .Insert(j, v, rest)) where i.value == (j.value - 1):
+			return Change(Box(i.value, u.value, v.value, rest.normalize(equals)))
 		case let .Insert(i, u, rest):
 			return Insert(Box(i.value, u.value, rest.restructured.normalize(equals)))
 		case let .Delete(i, u, rest):
