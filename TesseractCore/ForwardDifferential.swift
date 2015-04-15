@@ -89,7 +89,7 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	}
 
 
-	/// Prune nilpotent diffs.
+	/// Prune nilpotent diffs and coalesce adjacent deletions/insertions into changes.
 	public func normalize(equals: (T, T) -> Bool) -> ForwardDifferential {
 		switch destructured.destructured {
 		case let .Insert(i, u, .Delete(j, v, rest)) where i.value == (j.value + 1) && equals(u.value, v.value):
