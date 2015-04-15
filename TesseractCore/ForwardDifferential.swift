@@ -79,9 +79,9 @@ public enum ForwardDifferential<I: SignedIntegerType, T>: Printable {
 	public func normalize(equals: (T, T) -> Bool) -> ForwardDifferential {
 		switch destructured.destructured {
 		case let .Insert(i, u, .Delete(j, v, rest)) where i.value == (j.value + 1) && equals(u.value, v.value):
-			return rest
+			return rest.normalize(equals)
 		case let .Delete(i, u, .Insert(j, v, rest)) where i.value == (j.value - 1) && equals(u.value, v.value):
-			return rest
+			return rest.normalize(equals)
 		case let .Insert(i, u, rest):
 			return Insert(Box(i.value, u.value, rest.restructured.normalize(equals)))
 		case let .Delete(i, u, rest):
