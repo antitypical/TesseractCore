@@ -11,6 +11,7 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 		self.init(nodes: nodes, edges: [])
 	}
 
+
 	public var nodes: C {
 		willSet {
 			let removed = lazy(indices(nodes)).filter { !contains(indices(newValue), $0) }.array
