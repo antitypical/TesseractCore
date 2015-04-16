@@ -124,10 +124,7 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 
 
 public func == <C: CollectionType where C.Generator.Element: Equatable> (left: Graph<C>, right: Graph<C>) -> Bool {
-	return
-		count(left.nodes) == count(right.nodes)
-	&&	reduce(lazy(zip(left.nodes, right.nodes)).map { $0 == $1 }, true, { $0 && $1 })
-	&&	left.edges == right.edges
+	return Graph.equals { $0 == $1 } (left, right)
 }
 
 
