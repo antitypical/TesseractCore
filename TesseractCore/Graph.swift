@@ -65,6 +65,14 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 	}
 
 
+	public static func equals(node: (C.Generator.Element, C.Generator.Element) -> Bool)(_ left: Graph<C>, _ right: Graph<C>) -> Bool {
+		if count(left.nodes) != count(right.nodes) { return false }
+		if left.edges != right.edges { return false }
+
+		return Swift.reduce(lazy(zip(left.nodes, right.nodes)).map(node), true) { $0 && $1 }
+	}
+
+
 	// MARK: CollectionType
 
 	public typealias Index = C.Index
