@@ -1,7 +1,7 @@
 //  Copyright (c) 2014 Rob Rix. All rights reserved.
 
 public struct Graph<C: CollectionType>: CollectionType, Printable {
-	public init<S: SequenceType where S.Generator.Element == Edge<C>>(nodes: C, edges: S) {
+	public init<S: SequenceType where S.Generator.Element == Edge>(nodes: C, edges: S) {
 		self.nodes = nodes
 		self.edges = Set(edges)
 		sanitize(self.edges)
@@ -21,7 +21,10 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 		}
 	}
 
-	public var edges: Set<Edge<C>> {
+
+	public typealias Edge = TesseractCore.Edge<C>
+
+	public var edges: Set<Edge> {
 		didSet {
 			sanitize(edges.subtract(oldValue))
 		}
@@ -32,7 +35,7 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 
 	public func map<U>(transform: Element -> U) -> Graph<[U]> {
 		return Graph<[U]>(nodes: Swift.map(nodes, transform), edges: Set(lazy(edges).map {
-			Edge<[U]>(Source(nodeIndex: Int(distance(self.nodes.startIndex, $0.source.nodeIndex).toIntMax()), outputIndex: $0.source.outputIndex), Destination(nodeIndex: Int(distance(self.nodes.startIndex, $0.destination.nodeIndex).toIntMax()), inputIndex: $0.destination.inputIndex))
+			TesseractCore.Edge<[U]>(Source(nodeIndex: Int(distance(self.nodes.startIndex, $0.source.nodeIndex).toIntMax()), outputIndex: $0.source.outputIndex), Destination(nodeIndex: Int(distance(self.nodes.startIndex, $0.destination.nodeIndex).toIntMax()), inputIndex: $0.destination.inputIndex))
 		}))
 	}
 
@@ -113,7 +116,7 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 
 	// MARK: Private
 
-	private mutating func sanitize(added: Set<Edge<C>>) {
+	private mutating func sanitize(added: Set<Edge>) {
 		if added.count == 0 { return }
 		let extant = indices(nodes)
 		edges.subtractInPlace(lazy(added).filter { edge in
