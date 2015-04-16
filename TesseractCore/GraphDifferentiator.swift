@@ -1,6 +1,6 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
-public struct GraphDifferentiator<C: CollectionType where C.Generator.Element: Equatable, C.Index: Hashable> {
+public struct GraphDifferentiator<C: CollectionType where C.Index: Hashable> {
 	public typealias Differential = (nodes: UnorderedDifferential<(C.Index, C.Generator.Element)>, edges: UnorderedDifferential<Edge<C>>)
 
 	public static func differentiate(#before: Graph<C>, after: Graph<C>, equals: (C.Generator.Element, C.Generator.Element) -> Bool) -> Differential {
