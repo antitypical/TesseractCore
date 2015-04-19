@@ -48,7 +48,7 @@
 		D4F01E961AAFB0FA0060C95F /* FloatingPointDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */; };
 		D4F48AC41AAE90D70017504F /* SetDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC31AAE90D70017504F /* SetDifferentiator.swift */; };
 		D4F48AC61AAE91380017504F /* DictionaryDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC51AAE91380017504F /* DictionaryDifferentiator.swift */; };
-		D4F48AC81AAE918C0017504F /* GraphDifferentiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */; };
+		D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC71AAE918C0017504F /* GraphDifferential.swift */; };
 		D4F48ACA1AAE91BF0017504F /* ForwardDifferential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */; };
 		D4FF06B31AC10612004DB780 /* Inference.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF06B21AC10612004DB780 /* Inference.swift */; };
 		D4FF06B51AC10735004DB780 /* InferenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FF06B41AC10735004DB780 /* InferenceTests.swift */; };
@@ -104,7 +104,7 @@
 		D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatingPointDifferentiator.swift; sourceTree = "<group>"; };
 		D4F48AC31AAE90D70017504F /* SetDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDifferentiator.swift; sourceTree = "<group>"; };
 		D4F48AC51AAE91380017504F /* DictionaryDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryDifferentiator.swift; sourceTree = "<group>"; };
-		D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferentiator.swift; sourceTree = "<group>"; };
+		D4F48AC71AAE918C0017504F /* GraphDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDifferential.swift; sourceTree = "<group>"; };
 		D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardDifferential.swift; sourceTree = "<group>"; };
 		D4FF06B21AC10612004DB780 /* Inference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inference.swift; sourceTree = "<group>"; };
 		D4FF06B41AC10735004DB780 /* InferenceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InferenceTests.swift; sourceTree = "<group>"; };
@@ -233,7 +233,7 @@
 			children = (
 				D4F48AC31AAE90D70017504F /* SetDifferentiator.swift */,
 				D4F48AC51AAE91380017504F /* DictionaryDifferentiator.swift */,
-				D4F48AC71AAE918C0017504F /* GraphDifferentiator.swift */,
+				D4F48AC71AAE918C0017504F /* GraphDifferential.swift */,
 				D4F48AC91AAE91BF0017504F /* ForwardDifferential.swift */,
 				D4F01E951AAFB0FA0060C95F /* FloatingPointDifferentiator.swift */,
 				D4C0FAFA1AC537B900936032 /* TypeDifferentiator.swift */,
@@ -367,7 +367,7 @@
 				D4B3ECA81A772346001AD21D /* Value.swift in Sources */,
 				D4B5DE361A505F66004B4C0C /* Graph.swift in Sources */,
 				D4B695441A7330D200619555 /* Dictionary+HigherOrder.swift in Sources */,
-				D4F48AC81AAE918C0017504F /* GraphDifferentiator.swift in Sources */,
+				D4F48AC81AAE918C0017504F /* GraphDifferential.swift in Sources */,
 				D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */,
 				D47974051A7D92E00034ABA2 /* Evaluation.swift in Sources */,
 			);
