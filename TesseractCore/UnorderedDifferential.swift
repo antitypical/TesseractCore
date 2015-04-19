@@ -56,6 +56,13 @@ public struct UnorderedDifferential<T> {
 }
 
 
+public func patch<T>(diff: UnorderedDifferential<T>, var set: Set<T>) -> Set<T> {
+	set.subtractInPlace(diff.deleted)
+	set.unionInPlace(diff.inserted)
+	return set
+}
+
+
 /// Returns the union of two unordered differentials. Makes no effort to normalize.
 public func + <T> (left: UnorderedDifferential<T>, right: UnorderedDifferential<T>) -> UnorderedDifferential<T> {
 	return UnorderedDifferential(inserted: left.inserted + right.inserted, deleted: left.deleted + right.deleted)
