@@ -17,6 +17,11 @@ public struct UnorderedDifferential<T> {
 	public let deleted: [T]
 
 
+	public var inverse: UnorderedDifferential {
+		return UnorderedDifferential(inserted: deleted, deleted: inserted)
+	}
+
+
 	// MARK: Higher-order functions
 
 	public func map<U>(transform: T -> U) -> UnorderedDifferential<U> {
