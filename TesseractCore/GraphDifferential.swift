@@ -1,6 +1,11 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public struct GraphDifferential<C: CollectionType where C.Index: Hashable> {
+	public init(nodes: UnorderedDifferential<(C.Index, C.Generator.Element)>, edges: UnorderedDifferential<Edge<C>>) {
+		self.nodes = nodes
+		self.edges = edges
+	}
+
 	public let nodes: UnorderedDifferential<(C.Index, C.Generator.Element)>
 	public let edges: UnorderedDifferential<Edge<C>>
 
