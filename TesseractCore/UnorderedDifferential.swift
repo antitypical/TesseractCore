@@ -67,8 +67,8 @@ public func patch<C: RangeReplaceableCollectionType where C.Index: Comparable>(d
 			collection.insert(element, atIndex: advance(index, C.Index.Distance(offset.toIntMax())))
 		} else {
 			collection.removeAtIndex(advance(index, C.Index.Distance(offset.toIntMax())))
+			offset += delta
 		}
-		offset += delta
 	}
 
 	return collection
