@@ -8,4 +8,8 @@ public struct GraphDifferential<C: CollectionType where C.Index: Hashable> {
 		let nodes = DictionaryDifferentiator.differentiate(before: Dictionary(zip(indices(before.nodes), before.nodes)), after: Dictionary(zip(indices(after.nodes), after.nodes)), equals: equals)
 		return GraphDifferential(nodes: nodes, edges: SetDifferentiator.differentiate(before: before.edges, after: after.edges))
 	}
+
+	public static func patch(graph: Graph<C>, equals: (C.Generator.Element, C.Generator.Element) -> Bool, transform: Graph<C> -> Graph<C>) -> GraphDifferential {
+		return differentiate(before: graph, after: transform(graph), equals: equals)
+	}
 }
