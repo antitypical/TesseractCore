@@ -56,6 +56,24 @@ public struct UnorderedDifferential<T> {
 }
 
 
+public func patch<C: RangeReplaceableCollectionType where C.Index: Comparable>(diff: UnorderedDifferential<(C.Index, C.Generator.Element)>, var collection: C) -> C {
+	var offset = 0
+	let deleted = diff.deleted.map { ($0, $1, -1) }
+	let inserted = diff.inserted.map { ($0, $1, 1) }
+
+	let ordered = sorted(deleted + inserted) { $0.0 < $1.0 }
+	for (index, element, delta) in ordered {
+		if delta > 0 {
+			collection.insert(element, atIndex: advance(index, C.Index.Distance(offset.toIntMax())))
+		} else {
+			collection.removeAtIndex(advance(index, C.Index.Distance(offset.toIntMax())))
+		}
+		offset += delta
+	}
+
+	return collection
+}
+
 public func patch<T>(diff: UnorderedDifferential<T>, var set: Set<T>) -> Set<T> {
 	set.subtractInPlace(diff.deleted)
 	set.unionInPlace(diff.inserted)
