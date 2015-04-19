@@ -17,6 +17,13 @@ public struct UnorderedDifferential<T> {
 	public let deleted: [T]
 
 
+	public var inverse: UnorderedDifferential {
+		return UnorderedDifferential(inserted: deleted, deleted: inserted)
+	}
+
+
+	// MARK: Higher-order functions
+
 	public func map<U>(transform: T -> U) -> UnorderedDifferential<U> {
 		return UnorderedDifferential<U>(inserted: lazy(inserted).map(transform), deleted: lazy(deleted).map(transform))
 	}
@@ -46,6 +53,24 @@ public struct UnorderedDifferential<T> {
 			:	($0.0, $0.1 + [$1])
 		}
 	}
+}
+
+
+public func patch<C: RangeReplaceableCollectionType where C.Index: Comparable>(diff: UnorderedDifferential<(C.Index, C.Generator.Element)>, var collection: C) -> C {
+	for (index, element) in sorted(diff.deleted, { $0.0 > $1.0 }) {
+		collection.removeAtIndex(index)
+	}
+	for (index, element) in sorted(diff.inserted, { $0.0 < $1.0 }) {
+		collection.insert(element, atIndex: index)
+	}
+
+	return collection
+}
+
+public func patch<T>(diff: UnorderedDifferential<T>, var set: Set<T>) -> Set<T> {
+	set.subtractInPlace(diff.deleted)
+	set.unionInPlace(diff.inserted)
+	return set
 }
 
 
