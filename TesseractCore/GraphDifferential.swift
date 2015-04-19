@@ -26,3 +26,10 @@ public struct GraphDifferential<C: CollectionType where C.Index: Hashable> {
 		return differentiate(before: graph, after: transform(graph), equals: equals)
 	}
 }
+
+
+public func patch<C: RangeReplaceableCollectionType where C.Index: Comparable>(diff: GraphDifferential<C>, var graph: Graph<C>) -> Graph<C> {
+	graph.nodes = patch(diff.nodes, graph.nodes)
+	graph.edges = patch(diff.edges, graph.edges)
+	return graph
+}
