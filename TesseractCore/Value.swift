@@ -79,9 +79,9 @@ public enum Value: Equatable, Printable {
 /// - Bool
 /// - Void
 public func == (left: Value, right: Value) -> Bool {
-	if let a = left.constant(Bool.self), let b = right.constant(Bool.self) {
+	if let a = left.constant(Bool.self), b = right.constant(Bool.self) {
 		return a == b
-	} else if let a: () = left.constant(Void.self), let b: () = right.constant(Void.self) {
+	} else if let a: () = left.constant(Void.self), b: () = right.constant(Void.self) {
 		return true
 	}
 	return false
