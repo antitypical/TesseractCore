@@ -83,6 +83,8 @@ public func == (left: Value, right: Value) -> Bool {
 		return a == b
 	} else if let a: () = left.constant(Void.self), b: () = right.constant(Void.self) {
 		return true
+	} else if let a = left.graph, b = right.graph {
+		return a == b
 	}
 	return false
 }
