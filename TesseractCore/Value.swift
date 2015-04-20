@@ -78,6 +78,7 @@ public enum Value: Equatable, Printable {
 ///
 /// - Bool
 /// - Void
+/// - Graph
 public func == (left: Value, right: Value) -> Bool {
 	if let a = left.constant(Bool.self), b = right.constant(Bool.self) {
 		return a == b
