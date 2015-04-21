@@ -9,7 +9,11 @@ public enum Value: Equatable, Printable {
 		self = Graph(graph)
 	}
 
+
+	/// A Value wrapping some constant of some type.
 	case Constant(Box<Any>)
+
+	/// A Value wrapping a Graph.
 	case Graph(TesseractCore.Graph<[Node]>)
 
 	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifGraph: TesseractCore.Graph<[Node]> -> Result) -> Result {
