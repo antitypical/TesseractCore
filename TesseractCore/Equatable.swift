@@ -90,13 +90,10 @@ public func == (left: Value, right: Value) -> Bool {
 		return true
 	} else if let a = left.graph, b = right.graph {
 		return a == b
-	}
-	switch (left, right) {
-	case let (.Named(a, _), .Named(b, _)):
+	} else if let a = left.name, b = right.name {
 		return a == b
-	default:
-		return false
 	}
+	return false
 }
 
 
