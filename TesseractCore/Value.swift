@@ -18,12 +18,17 @@ public enum Value: Equatable, Printable {
 	/// A Value wrapping a Graph.
 	case Graph(TesseractCore.Graph<[Node]>)
 
+	/// A Value stored in the lookup table.
+	case Named(String, Box<Value>)
+
 	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifGraph: TesseractCore.Graph<[Node]> -> Result) -> Result {
 		switch self {
 		case let Constant(v):
 			return ifConstant(v.value)
 		case let Graph(g):
 			return ifGraph(g)
+		case let Named(_, v):
+			return v.value.analysis(ifConstant: ifConstant, ifGraph: ifGraph)
 		}
 	}
 
