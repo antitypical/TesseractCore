@@ -56,6 +56,15 @@ public enum Value: Equatable, Printable {
 			ifGraph: unit)
 	}
 
+	public var name: String? {
+		switch self {
+		case let Named(name, _):
+			return name
+		default:
+			return nil
+		}
+	}
+
 
 	public func apply(argument: Value, _ index: TesseractCore.Graph<[Node]>.Index, _ environment: Environment) -> Either<Error<TesseractCore.Graph<[Node]>.Index>, Memo<Value>> {
 		if let function: Any -> Any = function() {
