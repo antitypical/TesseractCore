@@ -9,6 +9,14 @@ public enum Value: Equatable, Printable {
 		self = Graph(graph)
 	}
 
+	public init(_ name: String, _ constant: Any) {
+		self = Value.byName[name] ?? {
+			let named = Named(name, Box(Value(constant)))
+			Value.byName[name] = named
+			return named
+		}()
+	}
+
 
 	private static var byName: [String: Value] = [:]
 
