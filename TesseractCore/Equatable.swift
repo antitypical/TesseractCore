@@ -76,7 +76,7 @@ public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 
 /// Value equality.
 ///
-/// Two values are equal iff their state is of the same known equatable type and equal.
+/// Two values are equal if their state is of the same known equatable type and equal, or if they have the same name.
 ///
 /// “Known equatable types” currently include:
 ///
@@ -91,7 +91,12 @@ public func == (left: Value, right: Value) -> Bool {
 	} else if let a = left.graph, b = right.graph {
 		return a == b
 	}
-	return false
+	switch (left, right) {
+	case let (.Named(a, _), .Named(b, _)):
+		return a == b
+	default:
+		return false
+	}
 }
 
 
