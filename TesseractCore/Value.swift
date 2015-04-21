@@ -70,26 +70,6 @@ public enum Value: Equatable, Printable {
 	}
 }
 
-/// Value equality.
-///
-/// Two values are equal iff their state is of the same known equatable type and equal.
-///
-/// “Known equatable types” currently include:
-///
-/// - Bool
-/// - Void
-/// - Graph
-public func == (left: Value, right: Value) -> Bool {
-	if let a = left.constant(Bool.self), b = right.constant(Bool.self) {
-		return a == b
-	} else if let a: () = left.constant(Void.self), b: () = right.constant(Void.self) {
-		return true
-	} else if let a = left.graph, b = right.graph {
-		return a == b
-	}
-	return false
-}
-
 
 // MARK: - Imports
 
