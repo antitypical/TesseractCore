@@ -18,7 +18,8 @@ public enum Value: Equatable, Printable {
 	}
 
 
-	private static var byName: [String: Value] = [:]
+	public static var byName: [String: Value] = [:]
+
 
 	/// A Value wrapping some constant of some type.
 	case Constant(Box<Any>)
