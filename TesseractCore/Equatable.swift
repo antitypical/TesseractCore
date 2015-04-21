@@ -2,10 +2,6 @@
 
 // MARK: Edge
 
-public func == <C: CollectionType> (left: (C.Index, Int), right: (C.Index, Int)) -> Bool {
-	return left.0 == right.0 && left.1 == right.1
-}
-
 public func == <C: CollectionType> (left: Edge<C>, right: Edge<C>) -> Bool {
 	return
 		left.source.nodeIndex == right.source.nodeIndex && left.source.outputIndex == right.source.outputIndex
