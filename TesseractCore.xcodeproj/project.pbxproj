@@ -42,7 +42,6 @@
 		D4CB5DC31A75E53D00672C6B /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CB5DC21A75E53D00672C6B /* Node.swift */; };
 		D4CB5DC51A75F45200672C6B /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CB5DC41A75F45200672C6B /* Environment.swift */; };
 		D4CD9E141A5323D200B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
-		D4CD9E151A5323E400B1FF53 /* Set.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4CD9E131A5323D200B1FF53 /* Set.framework */; };
 		D4ED827D1A3F9ADB00D0479E /* TesseractCore.h in Headers */ = {isa = PBXBuildFile; fileRef = D4ED827C1A3F9ADB00D0479E /* TesseractCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D4ED82881A3F9ADB00D0479E /* TesseractCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4ED82771A3F9ADB00D0479E /* TesseractCore.framework */; };
 		D4ED82991A3F9C3800D0479E /* Symbol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4ED82981A3F9C3800D0479E /* Symbol.swift */; };
@@ -139,7 +138,6 @@
 				D4B7EE741A47226B006D44E9 /* Either.framework in Frameworks */,
 				D47974091A7DA5C20034ABA2 /* Memo.framework in Frameworks */,
 				D4B7EE751A47226B006D44E9 /* Prelude.framework in Frameworks */,
-				D4CD9E151A5323E400B1FF53 /* Set.framework in Frameworks */,
 				D4ED82881A3F9ADB00D0479E /* TesseractCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

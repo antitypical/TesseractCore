@@ -127,7 +127,4 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 }
 
 
-// MARK: - Imports
-
 import Prelude
-import Set
