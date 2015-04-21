@@ -41,10 +41,3 @@ public struct Destination<C: CollectionType>: EndpointType, Printable {
 		return "Destination(\(nodeIndex), \(inputIndex))"
 	}
 }
-
-
-public func == <E: EndpointType> (left: E, right: E) -> Bool {
-	return
-		left.nodeIndex == right.nodeIndex
-	&&	left.endpointIndex == right.endpointIndex
-}

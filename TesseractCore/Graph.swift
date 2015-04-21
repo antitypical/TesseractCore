@@ -127,12 +127,4 @@ public struct Graph<C: CollectionType>: CollectionType, Printable {
 }
 
 
-public func == <C: CollectionType where C.Generator.Element: Equatable> (left: Graph<C>, right: Graph<C>) -> Bool {
-	return Graph.equals { $0 == $1 } (left, right)
-}
-
-
-// MARK: - Imports
-
 import Prelude
-import Set

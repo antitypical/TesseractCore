@@ -9,8 +9,25 @@ public enum Value: Equatable, Printable {
 		self = Graph(graph)
 	}
 
+	public init(_ name: String, _ constant: Any) {
+		self = Value.byName[name] ?? {
+			let named = Named(name, Box(Value(constant)))
+			Value.byName[name] = named
+			return named
+		}()
+	}
+
+
+	private static var byName: [String: Value] = [:]
+
+	/// A Value wrapping some constant of some type.
 	case Constant(Box<Any>)
+
+	/// A Value wrapping a Graph.
 	case Graph(TesseractCore.Graph<[Node]>)
+
+	/// A Value stored in the lookup table.
+	case Named(String, Box<Value>)
 
 	public func analysis<Result>(@noescape #ifConstant: Any -> Result, @noescape ifGraph: TesseractCore.Graph<[Node]> -> Result) -> Result {
 		switch self {
@@ -18,6 +35,8 @@ public enum Value: Equatable, Printable {
 			return ifConstant(v.value)
 		case let Graph(g):
 			return ifGraph(g)
+		case let Named(_, v):
+			return v.value.analysis(ifConstant: ifConstant, ifGraph: ifGraph)
 		}
 	}
 
@@ -45,6 +64,15 @@ public enum Value: Equatable, Printable {
 			ifGraph: unit)
 	}
 
+	public var name: String? {
+		switch self {
+		case let Named(name, _):
+			return name
+		default:
+			return nil
+		}
+	}
+
 
 	public func apply(argument: Value, _ index: TesseractCore.Graph<[Node]>.Index, _ environment: Environment) -> Either<Error<TesseractCore.Graph<[Node]>.Index>, Memo<Value>> {
 		if let function: Any -> Any = function() {
@@ -68,23 +96,6 @@ public enum Value: Equatable, Printable {
 			ifConstant: { ".Constant(\($0))" },
 			ifGraph: { ".Graph(\($0))" })
 	}
-}
-
-/// Value equality.
-///
-/// Two values are equal iff their state is of the same known equatable type and equal.
-///
-/// “Known equatable types” currently include:
-///
-/// - Bool
-/// - Void
-public func == (left: Value, right: Value) -> Bool {
-	if let a = left.constant(Bool.self), let b = right.constant(Bool.self) {
-		return a == b
-	} else if let a: () = left.constant(Void.self), let b: () = right.constant(Void.self) {
-		return true
-	}
-	return false
 }
 
 

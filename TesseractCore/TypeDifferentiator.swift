@@ -94,17 +94,6 @@ public enum TypeDifferential: Equatable, FixpointType, Printable {
 	}
 }
 
-public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
-	switch (left, right) {
-	case let (.Patch(p1, p2), .Patch(q1, q2)):
-		return p1 == q1 && p2 == q2
-	case let (.Copy(t), .Copy(u)):
-		return t == u
-	default:
-		return false
-	}
-}
-
 
 public struct TypeDifferentiator {
 	public static func differentiate(#before: Term, after: Term) -> TypeDifferential {
