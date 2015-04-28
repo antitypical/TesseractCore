@@ -72,6 +72,12 @@ final class InferenceTests: XCTestCase {
 		assert(typeOf(constant).right, ==, Term.function(0, .function(1, 0)).generalize())
 	}
 
+	func testConstantPermutationIsGeneralized() {
+		let (result, _) = typeOf(constantPermutation)
+		assert(result.left, ==, nil)
+		assert(result.right, ==, Term.function(0, .function(1, 0)).generalize())
+	}
+
 	func testInstantiatesNodeTypes() {
 		assert(typeOf(constantByWrappingNode).left, ==, nil)
 		assert(typeOf(constantByWrappingNode).right, ==, Term.function(0, .function(1, 0)).generalize())
