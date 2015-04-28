@@ -82,11 +82,11 @@ final class InferenceTests: XCTestCase {
 // MARK: Fixtures
 
 private let identity: Graph<[Node]> = {
-	return Graph(nodes: [ .Parameter(0, 0), .Return(0, 1) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
+	Graph(nodes: [ .Parameter(0, 0), .Return(0, 1) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 }()
 
 private let constant: Graph<[Node]> = {
-	return Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 2, inputIndex: 0)) ])
+	Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 2, inputIndex: 0)) ])
 }()
 
 private let constantByWrappingNode: Graph<[Node]> = {
