@@ -90,7 +90,7 @@ private let constant: Graph<[Node]> = {
 }()
 
 private let constantPermutation: Graph<[Node]> = {
-	Graph(nodes: [ .Parameter(0, 0), .Return(0, 2), .Parameter(1, 1), ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
+	Graph(nodes: [ .Parameter(0, 0), .Return(0, 1), .Parameter(1, 2), ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 }()
 
 private let constantByWrappingNode: Graph<[Node]> = {
