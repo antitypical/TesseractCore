@@ -89,6 +89,10 @@ private let constant: Graph<[Node]> = {
 	Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 2, inputIndex: 0)) ])
 }()
 
+private let constantPermutation: Graph<[Node]> = {
+	Graph(nodes: [ .Parameter(0, 0), .Return(0, 2), .Parameter(1, 1), ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
+}()
+
 private let constantByWrappingNode: Graph<[Node]> = {
 	let constantType = Term.forall([0, 1], .function(0, .function(1, 0)))
 	return Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2), .Symbolic(Symbol.named("constant", constantType)) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 3, inputIndex: 0)), Edge(Source(nodeIndex: 1, outputIndex: 0), Destination(nodeIndex: 3, inputIndex: 1)), Edge(Source(nodeIndex: 3, outputIndex: 0), Destination(nodeIndex: 2, inputIndex: 0)) ])
