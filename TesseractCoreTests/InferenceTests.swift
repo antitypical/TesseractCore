@@ -82,6 +82,16 @@ final class InferenceTests: XCTestCase {
 		assert(typeOf(constantByWrappingNode).left, ==, nil)
 		assert(typeOf(constantByWrappingNode).right, ==, Term.function(0, .function(1, 0)).generalize())
 	}
+
+
+	// MARK: Type graphs
+
+	func testConstantPermutationAssignsCorrectTypesToEachNode() {
+		let (_, typeGraph) = typeOf(constantPermutation)
+		assert(typeGraph.nodes[0], ==, 0)
+		assert(typeGraph.nodes[1], ==, 0)
+		assert(typeGraph.nodes[2], ==, 1)
+	}
 }
 
 
