@@ -82,12 +82,15 @@ public func == (left: TypeDifferential, right: TypeDifferential) -> Bool {
 ///
 /// - Bool
 /// - Void
+/// - Term
 /// - Graph
 public func == (left: Value, right: Value) -> Bool {
 	if let a = left.constant(Bool.self), b = right.constant(Bool.self) {
 		return a == b
 	} else if let a: () = left.constant(Void.self), b: () = right.constant(Void.self) {
 		return true
+	} else if let a = left.constant(Term.self), b = right.constant(Term.self) {
+		return a == b
 	} else if let a = left.graph, b = right.graph {
 		return a == b
 	} else if let a = left.name, b = right.name {
