@@ -58,6 +58,10 @@ public func + (var left: Environment, right: (Symbol, Value)) -> Environment {
 
 // MARK: - Prelude
 
+extension Symbol {
+	private static let Sum = Symbol.named("Sum", .function(.Kind, .function(.Kind, .Kind)))
+}
+
 public let Prelude: Environment = [
 	Symbol.named("unit", .Unit): Value(()),
 	Symbol.named("true", .Bool): Value(true),
