@@ -1,21 +1,13 @@
 //  Copyright (c) 2015 Rob Rix. All rights reserved.
 
 public func typeOf(graph: Graph<[Node]>) -> Either<Error<Graph<[Node]>.Index>, Term> {
-	let (type, constraints, _) = TesseractCore.constraints(graph)
-	return solve(constraints)
-		.either(
-		ifLeft: { Either.left(Error($0.description, count(graph.nodes))) },
-		ifRight: {
-			let t = $0.apply(type)
-			let n = normalization(t)
-			return Either.right(n.apply(t).generalize())
-		})
+	let (result, _) = typeOf(graph)
+	return result
 }
 
 public func typeOf(graph: Graph<[Node]>) -> (Either<Error<Graph<[Node]>.Index>, Term>, Graph<[Term]>) {
 	let (type, constraints, types) = TesseractCore.constraints(graph)
 	return solve(constraints)
-		.map { normalization(type).compose($0) }
 		.either(
 			ifLeft: { (Either.left(Error($0.description, count(graph.nodes))), types) },
 			ifRight: { s in

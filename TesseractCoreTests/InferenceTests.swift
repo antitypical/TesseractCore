@@ -72,9 +72,25 @@ final class InferenceTests: XCTestCase {
 		assert(typeOf(constant).right, ==, Term.function(0, .function(1, 0)).generalize())
 	}
 
+	func testConstantPermutationIsGeneralized() {
+		let (result, _) = typeOf(constantPermutation)
+		assert(result.left, ==, nil)
+		assert(result.right, ==, Term.function(0, .function(1, 0)).generalize())
+	}
+
 	func testInstantiatesNodeTypes() {
 		assert(typeOf(constantByWrappingNode).left, ==, nil)
 		assert(typeOf(constantByWrappingNode).right, ==, Term.function(0, .function(1, 0)).generalize())
+	}
+
+
+	// MARK: Type graphs
+
+	func testConstantPermutationAssignsCorrectTypesToEachNode() {
+		let (_, typeGraph) = typeOf(constantPermutation)
+		assert(typeGraph.nodes[0], ==, 0)
+		assert(typeGraph.nodes[1], ==, 0)
+		assert(typeGraph.nodes[2], ==, 1)
 	}
 }
 
@@ -82,11 +98,15 @@ final class InferenceTests: XCTestCase {
 // MARK: Fixtures
 
 private let identity: Graph<[Node]> = {
-	return Graph(nodes: [ .Parameter(0, 0), .Return(0, 1) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
+	Graph(nodes: [ .Parameter(0, 0), .Return(0, 1) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 }()
 
 private let constant: Graph<[Node]> = {
-	return Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 2, inputIndex: 0)) ])
+	Graph(nodes: [ .Parameter(0, 0), .Parameter(1, 1), .Return(0, 2) ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 2, inputIndex: 0)) ])
+}()
+
+private let constantPermutation: Graph<[Node]> = {
+	Graph(nodes: [ .Parameter(0, 0), .Return(0, 1), .Parameter(1, 2), ], edges: [ Edge(Source(nodeIndex: 0, outputIndex: 0), Destination(nodeIndex: 1, inputIndex: 0)) ])
 }()
 
 private let constantByWrappingNode: Graph<[Node]> = {
