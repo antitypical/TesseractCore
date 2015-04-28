@@ -58,12 +58,20 @@ public func + (var left: Environment, right: (Symbol, Value)) -> Environment {
 
 // MARK: - Prelude
 
+extension Symbol {
+	private static let Sum = Symbol.named("Sum", .function(.Kind, .function(.Kind, .Kind)))
+}
+
 public let Prelude: Environment = [
 	Symbol.named("unit", .Unit): Value(()),
 	Symbol.named("true", .Bool): Value(true),
 	Symbol.named("false", .Bool): Value(false),
 	Symbol.named("identity", Term.forall([0], .function(0, 0))): Value(id as Any -> Any),
 	Symbol.named("constant", Term.forall([0, 1], .function(0, .function(1, 0)))): Value(const as Any -> Any -> Any),
+
+	Symbol.named("Unit", .Kind): Value(Term.Unit),
+	Symbol.Sum: Value { x in { y in Term.sum(x, y) } },
+	Symbol.named("Bool", .Kind): Value(Graph(nodes: [ .Return(0, .Kind), .Symbolic(Symbol.Sum), ], edges: [ Edge(1, Destination(nodeIndex: 0, inputIndex: 0)) ])),
 ]
 
 
