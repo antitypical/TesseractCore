@@ -8,7 +8,6 @@ public func typeOf(graph: Graph<[Node]>) -> Either<Error<Graph<[Node]>.Index>, T
 public func typeOf(graph: Graph<[Node]>) -> (Either<Error<Graph<[Node]>.Index>, Term>, Graph<[Term]>) {
 	let (type, constraints, types) = TesseractCore.constraints(graph)
 	return solve(constraints)
-		.map { normalization(type).compose($0) }
 		.either(
 			ifLeft: { (Either.left(Error($0.description, count(graph.nodes))), types) },
 			ifRight: { s in
