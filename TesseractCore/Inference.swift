@@ -49,6 +49,7 @@ private func normalization(type: Term) -> Substitution {
 			ifVariable: { ([$0], [$0]) },
 			ifKind: const([], []),
 			ifUnit: const([], []),
+			ifOpaque: const([], []),
 			ifFunction: binary,
 			ifSum: binary,
 			ifProduct: binary,
